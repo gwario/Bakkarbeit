@@ -1,0 +1,4 @@
+primitives sind in kernel/aliases.fs zu sehen
+dieses file wird aus unter anderem prim generiert, dort ist der c-code zu den primitives
+
+in kernel/basics.fs ist die definition von - durch --prim und die hooks
