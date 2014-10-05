@@ -1,0 +1,2554 @@
+This is gforth.info, produced by makeinfo version 4.13 from gforth.texi.
+
+This manual is for Gforth (version 0.7.3, June 14, 2014), a fast and
+portable implementation of the ANS Forth language.  It serves as
+reference manual, but it also contains an introduction to Forth and a
+Forth tutorial.
+
+   Copyright (C) 1995, 1996, 1997, 1998, 2000, 2003,
+2004,2005,2006,2007,2008 Free Software Foundation, Inc.
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.1 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with the Front-Cover texts
+     being "A GNU Manual," and with the Back-Cover Texts as in (a)
+     below.  A copy of the license is included in the section entitled
+     "GNU Free Documentation License."
+
+     (a) The FSF's Back-Cover Text is: "You have freedom to copy and
+     modify this GNU Manual, like GNU software.  Copies published by
+     the Free Software Foundation raise funds for GNU development."
+
+INFO-DIR-SECTION Software development
+START-INFO-DIR-ENTRY
+* Gforth: (gforth).             A fast interpreter for the Forth language.
+END-INFO-DIR-ENTRY
+
+
+File: gforth.info,  Node: Using the Cross Compiler,  Next: How the Cross Compiler Works,  Prev: Cross Compiler,  Up: Cross Compiler
+
+15.1 Using the Cross Compiler
+=============================
+
+The cross compiler uses a language that resembles Forth, but isn't. The
+main difference is that you can execute Forth code after definition,
+while you usually can't execute the code compiled by cross, because the
+code you are compiling is typically for a different computer than the
+one you are compiling on.
+
+   The Makefile is already set up to allow you to create kernels for new
+architectures with a simple make command. The generic kernels using the
+GCC compiled virtual machine are created in the normal build process
+with `make'. To create a embedded Gforth executable for e.g. the 8086
+processor (running on a DOS machine), type
+
+     make kernl-8086.fi
+
+   This will use the machine description from the `arch/8086' directory
+to create a new kernel. A machine file may look like that:
+
+     \ Parameter for target systems                         06oct92py
+
+         4 Constant cell             \ cell size in bytes
+         2 Constant cell<<           \ cell shift to bytes
+         5 Constant cell>bit         \ cell shift to bits
+         8 Constant bits/char        \ bits per character
+         8 Constant bits/byte        \ bits per byte [default: 8]
+         8 Constant float            \ bytes per float
+         8 Constant /maxalign        \ maximum alignment in bytes
+     false Constant bigendian        \ byte order
+     ( true=big, false=little )
+
+     include machpc.fs               \ feature list
+
+   This part is obligatory for the cross compiler itself, the feature
+list is used by the kernel to conditionally compile some features in
+and out, depending on whether the target supports these features.
+
+   There are some optional features, if you define your own primitives,
+have an assembler, or need special, nonstandard preparation to make the
+boot process work. `asm-include' includes an assembler, `prims-include'
+includes primitives, and `>boot' prepares for booting.
+
+     : asm-include    ." Include assembler" cr
+       s" arch/8086/asm.fs" included ;
+
+     : prims-include  ." Include primitives" cr
+       s" arch/8086/prim.fs" included ;
+
+     : >boot          ." Prepare booting" cr
+       s" ' boot >body into-forth 1+ !" evaluate ;
+
+   These words are used as sort of macro during the cross compilation in
+the file `kernel/main.fs'. Instead of using these macros, it would be
+possible -- but more complicated -- to write a new kernel project file,
+too.
+
+   `kernel/main.fs' expects the machine description file name on the
+stack; the cross compiler itself (`cross.fs') assumes that either
+`mach-file' leaves a counted string on the stack, or `machine-file'
+leaves an address, count pair of the filename on the stack.
+
+   The feature list is typically controlled using `SetValue', generic
+files that are used by several projects can use `DefaultValue' instead.
+Both functions work like `Value', when the value isn't defined, but
+`SetValue' works like `to' if the value is defined, and `DefaultValue'
+doesn't set anything, if the value is defined.
+
+     \ generic mach file for pc gforth                       03sep97jaw
+
+     true DefaultValue NIL  \ relocating
+
+     >ENVIRON
+
+     true DefaultValue file          \ controls the presence of the
+                                     \ file access wordset
+     true DefaultValue OS            \ flag to indicate a operating system
+
+     true DefaultValue prims         \ true: primitives are c-code
+
+     true DefaultValue floating      \ floating point wordset is present
+
+     true DefaultValue glocals       \ gforth locals are present
+                                     \ will be loaded
+     true DefaultValue dcomps        \ double number comparisons
+
+     true DefaultValue hash          \ hashing primitives are loaded/present
+
+     true DefaultValue xconds        \ used together with glocals,
+                                     \ special conditionals supporting gforths'
+                                     \ local variables
+     true DefaultValue header        \ save a header information
+
+     true DefaultValue backtrace     \ enables backtrace code
+
+     false DefaultValue ec
+     false DefaultValue crlf
+
+     cell 2 = [IF] &32 [ELSE] &256 [THEN] KB DefaultValue kernel-size
+
+     &16 KB          DefaultValue stack-size
+     &15 KB &512 +   DefaultValue fstack-size
+     &15 KB          DefaultValue rstack-size
+     &14 KB &512 +   DefaultValue lstack-size
+
+
+File: gforth.info,  Node: How the Cross Compiler Works,  Prev: Using the Cross Compiler,  Up: Cross Compiler
+
+15.2 How the Cross Compiler Works
+=================================
+
+
+File: gforth.info,  Node: Bugs,  Next: Origin,  Prev: Cross Compiler,  Up: Top
+
+Anhang A Bugs
+*************
+
+Known bugs are described in the file `BUGS' in the Gforth distribution.
+
+   If you find a bug, please submit a bug report through
+`https://savannah.gnu.org/bugs/?func=addbug&group=gforth'.
+
+   * A program (or a sequence of keyboard commands) that reproduces the
+     bug.
+
+   * A description of what you think constitutes the buggy behaviour.
+
+   * The Gforth version used (it is announced at the start of an
+     interactive Gforth session).
+
+   * The machine and operating system (on Unix systems `uname -a' will
+     report this information).
+
+   * The installation options (you can find the configure options at the
+     start of `config.status') and configuration (`configure' output or
+     `config.cache').
+
+   * A complete list of changes (if any) you (or your installer) have
+     made to the Gforth sources.
+
+   For a thorough guide on reporting bugs read *note How to Report
+Bugs: (gcc.info)Bug Reporting.
+
+
+File: gforth.info,  Node: Origin,  Next: Forth-related information,  Prev: Bugs,  Up: Top
+
+Anhang B Authors and Ancestors of Gforth
+****************************************
+
+B.1 Authors and Contributors
+============================
+
+The Gforth project was started in mid-1992 by Bernd Paysan and Anton
+Ertl. The third major author was Jens Wilke.  Neal Crook contributed a
+lot to the manual.  Assemblers and disassemblers were contributed by
+Andrew McKewan, Christian Pirker, Bernd Thallner, and Michal Revucky.
+Lennart Benschop (who was one of Gforth's first users, in mid-1993) and
+Stuart Ramsden inspired us with their continuous feedback. Lennart
+Benshop contributed `glosgen.fs', while Stuart Ramsden has been working
+on automatic support for calling C libraries. Helpful comments also
+came from Paul Kleinrubatscher, Christian Pirker, Dirk Zoller, Marcel
+Hendrix, John Wavrik, Barrie Stott, Marc de Groot, Jorge Acerada, Bruce
+Hoyt, Robert Epprecht, Dennis Ruffer and David N. Williams. Since the
+release of Gforth-0.2.1 there were also helpful comments from many
+others; thank you all, sorry for not listing you here (but digging
+through my mailbox to extract your names is on my to-do list).
+
+   Gforth also owes a lot to the authors of the tools we used (GCC, CVS,
+and autoconf, among others), and to the creators of the Internet: Gforth
+was developed across the Internet, and its authors did not meet
+physically for the first 4 years of development.
+
+B.2 Pedigree
+============
+
+Gforth descends from bigFORTH (1993) and fig-Forth.  Of course, a
+significant part of the design of Gforth was prescribed by ANS Forth.
+
+   Bernd Paysan wrote bigFORTH, a descendent from TurboForth, an
+unreleased 32 bit native code version of VolksForth for the Atari ST,
+written mostly by Dietrich Weineck.
+
+   VolksForth was written by Klaus Schleisiek, Bernd Pennemann, Georg
+Rehfeld and Dietrich Weineck for the C64 (called UltraForth there) in
+the mid-80s and ported to the Atari ST in 1986.  It descends from
+fig-Forth.
+
+   A team led by Bill Ragsdale implemented fig-Forth on many processors
+in 1979. Robert Selzer and Bill Ragsdale developed the original
+implementation of fig-Forth for the 6502 based on microForth.
+
+   The principal architect of microForth was Dean Sanderson. microForth
+was FORTH, Inc.'s first off-the-shelf product. It was developed in 1976
+for the 1802, and subsequently implemented on the 8080, the 6800 and the
+Z80.
+
+   All earlier Forth systems were custom-made, usually by Charles Moore,
+who discovered (as he puts it) Forth during the late 60s. The first full
+Forth existed in 1971.
+
+   A part of the information in this section comes from `The Evolution
+of Forth (http://www.forth.com/Content/History/History1.htm)' by
+Elizabeth D. Rather, Donald R. Colburn and Charles H. Moore, presented
+at the HOPL-II conference and preprinted in SIGPLAN Notices 28(3),
+1993.  You can find more historical and genealogical information about
+Forth there.  For a more general (and graphical) Forth family tree look
+see ``http://www.complang.tuwien.ac.at/forth/family-tree/', Forth
+Family Tree and Timeline'.
+
+
+File: gforth.info,  Node: Forth-related information,  Next: Licenses,  Prev: Origin,  Up: Top
+
+Anhang C Other Forth-related information
+****************************************
+
+There is an active news group (comp.lang.forth) discussing Forth
+(including Gforth) and Forth-related issues. Its FAQs
+(http://www.complang.tuwien.ac.at/forth/faq/faq-general-2.html)
+(frequently asked questions and their answers) contains a lot of
+information on Forth.  You should read it before posting to
+comp.lang.forth.
+
+   The ANS Forth standard is most usable in its HTML form
+(http://www.taygeta.com/forth/dpans.html).
+
+
+File: gforth.info,  Node: Licenses,  Next: Word Index,  Prev: Forth-related information,  Up: Top
+
+Anhang D Licenses
+*****************
+
+* Menu:
+
+* GNU Free Documentation License::  License for copying this manual.
+* Copying::                     GPL (for copying this software).
+
+
+File: gforth.info,  Node: GNU Free Documentation License,  Next: Copying,  Prev: Licenses,  Up: Licenses
+
+D.1 GNU Free Documentation License
+==================================
+
+                      Version 1.2, November 2002
+
+     Copyright (C) 2000,2001,2002 Free Software Foundation, Inc.
+     59 Temple Place, Suite 330, Boston, MA  02111-1307, USA
+
+     Everyone is permitted to copy and distribute verbatim copies
+     of this license document, but changing it is not allowed.
+
+  0. PREAMBLE
+
+     The purpose of this License is to make a manual, textbook, or other
+     functional and useful document "free" in the sense of freedom: to
+     assure everyone the effective freedom to copy and redistribute it,
+     with or without modifying it, either commercially or
+     noncommercially.  Secondarily, this License preserves for the
+     author and publisher a way to get credit for their work, while not
+     being considered responsible for modifications made by others.
+
+     This License is a kind of "copyleft", which means that derivative
+     works of the document must themselves be free in the same sense.
+     It complements the GNU General Public License, which is a copyleft
+     license designed for free software.
+
+     We have designed this License in order to use it for manuals for
+     free software, because free software needs free documentation: a
+     free program should come with manuals providing the same freedoms
+     that the software does.  But this License is not limited to
+     software manuals; it can be used for any textual work, regardless
+     of subject matter or whether it is published as a printed book.
+     We recommend this License principally for works whose purpose is
+     instruction or reference.
+
+  1. APPLICABILITY AND DEFINITIONS
+
+     This License applies to any manual or other work, in any medium,
+     that contains a notice placed by the copyright holder saying it
+     can be distributed under the terms of this License.  Such a notice
+     grants a world-wide, royalty-free license, unlimited in duration,
+     to use that work under the conditions stated herein.  The
+     "Document", below, refers to any such manual or work.  Any member
+     of the public is a licensee, and is addressed as "you".  You
+     accept the license if you copy, modify or distribute the work in a
+     way requiring permission under copyright law.
+
+     A "Modified Version" of the Document means any work containing the
+     Document or a portion of it, either copied verbatim, or with
+     modifications and/or translated into another language.
+
+     A "Secondary Section" is a named appendix or a front-matter section
+     of the Document that deals exclusively with the relationship of the
+     publishers or authors of the Document to the Document's overall
+     subject (or to related matters) and contains nothing that could
+     fall directly within that overall subject.  (Thus, if the Document
+     is in part a textbook of mathematics, a Secondary Section may not
+     explain any mathematics.)  The relationship could be a matter of
+     historical connection with the subject or with related matters, or
+     of legal, commercial, philosophical, ethical or political position
+     regarding them.
+
+     The "Invariant Sections" are certain Secondary Sections whose
+     titles are designated, as being those of Invariant Sections, in
+     the notice that says that the Document is released under this
+     License.  If a section does not fit the above definition of
+     Secondary then it is not allowed to be designated as Invariant.
+     The Document may contain zero Invariant Sections.  If the Document
+     does not identify any Invariant Sections then there are none.
+
+     The "Cover Texts" are certain short passages of text that are
+     listed, as Front-Cover Texts or Back-Cover Texts, in the notice
+     that says that the Document is released under this License.  A
+     Front-Cover Text may be at most 5 words, and a Back-Cover Text may
+     be at most 25 words.
+
+     A "Transparent" copy of the Document means a machine-readable copy,
+     represented in a format whose specification is available to the
+     general public, that is suitable for revising the document
+     straightforwardly with generic text editors or (for images
+     composed of pixels) generic paint programs or (for drawings) some
+     widely available drawing editor, and that is suitable for input to
+     text formatters or for automatic translation to a variety of
+     formats suitable for input to text formatters.  A copy made in an
+     otherwise Transparent file format whose markup, or absence of
+     markup, has been arranged to thwart or discourage subsequent
+     modification by readers is not Transparent.  An image format is
+     not Transparent if used for any substantial amount of text.  A
+     copy that is not "Transparent" is called "Opaque".
+
+     Examples of suitable formats for Transparent copies include plain
+     ASCII without markup, Texinfo input format, LaTeX input format,
+     SGML or XML using a publicly available DTD, and
+     standard-conforming simple HTML, PostScript or PDF designed for
+     human modification.  Examples of transparent image formats include
+     PNG, XCF and JPG.  Opaque formats include proprietary formats that
+     can be read and edited only by proprietary word processors, SGML or
+     XML for which the DTD and/or processing tools are not generally
+     available, and the machine-generated HTML, PostScript or PDF
+     produced by some word processors for output purposes only.
+
+     The "Title Page" means, for a printed book, the title page itself,
+     plus such following pages as are needed to hold, legibly, the
+     material this License requires to appear in the title page.  For
+     works in formats which do not have any title page as such, "Title
+     Page" means the text near the most prominent appearance of the
+     work's title, preceding the beginning of the body of the text.
+
+     A section "Entitled XYZ" means a named subunit of the Document
+     whose title either is precisely XYZ or contains XYZ in parentheses
+     following text that translates XYZ in another language.  (Here XYZ
+     stands for a specific section name mentioned below, such as
+     "Acknowledgements", "Dedications", "Endorsements", or "History".)
+     To "Preserve the Title" of such a section when you modify the
+     Document means that it remains a section "Entitled XYZ" according
+     to this definition.
+
+     The Document may include Warranty Disclaimers next to the notice
+     which states that this License applies to the Document.  These
+     Warranty Disclaimers are considered to be included by reference in
+     this License, but only as regards disclaiming warranties: any other
+     implication that these Warranty Disclaimers may have is void and
+     has no effect on the meaning of this License.
+
+  2. VERBATIM COPYING
+
+     You may copy and distribute the Document in any medium, either
+     commercially or noncommercially, provided that this License, the
+     copyright notices, and the license notice saying this License
+     applies to the Document are reproduced in all copies, and that you
+     add no other conditions whatsoever to those of this License.  You
+     may not use technical measures to obstruct or control the reading
+     or further copying of the copies you make or distribute.  However,
+     you may accept compensation in exchange for copies.  If you
+     distribute a large enough number of copies you must also follow
+     the conditions in section 3.
+
+     You may also lend copies, under the same conditions stated above,
+     and you may publicly display copies.
+
+  3. COPYING IN QUANTITY
+
+     If you publish printed copies (or copies in media that commonly
+     have printed covers) of the Document, numbering more than 100, and
+     the Document's license notice requires Cover Texts, you must
+     enclose the copies in covers that carry, clearly and legibly, all
+     these Cover Texts: Front-Cover Texts on the front cover, and
+     Back-Cover Texts on the back cover.  Both covers must also clearly
+     and legibly identify you as the publisher of these copies.  The
+     front cover must present the full title with all words of the
+     title equally prominent and visible.  You may add other material
+     on the covers in addition.  Copying with changes limited to the
+     covers, as long as they preserve the title of the Document and
+     satisfy these conditions, can be treated as verbatim copying in
+     other respects.
+
+     If the required texts for either cover are too voluminous to fit
+     legibly, you should put the first ones listed (as many as fit
+     reasonably) on the actual cover, and continue the rest onto
+     adjacent pages.
+
+     If you publish or distribute Opaque copies of the Document
+     numbering more than 100, you must either include a
+     machine-readable Transparent copy along with each Opaque copy, or
+     state in or with each Opaque copy a computer-network location from
+     which the general network-using public has access to download
+     using public-standard network protocols a complete Transparent
+     copy of the Document, free of added material.  If you use the
+     latter option, you must take reasonably prudent steps, when you
+     begin distribution of Opaque copies in quantity, to ensure that
+     this Transparent copy will remain thus accessible at the stated
+     location until at least one year after the last time you
+     distribute an Opaque copy (directly or through your agents or
+     retailers) of that edition to the public.
+
+     It is requested, but not required, that you contact the authors of
+     the Document well before redistributing any large number of
+     copies, to give them a chance to provide you with an updated
+     version of the Document.
+
+  4. MODIFICATIONS
+
+     You may copy and distribute a Modified Version of the Document
+     under the conditions of sections 2 and 3 above, provided that you
+     release the Modified Version under precisely this License, with
+     the Modified Version filling the role of the Document, thus
+     licensing distribution and modification of the Modified Version to
+     whoever possesses a copy of it.  In addition, you must do these
+     things in the Modified Version:
+
+       A. Use in the Title Page (and on the covers, if any) a title
+          distinct from that of the Document, and from those of
+          previous versions (which should, if there were any, be listed
+          in the History section of the Document).  You may use the
+          same title as a previous version if the original publisher of
+          that version gives permission.
+
+       B. List on the Title Page, as authors, one or more persons or
+          entities responsible for authorship of the modifications in
+          the Modified Version, together with at least five of the
+          principal authors of the Document (all of its principal
+          authors, if it has fewer than five), unless they release you
+          from this requirement.
+
+       C. State on the Title page the name of the publisher of the
+          Modified Version, as the publisher.
+
+       D. Preserve all the copyright notices of the Document.
+
+       E. Add an appropriate copyright notice for your modifications
+          adjacent to the other copyright notices.
+
+       F. Include, immediately after the copyright notices, a license
+          notice giving the public permission to use the Modified
+          Version under the terms of this License, in the form shown in
+          the Addendum below.
+
+       G. Preserve in that license notice the full lists of Invariant
+          Sections and required Cover Texts given in the Document's
+          license notice.
+
+       H. Include an unaltered copy of this License.
+
+       I. Preserve the section Entitled "History", Preserve its Title,
+          and add to it an item stating at least the title, year, new
+          authors, and publisher of the Modified Version as given on
+          the Title Page.  If there is no section Entitled "History" in
+          the Document, create one stating the title, year, authors,
+          and publisher of the Document as given on its Title Page,
+          then add an item describing the Modified Version as stated in
+          the previous sentence.
+
+       J. Preserve the network location, if any, given in the Document
+          for public access to a Transparent copy of the Document, and
+          likewise the network locations given in the Document for
+          previous versions it was based on.  These may be placed in
+          the "History" section.  You may omit a network location for a
+          work that was published at least four years before the
+          Document itself, or if the original publisher of the version
+          it refers to gives permission.
+
+       K. For any section Entitled "Acknowledgements" or "Dedications",
+          Preserve the Title of the section, and preserve in the
+          section all the substance and tone of each of the contributor
+          acknowledgements and/or dedications given therein.
+
+       L. Preserve all the Invariant Sections of the Document,
+          unaltered in their text and in their titles.  Section numbers
+          or the equivalent are not considered part of the section
+          titles.
+
+       M. Delete any section Entitled "Endorsements".  Such a section
+          may not be included in the Modified Version.
+
+       N. Do not retitle any existing section to be Entitled
+          "Endorsements" or to conflict in title with any Invariant
+          Section.
+
+       O. Preserve any Warranty Disclaimers.
+
+     If the Modified Version includes new front-matter sections or
+     appendices that qualify as Secondary Sections and contain no
+     material copied from the Document, you may at your option
+     designate some or all of these sections as invariant.  To do this,
+     add their titles to the list of Invariant Sections in the Modified
+     Version's license notice.  These titles must be distinct from any
+     other section titles.
+
+     You may add a section Entitled "Endorsements", provided it contains
+     nothing but endorsements of your Modified Version by various
+     parties--for example, statements of peer review or that the text
+     has been approved by an organization as the authoritative
+     definition of a standard.
+
+     You may add a passage of up to five words as a Front-Cover Text,
+     and a passage of up to 25 words as a Back-Cover Text, to the end
+     of the list of Cover Texts in the Modified Version.  Only one
+     passage of Front-Cover Text and one of Back-Cover Text may be
+     added by (or through arrangements made by) any one entity.  If the
+     Document already includes a cover text for the same cover,
+     previously added by you or by arrangement made by the same entity
+     you are acting on behalf of, you may not add another; but you may
+     replace the old one, on explicit permission from the previous
+     publisher that added the old one.
+
+     The author(s) and publisher(s) of the Document do not by this
+     License give permission to use their names for publicity for or to
+     assert or imply endorsement of any Modified Version.
+
+  5. COMBINING DOCUMENTS
+
+     You may combine the Document with other documents released under
+     this License, under the terms defined in section 4 above for
+     modified versions, provided that you include in the combination
+     all of the Invariant Sections of all of the original documents,
+     unmodified, and list them all as Invariant Sections of your
+     combined work in its license notice, and that you preserve all
+     their Warranty Disclaimers.
+
+     The combined work need only contain one copy of this License, and
+     multiple identical Invariant Sections may be replaced with a single
+     copy.  If there are multiple Invariant Sections with the same name
+     but different contents, make the title of each such section unique
+     by adding at the end of it, in parentheses, the name of the
+     original author or publisher of that section if known, or else a
+     unique number.  Make the same adjustment to the section titles in
+     the list of Invariant Sections in the license notice of the
+     combined work.
+
+     In the combination, you must combine any sections Entitled
+     "History" in the various original documents, forming one section
+     Entitled "History"; likewise combine any sections Entitled
+     "Acknowledgements", and any sections Entitled "Dedications".  You
+     must delete all sections Entitled "Endorsements."
+
+  6. COLLECTIONS OF DOCUMENTS
+
+     You may make a collection consisting of the Document and other
+     documents released under this License, and replace the individual
+     copies of this License in the various documents with a single copy
+     that is included in the collection, provided that you follow the
+     rules of this License for verbatim copying of each of the
+     documents in all other respects.
+
+     You may extract a single document from such a collection, and
+     distribute it individually under this License, provided you insert
+     a copy of this License into the extracted document, and follow
+     this License in all other respects regarding verbatim copying of
+     that document.
+
+  7. AGGREGATION WITH INDEPENDENT WORKS
+
+     A compilation of the Document or its derivatives with other
+     separate and independent documents or works, in or on a volume of
+     a storage or distribution medium, is called an "aggregate" if the
+     copyright resulting from the compilation is not used to limit the
+     legal rights of the compilation's users beyond what the individual
+     works permit.  When the Document is included in an aggregate, this
+     License does not apply to the other works in the aggregate which
+     are not themselves derivative works of the Document.
+
+     If the Cover Text requirement of section 3 is applicable to these
+     copies of the Document, then if the Document is less than one half
+     of the entire aggregate, the Document's Cover Texts may be placed
+     on covers that bracket the Document within the aggregate, or the
+     electronic equivalent of covers if the Document is in electronic
+     form.  Otherwise they must appear on printed covers that bracket
+     the whole aggregate.
+
+  8. TRANSLATION
+
+     Translation is considered a kind of modification, so you may
+     distribute translations of the Document under the terms of section
+     4.  Replacing Invariant Sections with translations requires special
+     permission from their copyright holders, but you may include
+     translations of some or all Invariant Sections in addition to the
+     original versions of these Invariant Sections.  You may include a
+     translation of this License, and all the license notices in the
+     Document, and any Warranty Disclaimers, provided that you also
+     include the original English version of this License and the
+     original versions of those notices and disclaimers.  In case of a
+     disagreement between the translation and the original version of
+     this License or a notice or disclaimer, the original version will
+     prevail.
+
+     If a section in the Document is Entitled "Acknowledgements",
+     "Dedications", or "History", the requirement (section 4) to
+     Preserve its Title (section 1) will typically require changing the
+     actual title.
+
+  9. TERMINATION
+
+     You may not copy, modify, sublicense, or distribute the Document
+     except as expressly provided for under this License.  Any other
+     attempt to copy, modify, sublicense or distribute the Document is
+     void, and will automatically terminate your rights under this
+     License.  However, parties who have received copies, or rights,
+     from you under this License will not have their licenses
+     terminated so long as such parties remain in full compliance.
+
+ 10. FUTURE REVISIONS OF THIS LICENSE
+
+     The Free Software Foundation may publish new, revised versions of
+     the GNU Free Documentation License from time to time.  Such new
+     versions will be similar in spirit to the present version, but may
+     differ in detail to address new problems or concerns.  See
+     `http://www.gnu.org/copyleft/'.
+
+     Each version of the License is given a distinguishing version
+     number.  If the Document specifies that a particular numbered
+     version of this License "or any later version" applies to it, you
+     have the option of following the terms and conditions either of
+     that specified version or of any later version that has been
+     published (not as a draft) by the Free Software Foundation.  If
+     the Document does not specify a version number of this License,
+     you may choose any version ever published (not as a draft) by the
+     Free Software Foundation.
+
+D.1.1 ADDENDUM: How to use this License for your documents
+----------------------------------------------------------
+
+To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and license
+notices just after the title page:
+
+       Copyright (C)  YEAR  YOUR NAME.
+       Permission is granted to copy, distribute and/or modify this document
+       under the terms of the GNU Free Documentation License, Version 1.2
+       or any later version published by the Free Software Foundation;
+       with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+       Texts.  A copy of the license is included in the section entitled ``GNU
+       Free Documentation License''.
+
+   If you have Invariant Sections, Front-Cover Texts and Back-Cover
+Texts, replace the "with...Texts." line with this:
+
+         with the Invariant Sections being LIST THEIR TITLES, with
+         the Front-Cover Texts being LIST, and with the Back-Cover Texts
+         being LIST.
+
+   If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+
+   If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License, to
+permit their use in free software.
+
+
+File: gforth.info,  Node: Copying,  Prev: GNU Free Documentation License,  Up: Licenses
+
+D.2 GNU GENERAL PUBLIC LICENSE
+==============================
+
+                        Version 3, 29 June 2007
+
+     Copyright (C) 2007 Free Software Foundation, Inc. `http://fsf.org/'
+
+     Everyone is permitted to copy and distribute verbatim copies of this
+     license document, but changing it is not allowed.
+
+Preamble
+========
+
+The GNU General Public License is a free, copyleft license for software
+and other kinds of works.
+
+   The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works.  By contrast,
+the GNU General Public License is intended to guarantee your freedom to
+share and change all versions of a program--to make sure it remains
+free software for all its users.  We, the Free Software Foundation, use
+the GNU General Public License for most of our software; it applies
+also to any other work released this way by its authors.  You can apply
+it to your programs, too.
+
+   When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+them if you wish), that you receive source code or can get it if you
+want it, that you can change the software or use pieces of it in new
+free programs, and that you know you can do these things.
+
+   To protect your rights, we need to prevent others from denying you
+these rights or asking you to surrender the rights.  Therefore, you
+have certain responsibilities if you distribute copies of the software,
+or if you modify it: responsibilities to respect the freedom of others.
+
+   For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must pass on to the recipients the same
+freedoms that you received.  You must make sure that they, too, receive
+or can get the source code.  And you must show them these terms so they
+know their rights.
+
+   Developers that use the GNU GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+   For the developers' and authors' protection, the GPL clearly explains
+that there is no warranty for this free software.  For both users' and
+authors' sake, the GPL requires that modified versions be marked as
+changed, so that their problems will not be attributed erroneously to
+authors of previous versions.
+
+   Some devices are designed to deny users access to install or run
+modified versions of the software inside them, although the
+manufacturer can do so.  This is fundamentally incompatible with the
+aim of protecting users' freedom to change the software.  The
+systematic pattern of such abuse occurs in the area of products for
+individuals to use, which is precisely where it is most unacceptable.
+Therefore, we have designed this version of the GPL to prohibit the
+practice for those products.  If such problems arise substantially in
+other domains, we stand ready to extend this provision to those domains
+in future versions of the GPL, as needed to protect the freedom of
+users.
+
+   Finally, every program is threatened constantly by software patents.
+States should not allow patents to restrict development and use of
+software on general-purpose computers, but in those that do, we wish to
+avoid the special danger that patents applied to a free program could
+make it effectively proprietary.  To prevent this, the GPL assures that
+patents cannot be used to render the program non-free.
+
+   The precise terms and conditions for copying, distribution and
+modification follow.
+
+TERMS AND CONDITIONS
+====================
+
+  0. Definitions.
+
+     "This License" refers to version 3 of the GNU General Public
+     License.
+
+     "Copyright" also means copyright-like laws that apply to other
+     kinds of works, such as semiconductor masks.
+
+     "The Program" refers to any copyrightable work licensed under this
+     License.  Each licensee is addressed as "you".  "Licensees" and
+     "recipients" may be individuals or organizations.
+
+     To "modify" a work means to copy from or adapt all or part of the
+     work in a fashion requiring copyright permission, other than the
+     making of an exact copy.  The resulting work is called a "modified
+     version" of the earlier work or a work "based on" the earlier work.
+
+     A "covered work" means either the unmodified Program or a work
+     based on the Program.
+
+     To "propagate" a work means to do anything with it that, without
+     permission, would make you directly or secondarily liable for
+     infringement under applicable copyright law, except executing it
+     on a computer or modifying a private copy.  Propagation includes
+     copying, distribution (with or without modification), making
+     available to the public, and in some countries other activities as
+     well.
+
+     To "convey" a work means any kind of propagation that enables other
+     parties to make or receive copies.  Mere interaction with a user
+     through a computer network, with no transfer of a copy, is not
+     conveying.
+
+     An interactive user interface displays "Appropriate Legal Notices"
+     to the extent that it includes a convenient and prominently visible
+     feature that (1) displays an appropriate copyright notice, and (2)
+     tells the user that there is no warranty for the work (except to
+     the extent that warranties are provided), that licensees may
+     convey the work under this License, and how to view a copy of this
+     License.  If the interface presents a list of user commands or
+     options, such as a menu, a prominent item in the list meets this
+     criterion.
+
+  1. Source Code.
+
+     The "source code" for a work means the preferred form of the work
+     for making modifications to it.  "Object code" means any
+     non-source form of a work.
+
+     A "Standard Interface" means an interface that either is an
+     official standard defined by a recognized standards body, or, in
+     the case of interfaces specified for a particular programming
+     language, one that is widely used among developers working in that
+     language.
+
+     The "System Libraries" of an executable work include anything,
+     other than the work as a whole, that (a) is included in the normal
+     form of packaging a Major Component, but which is not part of that
+     Major Component, and (b) serves only to enable use of the work
+     with that Major Component, or to implement a Standard Interface
+     for which an implementation is available to the public in source
+     code form.  A "Major Component", in this context, means a major
+     essential component (kernel, window system, and so on) of the
+     specific operating system (if any) on which the executable work
+     runs, or a compiler used to produce the work, or an object code
+     interpreter used to run it.
+
+     The "Corresponding Source" for a work in object code form means all
+     the source code needed to generate, install, and (for an executable
+     work) run the object code and to modify the work, including
+     scripts to control those activities.  However, it does not include
+     the work's System Libraries, or general-purpose tools or generally
+     available free programs which are used unmodified in performing
+     those activities but which are not part of the work.  For example,
+     Corresponding Source includes interface definition files
+     associated with source files for the work, and the source code for
+     shared libraries and dynamically linked subprograms that the work
+     is specifically designed to require, such as by intimate data
+     communication or control flow between those subprograms and other
+     parts of the work.
+
+     The Corresponding Source need not include anything that users can
+     regenerate automatically from other parts of the Corresponding
+     Source.
+
+     The Corresponding Source for a work in source code form is that
+     same work.
+
+  2. Basic Permissions.
+
+     All rights granted under this License are granted for the term of
+     copyright on the Program, and are irrevocable provided the stated
+     conditions are met.  This License explicitly affirms your unlimited
+     permission to run the unmodified Program.  The output from running
+     a covered work is covered by this License only if the output,
+     given its content, constitutes a covered work.  This License
+     acknowledges your rights of fair use or other equivalent, as
+     provided by copyright law.
+
+     You may make, run and propagate covered works that you do not
+     convey, without conditions so long as your license otherwise
+     remains in force.  You may convey covered works to others for the
+     sole purpose of having them make modifications exclusively for
+     you, or provide you with facilities for running those works,
+     provided that you comply with the terms of this License in
+     conveying all material for which you do not control copyright.
+     Those thus making or running the covered works for you must do so
+     exclusively on your behalf, under your direction and control, on
+     terms that prohibit them from making any copies of your
+     copyrighted material outside their relationship with you.
+
+     Conveying under any other circumstances is permitted solely under
+     the conditions stated below.  Sublicensing is not allowed; section
+     10 makes it unnecessary.
+
+  3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+     No covered work shall be deemed part of an effective technological
+     measure under any applicable law fulfilling obligations under
+     article 11 of the WIPO copyright treaty adopted on 20 December
+     1996, or similar laws prohibiting or restricting circumvention of
+     such measures.
+
+     When you convey a covered work, you waive any legal power to forbid
+     circumvention of technological measures to the extent such
+     circumvention is effected by exercising rights under this License
+     with respect to the covered work, and you disclaim any intention
+     to limit operation or modification of the work as a means of
+     enforcing, against the work's users, your or third parties' legal
+     rights to forbid circumvention of technological measures.
+
+  4. Conveying Verbatim Copies.
+
+     You may convey verbatim copies of the Program's source code as you
+     receive it, in any medium, provided that you conspicuously and
+     appropriately publish on each copy an appropriate copyright notice;
+     keep intact all notices stating that this License and any
+     non-permissive terms added in accord with section 7 apply to the
+     code; keep intact all notices of the absence of any warranty; and
+     give all recipients a copy of this License along with the Program.
+
+     You may charge any price or no price for each copy that you convey,
+     and you may offer support or warranty protection for a fee.
+
+  5. Conveying Modified Source Versions.
+
+     You may convey a work based on the Program, or the modifications to
+     produce it from the Program, in the form of source code under the
+     terms of section 4, provided that you also meet all of these
+     conditions:
+
+       a. The work must carry prominent notices stating that you
+          modified it, and giving a relevant date.
+
+       b. The work must carry prominent notices stating that it is
+          released under this License and any conditions added under
+          section 7.  This requirement modifies the requirement in
+          section 4 to "keep intact all notices".
+
+       c. You must license the entire work, as a whole, under this
+          License to anyone who comes into possession of a copy.  This
+          License will therefore apply, along with any applicable
+          section 7 additional terms, to the whole of the work, and all
+          its parts, regardless of how they are packaged.  This License
+          gives no permission to license the work in any other way, but
+          it does not invalidate such permission if you have separately
+          received it.
+
+       d. If the work has interactive user interfaces, each must display
+          Appropriate Legal Notices; however, if the Program has
+          interactive interfaces that do not display Appropriate Legal
+          Notices, your work need not make them do so.
+
+     A compilation of a covered work with other separate and independent
+     works, which are not by their nature extensions of the covered
+     work, and which are not combined with it such as to form a larger
+     program, in or on a volume of a storage or distribution medium, is
+     called an "aggregate" if the compilation and its resulting
+     copyright are not used to limit the access or legal rights of the
+     compilation's users beyond what the individual works permit.
+     Inclusion of a covered work in an aggregate does not cause this
+     License to apply to the other parts of the aggregate.
+
+  6. Conveying Non-Source Forms.
+
+     You may convey a covered work in object code form under the terms
+     of sections 4 and 5, provided that you also convey the
+     machine-readable Corresponding Source under the terms of this
+     License, in one of these ways:
+
+       a. Convey the object code in, or embodied in, a physical product
+          (including a physical distribution medium), accompanied by the
+          Corresponding Source fixed on a durable physical medium
+          customarily used for software interchange.
+
+       b. Convey the object code in, or embodied in, a physical product
+          (including a physical distribution medium), accompanied by a
+          written offer, valid for at least three years and valid for
+          as long as you offer spare parts or customer support for that
+          product model, to give anyone who possesses the object code
+          either (1) a copy of the Corresponding Source for all the
+          software in the product that is covered by this License, on a
+          durable physical medium customarily used for software
+          interchange, for a price no more than your reasonable cost of
+          physically performing this conveying of source, or (2) access
+          to copy the Corresponding Source from a network server at no
+          charge.
+
+       c. Convey individual copies of the object code with a copy of
+          the written offer to provide the Corresponding Source.  This
+          alternative is allowed only occasionally and noncommercially,
+          and only if you received the object code with such an offer,
+          in accord with subsection 6b.
+
+       d. Convey the object code by offering access from a designated
+          place (gratis or for a charge), and offer equivalent access
+          to the Corresponding Source in the same way through the same
+          place at no further charge.  You need not require recipients
+          to copy the Corresponding Source along with the object code.
+          If the place to copy the object code is a network server, the
+          Corresponding Source may be on a different server (operated
+          by you or a third party) that supports equivalent copying
+          facilities, provided you maintain clear directions next to
+          the object code saying where to find the Corresponding Source.
+          Regardless of what server hosts the Corresponding Source, you
+          remain obligated to ensure that it is available for as long
+          as needed to satisfy these requirements.
+
+       e. Convey the object code using peer-to-peer transmission,
+          provided you inform other peers where the object code and
+          Corresponding Source of the work are being offered to the
+          general public at no charge under subsection 6d.
+
+
+     A separable portion of the object code, whose source code is
+     excluded from the Corresponding Source as a System Library, need
+     not be included in conveying the object code work.
+
+     A "User Product" is either (1) a "consumer product", which means
+     any tangible personal property which is normally used for personal,
+     family, or household purposes, or (2) anything designed or sold for
+     incorporation into a dwelling.  In determining whether a product
+     is a consumer product, doubtful cases shall be resolved in favor of
+     coverage.  For a particular product received by a particular user,
+     "normally used" refers to a typical or common use of that class of
+     product, regardless of the status of the particular user or of the
+     way in which the particular user actually uses, or expects or is
+     expected to use, the product.  A product is a consumer product
+     regardless of whether the product has substantial commercial,
+     industrial or non-consumer uses, unless such uses represent the
+     only significant mode of use of the product.
+
+     "Installation Information" for a User Product means any methods,
+     procedures, authorization keys, or other information required to
+     install and execute modified versions of a covered work in that
+     User Product from a modified version of its Corresponding Source.
+     The information must suffice to ensure that the continued
+     functioning of the modified object code is in no case prevented or
+     interfered with solely because modification has been made.
+
+     If you convey an object code work under this section in, or with,
+     or specifically for use in, a User Product, and the conveying
+     occurs as part of a transaction in which the right of possession
+     and use of the User Product is transferred to the recipient in
+     perpetuity or for a fixed term (regardless of how the transaction
+     is characterized), the Corresponding Source conveyed under this
+     section must be accompanied by the Installation Information.  But
+     this requirement does not apply if neither you nor any third party
+     retains the ability to install modified object code on the User
+     Product (for example, the work has been installed in ROM).
+
+     The requirement to provide Installation Information does not
+     include a requirement to continue to provide support service,
+     warranty, or updates for a work that has been modified or
+     installed by the recipient, or for the User Product in which it
+     has been modified or installed.  Access to a network may be denied
+     when the modification itself materially and adversely affects the
+     operation of the network or violates the rules and protocols for
+     communication across the network.
+
+     Corresponding Source conveyed, and Installation Information
+     provided, in accord with this section must be in a format that is
+     publicly documented (and with an implementation available to the
+     public in source code form), and must require no special password
+     or key for unpacking, reading or copying.
+
+  7. Additional Terms.
+
+     "Additional permissions" are terms that supplement the terms of
+     this License by making exceptions from one or more of its
+     conditions.  Additional permissions that are applicable to the
+     entire Program shall be treated as though they were included in
+     this License, to the extent that they are valid under applicable
+     law.  If additional permissions apply only to part of the Program,
+     that part may be used separately under those permissions, but the
+     entire Program remains governed by this License without regard to
+     the additional permissions.
+
+     When you convey a copy of a covered work, you may at your option
+     remove any additional permissions from that copy, or from any part
+     of it.  (Additional permissions may be written to require their own
+     removal in certain cases when you modify the work.)  You may place
+     additional permissions on material, added by you to a covered work,
+     for which you have or can give appropriate copyright permission.
+
+     Notwithstanding any other provision of this License, for material
+     you add to a covered work, you may (if authorized by the copyright
+     holders of that material) supplement the terms of this License
+     with terms:
+
+       a. Disclaiming warranty or limiting liability differently from
+          the terms of sections 15 and 16 of this License; or
+
+       b. Requiring preservation of specified reasonable legal notices
+          or author attributions in that material or in the Appropriate
+          Legal Notices displayed by works containing it; or
+
+       c. Prohibiting misrepresentation of the origin of that material,
+          or requiring that modified versions of such material be
+          marked in reasonable ways as different from the original
+          version; or
+
+       d. Limiting the use for publicity purposes of names of licensors
+          or authors of the material; or
+
+       e. Declining to grant rights under trademark law for use of some
+          trade names, trademarks, or service marks; or
+
+       f. Requiring indemnification of licensors and authors of that
+          material by anyone who conveys the material (or modified
+          versions of it) with contractual assumptions of liability to
+          the recipient, for any liability that these contractual
+          assumptions directly impose on those licensors and authors.
+
+     All other non-permissive additional terms are considered "further
+     restrictions" within the meaning of section 10.  If the Program as
+     you received it, or any part of it, contains a notice stating that
+     it is governed by this License along with a term that is a further
+     restriction, you may remove that term.  If a license document
+     contains a further restriction but permits relicensing or
+     conveying under this License, you may add to a covered work
+     material governed by the terms of that license document, provided
+     that the further restriction does not survive such relicensing or
+     conveying.
+
+     If you add terms to a covered work in accord with this section, you
+     must place, in the relevant source files, a statement of the
+     additional terms that apply to those files, or a notice indicating
+     where to find the applicable terms.
+
+     Additional terms, permissive or non-permissive, may be stated in
+     the form of a separately written license, or stated as exceptions;
+     the above requirements apply either way.
+
+  8. Termination.
+
+     You may not propagate or modify a covered work except as expressly
+     provided under this License.  Any attempt otherwise to propagate or
+     modify it is void, and will automatically terminate your rights
+     under this License (including any patent licenses granted under
+     the third paragraph of section 11).
+
+     However, if you cease all violation of this License, then your
+     license from a particular copyright holder is reinstated (a)
+     provisionally, unless and until the copyright holder explicitly
+     and finally terminates your license, and (b) permanently, if the
+     copyright holder fails to notify you of the violation by some
+     reasonable means prior to 60 days after the cessation.
+
+     Moreover, your license from a particular copyright holder is
+     reinstated permanently if the copyright holder notifies you of the
+     violation by some reasonable means, this is the first time you have
+     received notice of violation of this License (for any work) from
+     that copyright holder, and you cure the violation prior to 30 days
+     after your receipt of the notice.
+
+     Termination of your rights under this section does not terminate
+     the licenses of parties who have received copies or rights from
+     you under this License.  If your rights have been terminated and
+     not permanently reinstated, you do not qualify to receive new
+     licenses for the same material under section 10.
+
+  9. Acceptance Not Required for Having Copies.
+
+     You are not required to accept this License in order to receive or
+     run a copy of the Program.  Ancillary propagation of a covered work
+     occurring solely as a consequence of using peer-to-peer
+     transmission to receive a copy likewise does not require
+     acceptance.  However, nothing other than this License grants you
+     permission to propagate or modify any covered work.  These actions
+     infringe copyright if you do not accept this License.  Therefore,
+     by modifying or propagating a covered work, you indicate your
+     acceptance of this License to do so.
+
+ 10. Automatic Licensing of Downstream Recipients.
+
+     Each time you convey a covered work, the recipient automatically
+     receives a license from the original licensors, to run, modify and
+     propagate that work, subject to this License.  You are not
+     responsible for enforcing compliance by third parties with this
+     License.
+
+     An "entity transaction" is a transaction transferring control of an
+     organization, or substantially all assets of one, or subdividing an
+     organization, or merging organizations.  If propagation of a
+     covered work results from an entity transaction, each party to that
+     transaction who receives a copy of the work also receives whatever
+     licenses to the work the party's predecessor in interest had or
+     could give under the previous paragraph, plus a right to
+     possession of the Corresponding Source of the work from the
+     predecessor in interest, if the predecessor has it or can get it
+     with reasonable efforts.
+
+     You may not impose any further restrictions on the exercise of the
+     rights granted or affirmed under this License.  For example, you
+     may not impose a license fee, royalty, or other charge for
+     exercise of rights granted under this License, and you may not
+     initiate litigation (including a cross-claim or counterclaim in a
+     lawsuit) alleging that any patent claim is infringed by making,
+     using, selling, offering for sale, or importing the Program or any
+     portion of it.
+
+ 11. Patents.
+
+     A "contributor" is a copyright holder who authorizes use under this
+     License of the Program or a work on which the Program is based.
+     The work thus licensed is called the contributor's "contributor
+     version".
+
+     A contributor's "essential patent claims" are all patent claims
+     owned or controlled by the contributor, whether already acquired or
+     hereafter acquired, that would be infringed by some manner,
+     permitted by this License, of making, using, or selling its
+     contributor version, but do not include claims that would be
+     infringed only as a consequence of further modification of the
+     contributor version.  For purposes of this definition, "control"
+     includes the right to grant patent sublicenses in a manner
+     consistent with the requirements of this License.
+
+     Each contributor grants you a non-exclusive, worldwide,
+     royalty-free patent license under the contributor's essential
+     patent claims, to make, use, sell, offer for sale, import and
+     otherwise run, modify and propagate the contents of its
+     contributor version.
+
+     In the following three paragraphs, a "patent license" is any
+     express agreement or commitment, however denominated, not to
+     enforce a patent (such as an express permission to practice a
+     patent or covenant not to sue for patent infringement).  To
+     "grant" such a patent license to a party means to make such an
+     agreement or commitment not to enforce a patent against the party.
+
+     If you convey a covered work, knowingly relying on a patent
+     license, and the Corresponding Source of the work is not available
+     for anyone to copy, free of charge and under the terms of this
+     License, through a publicly available network server or other
+     readily accessible means, then you must either (1) cause the
+     Corresponding Source to be so available, or (2) arrange to deprive
+     yourself of the benefit of the patent license for this particular
+     work, or (3) arrange, in a manner consistent with the requirements
+     of this License, to extend the patent license to downstream
+     recipients.  "Knowingly relying" means you have actual knowledge
+     that, but for the patent license, your conveying the covered work
+     in a country, or your recipient's use of the covered work in a
+     country, would infringe one or more identifiable patents in that
+     country that you have reason to believe are valid.
+
+     If, pursuant to or in connection with a single transaction or
+     arrangement, you convey, or propagate by procuring conveyance of, a
+     covered work, and grant a patent license to some of the parties
+     receiving the covered work authorizing them to use, propagate,
+     modify or convey a specific copy of the covered work, then the
+     patent license you grant is automatically extended to all
+     recipients of the covered work and works based on it.
+
+     A patent license is "discriminatory" if it does not include within
+     the scope of its coverage, prohibits the exercise of, or is
+     conditioned on the non-exercise of one or more of the rights that
+     are specifically granted under this License.  You may not convey a
+     covered work if you are a party to an arrangement with a third
+     party that is in the business of distributing software, under
+     which you make payment to the third party based on the extent of
+     your activity of conveying the work, and under which the third
+     party grants, to any of the parties who would receive the covered
+     work from you, a discriminatory patent license (a) in connection
+     with copies of the covered work conveyed by you (or copies made
+     from those copies), or (b) primarily for and in connection with
+     specific products or compilations that contain the covered work,
+     unless you entered into that arrangement, or that patent license
+     was granted, prior to 28 March 2007.
+
+     Nothing in this License shall be construed as excluding or limiting
+     any implied license or other defenses to infringement that may
+     otherwise be available to you under applicable patent law.
+
+ 12. No Surrender of Others' Freedom.
+
+     If conditions are imposed on you (whether by court order,
+     agreement or otherwise) that contradict the conditions of this
+     License, they do not excuse you from the conditions of this
+     License.  If you cannot convey a covered work so as to satisfy
+     simultaneously your obligations under this License and any other
+     pertinent obligations, then as a consequence you may not convey it
+     at all.  For example, if you agree to terms that obligate you to
+     collect a royalty for further conveying from those to whom you
+     convey the Program, the only way you could satisfy both those
+     terms and this License would be to refrain entirely from conveying
+     the Program.
+
+ 13. Use with the GNU Affero General Public License.
+
+     Notwithstanding any other provision of this License, you have
+     permission to link or combine any covered work with a work licensed
+     under version 3 of the GNU Affero General Public License into a
+     single combined work, and to convey the resulting work.  The terms
+     of this License will continue to apply to the part which is the
+     covered work, but the special requirements of the GNU Affero
+     General Public License, section 13, concerning interaction through
+     a network will apply to the combination as such.
+
+ 14. Revised Versions of this License.
+
+     The Free Software Foundation may publish revised and/or new
+     versions of the GNU General Public License from time to time.
+     Such new versions will be similar in spirit to the present
+     version, but may differ in detail to address new problems or
+     concerns.
+
+     Each version is given a distinguishing version number.  If the
+     Program specifies that a certain numbered version of the GNU
+     General Public License "or any later version" applies to it, you
+     have the option of following the terms and conditions either of
+     that numbered version or of any later version published by the
+     Free Software Foundation.  If the Program does not specify a
+     version number of the GNU General Public License, you may choose
+     any version ever published by the Free Software Foundation.
+
+     If the Program specifies that a proxy can decide which future
+     versions of the GNU General Public License can be used, that
+     proxy's public statement of acceptance of a version permanently
+     authorizes you to choose that version for the Program.
+
+     Later license versions may give you additional or different
+     permissions.  However, no additional obligations are imposed on any
+     author or copyright holder as a result of your choosing to follow a
+     later version.
+
+ 15. Disclaimer of Warranty.
+
+     THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+     APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE
+     COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS"
+     WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+     MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE
+     RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.
+     SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+     NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+ 16. Limitation of Liability.
+
+     IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+     WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES
+     AND/OR CONVEYS THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU
+     FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
+     CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
+     THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA
+     BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+     PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
+     PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF
+     THE POSSIBILITY OF SUCH DAMAGES.
+
+ 17. Interpretation of Sections 15 and 16.
+
+     If the disclaimer of warranty and limitation of liability provided
+     above cannot be given local legal effect according to their terms,
+     reviewing courts shall apply local law that most closely
+     approximates an absolute waiver of all civil liability in
+     connection with the Program, unless a warranty or assumption of
+     liability accompanies a copy of the Program in return for a fee.
+
+
+END OF TERMS AND CONDITIONS
+===========================
+
+How to Apply These Terms to Your New Programs
+=============================================
+
+If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these
+terms.
+
+   To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+state the exclusion of warranty; and each file should have at least the
+"copyright" line and a pointer to where the full notice is found.
+
+     ONE LINE TO GIVE THE PROGRAM'S NAME AND A BRIEF IDEA OF WHAT IT DOES.
+     Copyright (C) YEAR NAME OF AUTHOR
+
+     This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation, either version 3 of the License, or (at
+     your option) any later version.
+
+     This program is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+     General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with this program.  If not, see `http://www.gnu.org/licenses/'.
+
+   Also add information on how to contact you by electronic and paper
+mail.
+
+   If the program does terminal interaction, make it output a short
+notice like this when it starts in an interactive mode:
+
+     PROGRAM Copyright (C) YEAR NAME OF AUTHOR
+     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+     This is free software, and you are welcome to redistribute it
+     under certain conditions; type `show c' for details.
+
+   The hypothetical commands `show w' and `show c' should show the
+appropriate parts of the General Public License.  Of course, your
+program's commands might be different; for a GUI interface, you would
+use an "about box".
+
+   You should also get your employer (if you work as a programmer) or
+school, if any, to sign a "copyright disclaimer" for the program, if
+necessary.  For more information on this, and how to apply and follow
+the GNU GPL, see `http://www.gnu.org/licenses/'.
+
+   The GNU General Public License does not permit incorporating your
+program into proprietary programs.  If your program is a subroutine
+library, you may consider it more useful to permit linking proprietary
+applications with the library.  If this is what you want to do, use the
+GNU Lesser General Public License instead of this License.  But first,
+please read `http://www.gnu.org/philosophy/why-not-lgpl.html'.
+
+
+File: gforth.info,  Node: Word Index,  Next: Concept Index,  Prev: Licenses,  Up: Top
+
+Word Index
+**********
+
+This index is a list of Forth words that have "glossary" entries within
+this manual. Each word is listed with its stack effect and wordset.
+
+ [index ]
+* Menu:
+
+* !  W A-ADDR -    core:                 Memory Access.       (line   9)
+* #  UD1 - UD2     core:                 Formatted numeric output.
+                                                              (line  41)
+* #!  -     gforth:                      Running Image Files. (line  44)
+* #>  XD - ADDR U     core:              Formatted numeric output.
+                                                              (line  65)
+* #>>  -     gforth:                     Formatted numeric output.
+                                                              (line  70)
+* #s  UD - 0 0     core:                 Formatted numeric output.
+                                                              (line  49)
+* #tib  - ADDR     core-ext-obsolescent: The Text Interpreter.
+                                                              (line 140)
+* $?  - N     gforth:                    Passing Commands to the OS.
+                                                              (line  20)
+* %align  ALIGN SIZE -     gforth:       Structure Glossary.  (line   6)
+* %alignment  ALIGN SIZE - ALIGN     gforth: Structure Glossary.
+                                                              (line   9)
+* %alloc  ALIGN SIZE - ADDR     gforth:  Structure Glossary.  (line  12)
+* %allocate  ALIGN SIZE - ADDR IOR     gforth: Structure Glossary.
+                                                              (line  16)
+* %allot  ALIGN SIZE - ADDR     gforth:  Structure Glossary.  (line  20)
+* %size  ALIGN SIZE - SIZE     gforth:   Structure Glossary.  (line  51)
+* '  "NAME" - XT     core:               Execution token.     (line  15)
+* '  "NAME" - XT     oof:                The OOF base class.  (line  77)
+* 'cold  -     gforth:                   Modifying the Startup Sequence.
+                                                              (line  42)
+* (  COMPILATION 'CCC<CLOSE-PAREN>' - ; RUN-TIME -     core,file: Comments.
+                                                              (line   9)
+* (local)  ADDR U -     local:           ANS Forth locals.    (line  46)
+* )  -     gforth:                       Assertions.          (line  46)
+* *  N1 N2 - N    core:                  Single precision.    (line  25)
+* */  N1 N2 N3 - N4    core:             Mixed precision.     (line   8)
+* */mod  N1 N2 N3 - N4 N5    core:       Mixed precision.     (line  11)
+* +  N1 N2 - N    core:                  Single precision.    (line  14)
+* +!  N A-ADDR -    core:                Memory Access.       (line  12)
+* +DO  COMPILATION - DO-SYS ; RUN-TIME N1 N2 - | LOOP-SYS     gforth: Arbitrary control structures.
+                                                              (line  61)
+* +field  N1 N2 "NAME" - N3     X:structures: Forth200x Structures.
+                                                              (line  29)
+* +load  I*X N - J*X     gforth:         Blocks.              (line 198)
+* +LOOP  COMPILATION DO-SYS - ; RUN-TIME LOOP-SYS1 N - | LOOP-SYS2     core: Arbitrary control structures.
+                                                              (line  75)
+* +thru  I*X N1 N2 - J*X     gforth:     Blocks.              (line 202)
+* +x/string  XC-ADDR1 U1 - XC-ADDR2 U2     xchar: Xchars and Unicode.
+                                                              (line  59)
+* ,  W -     core:                       Dictionary allocation.
+                                                              (line  45)
+* -  N1 N2 - N    core:                  Single precision.    (line  21)
+* -->  -     gforth:                     Blocks.              (line 206)
+* -DO  COMPILATION - DO-SYS ; RUN-TIME N1 N2 - | LOOP-SYS     gforth: Arbitrary control structures.
+                                                              (line  65)
+* -LOOP  COMPILATION DO-SYS - ; RUN-TIME LOOP-SYS1 U - | LOOP-SYS2     gforth: Arbitrary control structures.
+                                                              (line  77)
+* -rot  W1 W2 W3 - W3 W1 W2    gforth:   Data stack.          (line  23)
+* -trailing  C_ADDR U1 - C_ADDR U2     string: Memory Blocks. (line  61)
+* -trailing-garbage  XC-ADDR U1 - ADDR U2     xchar-ext: Xchars and Unicode.
+                                                              (line  70)
+* .  N -     core:                       Simple numeric output.
+                                                              (line  11)
+* ."  COMPILATION 'CCC"' - ; RUN-TIME -     core: Displaying characters and strings.
+                                                              (line  25)
+* .(  COMPILATION&INTERPRETATION "CCC<PAREN>" -     core-ext: Displaying characters and strings.
+                                                              (line  32)
+* .\"  COMPILATION 'CCC"' - ; RUN-TIME -     gforth: Displaying characters and strings.
+                                                              (line  38)
+* .debugline  NFILE NLINE -     gforth:  Debugging.           (line  34)
+* .id  NT -     F83:                     Name token.          (line  55)
+* .name  NT -     gforth-obsolete:       Name token.          (line  52)
+* .path  PATH-ADDR -     gforth:         General Search Paths.
+                                                              (line  26)
+* .r  N1 N2 -     core-ext:              Simple numeric output.
+                                                              (line  26)
+* .s  -     tools:                       Examining.           (line   8)
+* /  N1 N2 - N    core:                  Single precision.    (line  27)
+* /does-handler  - N     gforth:         Threading Words.     (line  60)
+* /l  - U     gforth:                    Address arithmetic.  (line 123)
+* /mod  N1 N2 - N3 N4    core:           Single precision.    (line  31)
+* /string  C-ADDR1 U1 N - C-ADDR2 U2    string: Memory Blocks.
+                                                              (line  65)
+* /w  - U     gforth:                    Address arithmetic.  (line 120)
+* 0<  N - F    core:                     Numeric comparison.  (line  21)
+* 0<=  N - F    gforth:                  Numeric comparison.  (line  23)
+* 0<>  N - F    core-ext:                Numeric comparison.  (line  25)
+* 0=  N - F    core:                     Numeric comparison.  (line  27)
+* 0>  N - F    core-ext:                 Numeric comparison.  (line  29)
+* 0>=  N - F    gforth:                  Numeric comparison.  (line  31)
+* 1+  N1 - N2    core:                   Single precision.    (line  16)
+* 1-  N1 - N2    core:                   Single precision.    (line  23)
+* 1/f  R1 - R2     gforth:               Floating Point.      (line  76)
+* 2!  W1 W2 A-ADDR -    core:            Memory Access.       (line  25)
+* 2*  N1 - N2    core:                   Bitwise operations.  (line  19)
+* 2,  W1 W2 -     gforth:                Dictionary allocation.
+                                                              (line  48)
+* 2/  N1 - N2    core:                   Bitwise operations.  (line  25)
+* 2>r  D - R:D    core-ext:              Return stack.        (line  21)
+* 2@  A-ADDR - W1 W2    core:            Memory Access.       (line  21)
+* 2Constant  W1 W2 "NAME" -     double:  Constants.           (line  29)
+* 2drop  W1 W2 -    core:                Data stack.          (line  31)
+* 2dup  W1 W2 - W1 W2 W1 W2    core:     Data stack.          (line  35)
+* 2field:  U1 "NAME" - U2     gforth:    Forth200x Structures.
+                                                              (line  35)
+* 2Literal  COMPILATION W1 W2 - ; RUN-TIME  - W1 W2     double: Literals.
+                                                              (line  53)
+* 2nip  W1 W2 W3 W4 - W3 W4    gforth:   Data stack.          (line  33)
+* 2over  W1 W2 W3 W4 - W1 W2 W3 W4 W1 W2    core: Data stack. (line  37)
+* 2r>  R:D - D    core-ext:              Return stack.        (line  23)
+* 2r@  R:D - R:D D    core-ext:          Return stack.        (line  25)
+* 2rdrop  R:D -    gforth:               Return stack.        (line  27)
+* 2rot  W1 W2 W3 W4 W5 W6 - W3 W4 W5 W6 W1 W2    double-ext: Data stack.
+                                                              (line  43)
+* 2swap  W1 W2 W3 W4 - W3 W4 W1 W2    core: Data stack.       (line  41)
+* 2tuck  W1 W2 W3 W4 - W3 W4 W1 W2 W3 W4    gforth: Data stack.
+                                                              (line  39)
+* 2Variable  "NAME" -     double:        Variables.           (line  33)
+* :  "NAME" -     oof:                   The OOF base class.  (line  43)
+* :  "NAME" - COLON-SYS     core:        Colon Definitions.   (line  17)
+* ::  "NAME" -     oof:                  The OOF base class.  (line  55)
+* ::  CLASS "NAME" -     mini-oof:       Basic Mini-OOF Usage.
+                                                              (line  32)
+* :m  "NAME" - XT; RUN-TIME: OBJECT -     objects: Objects Glossary.
+                                                              (line 103)
+* :noname  - XT COLON-SYS     core-ext:  Anonymous Definitions.
+                                                              (line   9)
+* ;  COMPILATION COLON-SYS - ; RUN-TIME NEST-SYS     core: Colon Definitions.
+                                                              (line  19)
+* ;code  COMPILATION. COLON-SYS1 - COLON-SYS2     tools-ext: Code and ;code.
+                                                              (line  27)
+* ;m  COLON-SYS -; RUN-TIME: -     objects: Objects Glossary. (line 107)
+* ;s  R:W -    gforth:                   Calls and returns.   (line  48)
+* <  N1 N2 - F    core:                  Numeric comparison.  (line   9)
+* <#  -     core:                        Formatted numeric output.
+                                                              (line  32)
+* <<#  -     gforth:                     Formatted numeric output.
+                                                              (line  35)
+* <=  N1 N2 - F    gforth:               Numeric comparison.  (line  11)
+* <>  N1 N2 - F    core-ext:             Numeric comparison.  (line  13)
+* <bind>  CLASS SELECTOR-XT - XT     objects: Objects Glossary.
+                                                              (line   9)
+* <compilation  COMPILATION. ORIG COLON-SYS -     gforth: Combined words.
+                                                              (line 100)
+* <interpretation  COMPILATION. ORIG COLON-SYS -     gforth: Combined words.
+                                                              (line  96)
+* <to-inst>  W XT -     objects:         Objects Glossary.    (line 148)
+* =  N1 N2 - F    core:                  Numeric comparison.  (line  15)
+* >  N1 N2 - F    core:                  Numeric comparison.  (line  17)
+* >=  N1 N2 - F    gforth:               Numeric comparison.  (line  19)
+* >body  XT - A_ADDR     core:           CREATE..DOES> details.
+                                                              (line  49)
+* >code-address  XT - C_ADDR     gforth: Threading Words.     (line  30)
+* >definer  XT - DEFINER     gforth:     Threading Words.     (line  87)
+* >does-code  XT - A_ADDR     gforth:    Threading Words.     (line  43)
+* >float  C-ADDR U - F:... FLAG    float: Line input and conversion.
+                                                              (line  43)
+* >in  - ADDR     core:                  The Text Interpreter.
+                                                              (line 130)
+* >l  W -    gforth:                     Locals implementation.
+                                                              (line  24)
+* >name  XT - NT|0     gforth:           Name token.          (line  28)
+* >number  UD1 C-ADDR1 U1 - UD2 C-ADDR2 U2     core: Line input and conversion.
+                                                              (line  30)
+* >order  WID -     gforth:              Word Lists.          (line  63)
+* >r  W - R:W    core:                   Return stack.        (line  13)
+* ?  A-ADDR -     tools:                 Examining.           (line  41)
+* ?DO  COMPILATION - DO-SYS ; RUN-TIME W1 W2 - | LOOP-SYS     core-ext: Arbitrary control structures.
+                                                              (line  59)
+* ?dup  W - S:... W    core:             Data stack.          (line  25)
+* ?DUP-0=-IF  COMPILATION - ORIG ; RUN-TIME N - N|     gforth: Arbitrary control structures.
+                                                              (line  55)
+* ?DUP-IF  COMPILATION - ORIG ; RUN-TIME N - N|     gforth: Arbitrary control structures.
+                                                              (line  50)
+* ?LEAVE  COMPILATION - ; RUN-TIME F | F LOOP-SYS -     gforth: Arbitrary control structures.
+                                                              (line  83)
+* @  A-ADDR - W    core:                 Memory Access.       (line   6)
+* @local#  #NOFFSET - W    gforth:       Locals implementation.
+                                                              (line  12)
+* [  -     core:                         Literals.            (line  36)
+* [']  COMPILATION. "NAME" - ; RUN-TIME. - XT     core: Execution token.
+                                                              (line  27)
+* [+LOOP]  N -     gforth:               Interpreter Directives.
+                                                              (line  72)
+* [?DO]  N-LIMIT N-INDEX -     gforth:   Interpreter Directives.
+                                                              (line  64)
+* []  N "NAME" -     oof:                The OOF base class.  (line  49)
+* [AGAIN]  -     gforth:                 Interpreter Directives.
+                                                              (line  80)
+* [BEGIN]  -     gforth:                 Interpreter Directives.
+                                                              (line  76)
+* [bind]  COMPILE-TIME: "CLASS" "SELECTOR" - ; RUN-TIME: ... OBJECT - ...     objects: Objects Glossary.
+                                                              (line  15)
+* [Char]  COMPILATION '<SPACES>CCC' - ; RUN-TIME - C     core: Displaying characters and strings.
+                                                              (line  82)
+* [COMP']  COMPILATION "NAME" - ; RUN-TIME - W XT     gforth: Compilation token.
+                                                              (line  24)
+* [compile]  COMPILATION "NAME" - ; RUN-TIME ? - ?     core-ext: Macros.
+                                                              (line  26)
+* [current]  COMPILE-TIME: "SELECTOR" - ; RUN-TIME: ... OBJECT - ...     objects: Objects Glossary.
+                                                              (line  48)
+* [DO]  N-LIMIT N-INDEX -     gforth:    Interpreter Directives.
+                                                              (line  66)
+* [ELSE]  -     tools-ext:               Interpreter Directives.
+                                                              (line  38)
+* [ENDIF]  -     gforth:                 Interpreter Directives.
+                                                              (line  51)
+* [FOR]  N -     gforth:                 Interpreter Directives.
+                                                              (line  68)
+* [IF]  FLAG -     tools-ext:            Interpreter Directives.
+                                                              (line  30)
+* [IFDEF]  "<SPACES>NAME" -     gforth:  Interpreter Directives.
+                                                              (line  54)
+* [IFUNDEF]  "<SPACES>NAME" -     gforth: Interpreter Directives.
+                                                              (line  59)
+* [LOOP]  -     gforth:                  Interpreter Directives.
+                                                              (line  70)
+* [NEXT]  N -     gforth:                Interpreter Directives.
+                                                              (line  74)
+* [parent]  COMPILE-TIME: "SELECTOR" - ; RUN-TIME: ... OBJECT - ...     objects: Objects Glossary.
+                                                              (line 126)
+* [REPEAT]  -     gforth:                Interpreter Directives.
+                                                              (line  84)
+* [THEN]  -     tools-ext:               Interpreter Directives.
+                                                              (line  47)
+* [to-inst]  COMPILE-TIME: "NAME" - ; RUN-TIME: W -     objects: Objects Glossary.
+                                                              (line 151)
+* [UNTIL]  FLAG -     gforth:            Interpreter Directives.
+                                                              (line  78)
+* [WHILE]  FLAG -     gforth:            Interpreter Directives.
+                                                              (line  82)
+* \  COMPILATION 'CCC<NEWLINE>' - ; RUN-TIME -     core-ext,block-ext: Comments.
+                                                              (line  16)
+* \c  "REST-OF-LINE" -     gforth:       Declaring C Functions.
+                                                              (line  78)
+* \G  COMPILATION 'CCC<NEWLINE>' - ; RUN-TIME -     gforth: Comments.
+                                                              (line  22)
+* ]  -     core:                         Literals.            (line  39)
+* ]L  COMPILATION: N - ; RUN-TIME: - N     gforth: Literals.  (line  47)
+* abort  ?? - ??     core,exception-ext: Exception Handling.  (line 211)
+* ABORT"  COMPILATION 'CCC"' - ; RUN-TIME F -     core,exception-ext: Exception Handling.
+                                                              (line 206)
+* abs  N - U    core:                    Single precision.    (line  35)
+* accept  C-ADDR +N1 - +N2     core:     Line input and conversion.
+                                                              (line  11)
+* action-of  INTERPRETATION "NAME" - XT; COMPILATION "NAME" - ; RUN-TIME - XT     gforth: Deferred Words.
+                                                              (line  95)
+* add-lib  C-ADDR U -     gforth:        Declaring OS-level libraries.
+                                                              (line  33)
+* ADDRESS-UNIT-BITS  - N     environment: Address arithmetic. (line 117)
+* AGAIN  COMPILATION DEST - ; RUN-TIME -     core-ext: Arbitrary control structures.
+                                                              (line  26)
+* AHEAD  COMPILATION - ORIG ; RUN-TIME -     tools-ext: Arbitrary control structures.
+                                                              (line  18)
+* Alias  XT "NAME" -     gforth:         Aliases.             (line  34)
+* align  -     core:                     Dictionary allocation.
+                                                              (line  62)
+* aligned  C-ADDR - A-ADDR    core:      Address arithmetic.  (line  70)
+* allocate  U - A-ADDR WIOR    memory:   Heap Allocation.     (line  16)
+* allot  N -     core:                   Dictionary allocation.
+                                                              (line  31)
+* also  -     search-ext:                Word Lists.          (line  69)
+* also-path  C-ADDR LEN PATH-ADDR -     gforth: General Search Paths.
+                                                              (line  23)
+* and  W1 W2 - W    core:                Bitwise operations.  (line   6)
+* arg  U - ADDR COUNT     gforth:        OS command line arguments.
+                                                              (line  41)
+* argc  - ADDR     gforth:               OS command line arguments.
+                                                              (line  56)
+* argv  - ADDR     gforth:               OS command line arguments.
+                                                              (line  60)
+* asptr  CLASS -     oof:                Class Declaration.   (line  16)
+* asptr  O "NAME" -     oof:             The OOF base class.  (line  47)
+* assembler  -     tools-ext:            Code and ;code.      (line  19)
+* assert(  -     gforth:                 Assertions.          (line  43)
+* assert-level  - A-ADDR     gforth:     Assertions.          (line  61)
+* assert0(  -     gforth:                Assertions.          (line  30)
+* assert1(  -     gforth:                Assertions.          (line  33)
+* assert2(  -     gforth:                Assertions.          (line  36)
+* assert3(  -     gforth:                Assertions.          (line  39)
+* ASSUME-LIVE  ORIG - ORIG     gforth:   Where are locals visible by name?.
+                                                              (line 122)
+* at-xy  U1 U2 -     facility:           Terminal output.     (line   9)
+* base  - A-ADDR     core:               Number Conversion.   (line  66)
+* base-execute  I*X XT U - J*X     gforth: Number Conversion. (line  62)
+* BEGIN  COMPILATION - DEST ; RUN-TIME -     core: Arbitrary control structures.
+                                                              (line  22)
+* begin-structure  "NAME" - STRUCT-SYS 0     X:structures: Forth200x Structures.
+                                                              (line  25)
+* bin  FAM1 - FAM2     file:             General files.       (line  15)
+* bind  ... "CLASS" "SELECTOR" - ...     objects: Objects Glossary.
+                                                              (line   6)
+* bind  O "NAME" -     oof:              The OOF base class.  (line  66)
+* bind'  "CLASS" "SELECTOR" - XT     objects: Objects Glossary.
+                                                              (line  12)
+* bl  - C-CHAR     core:                 Displaying characters and strings.
+                                                              (line   9)
+* blank  C-ADDR U -     string:          Memory Blocks.       (line  38)
+* blk  - ADDR     block:                 Input Sources.       (line  26)
+* block  U - A-ADDR     block:           Blocks.              (line 152)
+* block-included  A-ADDR U -     gforth: Blocks.              (line 213)
+* block-offset  - ADDR     gforth:       Blocks.              (line 130)
+* block-position  U -     block:         Blocks.              (line 141)
+* bootmessage  -     gforth:             Modifying the Startup Sequence.
+                                                              (line  47)
+* bound  CLASS ADDR "NAME" -     oof:    The OOF base class.  (line  68)
+* bounds  ADDR U - ADDR+U ADDR     gforth: Memory Blocks.     (line  69)
+* break"  'CCC"' -     gforth:           Singlestep Debugger. (line  68)
+* break:  -     gforth:                  Singlestep Debugger. (line  66)
+* broken-pipe-error  - N     gforth:     Pipes.               (line  21)
+* buffer  U - A-ADDR     block:          Blocks.              (line 159)
+* bye  -     tools-ext:                  Leaving Gforth.      (line  12)
+* c!  C C-ADDR -    core:                Memory Access.       (line  18)
+* C"  COMPILATION "CCC<QUOTE>" - ; RUN-TIME  - C-ADDR     core-ext: Displaying characters and strings.
+                                                              (line  73)
+* c,  C -     core:                      Dictionary allocation.
+                                                              (line  38)
+* c-function  "FORTH-NAME" "C-NAME" "{TYPE}" "-" "TYPE" -     gforth: Declaring C Functions.
+                                                              (line  81)
+* c-library  "NAME" -     gforth:        Defining library interfaces.
+                                                              (line  36)
+* c-library-name  C-ADDR U -     gforth: Defining library interfaces.
+                                                              (line  33)
+* c@  C-ADDR - C    core:                Memory Access.       (line  15)
+* call-c  ... W - ...    gforth:         Low-Level C Interface Words.
+                                                              (line  13)
+* case  COMPILATION  - CASE-SYS ; RUN-TIME  -     core-ext: Arbitrary control structures.
+                                                              (line  98)
+* catch  ... XT - ... N     exception:   Exception Handling.  (line  51)
+* cell  - U     gforth:                  Address arithmetic.  (line  67)
+* cell%  - ALIGN SIZE     gforth:        Structure Glossary.  (line  24)
+* cell+  A-ADDR1 - A-ADDR2    core:      Address arithmetic.  (line  64)
+* cells  N1 - N2    core:                Address arithmetic.  (line  61)
+* cfalign  -     gforth:                 Dictionary allocation.
+                                                              (line  81)
+* cfaligned  ADDR1 - ADDR2     gforth:   Address arithmetic.  (line 113)
+* cfield:  U1 "NAME" - U2     X:structures: Forth200x Structures.
+                                                              (line  31)
+* char  '<SPACES>CCC' - C     core:      Displaying characters and strings.
+                                                              (line  78)
+* char%  - ALIGN SIZE     gforth:        Structure Glossary.  (line  26)
+* char+  C-ADDR1 - C-ADDR2    core:      Address arithmetic.  (line  58)
+* chars  N1 - N2     core:               Address arithmetic.  (line  55)
+* class  "NAME" -     oof:               The OOF base class.  (line  20)
+* class  CLASS - CLASS SELECTORS VARS     mini-oof: Basic Mini-OOF Usage.
+                                                              (line  20)
+* class  PARENT-CLASS - ALIGN OFFSET     objects: Objects Glossary.
+                                                              (line  18)
+* class->map  CLASS - MAP     objects:   Objects Glossary.    (line  22)
+* class-inst-size  CLASS - ADDR     objects: Objects Glossary.
+                                                              (line  27)
+* class-override!  XT SEL-XT CLASS-MAP -     objects: Objects Glossary.
+                                                              (line  31)
+* class-previous  CLASS -     objects:   Objects Glossary.    (line  34)
+* class;  -     oof:                     Class Declaration.   (line  42)
+* class>order  CLASS -     objects:      Objects Glossary.    (line  38)
+* class?  O - FLAG     oof:              The OOF base class.  (line  24)
+* clear-libs  -     gforth:              Declaring OS-level libraries.
+                                                              (line  30)
+* clear-path  PATH-ADDR -     gforth:    General Search Paths.
+                                                              (line  20)
+* clearstack  ... -     gforth:          Examining.           (line  33)
+* clearstacks  ... -     gforth:         Examining.           (line  36)
+* close-file  WFILEID - WIOR    file:    General files.       (line  26)
+* close-pipe  WFILEID - WRETVAL WIOR    gforth: Pipes.        (line  12)
+* cmove  C-FROM C-TO U -    string:      Memory Blocks.       (line  25)
+* cmove>  C-FROM C-TO U -    string:     Memory Blocks.       (line  30)
+* code  "NAME" - COLON-SYS     tools-ext: Code and ;code.     (line  23)
+* code-address!  C_ADDR XT -     gforth: Threading Words.     (line  33)
+* common-list  LIST1 LIST2 - LIST3     gforth-internal: Locals implementation.
+                                                              (line  94)
+* COMP'  "NAME" - W XT     gforth:       Compilation token.   (line  27)
+* compare  C-ADDR1 U1 C-ADDR2 U2 - N    string: Memory Blocks.
+                                                              (line  41)
+* compilation>  COMPILATION. - ORIG COLON-SYS     gforth: Combined words.
+                                                              (line  98)
+* compile,  XT -     core-ext:           Macros.              (line  90)
+* compile-lp+!  N -     gforth:          Locals implementation.
+                                                              (line  34)
+* compile-only  -     gforth:            Interpretation and Compilation Semantics.
+                                                              (line  36)
+* const-does>  RUN-TIME: W*UW R*UR UW UR "NAME" -     gforth: Const-does>.
+                                                              (line   9)
+* Constant  W "NAME" -     core:         Constants.           (line  24)
+* construct  ... OBJECT -     objects:   Objects Glossary.    (line  41)
+* context  - ADDR     gforth:            Word Lists.          (line 139)
+* convert  UD1 C-ADDR1 - UD2 C-ADDR2     core-ext-obsolescent: Line input and conversion.
+                                                              (line  53)
+* count  C-ADDR1 - C-ADDR2 U    core:    String Formats.      (line  20)
+* cputime  - DUSER DSYSTEM    gforth:    Keeping track of Time.
+                                                              (line  16)
+* cr  -     core:                        Displaying characters and strings.
+                                                              (line  48)
+* Create  "NAME" -     core:             CREATE.              (line  19)
+* create-file  C-ADDR U WFAM - WFILEID WIOR    file: General files.
+                                                              (line  24)
+* create-interpret/compile  "NAME" -     gforth: Combined words.
+                                                              (line  92)
+* CS-PICK  ... U - ... DESTU     tools-ext: Arbitrary control structures.
+                                                              (line  28)
+* CS-ROLL  DESTU/ORIGU .. DEST0/ORIG0 U - .. DEST0/ORIG0 DESTU/ORIGU     tools-ext: Arbitrary control structures.
+                                                              (line  30)
+* current  - ADDR     gforth:            Word Lists.          (line 136)
+* current'  "SELECTOR" - XT     objects: Objects Glossary.    (line  45)
+* current-interface  - ADDR     objects: Objects Glossary.    (line  51)
+* d+  D1 D2 - D    double:               Double precision.    (line  25)
+* d-  D1 D2 - D    double:               Double precision.    (line  27)
+* d.  D -     double:                    Simple numeric output.
+                                                              (line  36)
+* d.r  D N -     double:                 Simple numeric output.
+                                                              (line  44)
+* d0<  D - F    double:                  Numeric comparison.  (line  62)
+* d0<=  D - F    gforth:                 Numeric comparison.  (line  64)
+* d0<>  D - F    gforth:                 Numeric comparison.  (line  66)
+* d0=  D - F    double:                  Numeric comparison.  (line  68)
+* d0>  D - F    gforth:                  Numeric comparison.  (line  70)
+* d0>=  D - F    gforth:                 Numeric comparison.  (line  72)
+* d2*  D1 - D2    double:                Bitwise operations.  (line  22)
+* d2/  D1 - D2    double:                Bitwise operations.  (line  29)
+* d<  D1 D2 - F    double:               Numeric comparison.  (line  50)
+* d<=  D1 D2 - F    gforth:              Numeric comparison.  (line  52)
+* d<>  D1 D2 - F    gforth:              Numeric comparison.  (line  54)
+* d=  D1 D2 - F    double:               Numeric comparison.  (line  56)
+* d>  D1 D2 - F    gforth:               Numeric comparison.  (line  58)
+* d>=  D1 D2 - F    gforth:              Numeric comparison.  (line  60)
+* d>f  D - R    float:                   Floating Point.      (line  22)
+* d>s  D - N     double:                 Double precision.    (line  23)
+* dabs  D - UD     double:               Double precision.    (line  31)
+* dbg  "NAME" -     gforth:              Singlestep Debugger. (line  64)
+* dec.  N -     gforth:                  Simple numeric output.
+                                                              (line  15)
+* decimal  -     core:                   Number Conversion.   (line  75)
+* Defer  "NAME" -     gforth:            Deferred Words.      (line  80)
+* defer  -     oof:                      Class Declaration.   (line  21)
+* defer!  XT XT-DEFERRED -     gforth:   Deferred Words.      (line  84)
+* defer@  XT-DEFERRED - XT     gforth:   Deferred Words.      (line  91)
+* defers  COMPILATION "NAME" - ; RUN-TIME ... - ...     gforth: Deferred Words.
+                                                              (line  98)
+* definer!  DEFINER XT -     gforth:     Threading Words.     (line  92)
+* defines  XT CLASS "NAME" -     mini-oof: Basic Mini-OOF Usage.
+                                                              (line  26)
+* definitions  -     oof:                The OOF base class.  (line  22)
+* definitions  -     search:             Word Lists.          (line  33)
+* delete-file  C-ADDR U - WIOR    file:  General files.       (line  28)
+* depth  - +N     core:                  Examining.           (line  25)
+* df!  R DF-ADDR -    float-ext:         Memory Access.       (line  46)
+* df@  DF-ADDR - R    float-ext:         Memory Access.       (line  42)
+* dfalign  -     float-ext:              Dictionary allocation.
+                                                              (line  74)
+* dfaligned  C-ADDR - DF-ADDR    float-ext: Address arithmetic.
+                                                              (line 105)
+* dffield:  U1 "NAME" - U2     X:structures: Forth200x Structures.
+                                                              (line  41)
+* dfloat%  - ALIGN SIZE     gforth:      Structure Glossary.  (line  28)
+* dfloat+  DF-ADDR1 - DF-ADDR2     float-ext: Address arithmetic.
+                                                              (line 102)
+* dfloats  N1 - N2    float-ext:         Address arithmetic.  (line  98)
+* dict-new  ... CLASS - OBJECT     objects: Objects Glossary. (line  54)
+* discode  ADDR U -     gforth:          Common Disassembler. (line   9)
+* dispose  -     oof:                    The OOF base class.  (line  34)
+* dmax  D1 D2 - D     double:            Double precision.    (line  35)
+* dmin  D1 D2 - D     double:            Double precision.    (line  33)
+* dnegate  D1 - D2    double:            Double precision.    (line  29)
+* DO  COMPILATION - DO-SYS ; RUN-TIME W1 W2 - LOOP-SYS     core: Arbitrary control structures.
+                                                              (line  69)
+* docol:  - ADDR     gforth:             Threading Words.     (line  66)
+* docon:  - ADDR     gforth:             Threading Words.     (line  69)
+* dodefer:  - ADDR     gforth:           Threading Words.     (line  78)
+* does-code!  A_ADDR XT -     gforth:    Threading Words.     (line  52)
+* does-handler!  A_ADDR -     gforth:    Threading Words.     (line  56)
+* DOES>  COMPILATION COLON-SYS1 - COLON-SYS2 ; RUN-TIME NEST-SYS -     core: CREATE..DOES> details.
+                                                              (line   6)
+* dofield:  - ADDR     gforth:           Threading Words.     (line  81)
+* DONE  COMPILATION ORIG - ; RUN-TIME -     gforth: Arbitrary control structures.
+                                                              (line  87)
+* double%  - ALIGN SIZE     gforth:      Structure Glossary.  (line  30)
+* douser:  - ADDR     gforth:            Threading Words.     (line  75)
+* dovar:  - ADDR     gforth:             Threading Words.     (line  72)
+* dpl  - A-ADDR     gforth:              Number Conversion.   (line  55)
+* drop  W -    core:                     Data stack.          (line   6)
+* du<  UD1 UD2 - F    double-ext:        Numeric comparison.  (line  74)
+* du<=  UD1 UD2 - F    gforth:           Numeric comparison.  (line  76)
+* du>  UD1 UD2 - F    gforth:            Numeric comparison.  (line  78)
+* du>=  UD1 UD2 - F    gforth:           Numeric comparison.  (line  80)
+* dump  ADDR U -     tools:              Examining.           (line  44)
+* dup  W - W W    core:                  Data stack.          (line  10)
+* early  -     oof:                      Class Declaration.   (line  26)
+* edit-line  C-ADDR N1 N2 - N3     gforth: Line input and conversion.
+                                                              (line  18)
+* ekey  - U     facility-ext:            Single-key input.    (line  38)
+* ekey>char  U - U FALSE | C TRUE     facility-ext: Single-key input.
+                                                              (line  41)
+* ekey>fkey  U1 - U2 F     X:ekeys:      Single-key input.    (line  44)
+* ekey?  - FLAG     facility-ext:        Single-key input.    (line  48)
+* ELSE  COMPILATION ORIG1 - ORIG2 ; RUN-TIME -     core: Arbitrary control structures.
+                                                              (line  40)
+* emit  C -     core:                    Displaying characters and strings.
+                                                              (line  18)
+* emit-file  C WFILEID - WIOR    gforth: General files.       (line  54)
+* empty-buffer  BUFFER -     gforth:     Blocks.              (line 172)
+* empty-buffers  -     block-ext:        Blocks.              (line 168)
+* end-c-library  -     gforth:           Defining library interfaces.
+                                                              (line  39)
+* end-class  ALIGN OFFSET "NAME" -     objects: Objects Glossary.
+                                                              (line  57)
+* end-class  CLASS SELECTORS VARS "NAME" -     mini-oof: Basic Mini-OOF Usage.
+                                                              (line  23)
+* end-class-noname  ALIGN OFFSET - CLASS     objects: Objects Glossary.
+                                                              (line  61)
+* end-code  COLON-SYS -     gforth:      Code and ;code.      (line  25)
+* end-interface  "NAME" -     objects:   Objects Glossary.    (line  64)
+* end-interface-noname  - INTERFACE     objects: Objects Glossary.
+                                                              (line  68)
+* end-methods  -     objects:            Objects Glossary.    (line  71)
+* end-struct  ALIGN SIZE "NAME" -     gforth: Structure Glossary.
+                                                              (line  32)
+* end-structure  STRUCT-SYS +N -     X:structures: Forth200x Structures.
+                                                              (line  27)
+* endcase  COMPILATION CASE-SYS - ; RUN-TIME X -     core-ext: Arbitrary control structures.
+                                                              (line 100)
+* ENDIF  COMPILATION ORIG - ; RUN-TIME -     gforth: Arbitrary control structures.
+                                                              (line  48)
+* endof  COMPILATION CASE-SYS1 OF-SYS - CASE-SYS2 ; RUN-TIME  -     core-ext: Arbitrary control structures.
+                                                              (line 104)
+* endscope  COMPILATION SCOPE - ; RUN-TIME  -     gforth: Where are locals visible by name?.
+                                                              (line  13)
+* endtry  COMPILATION  - ; RUN-TIME  R:SYS1 -     gforth: Exception Handling.
+                                                              (line  95)
+* endtry-iferror  COMPILATION  ORIG1 - ORIG2 ; RUN-TIME  R:SYS1 -     gforth: Exception Handling.
+                                                              (line 175)
+* endwith  -     oof:                    The OOF base class.  (line  88)
+* environment-wordlist  - WID     gforth: Environmental Queries.
+                                                              (line  29)
+* environment?  C-ADDR U - FALSE / ... TRUE     core: Environmental Queries.
+                                                              (line  24)
+* erase  ADDR U -     core-ext:          Memory Blocks.       (line  22)
+* evaluate  ... ADDR U - ...     core,block: Input Sources.   (line  43)
+* exception  ADDR U - N     gforth:      Exception Handling.  (line  31)
+* execute  XT -    core:                 Execution token.     (line  53)
+* execute-parsing  ... ADDR U XT - ...     gforth: The Input Stream.
+                                                              (line  65)
+* execute-parsing-file  I*X FILEID XT - J*X     gforth: The Input Stream.
+                                                              (line  75)
+* EXIT  COMPILATION - ; RUN-TIME NEST-SYS -     core: Calls and returns.
+                                                              (line  43)
+* exitm  -     objects:                  Objects Glossary.    (line  75)
+* expect  C-ADDR +N -     core-ext-obsolescent: Line input and conversion.
+                                                              (line  56)
+* f!  R F-ADDR -    float:               Memory Access.       (line  31)
+* f*  R1 R2 - R3    float:               Floating Point.      (line  30)
+* f**  R1 R2 - R3    float-ext:          Floating Point.      (line  49)
+* f+  R1 R2 - R3    float:               Floating Point.      (line  26)
+* f,  F -     gforth:                    Dictionary allocation.
+                                                              (line  41)
+* f-  R1 R2 - R3    float:               Floating Point.      (line  28)
+* f.  R -     float-ext:                 Simple numeric output.
+                                                              (line  53)
+* f.rdp  RF +NR +ND +NP -     gforth:    Simple numeric output.
+                                                              (line  65)
+* f.s  -     gforth:                     Examining.           (line  13)
+* f/  R1 R2 - R3    float:               Floating Point.      (line  32)
+* f0<  R - F    float:                   Floating Point.      (line 154)
+* f0<=  R - F    gforth:                 Floating Point.      (line 156)
+* f0<>  R - F    gforth:                 Floating Point.      (line 158)
+* f0=  R - F    float:                   Floating Point.      (line 160)
+* f0>  R - F    gforth:                  Floating Point.      (line 162)
+* f0>=  R - F    gforth:                 Floating Point.      (line 164)
+* f2*  R1 - R2     gforth:               Floating Point.      (line  70)
+* f2/  R1 - R2     gforth:               Floating Point.      (line  73)
+* f<  R1 R2 - F    float:                Floating Point.      (line 146)
+* f<=  R1 R2 - F    gforth:              Floating Point.      (line 148)
+* f<>  R1 R2 - F    gforth:              Floating Point.      (line 144)
+* f=  R1 R2 - F    gforth:               Floating Point.      (line 142)
+* f>  R1 R2 - F    gforth:               Floating Point.      (line 150)
+* f>=  R1 R2 - F    gforth:              Floating Point.      (line 152)
+* f>buf-rdp  RF C-ADDR +NR +ND +NP -     gforth: Formatted numeric output.
+                                                              (line  81)
+* f>d  R - D    float:                   Floating Point.      (line  24)
+* f>l  R -    gforth:                    Locals implementation.
+                                                              (line  26)
+* f>str-rdp  RF +NR +ND +NP - C-ADDR NR     gforth: Formatted numeric output.
+                                                              (line  75)
+* f@  F-ADDR - R    float:               Memory Access.       (line  28)
+* f@local#  #NOFFSET - R    gforth:      Locals implementation.
+                                                              (line  14)
+* fabs  R1 - R2    float-ext:            Floating Point.      (line  36)
+* facos  R1 - R2    float-ext:           Floating Point.      (line 101)
+* facosh  R1 - R2    float-ext:          Floating Point.      (line 117)
+* falign  -     float:                   Dictionary allocation.
+                                                              (line  66)
+* faligned  C-ADDR - F-ADDR    float:    Address arithmetic.  (line  83)
+* falog  R1 - R2    float-ext:           Floating Point.      (line  67)
+* false  - F     core-ext:               Boolean Flags.       (line  14)
+* fasin  R1 - R2    float-ext:           Floating Point.      (line  99)
+* fasinh  R1 - R2    float-ext:          Floating Point.      (line 115)
+* fatan  R1 - R2    float-ext:           Floating Point.      (line 103)
+* fatan2  R1 R2 - R3    float-ext:       Floating Point.      (line 105)
+* fatanh  R1 - R2    float-ext:          Floating Point.      (line 119)
+* fconstant  R "NAME" -     float:       Constants.           (line  31)
+* fcos  R1 - R2    float-ext:            Floating Point.      (line  92)
+* fcosh  R1 - R2    float-ext:           Floating Point.      (line 111)
+* fdepth  - +N     float:                Examining.           (line  29)
+* fdrop  R -    float:                   Floating point stack.
+                                                              (line  19)
+* fdup  R - R R    float:                Floating point stack.
+                                                              (line  23)
+* fe.  R -     float-ext:                Simple numeric output.
+                                                              (line  57)
+* fexp  R1 - R2    float-ext:            Floating Point.      (line  54)
+* fexpm1  R1 - R2    float-ext:          Floating Point.      (line  56)
+* ffield:  U1 "NAME" - U2     X:structures: Forth200x Structures.
+                                                              (line  37)
+* field  ALIGN1 OFFSET1 ALIGN SIZE "NAME" -  ALIGN2 OFFSET2     gforth: Structure Glossary.
+                                                              (line  36)
+* field:  U1 "NAME" - U2     X:structures: Forth200x Structures.
+                                                              (line  33)
+* file-position  WFILEID - UD WIOR    file: General files.    (line  60)
+* file-size  WFILEID - UD WIOR    file:  General files.       (line  64)
+* file-status  C-ADDR U - WFAM WIOR    file-ext: General files.
+                                                              (line  58)
+* fill  C-ADDR U C -    core:            Memory Blocks.       (line  35)
+* find  C-ADDR - XT +-1 | C-ADDR 0     core,search: Word Lists.
+                                                              (line  88)
+* find-name  C-ADDR U - NT | 0     gforth: Name token.        (line  20)
+* FLiteral  COMPILATION R - ; RUN-TIME - R     float: Literals.
+                                                              (line  57)
+* fln  R1 - R2    float-ext:             Floating Point.      (line  59)
+* flnp1  R1 - R2    float-ext:           Floating Point.      (line  61)
+* float  - U     gforth:                 Address arithmetic.  (line  79)
+* float%  - ALIGN SIZE     gforth:       Structure Glossary.  (line  43)
+* float+  F-ADDR1 - F-ADDR2    float:    Address arithmetic.  (line  76)
+* floating-stack  - N     environment:   Floating point stack.
+                                                              (line  15)
+* floats  N1 - N2    float:              Address arithmetic.  (line  73)
+* flog  R1 - R2    float-ext:            Floating Point.      (line  64)
+* floor  R1 - R2    float:               Floating Point.      (line  42)
+* FLOORED  - F     environment:          Single precision.    (line  41)
+* flush  -     block:                    Blocks.              (line 187)
+* flush-file  WFILEID - WIOR    file-ext: General files.      (line  56)
+* flush-icache  C-ADDR U -    gforth:    Code and ;code.      (line  29)
+* fm/mod  D1 N1 - N2 N3    core:         Mixed precision.     (line  25)
+* fmax  R1 R2 - R3    float:             Floating Point.      (line  38)
+* fmin  R1 R2 - R3    float:             Floating Point.      (line  40)
+* fnegate  R1 - R2    float:             Floating Point.      (line  34)
+* fnip  R1 R2 - R2    gforth:            Floating point stack.
+                                                              (line  21)
+* FOR  COMPILATION - DO-SYS ; RUN-TIME U - LOOP-SYS     gforth: Arbitrary control structures.
+                                                              (line  71)
+* form  - UROWS UCOLS    gforth:         Terminal output.     (line  17)
+* Forth  -     search-ext:               Word Lists.          (line  74)
+* forth-wordlist  - WID     search:      Word Lists.          (line  28)
+* fover  R1 R2 - R1 R2 R1    float:      Floating point stack.
+                                                              (line  25)
+* fp!  F-ADDR - F:...    gforth:         Stack pointer manipulation.
+                                                              (line  19)
+* fp0  - A-ADDR     gforth:              Stack pointer manipulation.
+                                                              (line  14)
+* fp@  F:... - F-ADDR    gforth:         Stack pointer manipulation.
+                                                              (line  17)
+* fpath  - PATH-ADDR     gforth:         Source Search Paths. (line  10)
+* fpick  F:... U - F:... R    gforth:    Floating point stack.
+                                                              (line  31)
+* free  A-ADDR - WIOR    memory:         Heap Allocation.     (line  23)
+* frot  R1 R2 R3 - R2 R3 R1    float:    Floating point stack.
+                                                              (line  34)
+* fround  R1 - R2    float:              Floating Point.      (line  46)
+* fs.  R -     float-ext:                Simple numeric output.
+                                                              (line  61)
+* fsin  R1 - R2    float-ext:            Floating Point.      (line  90)
+* fsincos  R1 - R2 R3    float-ext:      Floating Point.      (line  94)
+* fsinh  R1 - R2    float-ext:           Floating Point.      (line 109)
+* fsqrt  R1 - R2    float-ext:           Floating Point.      (line  52)
+* fswap  R1 R2 - R2 R1    float:         Floating point stack.
+                                                              (line  29)
+* ftan  R1 - R2    float-ext:            Floating Point.      (line  97)
+* ftanh  R1 - R2    float-ext:           Floating Point.      (line 113)
+* ftuck  R1 R2 - R2 R1 R2    gforth:     Floating point stack.
+                                                              (line  27)
+* fvariable  "NAME" -     float:         Variables.           (line  35)
+* f~  R1 R2 R3 - FLAG     float-ext:     Floating Point.      (line 138)
+* f~abs  R1 R2 R3 - FLAG     gforth:     Floating Point.      (line 135)
+* f~rel  R1 R2 R3 - FLAG     gforth:     Floating Point.      (line 132)
+* get-block-fid  - WFILEID     gforth:   Blocks.              (line 137)
+* get-current  - WID     search:         Word Lists.          (line  37)
+* get-order  - WIDN .. WID1 N     search: Word Lists.         (line  43)
+* getenv  C-ADDR1 U1 - C-ADDR2 U2    gforth: Passing Commands to the OS.
+                                                              (line  24)
+* gforth  - C-ADDR U     gforth-environment: Environmental Queries.
+                                                              (line  33)
+* heap-new  ... CLASS - OBJECT     objects: Objects Glossary. (line  78)
+* here  - ADDR     core:                 Dictionary allocation.
+                                                              (line  24)
+* hex  -     core-ext:                   Number Conversion.   (line  71)
+* hex.  U -     gforth:                  Simple numeric output.
+                                                              (line  18)
+* hold  CHAR -     core:                 Formatted numeric output.
+                                                              (line  55)
+* how:  -     oof:                       Class Declaration.   (line  39)
+* i  R:N - R:N N    core:                Counted Loops.       (line  23)
+* id.  NT -     gforth:                  Name token.          (line  49)
+* IF  COMPILATION - ORIG ; RUN-TIME F -     core: Arbitrary control structures.
+                                                              (line  16)
+* iferror  COMPILATION  ORIG1 - ORIG2 ; RUN-TIME  -     gforth: Exception Handling.
+                                                              (line  98)
+* immediate  -     core:                 Interpretation and Compilation Semantics.
+                                                              (line  32)
+* implementation  INTERFACE -     objects: Objects Glossary.  (line  81)
+* include  ... "FILE" - ...     gforth:  Forth source files.  (line  47)
+* include-file  I*X WFILEID - J*X     file: Forth source files.
+                                                              (line  33)
+* included  I*X C-ADDR U - J*X     file: Forth source files.  (line  37)
+* included?  C-ADDR U - F     gforth:    Forth source files.  (line  40)
+* infile-execute  ... XT FILE-ID - ...     gforth: Redirection.
+                                                              (line  24)
+* init  ... -     oof:                   The OOF base class.  (line  32)
+* init-asm  -     gforth:                Code and ;code.      (line  21)
+* init-object  ... CLASS OBJECT -     objects: Objects Glossary.
+                                                              (line  85)
+* inst-value  ALIGN1 OFFSET1 "NAME" - ALIGN2 OFFSET2     objects: Objects Glossary.
+                                                              (line  89)
+* inst-var  ALIGN1 OFFSET1 ALIGN SIZE "NAME" - ALIGN2 OFFSET2     objects: Objects Glossary.
+                                                              (line  93)
+* interface  -     objects:              Objects Glossary.    (line  97)
+* interpret/compile:  INTERP-XT COMP-XT "NAME" -     gforth: Combined words.
+                                                              (line   9)
+* interpretation>  COMPILATION. - ORIG COLON-SYS     gforth: Combined words.
+                                                              (line  94)
+* invert  W1 - W2    core:               Bitwise operations.  (line  12)
+* IS  COMPILATION/INTERPRETATION "NAME-DEFERRED" - ; RUN-TIME XT -     gforth: Deferred Words.
+                                                              (line  87)
+* is  XT "NAME" -     oof:               The OOF base class.  (line  72)
+* j  R:W R:W1 R:W2 - W R:W R:W1 R:W2    core: Counted Loops.  (line  25)
+* k  R:W R:W1 R:W2 R:W3 R:W4 - W R:W R:W1 R:W2 R:W3 R:W4    gforth: Counted Loops.
+                                                              (line  27)
+* k-alt-mask  - U     X:ekeys:           Single-key input.    (line 111)
+* k-ctrl-mask  - U     X:ekeys:          Single-key input.    (line 109)
+* k-delete  - U     X:ekeys:             Single-key input.    (line  74)
+* k-down  - U     X:ekeys:               Single-key input.    (line  59)
+* k-end  - U     X:ekeys:                Single-key input.    (line  64)
+* k-f1  - U     X:ekeys:                 Single-key input.    (line  78)
+* k-f10  - U     X:ekeys:                Single-key input.    (line  96)
+* k-f11  - U     X:ekeys:                Single-key input.    (line  98)
+* k-f12  - U     X:ekeys:                Single-key input.    (line 100)
+* k-f2  - U     X:ekeys:                 Single-key input.    (line  80)
+* k-f3  - U     X:ekeys:                 Single-key input.    (line  82)
+* k-f4  - U     X:ekeys:                 Single-key input.    (line  84)
+* k-f5  - U     X:ekeys:                 Single-key input.    (line  86)
+* k-f6  - U     X:ekeys:                 Single-key input.    (line  88)
+* k-f7  - U     X:ekeys:                 Single-key input.    (line  90)
+* k-f8  - U     X:ekeys:                 Single-key input.    (line  92)
+* k-f9  - U     X:ekeys:                 Single-key input.    (line  94)
+* k-home  - U     X:ekeys:               Single-key input.    (line  61)
+* k-insert  - U     X:ekeys:             Single-key input.    (line  72)
+* k-left  - U     X:ekeys:               Single-key input.    (line  53)
+* k-next  - U     X:ekeys:               Single-key input.    (line  69)
+* k-prior  - U     X:ekeys:              Single-key input.    (line  66)
+* k-right  - U     X:ekeys:              Single-key input.    (line  55)
+* k-shift-mask  - U     X:ekeys:         Single-key input.    (line 107)
+* k-up  - U     X:ekeys:                 Single-key input.    (line  57)
+* key  - CHAR     core:                  Single-key input.    (line   9)
+* key-file  WFILEID - C    gforth:       General files.       (line  37)
+* key?  - FLAG     facility:             Single-key input.    (line  12)
+* key?-file  WFILEID - F    gforth:      General files.       (line  44)
+* l!  W C-ADDR -    gforth:              Memory Access.       (line  65)
+* laddr#  #NOFFSET - C-ADDR    gforth:   Locals implementation.
+                                                              (line  16)
+* latest  - NT     gforth:               Name token.          (line  24)
+* latestxt  - XT     gforth:             Anonymous Definitions.
+                                                              (line  28)
+* LEAVE  COMPILATION - ; RUN-TIME LOOP-SYS -     core: Arbitrary control structures.
+                                                              (line  81)
+* lib-error  - C-ADDR U    gforth:       Low-Level C Interface Words.
+                                                              (line  10)
+* lib-sym  C-ADDR1 U1 U2 - U3    gforth: Low-Level C Interface Words.
+                                                              (line   8)
+* link  "NAME" - CLASS ADDR     oof:     The OOF base class.  (line  70)
+* list  U -     block-ext:               Blocks.              (line 144)
+* list-size  LIST - U     gforth-internal: Locals implementation.
+                                                              (line  98)
+* Literal  COMPILATION N - ; RUN-TIME - N     core: Literals. (line  42)
+* load  I*X N - J*X     block:           Blocks.              (line 190)
+* LOOP  COMPILATION DO-SYS - ; RUN-TIME LOOP-SYS1 - | LOOP-SYS2     core: Arbitrary control structures.
+                                                              (line  73)
+* lp!  C-ADDR -    gforth <1>:           Locals implementation.
+                                                              (line  22)
+* lp!  C-ADDR -    gforth:               Stack pointer manipulation.
+                                                              (line  35)
+* lp+!#  #NOFFSET -    gforth:           Locals implementation.
+                                                              (line  18)
+* lp0  - A-ADDR     gforth:              Stack pointer manipulation.
+                                                              (line  29)
+* lp@  - ADDR     gforth:                Stack pointer manipulation.
+                                                              (line  33)
+* lshift  U1 N - U2    core:             Bitwise operations.  (line  14)
+* m*  N1 N2 - D    core:                 Mixed precision.     (line  14)
+* m*/  D1 N2 U3 - DQUOT     double:      Mixed precision.     (line  18)
+* m+  D1 N - D2    double:               Mixed precision.     (line   6)
+* m:  - XT COLON-SYS; RUN-TIME: OBJECT -     objects: Objects Glossary.
+                                                              (line 100)
+* marker  "<SPACES> NAME" -     core-ext: Forgetting words.   (line   9)
+* max  N1 N2 - N    core:                Single precision.    (line  39)
+* maxalign  -     gforth:                Dictionary allocation.
+                                                              (line  78)
+* maxaligned  ADDR1 - ADDR2     gforth:  Address arithmetic.  (line 109)
+* maxdepth-.s  - ADDR     gforth:        Examining.           (line  18)
+* method  -     oof:                     Class Declaration.   (line  29)
+* method  M V "NAME" - M' V     mini-oof: Basic Mini-OOF Usage.
+                                                              (line  14)
+* method  XT "NAME" -     objects:       Objects Glossary.    (line 110)
+* methods  CLASS -     objects:          Objects Glossary.    (line 114)
+* min  N1 N2 - N    core:                Single precision.    (line  37)
+* mod  N1 N2 - N    core:                Single precision.    (line  29)
+* move  C-FROM C-TO UCOUNT -    core:    Memory Blocks.       (line  18)
+* ms  U -    facility-ext:               Keeping track of Time.
+                                                              (line   6)
+* naligned  ADDR1 N - ADDR2     gforth:  Structure Glossary.  (line  45)
+* name  - C-ADDR U     gforth-obsolete:  The Input Stream.    (line  36)
+* name>comp  NT - W XT     gforth:       Name token.          (line  43)
+* name>int  NT - XT     gforth:          Name token.          (line  33)
+* name>string  NT - ADDR COUNT     gforth: Name token.        (line  46)
+* name?int  NT - XT     gforth:          Name token.          (line  39)
+* needs  ... "NAME" - ...     gforth:    Forth source files.  (line  59)
+* negate  N1 - N2    core:               Single precision.    (line  33)
+* new  - O     oof:                      The OOF base class.  (line  39)
+* new  CLASS - O     mini-oof:           Basic Mini-OOF Usage.
+                                                              (line  29)
+* new[]  N - O     oof:                  The OOF base class.  (line  41)
+* NEXT  COMPILATION DO-SYS - ; RUN-TIME LOOP-SYS1 - | LOOP-SYS2     gforth: Arbitrary control structures.
+                                                              (line  79)
+* next-arg  - ADDR U     gforth:         OS command line arguments.
+                                                              (line  15)
+* nextname  C-ADDR U -     gforth:       Supplying names.     (line  10)
+* nip  W1 W2 - W2    core-ext:           Data stack.          (line   8)
+* noname  -     gforth:                  Anonymous Definitions.
+                                                              (line  23)
+* nothrow  -     gforth:                 Exception Handling.  (line  53)
+* object  - A-ADDR     mini-oof:         Basic Mini-OOF Usage.
+                                                              (line  11)
+* object  - CLASS     objects:           Objects Glossary.    (line 119)
+* of  COMPILATION  - OF-SYS ; RUN-TIME X1 X2 - |X1     core-ext: Arbitrary control structures.
+                                                              (line 102)
+* off  A-ADDR -     gforth:              Boolean Flags.       (line  20)
+* on  A-ADDR -     gforth:               Boolean Flags.       (line  17)
+* Only  -     search-ext:                Word Lists.          (line  78)
+* open-blocks  C-ADDR U -     gforth:    Blocks.              (line 124)
+* open-file  C-ADDR U WFAM - WFILEID WIOR    file: General files.
+                                                              (line  22)
+* open-lib  C-ADDR1 U1 - U2    gforth:   Low-Level C Interface Words.
+                                                              (line   6)
+* open-path-file  ADDR1 U1 PATH-ADDR - WFILEID ADDR2 U2 0 | IOR     gforth: General Search Paths.
+                                                              (line  11)
+* open-pipe  C-ADDR U WFAM - WFILEID WIOR    gforth: Pipes.   (line  10)
+* or  W1 W2 - W    core:                 Bitwise operations.  (line   8)
+* order  -     search-ext:               Word Lists.          (line  82)
+* os-class  - C-ADDR U     gforth-environment: Environmental Queries.
+                                                              (line  38)
+* outfile-execute  ... XT FILE-ID - ...     gforth: Redirection.
+                                                              (line  21)
+* over  W1 W2 - W1 W2 W1    core:        Data stack.          (line  12)
+* overrides  XT "SELECTOR" -     objects: Objects Glossary.   (line 122)
+* pad  - C-ADDR     core-ext:            Memory Blocks.       (line  74)
+* page  -     facility:                  Terminal output.     (line  27)
+* parse  CHAR "CCC<CHAR>" - C-ADDR U     core-ext: The Input Stream.
+                                                              (line  25)
+* parse-name  "NAME" - C-ADDR U     gforth: The Input Stream. (line  30)
+* parse-word  - C-ADDR U     gforth-obsolete: The Input Stream.
+                                                              (line  33)
+* path+  PATH-ADDR  "DIR" -     gforth:  General Search Paths.
+                                                              (line  29)
+* path-allot  UMAX -     gforth:         General Search Paths.
+                                                              (line  17)
+* path=  PATH-ADDR "DIR1|DIR2|DIR3"     gforth: General Search Paths.
+                                                              (line  32)
+* perform  A-ADDR -    gforth:           Execution token.     (line  56)
+* pi  - R     gforth:                    Floating Point.      (line 121)
+* pick  S:... U - S:... W    core-ext:   Data stack.          (line  18)
+* postpone  "NAME" -     core:           Macros.              (line  23)
+* postpone  "NAME" -     oof:            The OOF base class.  (line  79)
+* postpone,  W XT -     gforth:          Compilation token.   (line  30)
+* precision  - U     float-ext:          Floating Point.      (line  79)
+* previous  -     search-ext:            Word Lists.          (line  66)
+* print  OBJECT -     objects:           Objects Glossary.    (line 129)
+* printdebugdata  -     gforth:          Debugging.           (line  32)
+* protected  -     objects:              Objects Glossary.    (line 133)
+* ptr  "NAME" -     oof:                 The OOF base class.  (line  45)
+* ptr  -     oof:                        Class Declaration.   (line  13)
+* public  -     objects:                 Objects Glossary.    (line 136)
+* query  -     core-ext-obsolescent:     Input Sources.       (line  49)
+* quit  ?? - ??     core:                Miscellaneous Words. (line   9)
+* r/o  - FAM     file:                   General files.       (line   9)
+* r/w  - FAM     file:                   General files.       (line  11)
+* r>  R:W - W    core:                   Return stack.        (line  15)
+* r@  - W ; R: W - W     core:           Return stack.        (line  17)
+* rdrop  R:W -    gforth:                Return stack.        (line  19)
+* read-file  C-ADDR U1 WFILEID - U2 WIOR    file: General files.
+                                                              (line  33)
+* read-line  C_ADDR U1 WFILEID - U2 FLAG WIOR     file: General files.
+                                                              (line  35)
+* recurse  COMPILATION - ; RUN-TIME ?? - ??     core: Calls and returns.
+                                                              (line  16)
+* recursive  COMPILATION - ; RUN-TIME -     gforth: Calls and returns.
+                                                              (line  12)
+* refill  - FLAG     core-ext,block-ext,file-ext: The Input Stream.
+                                                              (line  48)
+* rename-file  C-ADDR1 U1 C-ADDR2 U2 - WIOR    file-ext: General files.
+                                                              (line  30)
+* REPEAT  COMPILATION ORIG DEST - ; RUN-TIME -     core: Arbitrary control structures.
+                                                              (line  44)
+* reposition-file  UD WFILEID - WIOR    file: General files.  (line  62)
+* represent  R C-ADDR U - N F1 F2    float: Formatted numeric output.
+                                                              (line  73)
+* require  ... "FILE" - ...     gforth:  Forth source files.  (line  56)
+* required  I*X ADDR U - I*X     gforth: Forth source files.  (line  50)
+* resize  A-ADDR1 U - A-ADDR2 WIOR    memory: Heap Allocation.
+                                                              (line  29)
+* resize-file  UD WFILEID - WIOR    file: General files.      (line  66)
+* restore  COMPILATION  ORIG1 - ; RUN-TIME  -     gforth: Exception Handling.
+                                                              (line 171)
+* restore-input  X1 .. XN N - FLAG     core-ext: Input Sources.
+                                                              (line  34)
+* restrict  -     gforth:                Interpretation and Compilation Semantics.
+                                                              (line  39)
+* roll  X0 X1 .. XN N - X1 .. XN X0     core-ext: Data stack. (line  29)
+* Root  -     gforth:                    Word Lists.          (line 119)
+* rot  W1 W2 W3 - W2 W3 W1    core:      Data stack.          (line  21)
+* rp!  A-ADDR -    gforth:               Stack pointer manipulation.
+                                                              (line  27)
+* rp0  - A-ADDR     gforth:              Stack pointer manipulation.
+                                                              (line  21)
+* rp@  - A-ADDR    gforth:               Stack pointer manipulation.
+                                                              (line  25)
+* rshift  U1 N - U2    core:             Bitwise operations.  (line  16)
+* S"  COMPILATION 'CCC"' - ; RUN-TIME - C-ADDR U     core,file: Displaying characters and strings.
+                                                              (line  54)
+* s>d  N - D     core:                   Double precision.    (line  21)
+* s>number?  ADDR U - D F     gforth:    Line input and conversion.
+                                                              (line  24)
+* s>unumber?  C-ADDR U - UD FLAG     gforth: Line input and conversion.
+                                                              (line  27)
+* s\"  COMPILATION 'CCC"' - ; RUN-TIME - C-ADDR U     gforth: Displaying characters and strings.
+                                                              (line  65)
+* save-buffer  BUFFER -     gforth:      Blocks.              (line 185)
+* save-buffers  -     block:             Blocks.              (line 181)
+* save-input  - X1 .. XN N     core-ext: Input Sources.       (line  29)
+* savesystem  "NAME" -     gforth:       Non-Relocatable Image Files.
+                                                              (line  16)
+* scope  COMPILATION  - SCOPE ; RUN-TIME  -     gforth: Where are locals visible by name?.
+                                                              (line  11)
+* scr  - A-ADDR     block-ext:           Blocks.              (line 148)
+* seal  -     gforth:                    Word Lists.          (line 129)
+* search  C-ADDR1 U1 C-ADDR2 U2 - C-ADDR3 U3 FLAG     string: Memory Blocks.
+                                                              (line  55)
+* search-wordlist  C-ADDR COUNT WID - 0 | XT +-1     search: Word Lists.
+                                                              (line 104)
+* see  "<SPACES>NAME" -     tools:       Examining.           (line  52)
+* see-code  "NAME" -     gforth:         Examining.           (line  66)
+* see-code-range  ADDR1 ADDR2 -     gforth: Examining.        (line  70)
+* selector  "NAME" -     objects:        Objects Glossary.    (line 140)
+* self  - O     oof:                     The OOF base class.  (line  61)
+* set-current  WID -     search:         Word Lists.          (line  40)
+* set-order  WIDN .. WID1 N -     search: Word Lists.         (line  49)
+* set-precision  U -     float-ext:      Floating Point.      (line  83)
+* sf!  R SF-ADDR -    float-ext:         Memory Access.       (line  38)
+* sf@  SF-ADDR - R    float-ext:         Memory Access.       (line  34)
+* sfalign  -     float-ext:              Dictionary allocation.
+                                                              (line  70)
+* sfaligned  C-ADDR - SF-ADDR    float-ext: Address arithmetic.
+                                                              (line  94)
+* sffield:  U1 "NAME" - U2     X:structures: Forth200x Structures.
+                                                              (line  39)
+* sfloat%  - ALIGN SIZE     gforth:      Structure Glossary.  (line  49)
+* sfloat+  SF-ADDR1 - SF-ADDR2     float-ext: Address arithmetic.
+                                                              (line  91)
+* sfloats  N1 - N2    float-ext:         Address arithmetic.  (line  87)
+* sh  "..." -     gforth:                Passing Commands to the OS.
+                                                              (line   9)
+* shift-args  -     gforth:              OS command line arguments.
+                                                              (line  49)
+* sign  N -     core:                    Formatted numeric output.
+                                                              (line  59)
+* simple-see  "NAME" -     gforth:       Examining.           (line  61)
+* simple-see-range  ADDR1 ADDR2 -     gforth: Examining.      (line  64)
+* sl@  C-ADDR - N    gforth:             Memory Access.       (line  59)
+* SLiteral  COMPILATION C-ADDR1 U ; RUN-TIME - C-ADDR2 U     string: Literals.
+                                                              (line  61)
+* slurp-fid  FID - ADDR U     gforth:    General files.       (line  71)
+* slurp-file  C-ADDR1 U1 - C-ADDR2 U2     gforth: General files.
+                                                              (line  68)
+* sm/rem  D1 N1 - N2 N3    core:         Mixed precision.     (line  28)
+* source  - ADDR U     core:             The Text Interpreter.
+                                                              (line 135)
+* source-id  - 0 | -1 | FILEID     core-ext,file: Input Sources.
+                                                              (line  21)
+* sourcefilename  - C-ADDR U     gforth: Forth source files.  (line  62)
+* sourceline#  - U     gforth:           Forth source files.  (line  69)
+* sp!  A-ADDR - S:...    gforth:         Stack pointer manipulation.
+                                                              (line  12)
+* sp0  - A-ADDR     gforth:              Stack pointer manipulation.
+                                                              (line   6)
+* sp@  S:... - A-ADDR    gforth:         Stack pointer manipulation.
+                                                              (line  10)
+* space  -     core:                     Displaying characters and strings.
+                                                              (line  12)
+* spaces  U -     core:                  Displaying characters and strings.
+                                                              (line  15)
+* span  - C-ADDR     core-ext-obsolescent: Line input and conversion.
+                                                              (line  64)
+* static  -     oof:                     Class Declaration.   (line  34)
+* stderr  - WFILEID    gforth:           General files.       (line  80)
+* stdin  - WFILEID    gforth:            General files.       (line  74)
+* stdout  - WFILEID    gforth:           General files.       (line  77)
+* str<  C-ADDR1 U1 C-ADDR2 U2 - F     gforth: Memory Blocks.  (line  50)
+* str=  C-ADDR1 U1 C-ADDR2 U2 - F     gforth: Memory Blocks.  (line  48)
+* string-prefix?  C-ADDR1 U1 C-ADDR2 U2 - F     gforth: Memory Blocks.
+                                                              (line  52)
+* struct  - ALIGN SIZE     gforth:       Structure Glossary.  (line  54)
+* sub-list?  LIST1 LIST2 - F     gforth-internal: Locals implementation.
+                                                              (line  96)
+* super  "NAME" -     oof:               The OOF base class.  (line  57)
+* sw@  C-ADDR - N    gforth:             Memory Access.       (line  50)
+* swap  W1 W2 - W2 W1    core:           Data stack.          (line  16)
+* system  C-ADDR U -     gforth:         Passing Commands to the OS.
+                                                              (line  13)
+* table  - WID     gforth:               Word Lists.          (line  60)
+* THEN  COMPILATION ORIG - ; RUN-TIME -     core: Arbitrary control structures.
+                                                              (line  20)
+* this  - OBJECT     objects:            Objects Glossary.    (line 145)
+* threading-method  - N    gforth:       Threading Words.     (line  26)
+* throw  Y1 .. YM NERROR - Y1 .. YM / Z1 .. ZN ERROR     exception: Exception Handling.
+                                                              (line  10)
+* thru  I*X N1 N2 - J*X     block-ext:   Blocks.              (line 195)
+* tib  - ADDR     core-ext-obsolescent:  The Text Interpreter.
+                                                              (line 138)
+* time&date  - NSEC NMIN NHOUR NDAY NMONTH NYEAR    facility-ext: Keeping track of Time.
+                                                              (line   9)
+* TO  C|W|D|R "NAME" -     core-ext,local: Values.            (line  19)
+* to-this  OBJECT -     objects:         Objects Glossary.    (line 154)
+* toupper  C1 - C2    gforth:            Displaying characters and strings.
+                                                              (line  21)
+* true  - F     core-ext:                Boolean Flags.       (line  11)
+* try  COMPILATION  - ORIG ; RUN-TIME  - R:SYS1     gforth: Exception Handling.
+                                                              (line  92)
+* tuck  W1 W2 - W2 W1 W2    core-ext:    Data stack.          (line  14)
+* type  C-ADDR U -     core:             Displaying characters and strings.
+                                                              (line  41)
+* typewhite  ADDR N -     gforth:        Displaying characters and strings.
+                                                              (line  45)
+* U+DO  COMPILATION - DO-SYS ; RUN-TIME U1 U2 - | LOOP-SYS     gforth: Arbitrary control structures.
+                                                              (line  63)
+* U-DO  COMPILATION - DO-SYS ; RUN-TIME U1 U2 - | LOOP-SYS     gforth: Arbitrary control structures.
+                                                              (line  67)
+* u.  U -     core:                      Simple numeric output.
+                                                              (line  22)
+* u.r  U N -     core-ext:               Simple numeric output.
+                                                              (line  32)
+* u<  U1 U2 - F    core:                 Numeric comparison.  (line  33)
+* u<=  U1 U2 - F    gforth:              Numeric comparison.  (line  35)
+* u>  U1 U2 - F    core-ext:             Numeric comparison.  (line  37)
+* u>=  U1 U2 - F    gforth:              Numeric comparison.  (line  39)
+* ud.  UD -     gforth:                  Simple numeric output.
+                                                              (line  40)
+* ud.r  UD N -     gforth:               Simple numeric output.
+                                                              (line  49)
+* ul@  C-ADDR - U    gforth:             Memory Access.       (line  62)
+* um*  U1 U2 - UD    core:               Mixed precision.     (line  16)
+* um/mod  UD U1 - U2 U3    core:         Mixed precision.     (line  22)
+* under+  N1 N2 N3 - N N2    gforth:     Single precision.    (line  18)
+* unloop  R:W1 R:W2 -    core:           Arbitrary control structures.
+                                                              (line  85)
+* UNREACHABLE  -     gforth:             Where are locals visible by name?.
+                                                              (line  49)
+* UNTIL  COMPILATION DEST - ; RUN-TIME F -     core: Arbitrary control structures.
+                                                              (line  24)
+* unused  - U     core-ext:              Dictionary allocation.
+                                                              (line  27)
+* update  -     block:                   Blocks.              (line 174)
+* updated?  N - F     gforth:            Blocks.              (line 177)
+* use  "FILE" -     gforth:              Blocks.              (line 127)
+* User  "NAME" -     gforth:             Variables.           (line  42)
+* utime  - DTIME    gforth:              Keeping track of Time.
+                                                              (line  13)
+* uw@  C-ADDR - U    gforth:             Memory Access.       (line  53)
+* Value  W "NAME" -     core-ext:        Values.              (line  17)
+* var  M V SIZE "NAME" - M V'     mini-oof: Basic Mini-OOF Usage.
+                                                              (line  17)
+* var  SIZE -     oof:                   Class Declaration.   (line   8)
+* Variable  "NAME" -     core:           Variables.           (line  31)
+* vlist  -     gforth:                   Word Lists.          (line 116)
+* Vocabulary  "NAME" -     gforth:       Word Lists.          (line 124)
+* vocs  -     gforth:                    Word Lists.          (line 133)
+* w!  W C-ADDR -    gforth:              Memory Access.       (line  56)
+* w/o  - FAM     file:                   General files.       (line  13)
+* WHILE  COMPILATION DEST - ORIG DEST ; RUN-TIME F -     core: Arbitrary control structures.
+                                                              (line  42)
+* with  O -     oof:                     The OOF base class.  (line  86)
+* within  U1 U2 U3 - F    core-ext:      Numeric comparison.  (line  41)
+* word  CHAR "<CHARS>CCC<CHAR>- C-ADDR     core: The Input Stream.
+                                                              (line  39)
+* wordlist  - WID     search:            Word Lists.          (line  57)
+* words  -     tools:                    Word Lists.          (line 112)
+* write-file  C-ADDR U1 WFILEID - WIOR    file: General files.
+                                                              (line  50)
+* write-line  C-ADDR U FILEID - IOR     file: General files.  (line  52)
+* x-size  XC-ADDR U1 - U2     xchar:     Xchars and Unicode.  (line  35)
+* x-width  XC-ADDR U - N     xchar-ext:  Xchars and Unicode.  (line  75)
+* x\string-  XC-ADDR1 U1 - XC-ADDR1 U2     xchar: Xchars and Unicode.
+                                                              (line  64)
+* xc!+?  XC XC-ADDR1 U1 - XC-ADDR2 U2 F     xchar-ext: Xchars and Unicode.
+                                                              (line  43)
+* xc-size  XC - U     xchar-ext:         Xchars and Unicode.  (line  32)
+* xc@+  XC-ADDR1 - XC-ADDR2 XC     xchar-ext: Xchars and Unicode.
+                                                              (line  39)
+* xchar+  XC-ADDR1 - XC-ADDR2     xchar-ext: Xchars and Unicode.
+                                                              (line  51)
+* xchar-  XC-ADDR1 - XC-ADDR2     xchar-ext: Xchars and Unicode.
+                                                              (line  55)
+* xchar-encoding  - ADDR U     xchar-ext: Xchars and Unicode. (line  90)
+* xemit  XC -     xchar-ext:             Xchars and Unicode.  (line  85)
+* xkey  - XC     xchar-ext:              Xchars and Unicode.  (line  81)
+* xor  W1 W2 - W    core:                Bitwise operations.  (line  10)
+* xt-new  ... CLASS XT - OBJECT     objects: Objects Glossary.
+                                                              (line 157)
+* xt-see  XT -     gforth:               Examining.           (line  58)
+* ~~  -     gforth:                      Debugging.           (line  28)
+

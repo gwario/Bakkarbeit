@@ -1,0 +1,976 @@
+kernel/aliases.fs	noop	/^Primitive noop$/
+kernel/aliases.fs	call	/^Primitive call$/
+kernel/aliases.fs	execute	/^Primitive execute$/
+kernel/aliases.fs	perform	/^Primitive perform$/
+kernel/aliases.fs	;S	/^Primitive ;s$/
+kernel/aliases.fs	unloop	/^Primitive unloop$/
+kernel/aliases.fs	lit-perform	/^Primitive lit-perform$/
+kernel/aliases.fs	does-exec	/^Primitive does-exec$/
+kernel/aliases.fs	branch-lp+!#	/^Primitive branch-lp+!#$/
+kernel/aliases.fs	branch	/^Primitive branch$/
+kernel/aliases.fs	?branch	/^Primitive ?branch$/
+kernel/aliases.fs	?branch-lp+!#	/^Primitive ?branch-lp+!#$/
+kernel/aliases.fs	?dup-?branch	/^Primitive ?dup-?branch$/
+kernel/aliases.fs	?dup-0=-?branch	/^Primitive ?dup-0=-?branch$/
+kernel/aliases.fs	(next)	/^Primitive (next)$/
+kernel/aliases.fs	(next)-lp+!#	/^Primitive (next)-lp+!#$/
+kernel/aliases.fs	(loop)	/^Primitive (loop)$/
+kernel/aliases.fs	(loop)-lp+!#	/^Primitive (loop)-lp+!#$/
+kernel/aliases.fs	(+loop)	/^Primitive (+loop)$/
+kernel/aliases.fs	(+loop)-lp+!#	/^Primitive (+loop)-lp+!#$/
+kernel/aliases.fs	(-loop)	/^Primitive (-loop)$/
+kernel/aliases.fs	(-loop)-lp+!#	/^Primitive (-loop)-lp+!#$/
+kernel/aliases.fs	(s+loop)	/^Primitive (s+loop)$/
+kernel/aliases.fs	(s+loop)-lp+!#	/^Primitive (s+loop)-lp+!#$/
+kernel/aliases.fs	(for)	/^Primitive (for)$/
+kernel/aliases.fs	(do)	/^Primitive (do)$/
+kernel/aliases.fs	(?do)	/^Primitive (?do)$/
+kernel/aliases.fs	(+do)	/^Primitive (+do)$/
+kernel/aliases.fs	(u+do)	/^Primitive (u+do)$/
+kernel/aliases.fs	(-do)	/^Primitive (-do)$/
+kernel/aliases.fs	(u-do)	/^Primitive (u-do)$/
+kernel/aliases.fs	i	/^Primitive i$/
+kernel/aliases.fs	i'	/^Primitive i'$/
+kernel/aliases.fs	j	/^Primitive j$/
+kernel/aliases.fs	k	/^Primitive k$/
+kernel/aliases.fs	move	/^Primitive move$/
+kernel/aliases.fs	cmove	/^Primitive cmove$/
+kernel/aliases.fs	cmove>	/^Primitive cmove>$/
+kernel/aliases.fs	fill	/^Primitive fill$/
+kernel/aliases.fs	compare	/^Primitive compare$/
+kernel/aliases.fs	toupper	/^Primitive toupper$/
+kernel/aliases.fs	capscompare	/^Primitive capscompare$/
+kernel/aliases.fs	/string	/^Primitive /string$/
+kernel/aliases.fs	lit	/^Primitive lit$/
+kernel/aliases.fs	+	/^Primitive +$/
+kernel/aliases.fs	lit+	/^Primitive lit+$/
+kernel/aliases.fs	under+	/^Primitive under+$/
+kernel/aliases.fs	--prim	/^Primitive --prim$/
+kernel/aliases.fs	negate	/^Primitive negate$/
+kernel/aliases.fs	1+	/^Primitive 1+$/
+kernel/aliases.fs	1-	/^Primitive 1-$/
+kernel/aliases.fs	max	/^Primitive max$/
+kernel/aliases.fs	min	/^Primitive min$/
+kernel/aliases.fs	abs	/^Primitive abs$/
+kernel/aliases.fs	*	/^Primitive *$/
+kernel/aliases.fs	/	/^Primitive /$/
+kernel/aliases.fs	mod	/^Primitive mod$/
+kernel/aliases.fs	/mod	/^Primitive /mod$/
+kernel/aliases.fs	*/mod	/^Primitive */mod$/
+kernel/aliases.fs	*/	/^Primitive */$/
+kernel/aliases.fs	2*	/^Primitive 2*$/
+kernel/aliases.fs	2/	/^Primitive 2/$/
+kernel/aliases.fs	fm/mod	/^Primitive fm/mod$/
+kernel/aliases.fs	sm/rem	/^Primitive sm/rem$/
+kernel/aliases.fs	m*	/^Primitive m*$/
+kernel/aliases.fs	um*	/^Primitive um*$/
+kernel/aliases.fs	um/mod	/^Primitive um/mod$/
+kernel/aliases.fs	m+	/^Primitive m+$/
+kernel/aliases.fs	d+	/^Primitive d+$/
+kernel/aliases.fs	d-	/^Primitive d-$/
+kernel/aliases.fs	dnegate	/^Primitive dnegate$/
+kernel/aliases.fs	d2*	/^Primitive d2*$/
+kernel/aliases.fs	d2/	/^Primitive d2/$/
+kernel/aliases.fs	and	/^Primitive and$/
+kernel/aliases.fs	or	/^Primitive or$/
+kernel/aliases.fs	xor	/^Primitive xor$/
+kernel/aliases.fs	invert	/^Primitive invert$/
+kernel/aliases.fs	rshift	/^Primitive rshift$/
+kernel/aliases.fs	lshift	/^Primitive lshift$/
+kernel/aliases.fs	0=	/^Primitive 0=$/
+kernel/aliases.fs	0<>	/^Primitive 0<>$/
+kernel/aliases.fs	0<	/^Primitive 0<$/
+kernel/aliases.fs	0>	/^Primitive 0>$/
+kernel/aliases.fs	0<=	/^Primitive 0<=$/
+kernel/aliases.fs	0>=	/^Primitive 0>=$/
+kernel/aliases.fs	=	/^Primitive =$/
+kernel/aliases.fs	<>	/^Primitive <>$/
+kernel/aliases.fs	<	/^Primitive <$/
+kernel/aliases.fs	>	/^Primitive >$/
+kernel/aliases.fs	<=	/^Primitive <=$/
+kernel/aliases.fs	>=	/^Primitive >=$/
+kernel/aliases.fs	u=	/^Primitive u=$/
+kernel/aliases.fs	u<>	/^Primitive u<>$/
+kernel/aliases.fs	u<	/^Primitive u<$/
+kernel/aliases.fs	u>	/^Primitive u>$/
+kernel/aliases.fs	u<=	/^Primitive u<=$/
+kernel/aliases.fs	u>=	/^Primitive u>=$/
+kernel/aliases.fs	d=	/^Primitive d=$/
+kernel/aliases.fs	d<>	/^Primitive d<>$/
+kernel/aliases.fs	d<	/^Primitive d<$/
+kernel/aliases.fs	d>	/^Primitive d>$/
+kernel/aliases.fs	d<=	/^Primitive d<=$/
+kernel/aliases.fs	d>=	/^Primitive d>=$/
+kernel/aliases.fs	d0=	/^Primitive d0=$/
+kernel/aliases.fs	d0<>	/^Primitive d0<>$/
+kernel/aliases.fs	d0<	/^Primitive d0<$/
+kernel/aliases.fs	d0>	/^Primitive d0>$/
+kernel/aliases.fs	d0<=	/^Primitive d0<=$/
+kernel/aliases.fs	d0>=	/^Primitive d0>=$/
+kernel/aliases.fs	du=	/^Primitive du=$/
+kernel/aliases.fs	du<>	/^Primitive du<>$/
+kernel/aliases.fs	du<	/^Primitive du<$/
+kernel/aliases.fs	du>	/^Primitive du>$/
+kernel/aliases.fs	du<=	/^Primitive du<=$/
+kernel/aliases.fs	du>=	/^Primitive du>=$/
+kernel/aliases.fs	within	/^Primitive within$/
+kernel/aliases.fs	useraddr	/^Primitive useraddr$/
+kernel/aliases.fs	up!	/^Primitive up!$/
+kernel/aliases.fs	sp@	/^Primitive sp@$/
+kernel/aliases.fs	sp!	/^Primitive sp!$/
+kernel/aliases.fs	rp@	/^Primitive rp@$/
+kernel/aliases.fs	rp!	/^Primitive rp!$/
+kernel/aliases.fs	fp@	/^Primitive fp@$/
+kernel/aliases.fs	fp!	/^Primitive fp!$/
+kernel/aliases.fs	>r	/^Primitive >r$/
+kernel/aliases.fs	r>	/^Primitive r>$/
+kernel/aliases.fs	rdrop	/^Primitive rdrop$/
+kernel/aliases.fs	2>r	/^Primitive 2>r$/
+kernel/aliases.fs	2r>	/^Primitive 2r>$/
+kernel/aliases.fs	2r@	/^Primitive 2r@$/
+kernel/aliases.fs	2rdrop	/^Primitive 2rdrop$/
+kernel/aliases.fs	over	/^Primitive over$/
+kernel/aliases.fs	drop	/^Primitive drop$/
+kernel/aliases.fs	swap	/^Primitive swap$/
+kernel/aliases.fs	dup	/^Primitive dup$/
+kernel/aliases.fs	rot	/^Primitive rot$/
+kernel/aliases.fs	-rot	/^Primitive -rot$/
+kernel/aliases.fs	nip	/^Primitive nip$/
+kernel/aliases.fs	tuck	/^Primitive tuck$/
+kernel/aliases.fs	?dup	/^Primitive ?dup$/
+kernel/aliases.fs	pick	/^Primitive pick$/
+kernel/aliases.fs	2drop	/^Primitive 2drop$/
+kernel/aliases.fs	2dup	/^Primitive 2dup$/
+kernel/aliases.fs	2over	/^Primitive 2over$/
+kernel/aliases.fs	2swap	/^Primitive 2swap$/
+kernel/aliases.fs	2rot	/^Primitive 2rot$/
+kernel/aliases.fs	2nip	/^Primitive 2nip$/
+kernel/aliases.fs	2tuck	/^Primitive 2tuck$/
+kernel/aliases.fs	@	/^Primitive @$/
+kernel/aliases.fs	lit@	/^Primitive lit@$/
+kernel/aliases.fs	!	/^Primitive !$/
+kernel/aliases.fs	+!	/^Primitive +!$/
+kernel/aliases.fs	c@	/^Primitive c@$/
+kernel/aliases.fs	c!	/^Primitive c!$/
+kernel/aliases.fs	2!	/^Primitive 2!$/
+kernel/aliases.fs	2@	/^Primitive 2@$/
+kernel/aliases.fs	cell+	/^Primitive cell+$/
+kernel/aliases.fs	cells	/^Primitive cells$/
+kernel/aliases.fs	char+	/^Primitive char+$/
+kernel/aliases.fs	(chars)	/^Primitive (chars)$/
+kernel/aliases.fs	count	/^Primitive count$/
+kernel/aliases.fs	(listlfind)	/^Primitive (listlfind)$/
+kernel/aliases.fs	(hashlfind)	/^Primitive (hashlfind)$/
+kernel/aliases.fs	(tablelfind)	/^Primitive (tablelfind)$/
+kernel/aliases.fs	(hashkey1)	/^Primitive (hashkey1)$/
+kernel/aliases.fs	(parse-white)	/^Primitive (parse-white)$/
+kernel/aliases.fs	aligned	/^Primitive aligned$/
+kernel/aliases.fs	faligned	/^Primitive faligned$/
+kernel/aliases.fs	threading-method	/^Primitive threading-method$/
+kernel/aliases.fs	key-file	/^Primitive key-file$/
+kernel/aliases.fs	key?-file	/^Primitive key?-file$/
+kernel/aliases.fs	stdin	/^Primitive stdin$/
+kernel/aliases.fs	stdout	/^Primitive stdout$/
+kernel/aliases.fs	stderr	/^Primitive stderr$/
+kernel/aliases.fs	form	/^Primitive form$/
+kernel/aliases.fs	wcwidth	/^Primitive wcwidth$/
+kernel/aliases.fs	flush-icache	/^Primitive flush-icache$/
+kernel/aliases.fs	(bye)	/^Primitive (bye)$/
+kernel/aliases.fs	(system)	/^Primitive (system)$/
+kernel/aliases.fs	getenv	/^Primitive getenv$/
+kernel/aliases.fs	open-pipe	/^Primitive open-pipe$/
+kernel/aliases.fs	close-pipe	/^Primitive close-pipe$/
+kernel/aliases.fs	time&date	/^Primitive time&date$/
+kernel/aliases.fs	ms	/^Primitive ms$/
+kernel/aliases.fs	allocate	/^Primitive allocate$/
+kernel/aliases.fs	free	/^Primitive free$/
+kernel/aliases.fs	resize	/^Primitive resize$/
+kernel/aliases.fs	strerror	/^Primitive strerror$/
+kernel/aliases.fs	strsignal	/^Primitive strsignal$/
+kernel/aliases.fs	call-c	/^Primitive call-c$/
+kernel/aliases.fs	close-file	/^Primitive close-file$/
+kernel/aliases.fs	open-file	/^Primitive open-file$/
+kernel/aliases.fs	create-file	/^Primitive create-file$/
+kernel/aliases.fs	delete-file	/^Primitive delete-file$/
+kernel/aliases.fs	rename-file	/^Primitive rename-file$/
+kernel/aliases.fs	file-position	/^Primitive file-position$/
+kernel/aliases.fs	reposition-file	/^Primitive reposition-file$/
+kernel/aliases.fs	file-size	/^Primitive file-size$/
+kernel/aliases.fs	resize-file	/^Primitive resize-file$/
+kernel/aliases.fs	read-file	/^Primitive read-file$/
+kernel/aliases.fs	(read-line)	/^Primitive (read-line)$/
+kernel/aliases.fs	write-file	/^Primitive write-file$/
+kernel/aliases.fs	emit-file	/^Primitive emit-file$/
+kernel/aliases.fs	flush-file	/^Primitive flush-file$/
+kernel/aliases.fs	file-status	/^Primitive file-status$/
+kernel/aliases.fs	file-eof?	/^Primitive file-eof?$/
+kernel/aliases.fs	open-dir	/^Primitive open-dir$/
+kernel/aliases.fs	read-dir	/^Primitive read-dir$/
+kernel/aliases.fs	close-dir	/^Primitive close-dir$/
+kernel/aliases.fs	filename-match	/^Primitive filename-match$/
+kernel/aliases.fs	set-dir	/^Primitive set-dir$/
+kernel/aliases.fs	get-dir	/^Primitive get-dir$/
+kernel/aliases.fs	=mkdir	/^Primitive =mkdir$/
+kernel/aliases.fs	newline	/^Primitive newline$/
+kernel/aliases.fs	utime	/^Primitive utime$/
+kernel/aliases.fs	cputime	/^Primitive cputime$/
+kernel/aliases.fs	f=	/^Primitive f=$/
+kernel/aliases.fs	f<>	/^Primitive f<>$/
+kernel/aliases.fs	f<	/^Primitive f<$/
+kernel/aliases.fs	f>	/^Primitive f>$/
+kernel/aliases.fs	f<=	/^Primitive f<=$/
+kernel/aliases.fs	f>=	/^Primitive f>=$/
+kernel/aliases.fs	f0=	/^Primitive f0=$/
+kernel/aliases.fs	f0<>	/^Primitive f0<>$/
+kernel/aliases.fs	f0<	/^Primitive f0<$/
+kernel/aliases.fs	f0>	/^Primitive f0>$/
+kernel/aliases.fs	f0<=	/^Primitive f0<=$/
+kernel/aliases.fs	f0>=	/^Primitive f0>=$/
+kernel/aliases.fs	s>f	/^Primitive s>f$/
+kernel/aliases.fs	d>f	/^Primitive d>f$/
+kernel/aliases.fs	f>d	/^Primitive f>d$/
+kernel/aliases.fs	f>s	/^Primitive f>s$/
+kernel/aliases.fs	f!	/^Primitive f!$/
+kernel/aliases.fs	f@	/^Primitive f@$/
+kernel/aliases.fs	df@	/^Primitive df@$/
+kernel/aliases.fs	df!	/^Primitive df!$/
+kernel/aliases.fs	sf@	/^Primitive sf@$/
+kernel/aliases.fs	sf!	/^Primitive sf!$/
+kernel/aliases.fs	f+	/^Primitive f+$/
+kernel/aliases.fs	f-	/^Primitive f-$/
+kernel/aliases.fs	f*	/^Primitive f*$/
+kernel/aliases.fs	f/	/^Primitive f/$/
+kernel/aliases.fs	f**	/^Primitive f**$/
+kernel/aliases.fs	fm*	/^Primitive fm*$/
+kernel/aliases.fs	fm/	/^Primitive fm/$/
+kernel/aliases.fs	fm*/	/^Primitive fm*/$/
+kernel/aliases.fs	f**2	/^Primitive f**2$/
+kernel/aliases.fs	fnegate	/^Primitive fnegate$/
+kernel/aliases.fs	fdrop	/^Primitive fdrop$/
+kernel/aliases.fs	fdup	/^Primitive fdup$/
+kernel/aliases.fs	fswap	/^Primitive fswap$/
+kernel/aliases.fs	fover	/^Primitive fover$/
+kernel/aliases.fs	frot	/^Primitive frot$/
+kernel/aliases.fs	fnip	/^Primitive fnip$/
+kernel/aliases.fs	ftuck	/^Primitive ftuck$/
+kernel/aliases.fs	float+	/^Primitive float+$/
+kernel/aliases.fs	floats	/^Primitive floats$/
+kernel/aliases.fs	floor	/^Primitive floor$/
+kernel/aliases.fs	fround	/^Primitive fround$/
+kernel/aliases.fs	fmax	/^Primitive fmax$/
+kernel/aliases.fs	fmin	/^Primitive fmin$/
+kernel/aliases.fs	represent	/^Primitive represent$/
+kernel/aliases.fs	>float	/^Primitive >float$/
+kernel/aliases.fs	fabs	/^Primitive fabs$/
+kernel/aliases.fs	facos	/^Primitive facos$/
+kernel/aliases.fs	fasin	/^Primitive fasin$/
+kernel/aliases.fs	fatan	/^Primitive fatan$/
+kernel/aliases.fs	fatan2	/^Primitive fatan2$/
+kernel/aliases.fs	fcos	/^Primitive fcos$/
+kernel/aliases.fs	fexp	/^Primitive fexp$/
+kernel/aliases.fs	fexpm1	/^Primitive fexpm1$/
+kernel/aliases.fs	fln	/^Primitive fln$/
+kernel/aliases.fs	flnp1	/^Primitive flnp1$/
+kernel/aliases.fs	flog	/^Primitive flog$/
+kernel/aliases.fs	falog	/^Primitive falog$/
+kernel/aliases.fs	fsin	/^Primitive fsin$/
+kernel/aliases.fs	fsincos	/^Primitive fsincos$/
+kernel/aliases.fs	fsqrt	/^Primitive fsqrt$/
+kernel/aliases.fs	ftan	/^Primitive ftan$/
+kernel/aliases.fs	fsinh	/^Primitive fsinh$/
+kernel/aliases.fs	fcosh	/^Primitive fcosh$/
+kernel/aliases.fs	ftanh	/^Primitive ftanh$/
+kernel/aliases.fs	fasinh	/^Primitive fasinh$/
+kernel/aliases.fs	facosh	/^Primitive facosh$/
+kernel/aliases.fs	fatanh	/^Primitive fatanh$/
+kernel/aliases.fs	sfloats	/^Primitive sfloats$/
+kernel/aliases.fs	dfloats	/^Primitive dfloats$/
+kernel/aliases.fs	sfaligned	/^Primitive sfaligned$/
+kernel/aliases.fs	dfaligned	/^Primitive dfaligned$/
+kernel/aliases.fs	v*	/^Primitive v*$/
+kernel/aliases.fs	faxpy	/^Primitive faxpy$/
+kernel/aliases.fs	@local#	/^Primitive @local#$/
+kernel/aliases.fs	@local0	/^Primitive @local0$/
+kernel/aliases.fs	@local1	/^Primitive @local1$/
+kernel/aliases.fs	@local2	/^Primitive @local2$/
+kernel/aliases.fs	@local3	/^Primitive @local3$/
+kernel/aliases.fs	f@local#	/^Primitive f@local#$/
+kernel/aliases.fs	f@local0	/^Primitive f@local0$/
+kernel/aliases.fs	f@local1	/^Primitive f@local1$/
+kernel/aliases.fs	laddr#	/^Primitive laddr#$/
+kernel/aliases.fs	lp+!#	/^Primitive lp+!#$/
+kernel/aliases.fs	lp-	/^Primitive lp-$/
+kernel/aliases.fs	lp+	/^Primitive lp+$/
+kernel/aliases.fs	lp+2	/^Primitive lp+2$/
+kernel/aliases.fs	lp!	/^Primitive lp!$/
+kernel/aliases.fs	>l	/^Primitive >l$/
+kernel/aliases.fs	f>l	/^Primitive f>l$/
+kernel/aliases.fs	fpick	/^Primitive fpick$/
+kernel/aliases.fs	open-lib	/^Primitive open-lib$/
+kernel/aliases.fs	lib-sym	/^Primitive lib-sym$/
+kernel/aliases.fs	wcall	/^Primitive wcall$/
+kernel/aliases.fs	uw@	/^Primitive uw@$/
+kernel/aliases.fs	sw@	/^Primitive sw@$/
+kernel/aliases.fs	w!	/^Primitive w!$/
+kernel/aliases.fs	ul@	/^Primitive ul@$/
+kernel/aliases.fs	sl@	/^Primitive sl@$/
+kernel/aliases.fs	l!	/^Primitive l!$/
+kernel/aliases.fs	lib-error	/^Primitive lib-error$/
+kernel/aliases.fs	compile-prim1	/^Primitive compile-prim1$/
+kernel/aliases.fs	finish-code	/^Primitive finish-code$/
+kernel/aliases.fs	forget-dyncode	/^Primitive forget-dyncode$/
+kernel/aliases.fs	decompile-prim	/^Primitive decompile-prim$/
+kernel/aliases.fs	set-next-code	/^Primitive set-next-code$/
+kernel/aliases.fs	call2	/^Primitive call2$/
+kernel/aliases.fs	tag-offsets	/^Primitive tag-offsets$/
+#load-file#	image-header	/^AConstant image-header$/
+#load-file#	forthstart	/^: forthstart image-header @ ;$/
+kernel/vars.fs	true	/^ -1 Constant true ( -- f ) \ core-ext$/
+kernel/vars.fs	false	/^  0 Constant false ( -- f ) \ core-ext$/
+kernel/vars.fs	cell	/^1 cells Constant cell ( -- u ) \ gforth$/
+kernel/vars.fs	float	/^1 floats Constant float ( -- u ) \ gforth$/
+kernel/vars.fs	bl	/^20 Constant bl ( -- c-char ) \ core b-l$/
+kernel/vars.fs	/line	/^has? EC [IF] 40 [ELSE] FF [THEN] Constant /line$/
+kernel/vars.fs	c/l	/^40 Constant c/l$/
+kernel/vars.fs	l/s	/^10 Constant l/s$/
+kernel/vars.fs	chars/block	/^400 Constant chars/block$/
+kernel/vars.fs	word-pno-size	/^20 8 2* cells + 2 + cell+ constant word-pno-size ( -- u )$/
+kernel/vars.fs	holdbuf	/^create holdbuf word-pno-size chars allot$/
+kernel/vars.fs	holdbuf-end	/^holdbuf word-pno-size chars + aconstant holdbuf-end$/
+kernel/vars.fs	holdptr	/^avariable holdptr holdbuf-end holdptr a!$/
+kernel/vars.fs	holdend	/^avariable holdend holdbuf-end holdend a!$/
+kernel/vars.fs	pad-minsize	/^84 constant pad-minsize ( -- u )$/
+kernel/vars.fs	def#tib	/^$400 Value def#tib$/
+kernel/vars.fs	main-task	/^Create main-task  has? OS [IF] 100 [ELSE] 40 [THEN] cells dup allot$/
+kernel/vars.fs	udp	/^Variable udp ( -- a-addr ) \ gforth$/
+kernel/vars.fs	next-task	/^AUser next-task        main-task next-task !$/
+kernel/vars.fs	prev-task	/^AUser prev-task        main-task prev-task !$/
+kernel/vars.fs	save-task	/^AUser save-task        0 save-task !$/
+kernel/vars.fs	sp0	/^AUser sp0 ( -- a-addr ) \ gforth$/
+kernel/vars.fs	rp0	/^AUser rp0 ( -- a-addr ) \ gforth$/
+kernel/vars.fs	fp0	/^AUser fp0 ( -- a-addr ) \ gforth$/
+kernel/vars.fs	lp0	/^AUser lp0 ( -- a-addr ) \ gforth$/
+kernel/vars.fs	handler	/^AUser handler	\ pointer to last throw frame$/
+kernel/vars.fs	backtrace-rp0	/^AUser backtrace-rp0 \ rp at last call of interpret$/
+kernel/vars.fs	errorhandler	/^AUser errorhandler$/
+kernel/vars.fs	"error	/^AUser "error            0 "error !$/
+kernel/vars.fs	current-input	/^    User current-input$/
+kernel/vars.fs	includefilename	/^ 2user includefilename  0 0 includefilename 2! \ innermost included file$/
+kernel/vars.fs	base	/^User base ( -- a-addr ) \ core$/
+kernel/vars.fs	dpl	/^User dpl ( -- a-addr ) \ gforth$/
+kernel/vars.fs	state	/^User state ( -- a-addr ) \ core,tools-ext$/
+kernel/vars.fs	normal-dp	/^AUser normal-dp		\ the usual dictionary pointer$/
+kernel/vars.fs	dpp	/^AUser dpp		normal-dp dpp !$/
+kernel/vars.fs	LastCFA	/^AUser LastCFA$/
+kernel/vars.fs	Last	/^AUser Last$/
+kernel/vars.fs	max-name-length	/^User max-name-length \ maximum length of all names defined yet$/
+kernel/vars.fs	locals-size	/^User locals-size \ this is the current size of the locals stack$/
+compat/strcomp.fs	str=	/^: str= ( c-addr1 u1 c-addr2 u2 -- f ) \ gforth$/
+compat/strcomp.fs	string-prefix?	/^: string-prefix? ( c-addr1 u1 c-addr2 u2 -- f ) \ gforth$/
+compat/strcomp.fs	str<	/^: str< ( c-addr1 u1 c-addr2 u2 -- f ) \ gforth$/
+kernel/basics.fs	--hook-before	/^defer --hook-before$/
+kernel/basics.fs	--hook-after	/^defer --hook-after$/
+kernel/basics.fs	--prim	/^defer --prim$/
+kernel/basics.fs	-	/^: -$/
+kernel/basics.fs	NIL	/^\- NIL NIL AConstant NIL \ gforth$/
+kernel/basics.fs	r@	/^' i Alias r@ ( -- w ; R: w -- w ) \ core r-fetch$/
+kernel/basics.fs	maxaligned	/^: maxaligned ( addr1 -- addr2 ) \ gforth$/
+kernel/basics.fs	cfaligned	/^' maxaligned Alias cfaligned ( addr1 -- addr2 ) \ gforth$/
+kernel/basics.fs	chars	/^: chars ( n1 -- n2 ) \ core$/
+kernel/basics.fs	A!	/^' ! alias A! ( addr1 addr2 -- ) \ gforth$/
+kernel/basics.fs	dictionary-end	/^	: dictionary-end ( -- addr )$/
+kernel/basics.fs	usable-dictionary-end	/^: usable-dictionary-end ( -- addr )$/
+kernel/basics.fs	unused	/^: unused ( -- u ) \ core-ext$/
+kernel/basics.fs	in-dictionary?	/^: in-dictionary? ( x -- f )$/
+kernel/basics.fs	dp	/^: dp    ( -- addr ) \ gforth$/
+kernel/basics.fs	here	/^: here  ( -- addr ) \ core$/
+kernel/basics.fs	on	/^: on  ( a-addr -- ) \ gforth$/
+kernel/basics.fs	off	/^: off ( a-addr -- ) \ gforth$/
+kernel/basics.fs	dabs	/^: dabs ( d -- ud ) \ double d-abs$/
+kernel/basics.fs	roll	/^: roll  ( x0 x1 .. xn n -- x1 .. xn x0 ) \ core-ext$/
+kernel/basics.fs	place	/^: place  ( addr len to -- ) \ gforth$/
+kernel/basics.fs	bounds	/^: bounds ( addr u -- addr+u addr ) \ gforth$/
+kernel/basics.fs	scan	/^: scan   ( addr1 n1 char -- addr2 n2 ) \ gforth$/
+kernel/basics.fs	skip	/^: skip   ( addr1 n1 char -- addr2 n2 ) \ gforth$/
+kernel/basics.fs	digit?	/^: digit?   ( char -- digit true/ false ) \ gforth$/
+kernel/basics.fs	accumulate	/^: accumulate ( +d0 addr digit - +d1 addr )$/
+kernel/basics.fs	>number	/^: >number ( ud1 c-addr1 u1 -- ud2 c-addr2 u2 ) \ core to-number$/
+kernel/basics.fs	s>d	/^: s>d ( n -- d ) \ core		s-to-d$/
+kernel/basics.fs	ud/mod	/^: ud/mod ( ud1 u2 -- urem udquot ) \ gforth$/
+kernel/basics.fs	lp@	/^: lp@ ( -- addr ) \ gforth	lp-fetch$/
+kernel/basics.fs	catch	/^defer catch ( x1 .. xn xt -- y1 .. ym 0 / z1 .. zn error ) \ exception$/
+kernel/basics.fs	throw	/^defer throw ( y1 .. ym nerror -- y1 .. ym / z1 .. zn error ) \ exception$/
+kernel/basics.fs	c(abort")	/^: c(abort") ( c-addr -- )$/
+kernel/basics.fs	(ABORT")	/^: (abort")$/
+kernel/basics.fs	abort	/^: abort ( ?? -- ?? ) \ core,exception-ext$/
+kernel/basics.fs	?stack	/^: ?stack ( ?? -- ?? ) \ gforth$/
+kernel/basics.fs	depth	/^: depth ( -- +n ) \ core depth$/
+kernel/basics.fs	clearstack	/^: clearstack ( ... -- ) \ gforth clear-stack$/
+kernel/basics.fs	clearstacks	/^: clearstacks ( ... -- ) \ gforth clear-stacks$/
+kernel/basics.fs	"lit	/^: "lit ( -- addr )$/
+kernel/basics.fs	decimal	/^: decimal ( -- ) \ core$/
+kernel/basics.fs	hex	/^: hex ( -- ) \ core-ext$/
+kernel/io.fs	outfile-id	/^0 Value outfile-id ( -- file-id ) \ gforth$/
+kernel/io.fs	infile-id	/^0 Value infile-id ( -- file-id ) \ gforth$/
+kernel/io.fs	(type)	/^: (type) ( c-addr u -- ) \ gforth$/
+kernel/io.fs	(emit)	/^: (emit) ( c -- ) \ gforth$/
+kernel/io.fs	(key)	/^: (key) ( -- c ) \ gforth$/
+kernel/io.fs	(key?)	/^: (key?) ( -- flag ) \ gforth$/
+kernel/io.fs	type	/^Defer type ( c-addr u -- ) \ core$/
+kernel/io.fs	emit	/^Defer emit ( c -- ) \ core$/
+kernel/io.fs	key	/^Defer key ( -- char ) \ core$/
+kernel/io.fs	key?	/^Defer key? ( -- flag ) \ facility key-question$/
+kernel/io.fs	(.")	/^: (.")     "lit count type ;$/
+kernel/io.fs	(S")	/^: (S")     "lit count ;$/
+kernel/io.fs	#eof	/^04 constant #eof ( -- c ) \ gforth$/
+kernel/io.fs	#bell	/^07 constant #bell ( -- c ) \ gforth$/
+kernel/io.fs	#bs	/^08 constant #bs ( -- c ) \ gforth$/
+kernel/io.fs	#tab	/^09 constant #tab ( -- c ) \ gforth$/
+kernel/io.fs	#del	/^7F constant #del ( -- c ) \ gforth$/
+kernel/io.fs	#cr	/^0D constant #cr   ( -- c ) \ gforth$/
+kernel/io.fs	#ff	/^0C constant #ff ( -- c ) \ gforth$/
+kernel/io.fs	#lf	/^0A constant #lf ( -- c ) \ gforth$/
+kernel/io.fs	bell	/^: bell  #bell emit [ has? os [IF] ] outfile-id flush-file drop [ [THEN] ] ;$/
+kernel/io.fs	cr	/^: cr ( -- ) \ core c-r$/
+kernel/io.fs	space	/^: space ( -- ) \ core$/
+kernel/io.fs	spaces	/^Create spaces ( u -- ) \ core$/
+kernel/io.fs	backspaces	/^Create backspaces$/
+kernel/nio.fs	pad	/^: pad    ( -- c-addr ) \ core-ext$/
+kernel/nio.fs	hold	/^: hold    ( char -- ) \ core$/
+kernel/nio.fs	<#	/^: <# ( -- ) \ core	less-number-sign$/
+kernel/nio.fs	#>	/^: #>      ( xd -- addr u ) \ core	number-sign-greater$/
+kernel/nio.fs	<<#	/^: <<# ( -- ) \ gforth	less-less-number-sign$/
+kernel/nio.fs	#>>	/^: #>> ( -- ) \ gforth	number-sign-greater-greater$/
+kernel/nio.fs	sign	/^: sign    ( n -- ) \ core$/
+kernel/nio.fs	#	/^: #       ( ud1 -- ud2 ) \ core		number-sign$/
+kernel/nio.fs	#s	/^: #s      ( ud -- 0 0 ) \ core	number-sign-s$/
+kernel/nio.fs	d.r	/^: d.r ( d n -- ) \ double	d-dot-r$/
+kernel/nio.fs	ud.r	/^: ud.r ( ud n -- ) \ gforth	u-d-dot-r$/
+kernel/nio.fs	.r	/^: .r ( n1 n2 -- ) \ core-ext	dot-r$/
+kernel/nio.fs	u.r	/^: u.r ( u n -- )  \ core-ext	u-dot-r$/
+kernel/nio.fs	d.	/^: d. ( d -- ) \ double	d-dot$/
+kernel/nio.fs	ud.	/^: ud. ( ud -- ) \ gforth	u-d-dot$/
+kernel/nio.fs	.	/^: . ( n -- ) \ core	dot$/
+kernel/nio.fs	u.	/^: u. ( u -- ) \ core	u-dot$/
+kernel/errore.fs	ErrLink	/^AVariable ErrLink              \ Linked list entry point$/
+kernel/errore.fs	>stderr	/^: >stderr ( -- )$/
+kernel/errore.fs	.error	/^: .error ( n -- )$/
+kernel/version.fs	version-string	/^: version-string s" 0.7.3" ;$/
+kernel/int.fs	(word)	/^: (word) ( addr1 n1 char -- addr2 n2 )$/
+kernel/int.fs	sword	/^: sword  ( char -- addr len ) \ gforth-obsolete s-word$/
+kernel/int.fs	word	/^: word   ( char "<chars>ccc<char>-- c-addr ) \ core$/
+kernel/int.fs	parse	/^: parse    ( char "ccc<char>" -- c-addr u ) \ core-ext$/
+kernel/int.fs	(name)	/^: (name) ( -- c-addr count ) \ gforth$/
+kernel/int.fs	name-too-short?	/^: name-too-short? ( c-addr u -- c-addr u )$/
+kernel/int.fs	name-too-long?	/^: name-too-long? ( c-addr u -- c-addr u )$/
+kernel/int.fs	bases	/^const Create bases   0A , 10 ,   2 ,   0A ,$/
+kernel/int.fs	getbase	/^: getbase ( addr u -- addr' u' )$/
+kernel/int.fs	sign?	/^: sign? ( addr u -- addr1 u1 flag )$/
+kernel/int.fs	?dnegate	/^: ?dnegate ( d1 f -- d2 )$/
+kernel/int.fs	s'>unumber?	/^: s'>unumber? ( addr u -- ud flag )$/
+kernel/int.fs	s>unumber?	/^: s>unumber? ( c-addr u -- ud flag ) \ gforth$/
+kernel/int.fs	s>number?	/^: s>number? ( addr u -- d f ) \ gforth$/
+kernel/int.fs	s>number	/^: s>number ( addr len -- d )$/
+kernel/int.fs	snumber?	/^: snumber? ( c-addr u -- 0 / n -1 / d 0> )$/
+kernel/int.fs	number?	/^: number? ( string -- string 0 / n -1 / d 0> )$/
+kernel/int.fs	number	/^: number ( string -- d )$/
+kernel/int.fs	(	/^: ( ( compilation 'ccc<close-paren>' -- ; run-time -- ) \ thisone- core,file	paren$/
+kernel/int.fs	\	/^: \ ( compilation 'ccc<newline>' -- ; run-time -- ) \ thisone- core-ext,block-ext backslash$/
+kernel/int.fs	\G	/^: \G ( compilation 'ccc<newline>' -- ; run-time -- ) \ gforth backslash-gee$/
+kernel/int.fs	find-method	/^  cell% field find-method   \ xt: ( c_addr u wid -- nt )$/
+kernel/int.fs	reveal-method	/^  cell% field reveal-method \ xt: ( nt wid -- ) \ used by dofield:, must be field$/
+kernel/int.fs	rehash-method	/^  cell% field rehash-method \ xt: ( wid -- )	   \ re-initializes a "search-data" (hashtables)$/
+kernel/int.fs	hash-method	/^  cell% field hash-method   \ xt: ( wid -- )    \ initializes ""$/
+kernel/int.fs	wordlist-map-struct	/^end-struct wordlist-map-struct$/
+kernel/int.fs	wordlist-map	/^  cell% field wordlist-map \ pointer to a wordlist-map-struct$/
+kernel/int.fs	wordlist-id	/^  cell% field wordlist-id \ linked list of words (for WORDS etc.)$/
+kernel/int.fs	wordlist-link	/^  cell% field wordlist-link \ link field to other wordlists$/
+kernel/int.fs	wordlist-extend	/^  cell% field wordlist-extend \ wordlist extensions (eg bucket offset)$/
+kernel/int.fs	wordlist-struct	/^end-struct wordlist-struct$/
+kernel/int.fs	f83find	/^: f83find      ( addr len wordlist -- nt / false )$/
+kernel/int.fs	initvoc	/^: initvoc		( wid -- )$/
+kernel/int.fs	f83search	/^Create f83search ( -- wordlist-map )$/
+kernel/int.fs	forth-wordlist	/^AValue forth-wordlist \ variable, will be redefined by search.fs$/
+kernel/int.fs	lookup	/^AVariable lookup       	forth-wordlist lookup !$/
+kernel/int.fs	current	/^AVariable current ( -- addr ) \ gforth$/
+kernel/int.fs	voclink	/^AVariable voclink	forth-wordlist wordlist-link voclink !$/
+kernel/int.fs	context	/^Defer context ( -- addr ) \ gforth$/
+kernel/int.fs	(search-wordlist)	/^: (search-wordlist)  ( addr count wid -- nt | false )$/
+kernel/int.fs	search-wordlist	/^: search-wordlist ( c-addr count wid -- 0 | xt +-1 ) \ search$/
+kernel/int.fs	find-name	/^: find-name ( c-addr u -- nt | 0 ) \ gforth$/
+kernel/int.fs	alias-mask	/^$80000000 constant alias-mask$/
+kernel/int.fs	immediate-mask	/^$40000000 constant immediate-mask$/
+kernel/int.fs	restrict-mask	/^$20000000 constant restrict-mask$/
+kernel/int.fs	lcount-mask	/^$1fffffff constant lcount-mask$/
+kernel/int.fs	flag-sign	/^: flag-sign ( f -- 1|-1 )$/
+kernel/int.fs	ticking-compile-only-error	/^: ticking-compile-only-error ( ... -- )$/
+kernel/int.fs	compile-only-error	/^: compile-only-error ( ... -- )$/
+kernel/int.fs	(cfa>int)	/^: (cfa>int) ( cfa -- xt )$/
+kernel/int.fs	(x>int)	/^: (x>int) ( cfa w -- xt )$/
+kernel/int.fs	name>string	/^: name>string ( nt -- addr count ) \ gforth     name-to-string$/
+kernel/int.fs	((name>))	/^: ((name>))  ( nfa -- cfa )$/
+kernel/int.fs	(name>x)	/^: (name>x) ( nfa -- cfa w )$/
+kernel/int.fs	name>int	/^: name>int ( nt -- xt ) \ gforth name-to-int$/
+kernel/int.fs	name?int	/^: name?int ( nt -- xt ) \ gforth name-question-int$/
+kernel/int.fs	(name>comp)	/^: (name>comp) ( nt -- w +-1 ) \ gforth$/
+kernel/int.fs	(name>intn)	/^: (name>intn) ( nfa -- xt +-1 )$/
+kernel/int.fs	???	/^const Create ???  0 , 3 , char ? c, char ? c, char ? c,$/
+kernel/int.fs	head?	/^: head? ( addr -- f )$/
+kernel/int.fs	>head-noprim	/^: >head-noprim ( cfa -- nt ) \ gforth  to-head-noprim$/
+kernel/int.fs	>body	/^cell% 2* 0 0 field >body ( xt -- a_addr ) \ core to-body$/
+kernel/int.fs	body>	/^cell% -2 * 0 0 field body> ( xt -- a_addr )$/
+kernel/int.fs	>code-address	/^' @ alias >code-address ( xt -- c_addr ) \ gforth$/
+kernel/int.fs	>does-code	/^: >does-code ( xt -- a_addr ) \ gforth$/
+kernel/int.fs	flash!	/^    : flash! ! ;$/
+kernel/int.fs	flashc!	/^    : flashc! c! ;$/
+kernel/int.fs	code-address!	/^alias code-address! ( c_addr xt -- ) \ gforth$/
+kernel/int.fs	does-code!	/^: does-code! ( a_addr xt -- ) \ gforth$/
+kernel/int.fs	does-handler!	/^' drop alias does-handler! ( a_addr -- ) \ gforth$/
+kernel/int.fs	/does-handler	/^2 cells constant /does-handler ( -- n ) \ gforth$/
+kernel/int.fs	sfind	/^: sfind ( c-addr u -- 0 / xt +-1  ) \ gforth-obsolete$/
+kernel/int.fs	find	/^: find ( c-addr -- xt +-1 | c-addr 0 ) \ core,search$/
+kernel/int.fs	(')	/^: (') ( "name" -- nt ) \ gforth$/
+kernel/int.fs	'	/^: '    ( "name" -- xt ) \ core	tick$/
+kernel/int.fs	parser1	/^Defer parser1 ( c-addr u -- ... xt)$/
+kernel/int.fs	parser	/^: parser ( c-addr u -- ... )$/
+kernel/int.fs	parse-name	/^Defer parse-name ( "name" -- c-addr u ) \ gforth$/
+kernel/int.fs	parse-word	/^' parse-name alias parse-word ( -- c-addr u ) \ gforth-obsolete$/
+kernel/int.fs	name	/^' parse-name alias name ( -- c-addr u ) \ gforth-obsolete$/
+kernel/int.fs	compiler-notfound1	/^Defer compiler-notfound1 ( c-addr count -- ... xt )$/
+kernel/int.fs	interpreter-notfound1	/^Defer interpreter-notfound1 ( c-addr count -- ... xt )$/
+kernel/int.fs	no.extensions	/^: no.extensions  ( addr u -- )$/
+kernel/int.fs	before-word	/^Defer before-word ( -- ) \ gforth$/
+kernel/int.fs	interpret1	/^: interpret1 ( ... -- ... )$/
+kernel/int.fs	interpret	/^: interpret ( ?? -- ?? ) \ gforth$/
+kernel/int.fs	interpreter1	/^: interpreter1 ( c-addr u -- ... xt ) $/
+kernel/int.fs	save-mem	/^: save-mem	( addr1 u -- addr2 u ) \ gforth$/
+kernel/int.fs	free-mem-var	/^: free-mem-var ( addr -- )$/
+kernel/int.fs	extend-mem	/^: extend-mem	( addr1 u1 u -- addr addr2 u2 )$/
+kernel/int.fs	'quit	/^Defer 'quit$/
+kernel/int.fs	.status	/^    Defer .status$/
+kernel/int.fs	prompt	/^: prompt        state @ IF ."  compiled" EXIT THEN ."  ok" ;$/
+kernel/int.fs	(quit)	/^: (quit) ( -- )$/
+kernel/int.fs	max-errors	/^8 Constant max-errors$/
+kernel/int.fs	/error	/^5 has? file 2 and + Constant /error$/
+kernel/int.fs	error-stack	/^Variable error-stack  0 error-stack !$/
+kernel/int.fs	error>	/^: error> ( --  c-addr1 u1 c-addr2 u2 line# [addr u] )$/
+kernel/int.fs	>error	/^: >error ( c-addr1 u1 c-addr2 u2 line# [addr u] -- )$/
+kernel/int.fs	input-error-data	/^: input-error-data ( -- c-addr1 u1 c-addr2 u2 line# [addr u] )$/
+kernel/int.fs	dec.	/^: dec. ( n -- ) \ gforth$/
+kernel/int.fs	dec.r	/^: dec.r ( u n -- ) \ gforth$/
+kernel/int.fs	hex.	/^: hex. ( u -- ) \ gforth$/
+kernel/int.fs	-trailing	/^: -trailing  ( c_addr u1 -- c_addr u2 ) \ string dash-trailing$/
+kernel/int.fs	DoError	/^DEFER DOERROR$/
+kernel/int.fs	dobacktrace	/^Defer dobacktrace ( -- )$/
+kernel/int.fs	.error-string	/^: .error-string ( throw-code -- )$/
+kernel/int.fs	umin	/^: umin ( u1 u2 -- u )$/
+kernel/int.fs	mark-start	/^Defer mark-start$/
+kernel/int.fs	mark-end	/^Defer mark-end$/
+kernel/int.fs	part-type	/^: part-type ( addr1 u1 u -- addr2 u2 )$/
+kernel/int.fs	.error-line	/^: .error-line ( c-addr1 u1 c-addr2 u2 -- )$/
+kernel/int.fs	.error-frame	/^: .error-frame ( throwcode addr1 u1 addr2 u2 n2 [addr3 u3] -- throwcode )$/
+kernel/int.fs	(DoError)	/^: (DoError) ( throw-code -- )$/
+kernel/int.fs	quit	/^: quit ( ?? -- ?? ) \ core$/
+kernel/int.fs	(bootmessage)	/^: (bootmessage) ( -- )$/
+kernel/int.fs	bootmessage	/^defer bootmessage ( -- ) \ gforth$/
+kernel/int.fs	process-args	/^defer process-args$/
+kernel/int.fs	'cold	/^Defer 'cold ( -- ) \ gforth  tick-cold$/
+kernel/int.fs	cold	/^: cold ( -- ) \ gforth$/
+kernel/int.fs	boot	/^: boot ( path n **argv argc -- )$/
+kernel/int.fs	bye	/^: bye ( -- ) \ tools-ext$/
+kernel/comp.fs	allot	/^: allot ( n -- ) \ core$/
+kernel/comp.fs	c,	/^: c,    ( c -- ) \ core c-comma$/
+kernel/comp.fs	,	/^: ,     ( w -- ) \ core comma$/
+kernel/comp.fs	2,	/^: 2,	( w1 w2 -- ) \ gforth$/
+kernel/comp.fs	align	/^: align ( -- ) \ core$/
+kernel/comp.fs	falign	/^: falign ( -- ) \ float f-align$/
+kernel/comp.fs	maxalign	/^: maxalign ( -- ) \ gforth$/
+kernel/comp.fs	cfalign	/^' maxalign Alias cfalign ( -- ) \ gforth$/
+kernel/comp.fs	A,	/^' , alias A, ( addr -- ) \ gforth$/
+kernel/comp.fs	const	/^' NOOP ALIAS const$/
+kernel/comp.fs	(header)	/^defer (header)$/
+kernel/comp.fs	header	/^defer header ( -- ) \ gforth$/
+kernel/comp.fs	string,	/^: string, ( c-addr u -- ) \ gforth$/
+kernel/comp.fs	longstring,	/^: longstring, ( c-addr u -- ) \ gforth$/
+kernel/comp.fs	header,	/^: header, ( c-addr u -- ) \ gforth$/
+kernel/comp.fs	input-stream-header	/^: input-stream-header ( "name" -- )$/
+kernel/comp.fs	input-stream	/^: input-stream ( -- )  \ general$/
+kernel/comp.fs	nextname-string	/^2variable nextname-string$/
+kernel/comp.fs	nextname-header	/^: nextname-header ( -- )$/
+kernel/comp.fs	nextname	/^: nextname ( c-addr u -- ) \ gforth$/
+kernel/comp.fs	noname-header	/^: noname-header ( -- )$/
+kernel/comp.fs	noname	/^: noname ( -- ) \ gforth$/
+kernel/comp.fs	latestxt	/^: latestxt ( -- xt ) \ gforth$/
+kernel/comp.fs	lastxt	/^' latestxt alias lastxt \ gforth-obsolete$/
+kernel/comp.fs	latest	/^: latest ( -- nt ) \ gforth$/
+kernel/comp.fs	Literal	/^: Literal  ( compilation n -- ; run-time -- n ) \ core$/
+kernel/comp.fs	2Literal	/^: 2Literal ( compilation w1 w2 -- ; run-time  -- w1 w2 ) \ double two-literal$/
+kernel/comp.fs	ALiteral	/^: ALiteral ( compilation addr -- ; run-time -- addr ) \ gforth$/
+kernel/comp.fs	char@	/^Defer char@ ( addr u -- char addr' u' )$/
+kernel/comp.fs	char	/^: char   ( '<spaces>ccc' -- c ) \ core$/
+kernel/comp.fs	[Char]	/^: [char] ( compilation '<spaces>ccc' -- ; run-time -- c ) \ core bracket-char$/
+kernel/comp.fs	cfa,	/^: cfa,     ( code-address -- )  \ gforth	cfa-comma$/
+kernel/comp.fs	compile,	/^defer compile, ( xt -- )	\ core-ext	compile-comma$/
+kernel/comp.fs	basic-block-end	/^defer basic-block-end ( -- )$/
+kernel/comp.fs	peephole-compile,	/^: peephole-compile, ( xt -- )$/
+kernel/comp.fs	compile-to-prims,	/^: compile-to-prims, ( xt -- )$/
+kernel/comp.fs	!does	/^: !does    ( addr -- ) \ gforth	store-does$/
+kernel/comp.fs	(does>)	/^: (does>)  ( R: addr -- )$/
+kernel/comp.fs	(does>2)	/^: (does>2)  ( addr -- )$/
+kernel/comp.fs	dodoes,	/^: dodoes,  ( -- )$/
+kernel/comp.fs	(compile)	/^: (compile) ( -- ) \ gforth-obsolete: dummy$/
+kernel/comp.fs	name>comp	/^: name>comp ( nt -- w xt ) \ gforth name-to-comp$/
+kernel/comp.fs	[(')]	/^: [(')]  ( compilation "name" -- ; run-time -- nt ) \ gforth bracket-paren-tick$/
+kernel/comp.fs	[']	/^: [']  ( compilation. "name" -- ; run-time. -- xt ) \ core      bracket-tick$/
+kernel/comp.fs	COMP'	/^: COMP'    ( "name" -- w xt ) \ gforth  comp-tick$/
+kernel/comp.fs	[COMP']	/^: [COMP']  ( compilation "name" -- ; run-time -- w xt ) \ gforth bracket-comp-tick$/
+kernel/comp.fs	postpone,	/^: postpone, ( w xt -- ) \ gforth	postpone-comma$/
+kernel/comp.fs	postpone	/^: POSTPONE ( "name" -- ) \ core$/
+kernel/comp.fs	recurse	/^: recurse ( compilation -- ; run-time ?? -- ?? ) \ core$/
+kernel/comp.fs	compiler1	/^: compiler1 ( c-addr u -- ... xt )$/
+kernel/comp.fs	[	/^: [ ( -- ) \  core	left-bracket$/
+kernel/comp.fs	]	/^: ] ( -- ) \ core	right-bracket$/
+kernel/comp.fs	S,	/^: S, ( addr u -- )$/
+kernel/comp.fs	mem,	/^: mem, ( addr u -- )$/
+kernel/comp.fs	,"	/^: ," ( "string"<"> -- )$/
+kernel/comp.fs	cset	/^: cset ( bmask c-addr -- )$/
+kernel/comp.fs	creset	/^: creset ( bmask c-addr -- )$/
+kernel/comp.fs	ctoggle	/^: ctoggle ( bmask c-addr -- )$/
+kernel/comp.fs	lastflags	/^: lastflags ( -- c-addr )$/
+kernel/comp.fs	immediate	/^: immediate ( -- ) \ core$/
+kernel/comp.fs	restrict	/^: restrict ( -- ) \ gforth$/
+kernel/comp.fs	compile-only	/^' restrict alias compile-only ( -- ) \ gforth$/
+kernel/comp.fs	Alias	/^: Alias    ( xt "name" -- ) \ gforth$/
+kernel/comp.fs	Create	/^: Create ( "name" -- ) \ core$/
+kernel/comp.fs	Variable	/^: Variable ( "name" -- ) \ core$/
+kernel/comp.fs	AVariable	/^: AVariable ( "name" -- ) \ gforth$/
+kernel/comp.fs	2Variable	/^: 2Variable ( "name" -- ) \ double two-variable$/
+kernel/comp.fs	uallot	/^: uallot ( n -- ) \ gforth$/
+kernel/comp.fs	User	/^: User ( "name" -- ) \ gforth$/
+kernel/comp.fs	AUser	/^: AUser ( "name" -- ) \ gforth$/
+kernel/comp.fs	(Constant)	/^    : (Constant)  Header reveal docon: cfa, ;$/
+kernel/comp.fs	(Value)	/^    : (Value)  Header reveal dovalue: cfa, ;$/
+kernel/comp.fs	Constant	/^: Constant ( w "name" -- ) \ core$/
+kernel/comp.fs	AConstant	/^: AConstant ( addr "name" -- ) \ gforth$/
+kernel/comp.fs	Value	/^: Value ( w "name" -- ) \ core-ext$/
+kernel/comp.fs	AValue	/^: AValue ( w "name" -- ) \ core-ext$/
+kernel/comp.fs	2Constant	/^: 2Constant ( w1 w2 "name" -- ) \ double two-constant$/
+kernel/comp.fs	(Field)	/^    : (Field)  Header reveal dofield: cfa, ;$/
+kernel/comp.fs	interpret/compile-int	/^    cell% field interpret/compile-int$/
+kernel/comp.fs	interpret/compile-comp	/^    cell% field interpret/compile-comp$/
+kernel/comp.fs	interpret/compile-struct	/^end-struct interpret/compile-struct$/
+kernel/comp.fs	interpret/compile:	/^: interpret/compile: ( interp-xt comp-xt "name" -- ) \ gforth$/
+kernel/comp.fs	defer-default	/^defer defer-default ( -- )$/
+kernel/comp.fs	Defer	/^: Defer ( "name" -- ) \ gforth$/
+kernel/comp.fs	defer@	/^: defer@ ( xt-deferred -- xt ) \ gforth defer-fetch$/
+kernel/comp.fs	defers	/^: Defers ( compilation "name" -- ; run-time ... -- ... ) \ gforth$/
+kernel/comp.fs	DOES>	/^interpret/compile: DOES>  ( compilation colon-sys1 -- colon-sys2 ; run-time nest-sys -- ) \ core        does$/
+kernel/comp.fs	defer!	/^: defer! ( xt xt-deferred -- ) \ gforth  defer-store$/
+kernel/comp.fs	<IS>	/^: <IS> ( "name" xt -- ) \ gforth$/
+kernel/comp.fs	[IS]	/^: [IS] ( compilation "name" -- ; run-time xt -- ) \ gforth bracket-is$/
+kernel/comp.fs	IS	/^interpret/compile: IS ( compilation/interpretation "name-deferred" -- ; run-time xt -- ) \ gforth$/
+kernel/comp.fs	TO	/^interpret/compile: TO ( w "name" -- ) \ core-ext$/
+kernel/comp.fs	interpret/compile?	/^: interpret/compile? ( xt -- flag )$/
+kernel/comp.fs	:-hook	/^defer :-hook ( sys1 -- sys2 )$/
+kernel/comp.fs	;-hook	/^defer ;-hook ( sys2 -- sys1 )$/
+kernel/comp.fs	defstart	/^0 Constant defstart$/
+kernel/comp.fs	(:noname)	/^: (:noname) ( -- colon-sys )$/
+kernel/comp.fs	:	/^: : ( "name" -- colon-sys ) \ core	colon$/
+kernel/comp.fs	:noname	/^: :noname ( -- xt colon-sys ) \ core-ext	colon-no-name$/
+kernel/comp.fs	;	/^: ; ( compilation colon-sys -- ; run-time nest-sys ) \ core	semicolon$/
+kernel/comp.fs	last?	/^: last?   ( -- false / nfa nfa )$/
+kernel/comp.fs	warnings	/^Variable warnings ( -- addr ) \ gforth$/
+kernel/comp.fs	(reveal)	/^: (reveal) ( nt wid -- )$/
+kernel/comp.fs	check-shadow	/^: check-shadow  ( addr count wid -- )$/
+kernel/comp.fs	reveal	/^: reveal ( -- ) \ gforth$/
+kernel/comp.fs	rehash	/^: rehash  ( wid -- )$/
+kernel/comp.fs	recursive	/^' reveal alias recursive ( compilation -- ; run-time -- ) \ gforth$/
+kernel/accept.fs	(ins)	/^: (ins) ( max span addr pos1 key -- max span addr pos2 )$/
+kernel/accept.fs	(bs)	/^: (bs) ( max span addr pos1 -- max span addr pos2 flag )$/
+kernel/accept.fs	(ret)	/^: (ret) ( max span addr pos1 -- max span addr pos2 flag )$/
+kernel/accept.fs	ctrlkeys	/^Create ctrlkeys$/
+kernel/accept.fs	insert-char	/^defer insert-char$/
+kernel/accept.fs	everychar	/^defer everychar$/
+kernel/accept.fs	everyline	/^defer everyline$/
+kernel/accept.fs	decode	/^: decode ( max span addr pos1 key -- max span addr pos2 flag )$/
+kernel/accept.fs	edit-line	/^: edit-line ( c-addr n1 n2 -- n3 ) \ gforth$/
+kernel/accept.fs	accept	/^: accept   ( c-addr +n1 -- +n2 ) \ core$/
+kernel/input.fs	input-method	/^| : input-method ( m "name" -- m' )  Create dup , cell+$/
+kernel/input.fs	input-var	/^| : input-var ( v size "name" -- v' )  Create  over , +$/
+kernel/input.fs	source	/^input-method source ( -- addr u ) \ core source$/
+kernel/input.fs	refill	/^input-method refill ( -- flag ) \ core-ext,block-ext,file-ext$/
+kernel/input.fs	source-id	/^input-method source-id ( -- 0 | -1 | fileid ) \ core-ext,file source-i-d$/
+kernel/input.fs	(save-input)	/^| input-method (save-input) ( -- x1 .. xn n ) \ gforth$/
+kernel/input.fs	(restore-input)	/^| input-method (restore-input) ( x1 .. xn n -- ) \ gforth$/
+kernel/input.fs	>in	/^cell input-var >in ( -- addr ) \ core to-in$/
+kernel/input.fs	input-lexeme	/^2 cells input-var input-lexeme ( -- a-addr ) \ gforth-internal$/
+kernel/input.fs	#tib	/^cell input-var #tib ( -- addr ) \ core-ext-obsolescent number-t-i-b$/
+kernel/input.fs	max#tib	/^cell input-var max#tib ( -- addr ) \ gforth max-number-t-i-b$/
+kernel/input.fs	old-input	/^cell input-var old-input ( -- addr ) \ gforth$/
+kernel/input.fs	loadline	/^cell input-var loadline ( -- addr ) \ gforth$/
+kernel/input.fs	loadfile	/^cell input-var loadfile ( -- addr ) \ gforth$/
+kernel/input.fs	blk	/^cell input-var blk ( -- addr ) \ block b-l-k$/
+kernel/input.fs	#fill-bytes	/^cell input-var #fill-bytes ( -- addr ) \ gforth$/
+kernel/input.fs	loadfilename	/^2 cells input-var loadfilename ( -- addr ) \ gforth$/
+kernel/input.fs	tib	/^0 input-var tib ( -- addr ) \ core-ext-obsolescent t-i-b$/
+kernel/input.fs	tib+	/^Constant tib+$/
+kernel/input.fs	input-lexeme!	/^: input-lexeme! ( c-addr u -- )$/
+kernel/input.fs	input-start-line	/^: input-start-line ( -- )$/
+kernel/input.fs	terminal-input	/^| Create terminal-input   A, A, A, A, A,$/
+kernel/input.fs	evaluate-input	/^| Create evaluate-input$/
+kernel/input.fs	read-line	/^: read-line ( c_addr u1 wfileid -- u2 flag wior ) \ file$/
+kernel/input.fs	file-input	/^| Create file-input  A, A, A, A, A,$/
+kernel/input.fs	new-tib	/^: new-tib ( method n -- ) \ gforth$/
+kernel/input.fs	expand-tib	/^: expand-tib ( n -- )$/
+kernel/input.fs	push-file	/^: push-file  ( -- ) \ gforth$/
+kernel/input.fs	pop-file	/^: pop-file ( throw-code -- throw-code ) \ gforth$/
+kernel/input.fs	save-input	/^: save-input ( -- x1 .. xn n ) \ core-ext$/
+kernel/input.fs	restore-input	/^: restore-input ( x1 .. xn n -- flag ) \ core-ext$/
+kernel/input.fs	create-input	/^: create-input ( -- )$/
+kernel/input.fs	execute-parsing-wrapper	/^: execute-parsing-wrapper ( ... addr1 u1 xt addr2 u2 -- ... ) \ gforth-internal$/
+kernel/input.fs	execute-parsing	/^: execute-parsing ( ... addr u xt -- ... ) \ gforth$/
+kernel/input.fs	evaluate	/^: evaluate ( ... addr u -- ... ) \ core,block$/
+kernel/input.fs	clear-tibstack	/^: clear-tibstack ( -- ) \ gforth$/
+kernel/input.fs	query	/^: query ( -- ) \ core-ext-obsolescent$/
+kernel/input.fs	line-end-hook	/^defer line-end-hook ( -- ) \ gforth$/
+kernel/input.fs	read-loop	/^: read-loop ( i*x -- j*x ) \ gforth$/
+kernel/input.fs	execute-parsing-named-file	/^: execute-parsing-named-file ( i*x wfileid filename-addr filename-u xt -- j*x )$/
+kernel/input.fs	execute-parsing-file	/^: execute-parsing-file ( i*x fileid xt -- j*x ) \ gforth$/
+kernel/input.fs	include-file	/^: include-file ( i*x wfileid -- j*x ) \ file$/
+kernel/license.fs	license	/^: license ( -- ) \ gforth$/
+kernel/xchars.fs	xemit	/^Defer xemit ( xc -- ) \ xchar-ext$/
+kernel/xchars.fs	xkey	/^Defer xkey ( -- xc ) \ xchar-ext$/
+kernel/xchars.fs	xchar+	/^Defer xchar+ ( xc-addr1 -- xc-addr2 ) \ xchar-ext$/
+kernel/xchars.fs	xchar-	/^Defer xchar- ( xc-addr1 -- xc-addr2 ) \ xchar-ext$/
+kernel/xchars.fs	+x/string	/^Defer +x/string ( xc-addr1 u1 -- xc-addr2 u2 ) \ xchar	plus-x-slash-string$/
+kernel/xchars.fs	x\string-	/^Defer x\string- ( xc-addr1 u1 -- xc-addr1 u2 ) \ xchar	x-back-string-minus$/
+kernel/xchars.fs	xc@	/^Defer xc@ ( xc-addr -- xc ) \ xchar-ext	xc-fetch$/
+kernel/xchars.fs	xc!+?	/^Defer xc!+? ( xc xc-addr1 u1 -- xc-addr2 u2 f ) \ xchar-ext	xc-store-plus-query$/
+kernel/xchars.fs	xc@+	/^Defer xc@+ ( xc-addr1 -- xc-addr2 xc ) \ xchar-ext	xc-fetch-plus$/
+kernel/xchars.fs	xc-size	/^Defer xc-size ( xc -- u ) \ xchar-ext$/
+kernel/xchars.fs	x-size	/^Defer x-size ( xc-addr u1 -- u2 ) \ xchar$/
+kernel/xchars.fs	x-width	/^Defer x-width ( xc-addr u -- n ) \ xchar-ext$/
+kernel/xchars.fs	-trailing-garbage	/^Defer -trailing-garbage ( xc-addr u1 -- addr u2 ) \ xchar-ext$/
+kernel/xchars.fs	x@+/string	/^: x@+/string ( xc-addr1 u1 -- xc-addr2 u2 xc )$/
+kernel/xchars.fs	xhold	/^: xhold ( xc -- )$/
+kernel/xchars.fs	char-	/^: char- ( c-addr1 -- c-addr2 )$/
+kernel/xchars.fs	+string	/^: +string ( c-addr1 u1 -- c-addr2 u2 )$/
+kernel/xchars.fs	string-	/^: string- ( c-addr1 u1 -- c-addr1 u2 )$/
+kernel/xchars.fs	c!+?	/^: c!+? ( c c-addr1 u1 -- c-addr2 u2 f )$/
+kernel/xchars.fs	c-size	/^: c-size ( c -- 1 )$/
+kernel/xchars.fs	set-encoding-fixed-width	/^: set-encoding-fixed-width ( -- )$/
+kernel/args.fs	cstring>sstring	/^: cstring>sstring  ( cstring -- addr n ) \ gforth	cstring-to-sstring$/
+kernel/args.fs	arg	/^: arg ( u -- addr count ) \ gforth$/
+kernel/args.fs	#!	/^: #! ( -- ) \ gforth   hash-bang$/
+kernel/args.fs	pathstring	/^Create pathstring 2 cells allot \ string$/
+kernel/args.fs	pathdirs	/^Create pathdirs   2 cells allot \ dir string array, pointer and count$/
+kernel/args.fs	argv	/^Variable argv ( -- addr ) \ gforth$/
+kernel/args.fs	argc	/^Variable argc ( -- addr ) \ gforth$/
+kernel/args.fs	script?	/^0 Value script? ( -- flag )$/
+kernel/args.fs	shift-args	/^: shift-args ( -- ) \ gforth$/
+kernel/args.fs	next-arg	/^: next-arg ( -- addr u ) \ gforth$/
+kernel/args.fs	os-execute-parsing	/^: os-execute-parsing ( ... addr u xt -- ... )$/
+kernel/args.fs	args-required1	/^: args-required1 ( addr u -- )$/
+kernel/args.fs	args-required	/^: args-required ( i*x addr u -- i*x ) \ gforth$/
+kernel/args.fs	args-evaluate	/^: args-evaluate ( i*x addr u -- j*x ) \ gforth$/
+kernel/args.fs	process-option	/^: process-option ( addr u -- )$/
+kernel/args.fs	(process-args)	/^: (process-args) ( -- )$/
+kernel/args.fs	os-boot	/^: os-boot ( path n **argv argc -- )$/
+kernel/files.fs	w/o	/^4 Constant w/o ( -- fam ) \ file	w-o$/
+kernel/files.fs	r/w	/^2 Constant r/w ( -- fam ) \ file	r-w$/
+kernel/files.fs	r/o	/^0 Constant r/o ( -- fam ) \ file	r-o$/
+kernel/files.fs	bin	/^: bin ( fam1 -- fam2 ) \ file$/
+kernel/files.fs	write-line	/^: write-line ( c-addr u fileid -- ior ) \ file$/
+kernel/files.fs	(	/^: ( ( compilation 'ccc<close-paren>' -- ; run-time -- ) \ core,file	paren$/
+kernel/paths.fs	path-allot	/^: path-allot ( umax -- ) \ gforth$/
+kernel/paths.fs	+place	/^: +place ( adr len adr )$/
+kernel/paths.fs	fpath	/^0 avalue fpath ( -- path-addr ) \ gforth$/
+kernel/paths.fs	make-path	/^: make-path ( -- addr )$/
+kernel/paths.fs	os-cold	/^: os-cold ( -- )$/
+kernel/paths.fs	also-path	/^: also-path ( c-addr len path-addr -- ) \ gforth$/
+kernel/paths.fs	clear-path	/^: clear-path ( path-addr -- ) \ gforth$/
+kernel/paths.fs	only-path	/^: only-path ( adr len path^ -- )$/
+kernel/paths.fs	path+	/^: path+ ( path-addr  "dir" -- ) \ gforth$/
+kernel/paths.fs	fpath+	/^: fpath+ ( "dir" ) \ gforth$/
+kernel/paths.fs	path=	/^: path= ( path-addr "dir1|dir2|dir3" ) \ gforth$/
+kernel/paths.fs	fpath=	/^: fpath= ( "dir1|dir2|dir3" ) \ gforth$/
+kernel/paths.fs	path>string	/^: path>string ( path -- c-addr u )$/
+kernel/paths.fs	next-path	/^: next-path ( addr u -- addr1 u1 addr2 u2 )$/
+kernel/paths.fs	previous-path	/^: previous-path ( path^ -- )$/
+kernel/paths.fs	.path	/^: .path ( path-addr -- ) \ gforth$/
+kernel/paths.fs	.fpath	/^: .fpath ( -- ) \ gforth$/
+kernel/paths.fs	absolut-path?	/^: absolut-path? ( addr u -- flag ) \ gforth$/
+kernel/paths.fs	ofile	/^Create ofile 0 c, 255 chars allot$/
+kernel/paths.fs	tfile	/^Create tfile 0 c, 255 chars allot$/
+kernel/paths.fs	pathsep?	/^: pathsep? dup [char] / = swap [char] \ = or ;$/
+kernel/paths.fs	need/	/^: need/   ofile dup c@ + c@ pathsep? 0= IF s" /" ofile +place THEN ;$/
+kernel/paths.fs	extractpath	/^: extractpath ( adr len -- adr len2 )$/
+kernel/paths.fs	remove~+	/^: remove~+ ( -- )$/
+kernel/paths.fs	expandtopic	/^: expandtopic ( -- ) \ stack effect correct? - anton$/
+kernel/paths.fs	del-string	/^: del-string ( addr u u1 -- addr u2 )$/
+kernel/paths.fs	del-./s	/^: del-./s ( addr u -- addr u2 )$/
+kernel/paths.fs	preserve-root	/^: preserve-root ( addr1 u1 -- addr2 u2 )$/
+kernel/paths.fs	skip-..-prefixes	/^: skip-..-prefixes ( addr1 u1 -- addr2 u2 )$/
+kernel/paths.fs	compact-filename	/^: compact-filename ( addr u1 -- addr u2 )$/
+kernel/paths.fs	reworkdir	/^: reworkdir ( -- )$/
+kernel/paths.fs	open-ofile	/^: open-ofile ( -- fid ior )$/
+kernel/paths.fs	check-path	/^: check-path ( adr1 len1 adr2 len2 -- fid 0 | 0 ior )$/
+kernel/paths.fs	open-path-file	/^: open-path-file ( addr1 u1 path-addr -- wfileid addr2 u2 0 | ior ) \ gforth$/
+kernel/paths.fs	open-fpath-file	/^: open-fpath-file ( addr1 u1 -- wfileid addr2 u2 0 | ior ) \ gforth$/
+kernel/require.fs	included-files	/^create included-files 0 , 0 , ( pointer to and count of included files )$/
+kernel/require.fs	image-included-files	/^create image-included-files 1 , A, ( pointer to and count of included files )$/
+kernel/require.fs	sourcefilename	/^: sourcefilename ( -- c-addr u ) \ gforth$/
+kernel/require.fs	sourceline#	/^: sourceline# ( -- u ) \ gforth		sourceline-number$/
+kernel/require.fs	init-included-files	/^: init-included-files ( -- ) \ gforth-internal$/
+kernel/require.fs	included?	/^: included? ( c-addr u -- f ) \ gforth$/
+kernel/require.fs	add-included-file	/^: add-included-file ( c-addr u -- ) \ gforth$/
+kernel/require.fs	included1	/^: included1 ( i*x file-id c-addr u -- j*x ) \ gforth$/
+kernel/require.fs	included	/^: included ( i*x c-addr u -- j*x ) \ file$/
+kernel/require.fs	required	/^: required ( i*x addr u -- i*x ) \ gforth$/
+kernel/require.fs	include	/^: include  ( ... "file" -- ... ) \ gforth$/
+kernel/require.fs	require	/^: require  ( ... "file" -- ... ) \ gforth$/
+kernel/require.fs	.strings	/^: .strings ( addr u -- ) \ gforth$/
+kernel/require.fs	.included	/^: .included ( -- ) \ gforth$/
+kernel/cond.fs	locals-list	/^AConstant locals-list \ acts like a variable that contains$/
+kernel/cond.fs	dead-code	/^variable dead-code \ true if normal code at "here" would be dead$/
+kernel/cond.fs	backedge-locals	/^variable backedge-locals$/
+kernel/cond.fs	UNREACHABLE	/^: UNREACHABLE ( -- ) \ gforth$/
+kernel/cond.fs	ASSUME-LIVE	/^: ASSUME-LIVE ( orig -- orig ) \ gforth$/
+kernel/cond.fs	live-orig	/^1 constant live-orig$/
+kernel/cond.fs	dead-orig	/^2 constant dead-orig$/
+kernel/cond.fs	dest	/^3 constant dest \ the loopback branch is always assumed live$/
+kernel/cond.fs	do-dest	/^4 constant do-dest$/
+kernel/cond.fs	scopestart	/^5 constant scopestart$/
+kernel/cond.fs	def?	/^: def? ( n -- )$/
+kernel/cond.fs	orig?	/^: orig? ( n -- )$/
+kernel/cond.fs	dest?	/^: dest? ( n -- )$/
+kernel/cond.fs	do-dest?	/^: do-dest? ( n -- )$/
+kernel/cond.fs	scope?	/^: scope? ( n -- )$/
+kernel/cond.fs	non-orig?	/^: non-orig? ( n -- )$/
+kernel/cond.fs	cs-item?	/^: cs-item? ( n -- )$/
+kernel/cond.fs	cs-item-size	/^3 constant cs-item-size$/
+kernel/cond.fs	CS-PICK	/^: CS-PICK ( ... u -- ... destu ) \ tools-ext c-s-pick$/
+kernel/cond.fs	CS-ROLL	/^: CS-ROLL ( destu/origu .. dest0/orig0 u -- .. dest0/orig0 destu/origu ) \ tools-ext c-s-roll$/
+kernel/cond.fs	cs-push-part	/^: cs-push-part ( -- list addr )$/
+kernel/cond.fs	cs-push-orig	/^: cs-push-orig ( -- orig )$/
+kernel/cond.fs	other-control-flow	/^defer other-control-flow ( -- )$/
+kernel/cond.fs	?struc	/^: ?struc      ( flag -- )       abort" unstructured " ;$/
+kernel/cond.fs	sys?	/^: sys?        ( sys -- )        dup 0= ?struc ;$/
+kernel/cond.fs	>mark	/^: >mark ( -- orig )$/
+kernel/cond.fs	>resolve	/^: >resolve    ( addr -- )$/
+kernel/cond.fs	<resolve	/^: <resolve    ( addr -- )        , ;$/
+kernel/cond.fs	BUT	/^: BUT$/
+kernel/cond.fs	YET	/^: YET$/
+kernel/cond.fs	AHEAD	/^: AHEAD ( compilation -- orig ; run-time -- ) \ tools-ext$/
+kernel/cond.fs	IF	/^: IF ( compilation -- orig ; run-time f -- ) \ core$/
+kernel/cond.fs	?DUP-IF	/^: ?DUP-IF ( compilation -- orig ; run-time n -- n| ) \ gforth	question-dupe-if$/
+kernel/cond.fs	?DUP-0=-IF	/^: ?DUP-0=-IF ( compilation -- orig ; run-time n -- n| ) \ gforth	question-dupe-zero-equals-if$/
+kernel/cond.fs	then-like	/^Defer then-like ( orig -- )$/
+kernel/cond.fs	cs>addr	/^: cs>addr ( orig/dest -- )  drop >resolve drop ;$/
+kernel/cond.fs	THEN	/^: THEN ( compilation orig -- ; run-time -- ) \ core$/
+kernel/cond.fs	ENDIF	/^' THEN alias ENDIF ( compilation orig -- ; run-time -- ) \ gforth$/
+kernel/cond.fs	ELSE	/^: ELSE ( compilation orig1 -- orig2 ; run-time -- ) \ core$/
+kernel/cond.fs	begin-like	/^Defer begin-like ( -- )$/
+kernel/cond.fs	BEGIN	/^: BEGIN ( compilation -- dest ; run-time -- ) \ core$/
+kernel/cond.fs	again-like	/^Defer again-like ( dest -- addr )$/
+kernel/cond.fs	AGAIN	/^: AGAIN ( compilation dest -- ; run-time -- ) \ core-ext$/
+kernel/cond.fs	until-like	/^Defer until-like ( list addr xt1 xt2 -- )$/
+kernel/cond.fs	UNTIL	/^: UNTIL ( compilation dest -- ; run-time f -- ) \ core$/
+kernel/cond.fs	WHILE	/^: WHILE ( compilation dest -- orig dest ; run-time f -- ) \ core$/
+kernel/cond.fs	REPEAT	/^: REPEAT ( compilation orig dest -- ; run-time -- ) \ core$/
+kernel/cond.fs	leave-stack-size	/^20 constant leave-stack-size$/
+kernel/cond.fs	leave-stack	/^create leave-stack  60 cells allot$/
+kernel/cond.fs	leave-sp	/^Avariable leave-sp  leave-stack 3 cells + leave-sp !$/
+kernel/cond.fs	clear-leave-stack	/^: clear-leave-stack ( -- )$/
+kernel/cond.fs	>leave	/^: >leave ( orig -- )$/
+kernel/cond.fs	leave>	/^: leave> ( -- orig )$/
+kernel/cond.fs	DONE	/^: DONE ( compilation orig -- ; run-time -- ) \ gforth$/
+kernel/cond.fs	LEAVE	/^: LEAVE ( compilation -- ; run-time loop-sys -- ) \ core$/
+kernel/cond.fs	?LEAVE	/^: ?LEAVE ( compilation -- ; run-time f | f loop-sys -- ) \ gforth	question-leave$/
+kernel/cond.fs	DO	/^: DO ( compilation -- do-sys ; run-time w1 w2 -- loop-sys ) \ core$/
+kernel/cond.fs	?do-like	/^: ?do-like ( -- do-sys )$/
+kernel/cond.fs	?DO	/^: ?DO ( compilation -- do-sys ; run-time w1 w2 -- | loop-sys )	\ core-ext	question-do$/
+kernel/cond.fs	+DO	/^: +DO ( compilation -- do-sys ; run-time n1 n2 -- | loop-sys )	\ gforth	plus-do$/
+kernel/cond.fs	U+DO	/^: U+DO ( compilation -- do-sys ; run-time u1 u2 -- | loop-sys )	\ gforth	u-plus-do$/
+kernel/cond.fs	-DO	/^: -DO ( compilation -- do-sys ; run-time n1 n2 -- | loop-sys )	\ gforth	minus-do$/
+kernel/cond.fs	U-DO	/^: U-DO ( compilation -- do-sys ; run-time u1 u2 -- | loop-sys )	\ gforth	u-minus-do$/
+kernel/cond.fs	FOR	/^: FOR ( compilation -- do-sys ; run-time u -- loop-sys )	\ gforth$/
+kernel/cond.fs	loop-like	/^: loop-like ( do-sys xt1 xt2 -- )$/
+kernel/cond.fs	LOOP	/^: LOOP ( compilation do-sys -- ; run-time loop-sys1 -- | loop-sys2 )	\ core$/
+kernel/cond.fs	+LOOP	/^: +LOOP ( compilation do-sys -- ; run-time loop-sys1 n -- | loop-sys2 )	\ core	plus-loop$/
+kernel/cond.fs	-LOOP	/^: -LOOP ( compilation do-sys -- ; run-time loop-sys1 u -- | loop-sys2 )	\ gforth	minus-loop$/
+kernel/cond.fs	S+LOOP	/^: S+LOOP ( compilation do-sys -- ; run-time loop-sys1 n -- | loop-sys2 )	\ gforth	s-plus-loop$/
+kernel/cond.fs	NEXT	/^: NEXT ( compilation do-sys -- ; run-time loop-sys1 -- | loop-sys2 ) \ gforth$/
+kernel/cond.fs	exit-like	/^Defer exit-like ( -- )$/
+kernel/cond.fs	EXIT	/^: EXIT ( compilation -- ; run-time nest-sys -- ) \ core$/
+kernel/cond.fs	?EXIT	/^: ?EXIT ( -- ) ( compilation -- ; run-time nest-sys f -- | nest-sys ) \ gforth$/
+kernel/quotes.fs	CLiteral	/^: CLiteral ( Compilation c-addr1 u ; run-time -- c-addr )$/
+kernel/quotes.fs	SLiteral	/^: SLiteral ( Compilation c-addr1 u ; run-time -- c-addr2 u ) \ string$/
+kernel/quotes.fs	ABORT"	/^: abort" ( compilation 'ccc"' -- ; run-time f -- ) \ core,exception-ext	abort-quote$/
+kernel/quotes.fs	S"	/^interpret/compile: S" ( compilation 'ccc"' -- ; run-time -- c-addr u )	\ core,file	s-quote$/
+kernel/quotes.fs	."	/^interpret/compile: ." ( compilation 'ccc"' -- ; run-time -- )  \ core	dot-quote$/
+kernel/toolsext.fs	countif	/^Variable countif$/
+kernel/toolsext.fs	dummy	/^: dummy ;  immediate$/
+kernel/toolsext.fs	>exec	/^: >exec  >r ; restrict ( :-)$/
+kernel/toolsext.fs	scanIF	/^: scanIF   f83find  dup 0=  IF  drop ['] dummy >head-noprim  THEN  ;$/
+kernel/toolsext.fs	[struct]-search	/^Create [struct]-search    ' scanIF A,  ' (reveal) A,  ' drop A, ' drop A,$/
+kernel/toolsext.fs	[struct]-voc	/^Create [struct]-voc       [struct]-search A,$/
+kernel/toolsext.fs	?if	/^: ?if  countif @ 0<$/
+kernel/toolsext.fs	[IF]	/^: [IF]$/
+kernel/toolsext.fs	[THEN]	/^: [THEN]$/
+kernel/toolsext.fs	[ELSE]	/^: [ELSE]$/
+kernel/toolsext.fs	[IFDEF]	/^' [IF]   Alias [IFDEF]               immediate$/
+kernel/toolsext.fs	[IFUNDEF]	/^' [IF]   Alias [IFUNDEF]             immediate$/
+kernel/toolsext.fs	[ENDIF]	/^' [THEN] Alias [ENDIF]               immediate$/
+kernel/toolsext.fs	[BEGIN]	/^' [IF]   Alias [BEGIN]               immediate$/
+kernel/toolsext.fs	[WHILE]	/^' [IF]   Alias [WHILE]               immediate$/
+kernel/toolsext.fs	[UNTIL]	/^' [THEN] Alias [UNTIL]               immediate$/
+kernel/toolsext.fs	[AGAIN]	/^' [THEN] Alias [AGAIN]               immediate$/
+kernel/toolsext.fs	[DO]	/^' [IF]   Alias [DO]                  immediate$/
+kernel/toolsext.fs	[?DO]	/^' [IF]   Alias [?DO]                 immediate$/
+kernel/toolsext.fs	[LOOP]	/^' [THEN] Alias [LOOP]                immediate$/
+kernel/toolsext.fs	[+LOOP]	/^' [THEN] Alias [+LOOP]               immediate$/
+kernel/toolsext.fs	[REPEAT]	/^: [REPEAT]  postpone [AGAIN] postpone [THEN] ;$/
+kernel/toolsext.fs	[defined]	/^: [defined] ( "<spaces>name" -- flag )   bl word find nip 0<> ; immediate$/
+kernel/toolsext.fs	defined	/^' [defined] alias defined immediate$/
+kernel/toolsext.fs	[undefined]	/^: [undefined] ( "<spaces>name" -- flag ) postpone [defined] 0= ; immediate$/
+kernel/toolsext.fs	[IF]	/^: [IF] ( flag -- ) \ tools-ext bracket-if$/
+kernel/toolsext.fs	[IFDEF]	/^: [IFDEF] ( "<spaces>name" -- ) \ gforth bracket-if-def$/
+kernel/toolsext.fs	[IFUNDEF]	/^: [IFUNDEF] ( "<spaces>name" -- ) \ gforth bracket-if-un-def$/
+kernel/toolsext.fs	[ELSE]	/^: [ELSE]  ( -- ) \ tools-ext bracket-else$/
+kernel/toolsext.fs	[THEN]	/^: [THEN] ( -- ) \ tools-ext bracket-then$/
+kernel/toolsext.fs	[ENDIF]	/^: [ENDIF] ( -- ) \ gforth bracket-end-if$/
+kernel/toolsext.fs	(i)	/^User (i)$/
+kernel/toolsext.fs	[DO]	/^: [DO]  ( n-limit n-index -- ) \ gforth bracket-do$/
+kernel/toolsext.fs	[?DO]	/^: [?DO] ( n-limit n-index -- ) \ gforth bracket-question-do$/
+kernel/toolsext.fs	[+LOOP]	/^: [+LOOP] ( n -- ) \ gforth bracket-question-plus-loop$/
+kernel/toolsext.fs	[LOOP]	/^: [LOOP] ( -- ) \ gforth bracket-loop$/
+kernel/toolsext.fs	[FOR]	/^: [FOR] ( n -- ) \ gforth bracket-for$/
+kernel/toolsext.fs	[NEXT]	/^: [NEXT] ( n -- ) \ gforth bracket-next$/
+kernel/toolsext.fs	[I]	/^interpret/compile: [I] ( -- n ) \ gforth bracket-i$/
+kernel/toolsext.fs	[BEGIN]	/^: [BEGIN] ( -- ) \ gforth bracket-begin$/
+kernel/toolsext.fs	[UNTIL]	/^' [+LOOP]  Alias [UNTIL] ( flag -- ) \ gforth bracket-until$/
+kernel/toolsext.fs	[REPEAT]	/^: [REPEAT]  ( -- ) \ gforth bracket-repeat$/
+kernel/toolsext.fs	[AGAIN]	/^' [REPEAT] Alias [AGAIN] ( -- ) \ gforth bracket-again$/
+kernel/toolsext.fs	[WHILE]	/^: [WHILE]   ( flag -- ) \ gforth bracket-while$/
+kernel/tools.fs	maxdepth-.s	/^variable maxdepth-.s ( -- addr ) \ gforth maxdepth-dot-s$/
+kernel/tools.fs	.s	/^: .s ( -- ) \ tools dot-s$/
+kernel/tools.fs	/dump	/^Variable /dump$/
+kernel/tools.fs	.4	/^: .4 ( addr -- addr' )$/
+kernel/tools.fs	.chars	/^: .chars ( addr -- )$/
+kernel/tools.fs	.line	/^: .line ( addr -- )$/
+kernel/tools.fs	dump	/^: dump  ( addr u -- ) \ tools dump$/
+kernel/tools.fs	?	/^: ? ( a-addr -- ) \ tools question$/
+termsize.fs	rows	/^: rows ( -- u )$/
+termsize.fs	cols	/^: cols ( -- u )$/
+kernel/tools.fs	wordlist-words	/^: wordlist-words ( wid -- ) \ gforth$/
+kernel/tools.fs	words	/^: words$/
+kernel/tools.fs	vlist	/^' words alias vlist ( -- ) \ gforth$/
+kernel/getdoers.fs	docon:	/^: docon: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	dovalue:	/^: dovalue: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	docol:	/^: docol: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	dovar:	/^: dovar: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	douser:	/^: douser: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	dodefer:	/^: dodefer: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	dofield:	/^: dofield: ( -- addr )	\ gforth$/
+kernel/getdoers.fs	dodoes:	/^: dodoes: ( -- addr )	\ gforth$/

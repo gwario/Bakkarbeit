@@ -1,0 +1,535 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.5)  5 OCT 2014 12:42
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**titlepage_en.tex
+(./titlepage_en.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 9 languages loaded.
+! Undefined control sequence.
+l.15 \newgeometry
+                 {left=2.4cm,right=2.4cm,bottom=2.5cm,top=2cm}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \newgeometry{l
+                   eft=2.4cm,right=2.4cm,bottom=2.5cm,top=2cm}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no b in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 5 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no , in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 15--16
+[] 
+ []
+
+! Undefined control sequence.
+<argument> \undefinedpagestyle 
+                               
+l.26 \thispagestyle{tuinftitlepage}
+                                   
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 \begin{center}
+                   
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 35--35
+[] 
+ []
+
+! Undefined control sequence.
+l.40 \thesistitlefontHUGE
+                         \sffamily\bfseries\tuinfthesistitle\\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.40 ...ontHUGE\sffamily\bfseries\tuinfthesistitle
+                                                  \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 ...tHUGE\sffamily\bfseries\tuinfthesistitle\\
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+l.42 {\thesistitlefonthuge
+                          \sffamily\bfseries\tuinfthesissubtitle}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.42 ...huge\sffamily\bfseries\tuinfthesissubtitle
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \vbox (badness 10000) detected at line 43
+ []
+
+! Undefined control sequence.
+l.47 {\thesistitlefontLARGE
+                           \sffamily \tuinfthesistypeen}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.47 ...titlefontLARGE\sffamily \tuinfthesistypeen
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.51 {\thesistitlefontlarge
+                           \sffamily submitted in partial fulfillment of the...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (41.33336pt too wide) in paragraph at lines 51--52
+ []\OT1/cmss/m/n/10 submitted 
+ []
+
+
+Overfull \hbox (7.55556pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 in 
+ []
+
+
+Overfull \hbox (16.44447pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 par- 
+ []
+
+
+Overfull \hbox (13.19446pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 tial 
+ []
+
+
+Overfull \hbox (13.94446pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 ful- 
+ []
+
+
+Overfull \hbox (13.47221pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 fill- 
+ []
+
+
+Overfull \hbox (21.16669pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 ment 
+ []
+
+
+Overfull \hbox (8.05559pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 of 
+ []
+
+
+Overfull \hbox (13.22223pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 the 
+ []
+
+
+Overfull \hbox (11.19446pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 re- 
+ []
+
+
+Overfull \hbox (23.91669pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 quire- 
+ []
+
+
+Overfull \hbox (25.00002pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 ments 
+ []
+
+
+Overfull \hbox (11.19449pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 for 
+ []
+
+
+Overfull \hbox (13.22223pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 the 
+ []
+
+
+Overfull \hbox (12.94444pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 de- 
+ []
+
+
+Overfull \hbox (17.30559pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 gree 
+ []
+
+
+Overfull \hbox (8.05559pt too wide) in paragraph at lines 51--52
+ \OT1/cmss/m/n/10 of 
+ []
+
+! Undefined control sequence.
+l.55 {\thesistitlefontLARGE
+                           \sffamily\bfseries \tuinfthesisdegreeen}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.55 ...RGE\sffamily\bfseries \tuinfthesisdegreeen
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.59 {\thesistitlefontlarge
+                           \sffamily in}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (7.55556pt too wide) in paragraph at lines 59--60
+ []\OT1/cmss/m/n/10 in 
+ []
+
+! Undefined control sequence.
+l.63 {\thesistitlefontLarge
+                           \sffamily\bfseries \tuinfthesiscurriculumen}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.63 ...sffamily\bfseries \tuinfthesiscurriculumen
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.67 {\thesistitlefontlarge
+                           \sffamily by}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (9.50002pt too wide) in paragraph at lines 67--68
+ []\OT1/cmss/m/n/10 by 
+ []
+
+! Undefined control sequence.
+l.71 {\thesistitlefontLarge
+                           \sffamily\bfseries \tuinfthesisauthor}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.71 ...Large\sffamily\bfseries \tuinfthesisauthor
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.75 {\thesistitlefontlarge
+                           \sffamily Registration Number \tuinfthesismatrike...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.75 ...Registration Number \tuinfthesismatrikelno
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (50.12509pt too wide) in paragraph at lines 75--76
+ []\OT1/cmss/m/n/10 Registration 
+ []
+
+
+Overfull \hbox (23.52783pt too wide) in paragraph at lines 75--76
+ \OT1/cmss/m/n/10 Num- 
+ []
+
+
+Overfull \hbox (13.30559pt too wide) in paragraph at lines 75--76
+ \OT1/cmss/m/n/10 ber 
+ []
+
+! Undefined control sequence.
+l.80 ...0pt}\raggedright\thesistitlefontnormalsize
+                                                  \sffamily
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (8191.99998pt too wide) in paragraph at lines 79--86
+ [][] 
+ []
+
+! Undefined control sequence.
+l.87 ...0pt}\raggedright\thesistitlefontnormalsize
+                                                  \sffamily
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.91 	    Advisor: \> \tuinfthesisbetreins
+                                          \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (57.39355pt too wide) in paragraph at lines 88--96
+[][] 
+ []
+
+! Undefined control sequence.
+l.98 ...ce{0pt}\sffamily\thesistitlefontnormalsize
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 \cleardoublepage
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+! Undefined control sequence.
+<argument> \tmpbaselineskip 
+                            
+l.117 \setlength{\baselineskip}{\tmpbaselineskip}
+                                                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.117 \setlength{\baselineskip}{\tmpbaselineskip}
+                                                 
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.117 \setlength{\baselineskip}{\tmpbaselineskip}
+                                                 
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+<argument> \tmpparindent 
+                         
+l.118 \setlength{\parindent}{\tmpparindent}
+                                           
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \relax 
+l.118 \setlength{\parindent}{\tmpparindent}
+                                           
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \relax 
+l.118 \setlength{\parindent}{\tmpparindent}
+                                           
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Undefined control sequence.
+l.121 \restoregeometry
+                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+! Emergency stop.
+<*> titlepage_en.tex
+                    
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 15 strings out of 494935
+ 272 string characters out of 6178122
+ 48369 words of memory out of 5000000
+ 3344 multiletter control sequences out of 15000+600000
+ 4239 words of font info for 16 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 21i,4n,14p,138b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

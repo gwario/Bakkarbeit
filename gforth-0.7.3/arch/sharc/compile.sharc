@@ -1,0 +1,27 @@
+# Copyright (C) 1998,2000,2003,2004,2007 Free Software Foundation, Inc.
+
+# This file is part of Gforth.
+
+# Gforth is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+cd ../..
+make kernl-sharc.fi
+./gforth -i ./gforth.fi fi2c.fs -e 's" kernl-sharc.fi" fi2c bye' >arch/sharc/image.c
+cd engine
+INCS='-I../arch/sharc -I.'
+g21k -O4 -S engine.c -o ../arch/sharc/engine.s -DSTANDALONE -Wall $INCS
+g21k -O4 -S main.c -o ../arch/sharc/main.s -DSTANDALONE -DINCLUDE_IMAGE -Wall $INCS
+g21k -O4 -S strsignal.c -o ../arch/sharc/strsig.s -DSTANDALONE -Wall $INCS
+g21k -O4 -S ../arch/../arch/sharc/image.c -o ../arch/sharc/image.s -DSTANDALONE -Wall $INCS
+g21k -O4 -S dblsub.c -o ../arch/sharc/dblsub.s -DSTANDALONE -Wall $INCS
+g21k -O4 -S memcmpc.c -o ../arch/sharc/memcmpc.s -DSTANDALONE -Wall $INCS

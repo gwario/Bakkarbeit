@@ -1,0 +1,121 @@
+\ machpc.fs is generated; source: machpc.fs.in
+\ generic mach file for pc gforth				03sep97jaw
+
+\ Copyright (C) 1995,1996,1997,2000,2003,2005,2007,2008 Free Software Foundation, Inc.
+
+\ This file is part of Gforth.
+
+\ Gforth is free software; you can redistribute it and/or
+\ modify it under the terms of the GNU General Public License
+\ as published by the Free Software Foundation, either version 3
+\ of the License, or (at your option) any later version.
+
+\ This program is distributed in the hope that it will be useful,
+\ but WITHOUT ANY WARRANTY; without even the implied warranty of
+\ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+\ GNU General Public License for more details.
+
+\ You should have received a copy of the GNU General Public License
+\ along with this program. If not, see http://www.gnu.org/licenses/.
+
+true DefaultValue NIL  \ relocating
+
+>ENVIRON
+
+@EC_MODE@ DefaultValue ec
+
+T has? ec H 0= [IF]
+true DefaultValue file		\ controls the presence of the
+				\ file access wordset
+true DefaultValue OS		\ flag to indicate a operating system
+
+true DefaultValue prims		\ true: primitives are c-code
+
+true DefaultValue floating	\ floating point wordset is present
+
+true DefaultValue glocals	\ gforth locals are present
+				\ will be loaded
+true DefaultValue dcomps	\ double number comparisons
+
+true DefaultValue hash		\ hashing primitives are loaded/present
+
+true DefaultValue xconds	\ used together with glocals,
+				\ special conditionals supporting gforths'
+				\ local variables
+true DefaultValue header	\ save a header information
+
+true DefaultValue backtrace	\ enables backtrace code
+
+true DefaultValue new-input	\ enables object oriented input
+
+@PEEPHOLEFLAG@ DefaultValue peephole      \ enables peephole optimizer
+
+true DefaultValue primcentric   \ enables primcentric code
+
+true DefaultValue abranch       \ enables absolute branches
+
+false DefaultValue control-rack \ disable return stack use for control flow
+
+false DefaultValue crlf
+
+$100 DefaultValue kernel-start
+cell 2 = [IF] &32 KB [ELSE] $100000 cells [THEN] DefaultValue kernel-size
+
+&16 KB		DefaultValue stack-size
+&16 KB		DefaultValue fstack-size
+&15 KB		DefaultValue rstack-size
+&14 KB &512 +	DefaultValue lstack-size
+[ELSE]
+false DefaultValue file		\ controls the presence of the
+				\ file access wordset
+false DefaultValue OS		\ flag to indicate a operating system
+
+true SetValue relocate
+
+false DefaultValue ffcall \ Foreign Function Calls
+
+false DefaultValue libffi \ Foreign Function Calls
+
+false DefaultValue oldcall \ old Foreign Function Calls
+
+true DefaultValue prims		\ true: primitives are c-code
+
+false DefaultValue floating	\ floating point wordset is present
+
+false DefaultValue glocals	\ gforth locals are present
+				\ will be loaded
+true DefaultValue dcomps	\ double number comparisons
+
+false DefaultValue hash		\ hashing primitives are loaded/present
+
+false DefaultValue xconds	\ used together with glocals,
+				\ special conditionals supporting gforths'
+				\ local variables
+true DefaultValue header	\ save a header information
+
+false DefaultValue backtrace	\ enables backtrace code
+
+false DefaultValue new-input	\ enables object oriented input
+
+false DefaultValue peephole     \ enables peephole optimizer
+
+true DefaultValue primcentric   \ enables primcentric code
+
+true DefaultValue f83headerstring
+
+true DefaultValue abranch       \ enables absolute branches
+
+true DefaultValue control-rack  \ disable return stack use for control flow
+
+false DefaultValue crlf
+
+true DefaultValue flash
+    
+$0 DefaultValue kernel-start   \ no artificial offset
+&48 KB DefaultValue kernel-size
+
+&1 KB		DefaultValue stack-size
+&0 KB		DefaultValue fstack-size
+&1 KB		DefaultValue rstack-size
+&1 KB		DefaultValue lstack-size
+[THEN]

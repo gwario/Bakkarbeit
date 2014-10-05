@@ -1,0 +1,87 @@
+\ stack cache setup
+
+\ Copyright (C) 2003,2004,2005,2007,2008 Free Software Foundation, Inc.
+
+\ This file is part of Gforth.
+
+\ Gforth is free software; you can redistribute it and/or
+\ modify it under the terms of the GNU General Public License
+\ as published by the Free Software Foundation, either version 3
+\ of the License, or (at your option) any later version.
+
+\ This program is distributed in the hope that it will be useful,
+\ but WITHOUT ANY WARRANTY; without even the implied warranty of
+\ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+\ GNU General Public License for more details.
+
+\ You should have received a copy of the GNU General Public License
+\ along with this program. If not, see http://www.gnu.org/licenses/.
+
+\E register IPTOS Cell
+\E register spTOS Cell
+\E register spb Cell
+\E register spc Cell
+\E register spd Cell
+\E register spe Cell
+\E register spf Cell
+\E register spg Cell
+\E register sph Cell
+
+\E create IPregs IPTOS ,
+\E create regs sph , spg , spf , spe , spd , spc , spb , spTOS ,
+\ \E create regs spTOS ,
+
+\E IPregs 1 0 stack-state IPss1
+\E regs 8 th 0  -1 stack-state ss0
+\E regs 7 th 1  0 stack-state ss1
+\E regs 6 th 2  1 stack-state ss2
+\E regs 5 th 3  2 stack-state ss3
+\E regs 4 th 4  3 stack-state ss4
+\E regs 3 th 5  4 stack-state ss5
+\E regs 2 th 6  5 stack-state ss6
+\E regs 1 th 7  6 stack-state ss7
+\E regs 0 th 8  7 stack-state ss8
+\ \E regs 1 th 0 -1 stack-state ss0
+\ \E regs           1  0 stack-state ss1
+
+\ the first of these is the default state (for now)
+\E state S2
+\E state S0
+\E state S1
+\E state S3
+\E state S4
+\E state S5
+\E state S6
+\E state S7
+\E state S8
+
+include(STACK_CACHE_REGS)
+
+\E ss0 data-stack S0 set-ss
+\E ss1 data-stack S1 set-ss
+\E ss2 data-stack S2 set-ss
+\E ss3 data-stack S3 set-ss
+\E ss4 data-stack S4 set-ss
+\E ss5 data-stack S5 set-ss
+\E ss6 data-stack S6 set-ss
+\E ss7 data-stack S7 set-ss
+\E ss8 data-stack S8 set-ss
+
+\E IPss1 inst-stream S0 set-ss
+\E IPss1 inst-stream S1 set-ss
+\E IPss1 inst-stream S2 set-ss
+\E IPss1 inst-stream S3 set-ss
+\E IPss1 inst-stream S4 set-ss
+\E IPss1 inst-stream S5 set-ss
+\E IPss1 inst-stream S6 set-ss
+\E IPss1 inst-stream S7 set-ss
+\E IPss1 inst-stream S8 set-ss
+
+\E data-stack to cache-stack
+\E here 9 cache-states 2! s0 , s1 , s2 , s3 , s4 , s5 , s6 , s7 , s8 ,
+\ \E here 2 cache-states 2! s0 , s1 ,
+
+\ !! the following should be automatic
+\E S2 to state-default
+\E state-default to state-in
+\E state-default to state-out

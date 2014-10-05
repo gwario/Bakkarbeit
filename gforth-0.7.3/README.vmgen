@@ -1,0 +1,68 @@
+Vmgen supports the construction of interpretive systems by generating
+the code for executing and dealing with virtual machine (VM)
+instructions from simple descriptions of the VM instructions.
+
+This file is about Vmgen-specific issues.  Issues affecting both
+Gforth and Vmgen (e.g., platform compatibility) are discussed in
+README.
+
+Vmgen generates code for executing VM instructions (with optional
+tracing), for generating VM code, for disassembling VM code, and for
+profiling VM instruction sequences.  A VM instruction description
+looks like this:
+
+add  ( i1 i2 -- i )
+i = i1+i2;
+
+Vmgen supports several techniques for writing efficient interpreters:
+virtual machine interpreters, threaded code, combining VM instructions
+into superinstructions, keeping the top-of-stack in a register,
+scheduling the dispatch of the next VM instruction, and a couple of
+minor optimizations.  Interpreters created with vmgen usually are
+faster than competing interpreters and are typically only a factor of
+2-10 slower than the code generateed by native-code compilers.
+
+Vmgen has special support for stack-based VMs (but it can also be
+used to advantage when implementing a register-based VM).
+
+Changes in Vmgen from earlier releases are explained in NEWS.vmgen.
+
+After installation the documentation is available in info form and in
+printable form (doc/vmgen.ps).
+
+There is a simple usage example in vmgen-ex (and a variation on that
+in vmgen-ex2).  See the documentation for more information on that.
+
+To report a bug, use
+<https://savannah.gnu.org/bugs/?func=addbug&group_id=2672>.  For
+discussion on Vmgen (e.g., how to use it), use the
+bug-vmgen@mail.freesoftware.fsf.org mailing list (use
+<http://mail.gnu.org/mailman/listinfo/help-vmgen> to subscribe).
+
+You can find vmgen at http://www.complang.tuwien.ac.at/anton/vmgen/.
+
+Vmgen is currently distributed with Gforth (because it needs Gforth to
+run, and Gforth needs it to build), and is installed together with
+Gforth (read INSTALL for instructions).
+
+Note that future versions of vmgen may require small changes in
+programs written for the present version (e.g., requiring a few
+additional macro definitions).
+
+-----
+Copyright (C) 2001, 2002, 2003,2007 Free Software Foundation, Inc.
+
+This file is part of Gforth.
+
+Gforth is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.#See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see http://www.gnu.org/licenses/.
