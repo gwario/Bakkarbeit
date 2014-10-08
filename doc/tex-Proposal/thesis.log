@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.5)  6 OCT 2014 20:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.5)  8 OCT 2014 12:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1139,7 +1139,7 @@ Package: cite 2010/09/10  v 5.3
 Package: varioref 2011/10/02 v1.4z package for extended references (FMi)
 \c@vrcnt=\count178
 ) (./thesis.aux
-(./titlepage.aux) (./titlepage_en.aux))
+(./titlepage_en.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
@@ -1157,11 +1157,9 @@ LaTeX Font Info:    ... okay on input line 48.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
 LaTeX Font Info:    ... okay on input line 48.
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 48.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
-)
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+) (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count179
 \scratchdimen=\dimen213
@@ -1248,9 +1246,9 @@ LaTeX Info: Redefining \Ref on input line 48.
 
 bibgerm.sty: (n)german.sty 2.5b detected
 
-\openout2 = `titlepage.aux'.
+\openout2 = `titlepage_en.aux'.
 
-(./titlepage.tex
+(./titlepage_en.tex
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -1283,47 +1281,47 @@ bibgerm.sty: (n)german.sty 2.5b detected
 
 \tmpbaselineskip=\skip206
 \tmpparindent=\skip207
-LaTeX Font Info:    Try loading font information for T1+phv on input line 42.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 40.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 28.49991pt on input line 42.
+(Font)              scaled to size 28.49991pt on input line 40.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <30> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 40.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 28.49991pt on input line 40.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 42.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 28.49991pt on input line 42.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 44.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 18.99994pt on input line 44.
+(Font)              scaled to size 18.99994pt on input line 42.
 
-Overfull \vbox (17.12285pt too high) detected at line 45
+Overfull \vbox (17.12285pt too high) detected at line 43
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 16.14995pt on input line 49.
+(Font)              scaled to size 16.14995pt on input line 47.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.39996pt on input line 53.
+(Font)              scaled to size 11.39996pt on input line 51.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 57.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 55.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 16.14995pt on input line 57.
+(Font)              scaled to size 16.14995pt on input line 55.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 13.29996pt on input line 65.
+(Font)              scaled to size 13.29996pt on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 65.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 13.29996pt on input line 65.
+(Font)              scaled to size 13.29996pt on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.44997pt on input line 81.
+(Font)              scaled to size 10.44997pt on input line 80.
 
 <figures/titlepage/dokumentenkopf__klein.pdf, id=35, 512.91624pt x 47.17625pt>
 File: figures/titlepage/dokumentenkopf__klein.pdf Graphic file (type pdf)
 
 <use figures/titlepage/dokumentenkopf__klein.pdf>
 Package pdftex.def Info: figures/titlepage/dokumentenkopf__klein.pdf used on in
-put line 114.
+put line 111.
 (pdftex.def)             Requested size: 509.30415pt x 46.84425pt.
 
 <figures/titlepage/INF_Logo_typo_grau.pdf, id=36, 171.64125pt x 46.1725pt>
@@ -1331,27 +1329,27 @@ File: figures/titlepage/INF_Logo_typo_grau.pdf Graphic file (type pdf)
 
 <use figures/titlepage/INF_Logo_typo_grau.pdf>
 Package pdftex.def Info: figures/titlepage/INF_Logo_typo_grau.pdf used on input
- line 114.
+ line 111.
 (pdftex.def)             Requested size: 171.64081pt x 46.17236pt.
 
 
 Class memoir Warning: The material used in the headers is too large
 (77.80435pt) for the given head height (13.6pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 114.
+(in both cases you will find help in the memoir manual). on input line 111.
 
 
 Overfull \vbox (64.20435pt too high) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.40245pt on input line 114.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 114.
-LaTeX Font Info:    Try loading font information for U+msa on input line 114.
+(Font)              scaled to size 10.40245pt on input line 111.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 111.
+LaTeX Font Info:    Try loading font information for U+msa on input line 111.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 114.
+LaTeX Font Info:    Try loading font information for U+msb on input line 111.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1364,66 +1362,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ntenkopf__klein.pdf> <./figures/titlepage/INF_Logo_typo_grau.pdf>] [2
 
 ])
-\openout2 = `titlepage_en.aux'.
-
- (./titlepage_en.tex
-*geometry* verbose mode - [ newgeometry ] result:
-* driver: pdftex
-* paper: a4paper
-* layout: a4paper
-* switch(es): twoside 
-* h-part:(L,W,R)=(68.28644pt, 460.935pt, 68.28644pt)
-* v-part:(T,H,B)=(56.9055pt, 717.00946pt, 71.13188pt)
-* \paperwidth=597.50787pt
-* \paperheight=845.04684pt
-* \textwidth=460.935pt
-* \textheight=717.00946pt
-* \oddsidemargin=-3.98355pt
-* \evensidemargin=-3.98355pt
-* \topmargin=-48.83829pt
-* \headheight=13.6pt
-* \headsep=19.8738pt
-* \footskip=27.46295pt
-* \marginparwidth=101.0pt
-* \marginparsep=7.0pt
-* \columnsep=10.0pt
-* \skip\footins=12.0pt plus 4.0pt minus 4.0pt
-* \hoffset=0.0pt
-* \voffset=0.0pt
-* \mag=1000
-* \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
-* \@reversemarginfalse
-* (1in=72.27pt, 1cm=28.453pt)
-
-
-Overfull \vbox (17.12285pt too high) detected at line 43
- []
-
-File: figures/titlepage/dokumentenkopf__klein.pdf Graphic file (type pdf)
-<use figures/titlepage/dokumentenkopf__klein.pdf>
-Package pdftex.def Info: figures/titlepage/dokumentenkopf__klein.pdf used on in
-put line 111.
-(pdftex.def)             Requested size: 509.30415pt x 46.84425pt.
-File: figures/titlepage/INF_Logo_typo_grau.pdf Graphic file (type pdf)
-
-<use figures/titlepage/INF_Logo_typo_grau.pdf>
-Package pdftex.def Info: figures/titlepage/INF_Logo_typo_grau.pdf used on input
- line 111.
-(pdftex.def)             Requested size: 171.64081pt x 46.17236pt.
-
-Overfull \vbox (64.20435pt too high) has occurred while \output is active []
-
-
-[1
-
-
-
-
-] [2
-
-]) (./chapters/abstract_en.tex
+(./chapters/abstract_en.tex
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
@@ -1446,6 +1385,12 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
+
+Underfull \hbox (badness 4060) in paragraph at lines 45--45
+[]|\T1/ptm/m/n/10.95 Research on forth, the ar-chi-tec-ture of gforth, ``de-bug
+-ging'' in
+ []
+
 ) [2]
 
 Class memoir Warning: The material used in the headers is too large
@@ -1455,21 +1400,21 @@ either increase the head height or redesign the header
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 144.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
-(./thesis.aux (./titlepage.aux) (./titlepage_en.aux))
+(./thesis.aux (./titlepage_en.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: E47F72D8389CD96581953612E7676111;379.
+(rerunfilecheck)             Checksum: E03B7AED77D853DB0E598C4245EAAF65;384.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 144.
  ) 
 Here is how much of TeX's memory you used:
- 21197 strings out of 494935
- 361110 string characters out of 6178122
- 500415 words of memory out of 5000000
- 24017 multiletter control sequences out of 15000+600000
- 58994 words of font info for 66 fonts, out of 8000000 for 9000
+ 21198 strings out of 494935
+ 361147 string characters out of 6178122
+ 499381 words of memory out of 5000000
+ 24030 multiletter control sequences out of 15000+600000
+ 63085 words of font info for 82 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 69i,19n,57p,729b,820s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,19n,57p,729b,808s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
@@ -1478,10 +1423,10 @@ ype1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/hel
 vetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (6 pages, 80419 bytes).
+Output written on thesis.pdf (4 pages, 78751 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
+ 109 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
+ 16 named destinations out of 1000 (max. 500000)
  79 words of extra memory for PDF output out of 10000 (max. 10000000)
 

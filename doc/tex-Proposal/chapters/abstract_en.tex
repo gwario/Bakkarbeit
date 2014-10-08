@@ -10,7 +10,7 @@ Improvement of awareness of what's happening during the execution of a program a
 
 \section{Methodology and approach}
 
-As a first step I'm going to evaluate means of implementing a transparent way to generate a program trace by modification of the Gforth code. The next step is to visualize manipulation of the stack and accessed memory. Once a satisfying visualization in implemented, I'm going to debug example programs with an without the visualization to verify my assumption.
+As a first step I'm going to evaluate means of implementing a transparent way to generate a program trace by modification of the Gforth code. The next step is to visualize manipulation of the stack and accessed memory. Once a satisfying visualization in implemented, I'm going to write and debug example programs with an without the visualization to verify my assumption.
 
 \section{State of the art}
 
@@ -38,24 +38,28 @@ Writing test cases for words to narrow down the actual location of the fault.
 
 \section{Timetable}
 
-\begin{enumerate}
-  \item research on program execution/trace visualization
-	\item research on forth
-  \item research on architecture of gforth
-  \item research on ``debugging'' in forth/gforth
-  \item research of similar approaches
-  \item extracting several technical approaches to accomplish the task(hooks, word-wrapping, level of implementation)
-  \item evaluation of the approaches(automation?, performance, feasibility)
-  \item prototyping the approaches in order of quality
-  \item evaluation visualization methods
-  \item implementation of one method
-\end{enumerate}
+\begin{center}
+    \begin{tabular}{ | c | p{11cm} |}
+    \hline
+    Calendar week & work \\ \hline
+    2014 - 40 & Research on forth, the architecture of gforth, ``debugging'' in forth/gforth,  program execution/trace visualization and on similar approaches \\ \hline
+    2014 - 44 & Extracting several technical approaches to accomplish the task(hooks, word-wrapping, level of implementation, ...) \\ \hline
+    2014 - 45 & Evaluation of the approaches(automation, performance, feasibility) \\ \hline
+    2014 - 46 & Prototyping the approaches in order of quality \\ \hline
+	  2014 - 50 & Evaluation visualization methods \\ \hline
+    2014 - 52 & Verification of the hypothesis \\ \hline
+    2015 - 03 & Final documentation and feedback cycles \\ \hline
+    2015 - 05 & Submission \\
+    \hline
+    \end{tabular}
+\end{center}
 
 
-\section{References}
+\section{References TODO}
 
 \begin{itemize}
 	\item print debugging
+	\item test driven development
 	\item visualization of program execution/traces
 	\item debugger
 \end{itemize}
