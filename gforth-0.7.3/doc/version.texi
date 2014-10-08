@@ -1,2 +1,0 @@
-@set VERSION 0.7.3
-@set UPDATED June 14, 2014

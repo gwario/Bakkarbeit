@@ -100,7 +100,7 @@ GROUP( arith, 52)
 "+",
 "lit+",
 "under+",
-"--prim",
+"-",
 "negate",
 "1+",
 "1-",

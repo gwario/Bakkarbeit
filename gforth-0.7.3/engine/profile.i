@@ -325,7 +325,7 @@ if (VM_IS_INST(*ip, 55)) {
   goto _endif_;
 }
 if (VM_IS_INST(*ip, 56)) {
-  add_inst(b, "--prim");
+  add_inst(b, "-");
   ip += 1;
   goto _endif_;
 }

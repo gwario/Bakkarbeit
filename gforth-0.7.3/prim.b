@@ -1237,7 +1237,7 @@ n = n1+n3;
 :
  rot + swap ;
 
---prim	( n1 n2 -- n )		core	minus
+-	( n1 n2 -- n )		core	minus
 n = n1-n2;
 :
  negate + ;

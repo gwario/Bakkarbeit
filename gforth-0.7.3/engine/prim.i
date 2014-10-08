@@ -3011,9 +3011,9 @@ LABEL3(under_plus)
 DO_GOTO;
 }
 
-LABEL(minus) /* --prim ( n1 n2 -- n ) S0 -- S0  */
+LABEL(minus) /* - ( n1 n2 -- n ) S0 -- S0  */
 /*  */
-NAME("--prim")
+NAME("-")
 {
 DEF_CA
 MAYBE_UNUSED Cell n1;

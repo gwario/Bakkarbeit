@@ -21,10 +21,6 @@
 
 \ Needs:
 
-: -
-  --prim
-;
-
 require ./vars.fs
 require ../compat/strcomp.fs
 

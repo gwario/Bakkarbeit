@@ -134,7 +134,7 @@ Primitive lit
 Primitive +
 Primitive lit+
 Primitive under+
-Primitive --prim
+Primitive -
 Primitive negate
 Primitive 1+
 Primitive 1-

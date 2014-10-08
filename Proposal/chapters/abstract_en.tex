@@ -2,51 +2,60 @@
 
 \section{Problem definition}
 
-In software engineering, the most important part is to verify the correctness of a program. The difficulty of this task grows with the size and the complexity of a program. Thus the task of finding faulty code takes a considerable amount of time and the efficiency of finding faulty code a major concern. There a several methods to improve the quality of code.
-
-correctness
-faulty code
-methods to improve quality
-debugging watch and break
-in forth/gforth
-println method and visualization of program execution
-transparent and automated
+In software engineering, an important part is to verify the functional correctness of a program. The difficulty of this task grows with the size and the complexity of a program. Thus the task of finding faulty code consumes a considerable amount of time and the efficiency of finding, understanding and fixing this faulty code is of major concern. A very efficient way to keep up code quality is to make developers understand how the code really works. In this thesis I'm going to implement a visualization of the program execution of Forth programs in Gforth and will analyse the improvement of user experience during debugging and time consumption of the process with example programs.
 
 \section{Expected results}
 
-improvement of awareness of whats happening during execution and efficiency of finding faulty code
+Improvement of awareness of what's happening during the execution of a program and efficiency of finding faulty code.
 
 \section{Methodology and approach}
 
+As a first step I'm going to evaluate means of implementing a transparent way to generate a program trace by modification of the Gforth code. The next step is to visualize manipulation of the stack and accessed memory. Once a satisfying visualization in implemented, I'm going to debug example programs with an without the visualization to verify my assumption.
+
+\section{State of the art}
+
+Current methods of locating faults are
+
+\subsection{Print debugging}
+
+Words like \emph{.} \texttt{.}, \texttt{.\textquotedbl} and \texttt{\textasciitilde\textasciitilde} print information directly to the terminal.
+
+\subsection{Gforth debugger}
+
+Stepping throw program execution with dbg.
+
+\subsection{Writing test cases}
+
+Writing test cases for words to narrow down the actual location of the fault.
+
+\section{Relation to Software engineering}
+
+\begin{itemize}
+	\item Software quality assurance (testing, dynamic analysis, debugging)
+	\item Software development methodology (prototyping, agile)
+	\item Stack-based language(forth)
+\end{itemize}
+
+\section{Timetable}
+
 \begin{enumerate}
-  \item research on program flow visualization
+  \item research on program execution/trace visualization
 	\item research on forth
   \item research on architecture of gforth
   \item research on ``debugging'' in forth/gforth
   \item research of similar approaches
   \item extracting several technical approaches to accomplish the task(hooks, word-wrapping, level of implementation)
   \item evaluation of the approaches(automation?, performance, feasibility)
-  \item prototyping the approaches in order of quality(?)
+  \item prototyping the approaches in order of quality
+  \item evaluation visualization methods
+  \item implementation of one method
 \end{enumerate}
 
-\section{State of the art}
-?
-
-\section{Relation to Software engineering}
-
-\begin{itemize}
-	\item software testing(analysis, debugging)
-	\item development process(rapid prototyping)
-	\item stack-based language forth
-\end{itemize}
 
 \section{References}
 
 \begin{itemize}
-	\item correctness
-	\item software quality
-	\item debugging watch and break points
-	\item println method
-	\item visualization of data manipulation and
-	\item program flow
+	\item print debugging
+	\item visualization of program execution/traces
+	\item debugger
 \end{itemize}

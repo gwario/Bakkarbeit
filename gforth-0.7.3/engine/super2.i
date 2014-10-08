@@ -100,7 +100,7 @@ N_lit, /* lit */
 N_plus, /* + */
 N_lit_plus, /* lit+ */
 N_under_plus, /* under+ */
-N_minus, /* --prim */
+N_minus, /* - */
 N_negate, /* negate */
 N_one_plus, /* 1+ */
 N_one_minus, /* 1- */

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.5)  5 OCT 2014 15:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.5)  6 OCT 2014 20:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1318,7 +1318,7 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 10.44997pt on input line 81.
 
-<figures/titlepage/dokumentenkopf__klein.pdf, id=79, 512.91624pt x 47.17625pt>
+<figures/titlepage/dokumentenkopf__klein.pdf, id=35, 512.91624pt x 47.17625pt>
 File: figures/titlepage/dokumentenkopf__klein.pdf Graphic file (type pdf)
 
 <use figures/titlepage/dokumentenkopf__klein.pdf>
@@ -1326,7 +1326,7 @@ Package pdftex.def Info: figures/titlepage/dokumentenkopf__klein.pdf used on in
 put line 114.
 (pdftex.def)             Requested size: 509.30415pt x 46.84425pt.
 
-<figures/titlepage/INF_Logo_typo_grau.pdf, id=80, 171.64125pt x 46.1725pt>
+<figures/titlepage/INF_Logo_typo_grau.pdf, id=36, 171.64125pt x 46.1725pt>
 File: figures/titlepage/INF_Logo_typo_grau.pdf Graphic file (type pdf)
 
 <use figures/titlepage/INF_Logo_typo_grau.pdf>
@@ -1428,137 +1428,60 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 3.
-
-Overfull \hbox (3.08214pt too wide) in paragraph at lines 7--14
-[]\T1/ptm/m/n/10.95 correctness faulty code meth-ods to im-prove qual-ity de-bu
-g-ging watch and break in forth/gforth
- []
-
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 38.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
- [1
-
-
-
-]) [2]
-(./thesis.toc
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 7.
-) [3
-
-
-] [4
-
-] (./chapters/introduction.tex
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 11.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 19.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [1
 
-] [2]) [3] [4
+
 
 ]
-(./chapters/design.tex
-<figures/figure1.pdf, id=196, 305.17311pt x 301.30667pt>
-File: figures/figure1.pdf Graphic file (type pdf)
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 34.
 
-<use figures/figure1.pdf>
-Package pdftex.def Info: figures/figure1.pdf used on input line 45.
-(pdftex.def)             Requested size: 292.77629pt x 289.081pt.
- [5] [6 <./figures/figure1.pdf>]
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 81.
-) [7] [8
-
-]
-(./chapters/bibliographic.tex
-Overfull \hbox (15.9446pt too wide) in paragraph at lines 3--4
-\T1/ptm/m/n/10.95 fer-ences, and or-ga-ni-za-tions may be found at []$\T1/pcr/m
-/n/10.95 http : / / www . big . tuwien . ac . at / teaching /
- []
-
-
-LaTeX Warning: Citation `jour:B2BServices' on page 9 undefined on input line 9.
-
-
-
-LaTeX Warning: Citation `proc:TheWebMLApproach' on page 9 undefined on input li
-ne 9.
-
-
-LaTeX Warning: Citation `book:umlatwork' on page 9 undefined on input line 9.
-
-
-LaTeX Warning: Citation `incoll:ErhardKonrad1992' on page 9 undefined on input 
-line 9.
-
-
-LaTeX Warning: Citation `man:BPEL' on page 9 undefined on input line 9.
-
-
-LaTeX Warning: Citation `phdthesis:manuelWimmer' on page 9 undefined on input l
-ine 9.
-
-
-LaTeX Warning: Citation `mast:AUMLProfile' on page 9 undefined on input line 9.
-
-
-
-LaTeX Warning: Citation `misc:BIGWebsite' on page 9 undefined on input line 9.
-
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
 )
-No file thesis.bbl.
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
+) [2]
 
 Class memoir Warning: The material used in the headers is too large
 (77.80435pt) for the given head height (13.6pt), it is recommended to
 either increase the head height or redesign the header
 (in both cases you will find help in the memoir manual). on input line 144.
 
-[9]
-\tf@toc=\write6
-\openout6 = `thesis.toc'.
-
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 144.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
- (./thesis.aux (./titlepage.aux) (./titlepage_en.aux))
+(./thesis.aux (./titlepage.aux) (./titlepage_en.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 5CAF5020EF91FA4A1950B60DD48FE799;1027.
-
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Checksum: E47F72D8389CD96581953612E7676111;379.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 144.
  ) 
 Here is how much of TeX's memory you used:
- 21457 strings out of 494935
- 364765 string characters out of 6178122
- 504039 words of memory out of 5000000
- 24187 multiletter control sequences out of 15000+600000
- 80442 words of font info for 103 fonts, out of 8000000 for 9000
+ 21197 strings out of 494935
+ 361110 string characters out of 6178122
+ 500415 words of memory out of 5000000
+ 24017 multiletter control sequences out of 15000+600000
+ 58994 words of font info for 66 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 69i,19n,68p,709b,870s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,19n,57p,729b,820s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhv
-b8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (17 pages, 161839 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/hel
+vetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on thesis.pdf (6 pages, 80419 bytes).
 PDF statistics:
- 341 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 83 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 130 PDF objects out of 1000 (max. 8388607)
+ 110 compressed objects within 2 object streams
+ 28 named destinations out of 1000 (max. 500000)
+ 79 words of extra memory for PDF output out of 10000 (max. 10000000)
 
