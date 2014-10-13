@@ -1,0 +1,94 @@
+=================================
+Meine geplante structur:
+-------------------
+*	Cover page
+* Acknowledgements
+* Abstract of the thesis in English and German
+* Table of contents
+1 Introduction
+		(abstract noch etwas konkreter erklärt, und was genau das ziel ist)
+		Software entwicklung,
+		fehler treten statistisch notwendigerweise auf,
+		um fehler - bugs - zu finden debugging,
+		nur ein paar techniken des debugging,
+		werde auf eine form des print debugging eingehen.
+
+2 Debugging
+	a Print debugging
+	b Debugging in Forth/Gforth
+	c ...
+
+3 Visualization
+	a Visualization of program flow
+		i source code
+		ii pseudo code
+		iii UML - the flow diagram
+			automatization, dotty
+	b Visualization of program state
+		single threaded
+			line number, globals & locals, io descriptors, memory
+		?distributed		
+		?multi threaded
+
+4 	Stack-based high-level languages
+	a PS?
+	b Forth - forth standards
+		i stacks
+		ii memory
+		iii oo extension
+	
+5 Implementation
+	a Gforth structure
+	b The chosen approach
+	c Posibilities & limitations
+
+6 Case study
+	a the program
+	b use during development
+	c use as debugging extension
+	d compatibility with dbg and ~~
+	
+7 Conclusion
+
+8 References
+
+=======================================
+TU vorlage für master's thesis
+--------------------------------
+*	Cover page
+* Acknowledgements
+* Abstract of the thesis in English and German
+* Table of contents
+1 Introduction
+ a motivation
+ b problem statement (which problem should be solved?)
+ c aim of the work
+ d methodological approach
+ e structure of the work
+ 
+2 State of the art / analysis of existing approaches
+ a literature studies
+ b analysis
+ c comparison and summary of existing approaches
+ 
+3 Methodology
+ a used concepts
+ b methods and/or models
+ c languages
+ d design methods
+ e data models
+ f analysis methods
+ g formalisms
+ 
+4 Suggested solution/implementation
+
+5 Critical reflection
+ a comparison with related work
+ b discussion of open issues
+ 
+6 Summary and future work
+
+7 Appendix: source code, data models,...
+
+8 Bibliography
+
