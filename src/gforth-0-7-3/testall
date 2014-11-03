@@ -1,0 +1,26 @@
+#! /bin/bash
+#test dist on all MACHINES given in MACHINES
+#usage: MACHINES="..." testall dirs/gforth-version.tar.gz
+if test $# = 0; then
+  echo "usage: `basename $0` gforth-xxx.tar.gz"
+  exit 1
+fi
+test "x$MACHINES" != x || 
+MACHINES="a7 akrall@titan.zserv.tuwien.ac.at b2 b3 b6 c4 c6 c7 c8 iyonix mips ppc64 t1000"
+#left out: c1 (NFS problem?), a5 (no working compiler with the right name)
+#SSH_PROTOCOL=-oProtocol=1,2
+for i in $MACHINES
+do
+  if false; then
+    echo; echo $i
+    /usr/bin/ssh $SSH_PROTOCOL -x $i echo ok
+  else
+    ( ssh $SSH_PROTOCOL -q -x $i "test -d xxxgforthtest||mkdir xxxgforthtest; cd xxxgforthtest; test -d $i||mkdir $i; rm -rf $i/*" >$i 2>&1; \
+      scp $SSH_PROTOCOL -p -q $1 ../testdist $i:xxxgforthtest/$i >>$i 2>&1; \
+      ssh $SSH_PROTOCOL -q -x $i "cd xxxgforthtest/$i; nice ./testdist `basename $1`" >>$i 2>&1; \
+      echo "$i done" "`tail -1 $i`" `grep "checking host system type..." $i|sed 's/checking host system type... //'|uniq` `grep "^gcc.*ok" $i`
+      grep -A 2 "sieve bubble matrix  fib" $i; echo) &
+  fi
+done
+wait
+echo all done

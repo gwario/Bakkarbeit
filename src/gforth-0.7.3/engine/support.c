@@ -228,6 +228,18 @@ Cell capscompare(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2)
   return n;
 }
 
+/* mga */
+Cell strstartswith(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2)
+{
+	if (u1 < u2)
+		return F_FALSE;
+	else if(memcmp(c_addr2, c_addr1, u2) == 0)
+		return F_TRUE;
+	else
+		return F_FALSE;
+}
+/* /mga */
+
 struct Longname *listlfind(Char *c_addr, UCell u, struct Longname *longname1)
 {
   for (; longname1 != NULL; longname1 = (struct Longname *)(longname1->next))
@@ -790,3 +802,31 @@ DCell fmdiv (DCell num, Cell denom)
   return res;
 }
 #endif
+
+/* mga */
+/* ifdef VIS */
+void onReturnStackChange()
+{
+	if (!gfvis)
+		return;
+
+	fprintf(stderr, "R: TEST\n");
+}
+
+void onDataStackChange()
+{
+	if (!gfvis)
+		return;
+
+	fprintf(stdout, "D: TEST\n");
+}
+
+void onFloatStackChange()
+{
+	if (!gfvis)
+		return;
+
+	fprintf(stderr, "F: TEST\n");
+}
+/* endif
+/ /mga */

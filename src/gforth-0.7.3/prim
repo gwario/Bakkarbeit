@@ -151,6 +151,7 @@ undefine(`symbols')
 \ run-time routines for non-primitives.  They are defined as
 \ primitives, because that simplifies things.
 
+\ TODO
 (docol)	( -- R:a_retaddr )	gforth-internal	paren_docol
 ""run-time routine for colon definitions""
 #ifdef NO_IP
@@ -162,6 +163,7 @@ a_retaddr = (Cell *)IP;
 SET_IP((Xt *)PFA(CFA));
 #endif /* !defined(NO_IP) */
 
+\ TODO
 (docon) ( -- w )	gforth-internal	paren_docon
 ""run-time routine for constants""
 w = *(Cell *)PFA(CFA);
@@ -170,6 +172,7 @@ INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
 
+\ TODO
 (dovar) ( -- a_body )	gforth-internal	paren_dovar
 ""run-time routine for variables and CREATEd words""
 a_body = PFA(CFA);
@@ -178,6 +181,7 @@ INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
 
+\ TODO
 (douser) ( -- a_user )	gforth-internal	paren_douser
 ""run-time routine for constants""
 a_user = (Cell *)(up+*(Cell *)PFA(CFA));
@@ -186,6 +190,7 @@ INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
 
+\ TODO
 (dodefer) ( -- )	gforth-internal	paren_dodefer
 ""run-time routine for deferred words""
 #ifndef NO_IP
@@ -194,6 +199,7 @@ ip=IP; /* undo any ip updating that may have been performed by NEXT_P0 */
 SUPER_END; /* !! probably unnecessary and may lead to measurement errors */
 VM_JUMP(EXEC1(*(Xt *)PFA(CFA)));
 
+\ TODO
 (dofield) ( n1 -- n2 )	gforth-internal	paren_field
 ""run-time routine for fields""
 n2 = n1 + *(Cell *)PFA(CFA);
@@ -202,6 +208,7 @@ INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
 
+\ TODO
 (dovalue) ( -- w )	gforth-internal	paren_doval
 ""run-time routine for constants""
 w = *(Cell *)PFA(CFA);
@@ -210,6 +217,7 @@ INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
 
+\ TODO
 (dodoes) ( -- a_body R:a_retaddr )	gforth-internal	paren_dodoes
 ""run-time routine for @code{does>}-defined words""
 #ifdef NO_IP
@@ -229,6 +237,7 @@ fprintf(stderr, "dodoes to %x, push %x\n", a_retaddr, a_body);
 SET_IP(DOES_CODE1(CFA));
 #endif /* !defined(NO_IP) */
 
+\ TODO
 (does-handler) ( -- )	gforth-internal	paren_does_handler
 ""just a slot to have an encoding for the DOESJUMP, 
 which is no longer used anyway (!! eliminate this)""
@@ -241,6 +250,7 @@ noop	( -- )		gforth
 :
  ;
 
+\ TODO
 call	( #a_callee -- R:a_retaddr )	new
 ""Call callee (a variant of docol with inline argument).""
 #ifdef NO_IP
@@ -259,6 +269,7 @@ a_retaddr = (Cell *)IP;
 SET_IP((Xt *)a_callee);
 #endif
 
+\ TODO
 execute	( xt -- )		core
 ""Perform the semantics represented by the execution token, @i{xt}.""
 #ifdef DEBUG
@@ -270,6 +281,7 @@ ip=IP;
 SUPER_END;
 VM_JUMP(EXEC1(xt));
 
+\ TODO
 perform	( a_addr -- )	gforth
 ""@code{@@ execute}.""
 /* and pfe */
@@ -281,6 +293,7 @@ VM_JUMP(EXEC1(*(Xt *)a_addr));
 :
  @ execute ;
 
+\ TODO
 ;s	( R:w -- )		gforth	semis
 ""The primitive compiled by @code{EXIT}.""
 #ifdef NO_IP
@@ -719,6 +732,26 @@ u2 = u1-n;
 :
  tuck - >r + r> dup 0< IF  - 0  THEN ;
 
+\ /* mga */
+
+starts-with?	( c_addr1 u1 c_addr2 u2 -- n )	gforth	starts_with_query
+""@i{n} is true if the string at @i{c_addr1, u1} begins with the string in @i{c_addr2, u2}""
+n = strstartswith(c_addr1, u1, c_addr2, u2);
+
+gfvis?	( -- n ) gforth	gfvis_query
+""@i{n} is true if visualization is enabled.""
+n = gfvis;
+
+gfvis-on	( -- ) gforth	gfvis_on
+""Enables the visualization.""
+gfvis = F_TRUE;
+
+gfvis-off	( -- ) gforth	gfvis_off
+""Disables the visualization.""
+gfvis = F_FALSE;
+
+\ /* /mga */
+
 \g arith
 
 lit	( #w -- w )		gforth
@@ -727,6 +760,11 @@ lit	( #w -- w )		gforth
 
 +	( n1 n2 -- n )		core	plus
 n = n1+n2;
+/*onDataStackChange();*/
+ifdef(`VIS', `/* mga */
+onDataStackChange();
+/* /mga */dnl
+')
 
 \ lit+ / lit_plus = lit +
 

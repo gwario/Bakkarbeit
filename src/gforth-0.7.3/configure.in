@@ -80,6 +80,7 @@ GCC_LD="\$(GCC)"
 EC_MODE="false"
 EC=""
 engine2='engine2$(OPT).o'
+engine_vis2='engine-vis2$(OPT).o'
 engine_fast2='engine-fast2$(OPT).o'
 no_dynamic=""
 image_i=""
@@ -96,6 +97,7 @@ else
   EC_MODE="true"
   EC="-ec"
   engine2=""
+  engine_vis2=""  
   engine_fast2=""
   no_dynamic="-DNO_DYNAMIC"
   image_i="image.i"
@@ -176,6 +178,7 @@ AC_SUBST(EC)
 AC_SUBST(NO_CHECK)
 AC_SUBST(EC_MODE)
 AC_SUBST(engine2)
+AC_SUBST(engine_vis2)
 AC_SUBST(engine_fast2)
 AC_SUBST(no_dynamic)
 AC_SUBST(image_i)
@@ -715,6 +718,8 @@ AC_CHECK_PROG([MASSAGE_EXE],[chcon],[chcon -t unconfined_execmem_exec_t],[true])
 dnl Now a little support for DOS/DJGCC
 AC_SUBST(GFORTH_EXE)
 GFORTH_EXE="true"
+AC_SUBST(GFORTHVIS_EXE)
+GFORTHVIS_EXE="true"
 AC_SUBST(GFORTHFAST_EXE)
 GFORTHFAST_EXE="true"
 AC_SUBST(GFORTHITC_EXE)
