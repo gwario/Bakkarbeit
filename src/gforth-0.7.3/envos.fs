@@ -32,7 +32,7 @@ set-current
 
 : libtool-cc ( -- c-addr u ) \ gforth
 \G invocation string of the C compiler used for libtool
-    s" gcc-4.9 -m32" ;
+    s" gcc" ;
 
 : libtool-flags ( -- c-addr u ) \ gforth
 \G force no undefined for cygwin
@@ -44,5 +44,5 @@ false constant ffcall-present \ libffi present (on building)
 false constant libffi-present \ ffcall libs present (on building)
 
 : include-ffi.h-string ( -- c-addr u )
-  s" #include <ffi.h>" ;
+  s" #include <>" ;
 

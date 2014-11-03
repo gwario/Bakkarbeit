@@ -128,7 +128,11 @@ Primitive compare
 Primitive toupper
 Primitive capscompare
 Primitive /string
-8 groupadd
+Primitive starts-with?
+Primitive gfvis?
+Primitive gfvis-on
+Primitive gfvis-off
+12 groupadd
 group  arith
 Primitive lit
 Primitive +

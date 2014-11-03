@@ -1,0 +1,13 @@
+/Sleep 
+{ 
+        % Single arg off stack - seconds to sleep 
+        /sleepInterval exch def 
+        % Get our starting time 
+        usertime 1000 idiv /starttime exch def 
+        { 
+                % Seconds since start 
+                usertime 1000 idiv starttime sub 
+                % Exit if interval is exceeded 
+                sleepInterval ge { exit } if 
+        } loop
+}

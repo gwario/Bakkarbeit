@@ -212,7 +212,7 @@ group  strings
 : /string  ( c_addr1 u1 n -- c_addr2 u2 )
  tuck - >r + r> dup 0< IF  - 0  THEN ;
 
-8 groupadd
+12 groupadd
 group  arith
 : lit  ( #w -- w )
  r> dup @ swap cell+ >r ;

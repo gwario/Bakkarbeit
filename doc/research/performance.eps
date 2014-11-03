@@ -1,0 +1,188 @@
+%!PS-Adobe-2.0 EPSF-1.2
+%%BoundingBox: 80 10 488 540
+%%Pages: 1 1
+%%DocumentFonts: Helvetica
+%%EndComments
+1 setlinejoin
+0 0 translate
+1.1 1.1 scale
+2 setlinewidth
+
+%Forth names
+/over {1 index} def
+/pick {index} def
+/drop {pop} def
+/swap {exch} def
+
+%transformation
+/xtf {4 add 20 mul} def
+/ytf {ln 100 mul 100 add} def
+/tf {exch xtf exch ytf} def
+/bar {over swap tf exch ybase ytf moveto 0 exch ybase ytf sub rlineto 1 add} def
+/mt {tf moveto} def
+/lt {tf lineto} def
+/tf1 {instructions exch div tf} def
+/mt1 {tf1 moveto} def
+/lt1 {tf1 lineto} def
+
+/xbase 1 def
+/ybase 0.5 def
+
+%benchmark1
+1.275
+1.00 bar
+0.5 bar
+7.03 bar
+0.86 bar
+1.87 bar
+2.16 bar
+2.31 bar
+1.27 bar
+1.47 bar
+5.05 bar
+7.99 bar
+6.56 bar
+8.00 bar
+4.87 bar
+9.09 bar
+18.32 bar
+49.42 bar
+pop stroke
+%benchmark2
+1.425
+1.00 bar
+0.5 bar
+8.28 bar
+0.87 bar
+2.34 bar
+2.32 bar
+2.20 bar
+7.12 bar
+1.61 bar
+6.25 bar
+9.69 bar
+10.41 bar
+10.94 bar
+6.49 bar
+11.11 bar
+0.5 bar
+28.67 bar
+pop stroke
+%benchmark3
+1.575
+1.00 bar
+0.5 bar
+9.35 bar
+1.10 bar
+3.02 bar
+2.19 bar
+2.31 bar
+4.14 bar
+1.99 bar
+5.92 bar
+9.87 bar
+9.09 bar
+9.80 bar
+4.95 bar
+10.59 bar
+0.5 bar
+27.41 bar
+pop stroke
+%benchmark4
+1.725
+1.00 bar
+3.14 bar
+4.92 bar
+1.00 bar
+1.37 bar
+1.32 bar
+0.95 bar
+1.47 bar
+0.83 bar
+3.79 bar
+6.62 bar
+5.81 bar
+5.31 bar
+3.76 bar
+7.56 bar
+12.99 bar
+18.68 bar
+pop stroke
+
+[] 0 setdash
+
+0.5 setlinewidth
+xbase 45 mt
+xbase ybase lt
+18 ybase lt
+stroke
+
+newpath /Helvetica findfont 9 scalefont setfont
+/xjright {dup stringwidth pop neg 0 rmoveto} def
+/xjcenter {dup stringwidth pop 2 div neg 0 rmoveto} def
+/yjtop {0 -7 rmoveto} def
+/yjcenter {0 -3.5 rmoveto} def
+
+%1000 ybase mt (predicted branches) yjcenter show
+xbase 46 mt (relative time) xjcenter show
+
+%x str xtick
+/xtick1 { over ybase mt 0 -2 rlineto 0 -2 rmoveto xjcenter yjtop show 1 add } def
+/xtick2 { over ybase mt 0 -11 rlineto 0 -2 rmoveto xjcenter yjtop show 1 add } def
+
+1.5
+ (f2c opt) xtick1
+ (Timbre) xtick2
+ (f2c noopt) xtick1
+ (C) xtick2
+ (bigForth) xtick1
+ (iForth) xtick2
+ (mxForth) xtick1
+ (NT NCC) xtick2
+ (FLK) xtick1
+ (Gforth) xtick2
+ (Win32F) xtick1
+ (NT Forth) xtick2
+ (eforth) xtick1
+ (eforth opt) xtick2
+ (PFE) xtick1
+ (thisForth) xtick2
+ (TILE) xtick1
+stroke
+
+/str 20 string def
+/ytick { dup xbase exch mt -2 0 rlineto -2 0 rmoveto  str cvs xjright
+   yjcenter show } def
+%1 ytick
+%1.5 ytick
+%2 ytick
+%3 ytick
+%4 ytick
+%5 ytick
+%7 ytick
+%10 ytick
+%15 ytick
+0.5 ytick
+1 ytick
+2 ytick
+4 ytick
+8 ytick
+16 ytick
+32 ytick
+stroke
+
+%400 310 moveto (without) xjcenter yjcenter show
+%430 310 moveto (with) xjcenter yjcenter show
+%415 300 moveto (delayed exceptions) xjcenter yjcenter show
+%380 340 moveto (Prolog) xjright yjcenter show
+%[3 2] 0 setdash
+%0 setlinewidth 390 340 moveto 20 0 rlineto stroke
+%0.6 setlinewidth 420 340 moveto 20 0 rlineto stroke
+%380 330 moveto (compress) xjright yjcenter show
+%[4 4] 0 setdash
+%0 setlinewidth 390 330 moveto 20 0 rlineto stroke
+%0.6 setlinewidth 420 330 moveto 20 0 rlineto stroke
+%380 320 moveto (sched) xjright yjcenter show
+%[4 2 1 2] 0 setdash
+%0 setlinewidth 390 320 moveto 20 0 rlineto stroke
+%0.6 setlinewidth 420 320 moveto 20 0 rlineto stroke
