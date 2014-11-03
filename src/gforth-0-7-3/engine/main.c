@@ -211,6 +211,13 @@ static int print_sequences = 0; /* print primitive sequences for optimization */
 static int relocs = 0;
 static int nonrelocs = 0;
 
+/* mga */
+#ifdef VIS
+Cell gfvis_enabled = F_FALSE;
+Address gfvis_here;
+#endif
+/* /mga */
+
 #ifdef HAS_DEBUG
 int debug=0;
 # define debugp(x...) do { if (debug) fprintf(x); } while (0)

@@ -409,6 +409,21 @@ void gforth_ms(UCell u);
 UCell gforth_dlopen(Char *c_addr, UCell u);
 Cell capscompare(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 
+/* mga */
+Cell strstartswith(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
+
+#ifdef VIS
+/* called on return stack modifications */
+void onReturnStackChange();
+
+/* called on data stack modifications */
+void onDataStackChange();
+
+/* called on floating point stack modifications */
+void onFloatStackChange();
+#endif
+/* /mga */
+
 /* signal handler stuff */
 void install_signal_handlers(void);
 void throw(int code);
@@ -446,6 +461,13 @@ extern ImageHeader *gforth_header;
 extern Label *vm_prims;
 extern Label *xts;
 extern Cell npriminfos;
+
+/* mga */
+#ifdef VIS
+extern Cell gfvis_enabled;
+extern Address gfvis_here; /* us Cell or Address?*/
+#endif
+/* /mga */
 
 #ifdef HAS_DEBUG
 extern int debug;

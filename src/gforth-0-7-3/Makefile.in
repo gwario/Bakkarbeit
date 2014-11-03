@@ -83,6 +83,8 @@ BUILDFORTH = $(ENGINE) --die-on-signal -m 4M -p ".$(PATHSEP)~+$(PATHSEP)$(srcdir
 FORTHB = $(BUILDFORTH) exboot.fs -e 'fpath= .|~+|$(srcdir)'
 # the Forth system for running prims2x.fs
 FORTHP = $(FORTH)
+ENGINE_VIS = ./gforth-vis
+FORTH_VIS	= $(ENGINE_VIS) $(FORTH_ARGS)
 ENGINE_FAST = ./gforth-fast
 FORTH_FAST	= $(ENGINE_FAST) $(FORTH_ARGS)
 FORTHKFLAGS= --die-on-signal -p ".$(PATHSEP)~+$(PATHSEP)$(srcdir)" -i $(kernel_fi)
@@ -428,15 +430,22 @@ RCS_FILES =  ToDo model high-level
 
 ENGINES = gforth$(EC)$(EXE) gforth-ditc$(EC)$(EXE) gforth-itc$(EC)$(EXE) $(PROFEXES)
 
+ENGINES_VIS = gforth-vis$(OPT)$(EC)$(EXE) #gforth-native$(OPT)$(EC)$(EXE)
+
 ENGINES_FAST = gforth-fast$(OPT)$(EC)$(EXE) #gforth-native$(OPT)$(EC)$(EXE) 
 
-GEN = $(ENGINES) $(ENGINES_FAST) gforth.elc
+GEN = $(ENGINES) $(ENGINES_VIS) $(ENGINES_FAST) gforth.elc
 
 # things that need a working forth system to be generated
 FORTH_GEN_ENGINE=engine/prim.i engine/prim_lab.i engine/prim_names.i \
 	engine/prim_superend.i engine/profile.i \
 	engine/prim_num.i engine/prim_grp.i \
 	engine/costs.i engine/super2.i
+FORTH_GEN_ENGINE_VIS= \
+	engine/prim-vis.i engine/prim_lab-vis.i engine/prim_names-vis.i \
+	engine/prim_superend-vis.i engine/profile-vis.i \
+	engine/prim_num-vis.i engine/prim_grp-vis.i \
+	engine/costs-vis.i engine/super2-vis.i
 FORTH_GEN_ENGINE_FAST= \
 	engine/prim-fast.i engine/prim_lab-fast.i engine/prim_names-fast.i \
 	engine/prim_superend-fast.i engine/profile-fast.i \
@@ -527,13 +536,14 @@ clean:		mostlyclean
 	gforth-ditc-noll$(EC)$(EXE) engine/gforth-ditc-noll$(EC)$(EXE) \
 	gforth-prof-noll$(EC)$(EXE) engine/gforth-prof-noll$(EC)$(EXE) \
 	engine/prim-s.i
-	for i in gforth gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
+	for i in gforth gforth-vis gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
 
 distclean:	clean
 		-$(RM) -rf config.cache config.log config.status \
 		engine/config.h Makefile Makedist engine/Makefile \
 		stamp-h engine/stamp-h \
 		doc/version.texi gforthmi vmgen preforth \
+		prim-vis.b $(FORTH_GEN_ENGINE_VIS) \
 		prim-fast.b $(FORTH_GEN_ENGINE_FAST)
 
 #realclean is useless, but dangerous, so it's commented out
@@ -597,6 +607,9 @@ install:	gforth$(EC)$(EXE) $(FORTH_SRC) $(kernel_fi) gforth.fi gforthmi vmgen do
 		$(INSTALL_PROGRAM) gforth$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-$(VERSION)$(EC)$(EXE)
 		-$(MASSAGE_EXE) $(DESTDIR)$(bindir)/gforth-$(VERSION)$(EC)$(EXE)
 		(cd $(DESTDIR)$(bindir) && $(LN_S) gforth-$(VERSION)$(EC)$(EXE) gforth$(EC)$(EXE))
+		$(INSTALL_PROGRAM) gforth-vis$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-vis-$(VERSION)$(EC)$(EXE)
+		-$(MASSAGE_EXE) $(DESTDIR)$(bindir)/gforth-vis-$(VERSION)$(EC)$(EXE)
+		(cd $(DESTDIR)$(bindir) && $(LN_S) gforth-vis-$(VERSION)$(EC)$(EXE) gforth-vis$(EC)$(EXE))
 		$(INSTALL_PROGRAM) gforth-fast$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-fast-$(VERSION)$(EC)$(EXE)
 		-$(MASSAGE_EXE) $(DESTDIR)$(bindir)/gforth-fast-$(VERSION)$(EC)$(EXE)
 		(cd $(DESTDIR)$(bindir) && $(LN_S) gforth-fast-$(VERSION)$(EC)$(EXE) gforth-fast$(EC)$(EXE))
@@ -645,8 +658,17 @@ installdirs:	mkinstalldirs
 #to uninstall version foo, type `make uninstall VERSION=foo'
 uninstall:	FORCE
 		$(NORMAL_UNINSTALL)
-		-$(RM) -rf $(DESTDIR)$(libdir)/gforth/$(VERSION) $(DESTDIR)$(datadir)/gforth/$(VERSION) $(DESTDIR)$(bindir)/gforth-$(VERSION)$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-fast-$(VERSION)$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-itc-$(VERSION)$(EC)$(EXE) $(DESTDIR)$(bindir)/gforthmi-$(VERSION) $(DESTDIR)(bindir)/vmgen-$(VERSION) $(DESTDIR)$(includedir)/gforth/$(VERSION)
-		@echo -e "To remove Gforth completely, type\n$(RM) -rf $(DESTDIR)$(bindir)/gforth$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-fast$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-itc$(EC)$(EXE) $(DESTDIR)$(bindir)/gforthmi $(DESTDIR)$(bindir)/vmgen $(DESTDIR)$(man1dir)/gforth.1 $(DESTDIR)$(infodir)/gforth.info* $(DESTDIR)$(datadir)/gforth $(DESTDIR)$(libdir)/gforth"
+		-$(RM) -rf \
+		$(DESTDIR)$(libdir)/gforth/$(VERSION) \
+		$(DESTDIR)$(datadir)/gforth/$(VERSION) \
+		$(DESTDIR)$(bindir)/gforth-$(VERSION)$(EC)$(EXE) \
+		$(DESTDIR)$(bindir)/gforth-vis-$(VERSION)$(EC)$(EXE) \
+		$(DESTDIR)$(bindir)/gforth-fast-$(VERSION)$(EC)$(EXE) \
+		$(DESTDIR)$(bindir)/gforth-itc-$(VERSION)$(EC)$(EXE) \
+		$(DESTDIR)$(bindir)/gforthmi-$(VERSION) \
+		$(DESTDIR)(bindir)/vmgen-$(VERSION) \
+		$(DESTDIR)$(includedir)/gforth/$(VERSION)
+		@echo -e "To remove Gforth completely, type\n$(RM) -rf $(DESTDIR)$(bindir)/gforth$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-vis$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-fast$(EC)$(EXE) $(DESTDIR)$(bindir)/gforth-itc$(EC)$(EXE) $(DESTDIR)$(bindir)/gforthmi $(DESTDIR)$(bindir)/vmgen $(DESTDIR)$(man1dir)/gforth.1 $(DESTDIR)$(infodir)/gforth.info* $(DESTDIR)$(datadir)/gforth $(DESTDIR)$(libdir)/gforth"
 
 build-libcc-named: $(LIBCC_BUILD_SRC) $(FORTH_GEN) $(GEN) FORCE
 		$(RMTREE) lib/gforth/$(VERSION)/libcc-named/
@@ -654,10 +676,12 @@ build-libcc-named: $(LIBCC_BUILD_SRC) $(FORTH_GEN) $(GEN) FORCE
 
 check:		gforths	gforth.fi 
 		$(MAKE) checkone check-nofast ENGINE="./gforth --no-dynamic" >/dev/null 2>&1
+		$(MAKE) checkone check-nofast ENGINE="./gforth-vis --no-dynamic" >/dev/null 2>&1
 		$(MAKE) checkone check-nofast ENGINE="./gforth-itc" >/dev/null 2>&1
 		$(MAKE) checkone check-nofast ENGINE="./gforth-ditc" >/dev/null 2>&1
 		$(MAKE) checkone ENGINE="./gforth-fast --no-dynamic" >/dev/null 2>&1
 		$(MAKE) checkone check-nofast ENGINE="./gforth" >/dev/null 2>&1
+		$(MAKE) checkone check-nofast ENGINE="./gforth-vis" >/dev/null 2>&1
 		$(MAKE) checkone ENGINE="./gforth-fast" >/dev/null 2>&1
 		@echo "*** Check successful ***"
 		./gforth-fast --diag -e bye
@@ -678,8 +702,8 @@ check-nofast: gforth.fi
 test/primtest.fi: test/primtest.fs mach32l.fs cross.fs
 		$(FORTHB) -e 's" mach32l.fs"' $(srcdir)/test/primtest.fs -e "save-cross $@ $(bindir)/gforth-$(VERSION) bye"
 
-primtest:	gforth gforth-native test/primtest.fi FORCE
-		(echo rs|ENVVAR=bla ./gforth -i test/primtest.fi) && (echo rs|ENVVAR=bla ./gforth-native -i test/primtest.fi); echo $$?
+primtest:	gforth gforth-vis gforth-native test/primtest.fi FORCE
+		(echo rs|ENVVAR=bla ./gforth -i test/primtest.fi) && (echo rs|ENVVAR=bla ./gforth-vis -i test/primtest.fi) && (echo rs|ENVVAR=bla ./gforth-native -i test/primtest.fi); echo $$?
 
 bench:		gforth-fast$(EC)$(EXE) gforth.fi
 		@echo 'Each benchmark takes about 30s on a 486-66 (gcc-2.6.3 -DFORCE_REG)'
@@ -696,6 +720,8 @@ all-bench allbench:
 	./gforth-fast --no-dynamic onebench.fs
 	./gforth --dynamic onebench.fs
 	./gforth --no-dynamic onebench.fs
+	./gforth-vis --dynamic onebench.fs
+	./gforth-vis --no-dynamic onebench.fs
 	./gforth-itc onebench.fs
 	./gforth-ditc onebench.fs
 
@@ -775,12 +801,19 @@ prim.b:		prim cache0.vmg
 		(cd $(srcdir) && $(M4) -Dcondbranch_opt=0 prim) >$@
 		sleep 1 #should make hpux-workaround unnecessary
 
+prim-vis.b:	prim cache0.vmg
+		(cd $(srcdir) && $(M4) -DVIS -Dcondbranch_opt=0 prim) >$@
+		sleep 1 #should make hpux-workaround unnecessary
+
 prim-fast.b:	prim cache-fast$(STACK_CACHE_DEFAULT_FAST).vmg cache-regs$(STACK_CACHE_REGS).vmg peeprules.vmg Makefile
 		(cd $(srcdir) && $(M4) -Dcondbranch_opt=@condbranch_opt@ -DSTACK_CACHE_FILE=cache-fast$(STACK_CACHE_DEFAULT_FAST).vmg -DSTACK_CACHE_REGS=cache-regs$(STACK_CACHE_REGS).vmg prim) >$@
 		sleep 1 #should make hpux-workaround unnecessary
 
 $(FORTH_GEN_ENGINE_FAST): prim-fast.b prims2x.fs
 		GFORTH="$(PREFORTH)" $(srcdir)/gfgen -fast
+
+$(FORTH_GEN_ENGINE_VIS): prim-vis.b prims2x.fs
+		GFORTH="$(PREFORTH)" $(srcdir)/gfgen -vis
 
 $(FORTH_GEN_ENGINE): prim.b prims2x.fs
 		GFORTH="$(PREFORTH)" $(srcdir)/gfgen
@@ -822,6 +855,20 @@ gforth$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE) engine/config.h @
 optgforth:
 	$(MAKE) gforth$(OPT)$(EC)$(EXE) $(MAKELINE$(OPT))
 
+gforth-vis$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE_VIS) engine/config.h @kernel_anti_dependence@
+	if test -z "$(OPT)"; then \
+		for i in $(OPTS); do $(MAKE) optgforth-vis OPT=$$i && $(CP) gforth-vis$${i}$(EC)$(EXE) $@ && break; done; \
+	else \
+		( cd engine && $(MAKE) $@ ) && \
+		$(CP) engine/$@ $@ && \
+		$(MASSAGE_EXE) $@; \
+		@GFORTH_EXE@; \
+		@NO_CHECK@$(MAKE) checkone check-nofast ENGINE=./engine/$@; \
+	fi
+
+optgforth-vis:
+	$(MAKE) gforth-vis$(OPT)$(EC)$(EXE) $(MAKELINE$(OPT))
+
 gforth-fast$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE_FAST) engine/config.h
 	if test -z "$(OPT)"; then \
 		for i in $(OPTS); do $(MAKE) optgforth-fast OPT=$$i && $(CP) gforth-fast$${i}$(EC)$(EXE) $@ && break; done; \
@@ -855,7 +902,7 @@ gforth-prof$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE) engine/Makefile en
 		cd engine && $(MAKE) gforth-prof-noll$(EC)$(EXE) $(MAKELINE-noll)
 		$(CP) engine/gforth-prof-noll$(EC)$(EXE) $@
 
-gforths: $(ENGINES) $(ENGINES_FAST)
+gforths: $(ENGINES) $(ENGINES_VIS) $(ENGINES_FAST)
 
 # ------------- additional C primitives
 
