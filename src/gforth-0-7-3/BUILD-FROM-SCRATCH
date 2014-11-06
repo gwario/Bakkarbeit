@@ -28,6 +28,6 @@
 ./autogen.sh &&
 ./configure "$@" &&
 echo Running: make &&
-make &&
-make doc &&
-make more
+make #&&
+#make doc &&
+#make more
