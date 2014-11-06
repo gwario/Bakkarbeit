@@ -529,18 +529,20 @@ docclean:	FORCE
 
 clean:		mostlyclean
 	-$(RM) -rf $(GEN) *.o engine/*.o arch/*/*.o version \
+	gforth-vis-noll$(EC)$(EXE) engine/gforth-vis-noll$(EC)$(EXE) \
 	gforth-itc-noll$(EC)$(EXE)  engine/gforth-itc-noll$(EC)$(EXE)  \
 	gforth-ditc-noll$(EC)$(EXE) engine/gforth-ditc-noll$(EC)$(EXE) \
 	gforth-prof-noll$(EC)$(EXE) engine/gforth-prof-noll$(EC)$(EXE) \
 	engine/prim-s.i
-	for i in gforth gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
+	for i in gforth gforth-vis gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
 
 distclean:	clean
 		-$(RM) -rf config.cache config.log config.status \
 		engine/config.h Makefile Makedist engine/Makefile \
 		stamp-h engine/stamp-h \
 		doc/version.texi gforthmi vmgen preforth \
-		prim-fast.b $(FORTH_GEN_ENGINE_FAST)
+		prim-fast.b $(FORTH_GEN_ENGINE_FAST) \
+		prim-vis.b $(FORTH_GEN_ENGINE_VIS)
 
 #realclean is useless, but dangerous, so it's commented out
 realclean:	distclean

@@ -109,7 +109,7 @@ AOBJECTS_VIS = @signals_o@ support-vis$(OPT).o @LIBOBJS@ $(OPTOBJECTS)
 @MAKEINC@
 
 OBJECTS = engine$(OPT).o @engine2@ main$(OPT).o
-OBJECTS_VIS = engine-vis$(OPT).o @engine-vis2@ main-vis$(OPT).o
+OBJECTS_VIS = engine-vis$(OPT).o @engine_vis2@ main-vis$(OPT).o
 OBJECTS_NATIVE = engine-native$(OPT).o engine-native2$(OPT).o engine-native3$(OPT).o main-native$(OPT).o
 OBJECTS_FAST = engine-fast$(OPT).o @engine_fast2@ main-fast$(OPT).o
 OBJECTS_ITC = engine-itc$(OPT).o main-itc$(OPT).o
@@ -184,7 +184,7 @@ engine2$(OPT).o:	$(ENGINE_DEPS)
 engine-vis$(OPT).o:	$(ENGINE_VIS_DEPS)
 		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DVIS -DGFORTH_DEBUGGING -o $@ -c $(srcdir)/engine.c
 
-engine2-vis$(OPT).o:	$(ENGINE_VIS_DEPS)
+engine-vis2$(OPT).o:	$(ENGINE_VIS_DEPS)
 		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DVIS -DGFORTH_DEBUGGING -DENGINE=2 -o $@ -c $(srcdir)/engine.c
 
 engine-native$(OPT).o:$(ENGINE_FAST_DEPS)

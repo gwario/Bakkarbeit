@@ -727,25 +727,21 @@ n = strstartswith(c_addr1, u1, c_addr2, u2);
 
 gfvis?	( -- n ) gforth	gfvis_query
 ""@i{n} is true if visualization is enabled.""
-ifdef(`VIS', `/* mga */
-n = gfvis_enabled;
-/* /mga */dnl
+ifdef(`VIS', `
+n = gfvis_enabled;dnl
 ')
 
 gfvis-on	( -- ) gforth	gfvis_on
 ""Enables the visualization.""
-ifdef(`VIS', `/* mga */
-gfvis_enabled = F_TRUE;
-/* /mga */dnl
+ifdef(`VIS', `
+gfvis_enabled = F_TRUE;dnl
 ')
 
 gfvis-off	( -- ) gforth	gfvis_off
 ""Disables the visualization.""
-ifdef(`VIS', `/* mga */
-gfvis_enabled = F_FALSE;
-/* /mga */dnl
+ifdef(`VIS', `
+gfvis_enabled = F_FALSE;dnl
 ')
-
 \ /* /mga */
 
 \g arith
