@@ -104,7 +104,6 @@ LDFLAGS =  $(DEBUGFLAG) $(XLDFLAGS)
 LDLIBS  = @LIBS@ @LTDL_LDLIBS@
 
 AOBJECTS = @signals_o@ support$(OPT).o @LIBOBJS@ $(OPTOBJECTS)
-AOBJECTS_VIS = @signals_o@ support-vis$(OPT).o @LIBOBJS@ $(OPTOBJECTS)
 
 @MAKEINC@
 
@@ -151,8 +150,8 @@ getopt.o: getopt.c getopt.h
 gforth$(OPT)$(EC)$(EXE):	$(OBJECTS) $(AOBJECTS) $(LTDLDEPS)
 	$(GCCLD) $(LDFLAGS) $(OBJECTS) $(AOBJECTS) $(LDLIBS) -o $@
 
-gforth-vis$(OPT)$(EC)$(EXE):	$(OBJECTS_VIS) $(AOBJECTS_VIS) $(LTDLDEPS)
-	$(GCCLD) $(LDFLAGS) $(OBJECTS_VIS) $(AOBJECTS_VIS) $(LDLIBS) -DVIS -o $@
+gforth-vis$(OPT)$(EC)$(EXE):	$(OBJECTS_VIS) $(AOBJECTS) $(LTDLDEPS)
+	$(GCCLD) $(LDFLAGS) $(OBJECTS_VIS) $(AOBJECTS) $(LDLIBS) -DVIS -o $@
 
 gforth-native$(OPT)$(EC)$(EXE):	$(OBJECTS_NATIVE) $(AOBJECTS) $(LTDLDEPS)
 	$(GCCLD) $(LDFLAGS) $(OBJECTS_NATIVE) $(AOBJECTS) $(LDLIBS) -o $@

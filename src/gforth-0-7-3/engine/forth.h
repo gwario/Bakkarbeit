@@ -412,7 +412,6 @@ Cell capscompare(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 /* mga */
 Cell strstartswith(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 
-#ifdef VIS
 /* called on return stack modifications */
 void onReturnStackChange();
 
@@ -421,7 +420,6 @@ void onDataStackChange();
 
 /* called on floating point stack modifications */
 void onFloatStackChange();
-#endif
 /* /mga */
 
 /* signal handler stuff */
@@ -462,11 +460,9 @@ extern Label *vm_prims;
 extern Label *xts;
 extern Cell npriminfos;
 
-/* mga */
-#ifdef VIS
+/* mga TODO how do we not compile that in ??! */
 extern Cell gfvis_enabled;
 extern Address gfvis_here; /* us Cell or Address?*/
-#endif
 /* /mga */
 
 #ifdef HAS_DEBUG

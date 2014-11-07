@@ -211,11 +211,9 @@ static int print_sequences = 0; /* print primitive sequences for optimization */
 static int relocs = 0;
 static int nonrelocs = 0;
 
-/* mga */
-#ifdef VIS
+/* mga TODO how do we not compile that in ??! */
 Cell gfvis_enabled = F_FALSE;
 Address gfvis_here;
-#endif
 /* /mga */
 
 #ifdef HAS_DEBUG
@@ -2391,3 +2389,39 @@ int main(int argc, char **argv, char **env)
   }
   return retvalue;
 }
+
+/* mga */
+void onReturnStackChange()
+{
+	if (!gfvis_enabled)
+		return;
+	fprintf(stderr, "R: TEST\n");
+}
+
+void onDataStackChange()
+{
+	if (!gfvis_enabled)
+		return;
+	
+	fprintf(stderr, "R: TEST\n");
+	/*fprintf(stderr, "D: <%d>",dsize);*/
+	/*UCell i;
+	for(i = dsize; 0 < i ; i--) {
+		fprintf(stderr, " %d",sp[i]);
+	}
+	fprintf(stderr, "\n");*/
+}
+
+void onFloatStackChange()
+{
+	if (!gfvis_enabled)
+		return;
+
+	fprintf(stderr, "F: TEST\n");
+}
+
+/*void printStack(UCell from, UCell to, Cell *stack) {
+UCell fp_stack_size;
+UCell return_stack_size;
+}*/
+/* /mga */
