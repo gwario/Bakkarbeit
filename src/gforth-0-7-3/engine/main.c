@@ -213,6 +213,7 @@ static int nonrelocs = 0;
 
 /* mga TODO how do we not compile that in ??! */
 Cell gfvis_enabled = F_FALSE;
+FILE *stdvis;
 Address gfvis_here;
 /* /mga */
 
@@ -2395,21 +2396,25 @@ void onReturnStackChange()
 {
 	if (!gfvis_enabled)
 		return;
-	fprintf(stderr, "R: TEST\n");
+	/*fprintf(stderr, "R: TEST\n");*/
 }
 
-void onDataStackChange()
+void onDataStackChange(Cell *sp, Cell *sp0)
 {
 	if (!gfvis_enabled)
 		return;
 	
-	fprintf(stderr, "R: TEST\n");
-	/*fprintf(stderr, "D: <%d>",dsize);*/
-	/*UCell i;
-	for(i = dsize; 0 < i ; i--) {
-		fprintf(stderr, " %d",sp[i]);
-	}
-	fprintf(stderr, "\n");*/
+	/*fprintf(stderr, "R: TEST\n");
+	fprintf(stderr, "D: <%d>\n",dsize);
+	UCell i;*/
+	/*for(i = 0; i < ; i++) {
+	fprintf(stderr, "%d", *sp0);
+	fprintf(stderr, "%d", sp[0]);
+	}*/
+	/*fprintf(stdvis, "exit\n");*/
+	int dstacksize = &sp - &sp0;
+	fprintf(stdvis, "sp: %d    sp0: %d    sp - sp0: %d    sizeof(Cell): %d    tos: %016lx \n", &sp, &sp0, dstacksize, sizeof(Cell), sp[0]);
+	fflush(stdvis);
 }
 
 void onFloatStackChange()
@@ -2417,7 +2422,7 @@ void onFloatStackChange()
 	if (!gfvis_enabled)
 		return;
 
-	fprintf(stderr, "F: TEST\n");
+	/*fprintf(stderr, "F: TEST\n");*/
 }
 
 /*void printStack(UCell from, UCell to, Cell *stack) {

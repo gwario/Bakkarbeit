@@ -170,7 +170,7 @@ w = *(Cell *)PFA(CFA);
 INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (dovar) ( -- a_body )	gforth-internal	paren_dovar
 ""run-time routine for variables and CREATEd words""
@@ -179,7 +179,7 @@ a_body = PFA(CFA);
 INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (douser) ( -- a_user )	gforth-internal	paren_douser
 ""run-time routine for constants""
@@ -188,7 +188,7 @@ a_user = (Cell *)(up+*(Cell *)PFA(CFA));
 INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (dodefer) ( -- )	gforth-internal	paren_dodefer
 ""run-time routine for deferred words""
@@ -205,7 +205,7 @@ n2 = n1 + *(Cell *)PFA(CFA);
 INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (dovalue) ( -- w )	gforth-internal	paren_doval
 ""run-time routine for constants""
@@ -214,7 +214,7 @@ w = *(Cell *)PFA(CFA);
 INST_TAIL;
 goto *next_code;
 #endif /* defined(NO_IP) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (dodoes) ( -- a_body R:a_retaddr )	gforth-internal	paren_dodoes
 ""run-time routine for @code{does>}-defined words""
@@ -235,7 +235,7 @@ fprintf(stderr, "dodoes to %x, push %x\n", a_retaddr, a_body);
 SET_IP(DOES_CODE1(CFA));
 #endif /* !defined(NO_IP) */
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (does-handler) ( -- )	gforth-internal	paren_does_handler
 ""just a slot to have an encoding for the DOESJUMP, 
@@ -267,7 +267,7 @@ a_retaddr = (Cell *)IP;
 SET_IP((Xt *)a_callee);
 #endif
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 execute	( xt -- )		core
 ""Perform the semantics represented by the execution token, @i{xt}.""
@@ -279,7 +279,7 @@ ip=IP;
 #endif
 SUPER_END;
 VM_JUMP(EXEC1(xt));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 perform	( a_addr -- )	gforth
 ""@code{@@ execute}.""
@@ -289,7 +289,7 @@ ip=IP;
 #endif
 SUPER_END;
 VM_JUMP(EXEC1(*(Xt *)a_addr));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  @ execute ;
 
@@ -315,7 +315,7 @@ ip=IP;
 #endif
 SUPER_END;
 VM_JUMP(EXEC1(*(Xt *)a_addr));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 does-exec ( #a_cfa -- R:nest a_pfa )	new	does_exec
 #ifdef NO_IP
@@ -334,7 +334,7 @@ nest = (Cell)IP;
 SET_IP(DOES_CODE1(a_cfa));
 #endif
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+glocals
 
@@ -347,7 +347,7 @@ JUMP(a_target);
 #else
 SET_IP((Xt *)a_target);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 
@@ -358,7 +358,7 @@ JUMP(a_target);
 #else
 SET_IP((Xt *)a_target);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> @ >r ;
 
@@ -501,13 +501,13 @@ n2=n1+n;
 /* or (for) = >r -- collides with unloop! */
 nlimit=0;
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> swap 0 >r >r >r ;
 
 (do)    ( nlimit nstart -- R:nlimit R:nstart )  gforth          paren_do
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> swap rot >r >r >r ;
 
@@ -523,7 +523,7 @@ if (nstart == nlimit) {
 #endif
 }
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
   2dup =
   IF   r> swap rot >r >r
@@ -546,7 +546,7 @@ if (nstart >= nlimit) {
 #endif
 }
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap 2dup
  r> swap >r swap >r
@@ -569,7 +569,7 @@ SET_IP((Xt *)a_target);
 #endif
 }
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap 2dup
  r> swap >r swap >r
@@ -592,7 +592,7 @@ SET_IP((Xt *)a_target);
 #endif
 }
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap 2dup
  r> swap >r swap >r
@@ -615,7 +615,7 @@ SET_IP((Xt *)a_target);
 #endif
 }
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap 2dup
  r> swap >r swap >r
@@ -633,7 +633,7 @@ onDataStackChange();
 
 i	( R:n -- R:n n )		core
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 \ rp@ cell+ @ ;
   r> r> tuck >r >r ;
@@ -647,7 +647,7 @@ variable itmp
 
 j	( R:w R:w1 R:w2 -- w R:w R:w1 R:w2 )	core
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 \ rp@ cell+ cell+ cell+ @ ;
   r> r> r> r> dup itmp ! >r >r >r >r itmp @ ;
@@ -655,7 +655,7 @@ onDataStackChange();
 
 k	( R:w R:w1 R:w2 R:w3 R:w4 -- w R:w R:w1 R:w2 R:w3 R:w4 )	gforth
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 \ rp@ [ 5 cells ] Literal + @ ;
   r> r> r> r> r> r> dup itmp ! >r >r >r >r >r >r itmp @ ;
@@ -673,7 +673,7 @@ move	( c_from c_to ucount -- )		core
 /* !! note that the standard specifies addr, not c-addr */
 memmove(c_to,c_from,ucount);
 /* make an Ifdef for bsd and others? */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r 2dup u< IF r> cmove> ELSE r> cmove THEN ;
 
@@ -683,7 +683,7 @@ cmove	( c_from c_to u -- )	string	c_move
 from low address to high address; i.e., for overlapping areas it is
 safe if @i{c-to}=<@i{c-from}.""
 cmove(c_from,c_to,u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  bounds ?DO  dup c@ I c! 1+  LOOP  drop ;
 
@@ -693,7 +693,7 @@ cmove>	( c_from c_to u -- )	string	c_move_up
 from high address to low address; i.e., for overlapping areas it is
 safe if @i{c-to}>=@i{c-from}.""
 cmove_up(c_from,c_to,u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup 0= IF  drop 2drop exit  THEN
  rot over + -rot bounds swap 1-
@@ -702,7 +702,7 @@ onDataStackChange();
 fill	( c_addr u c -- )	core
 ""Store @i{c} in @i{u} chars starting at @i{c-addr}.""
 memset(c_addr,c,u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  -rot bounds
  ?DO  dup I c!  LOOP  drop ;
@@ -715,7 +715,7 @@ comparison. In the future, this may change to consider the current
 locale and its collation order.""
 /* close ' to keep fontify happy */ 
 n = compare(c_addr1, u1, c_addr2, u2);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rot 2dup swap - >r min swap -text dup
  IF  rdrop  ELSE  drop r> sgn  THEN ;
@@ -744,7 +744,7 @@ toupper	( c1 -- c2 )	gforth
 ""If @i{c1} is a lower-case character (in the current locale), @i{c2}
 is the equivalent upper-case character. All other characters are unchanged.""
 c2 = toupper(c1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup [char] a - [ char z char a - 1 + ] Literal u<  bl and - ;
 
@@ -756,14 +756,14 @@ comparison. In the future, this may change to consider the current
 locale and its collation order.""
 /* close ' to keep fontify happy */ 
 n = capscompare(c_addr1, u1, c_addr2, u2);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 /string	( c_addr1 u1 n -- c_addr2 u2 )	string	slash_string
 ""Adjust the string specified by @i{c-addr1, u1} to remove @i{n}
 characters from the start of the string.""
 c_addr2 = c_addr1+n;
 u2 = u1-n;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  tuck - >r + r> dup 0< IF  - 0  THEN ;
 
@@ -772,7 +772,11 @@ onDataStackChange();
 starts-with?	( c_addr1 u1 c_addr2 u2 -- n )	gforth	starts_with_query
 ""@i{n} is true if the string at @i{c_addr1, u1} begins with the string in @i{c_addr2, u2}""
 n = strstartswith(c_addr1, u1, c_addr2, u2);
-onDataStackChange();
+onDataStackChange(sp, sp0);
+
+gfvis-fid	( wfileid -- )	gforth gfvis_fid
+""@i{wfileid} is the file descriptor of the pipe to send the data structure changes to."" 
+stdvis = wfileid;
 
 gfvis?	( -- n ) gforth	gfvis_query
 ""@i{n} is true if visualization is enabled.""
@@ -780,10 +784,10 @@ n = gfvis_enabled;
 
 \ ifdef(`VIS', `n = gfvis_enabled;')
 
-
 gfvis-on	( -- ) gforth	gfvis_on
 ""Enables the visualization.""
 gfvis_enabled = F_TRUE;
+/*gfvis_here = ;*/
 
 \ ifdef(`VIS', `gfvis_enabled = F_TRUE;')
 
@@ -797,12 +801,12 @@ gfvis_enabled = F_FALSE;
 \g arith
 
 lit	( #w -- w )		gforth
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> dup @ swap cell+ >r ;
 
 +	( n1 n2 -- n )		core	plus
-onDataStackChange();
+onDataStackChange(sp, sp0);
 n = n1+n2;
 
 \ lit+ / lit_plus = lit +
@@ -812,38 +816,38 @@ lit+	( n1 #n2 -- n )		new	lit_plus
 fprintf(stderr, "lit+ %08x\n", n2);
 #endif
 n=n1+n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \ PFE-0.9.14 has it differently, but the next release will have it as follows
 under+	( n1 n2 n3 -- n n2 )	gforth	under_plus
 ""add @i{n3} to @i{n1} (giving @i{n})""
 n = n1+n3;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rot + swap ;
 
 -	( n1 n2 -- n )		core	minus
 n = n1-n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  negate + ;
 
 negate	( n1 -- n2 )		core
 /* use minus as alias */
 n2 = -n1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  invert 1+ ;
 
 1+	( n1 -- n2 )		core		one_plus
 n2 = n1+1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  1 + ;
 
 1-	( n1 -- n2 )		core		one_minus
 n2 = n1-1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  1 - ;
 
@@ -852,7 +856,7 @@ if (n1<n2)
   n = n2;
 else
   n = n1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2dup < IF swap THEN drop ;
 
@@ -861,7 +865,7 @@ if (n1<n2)
   n = n1;
 else
   n = n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2dup > IF swap THEN drop ;
 
@@ -870,13 +874,13 @@ if (n<0)
   u = -n;
 else
   u = n;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup 0< IF negate THEN ;
 
 *	( n1 n2 -- n )		core	star
 n = n1*n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  um* drop ;
 
@@ -888,7 +892,7 @@ if (CHECK_DIVISION_SW && n2 == -1 && n1 == CELL_MIN)
   throw(BALL_RESULTRANGE);
 if (FLOORED_DIV && ((n1^n2) < 0) && (n1%n2 != 0))
   n--;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  /mod nip ;
 
@@ -899,7 +903,7 @@ if (CHECK_DIVISION_SW && n2 == 0)
 if (CHECK_DIVISION_SW && n2 == -1 && n1 == CELL_MIN)
   throw(BALL_RESULTRANGE);
 if(FLOORED_DIV && ((n1^n2) < 0) && n!=0) n += n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  /mod drop ;
 
@@ -914,7 +918,7 @@ if (FLOORED_DIV && ((n1^n2) < 0) && n3!=0) {
   n4--;
   n3+=n2;
 }
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r s>d r> fm/mod ;
 
@@ -938,7 +942,7 @@ DCell r = FLOORED_DIV ? fmdiv(d,n3) : smdiv(d,n3);
 n4=DHI(r);
 n5=DLO(r);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r m* r> fm/mod ;
 
@@ -961,14 +965,14 @@ if (FLOORED_DIV && ((DHI(d)^n3)<0) && remainder!=0) {
 DCell r = FLOORED_DIV ? fmdiv(d,n3) : smdiv(d,n3);
 n4=DLO(r);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  */mod nip ;
 
 2*	( n1 -- n2 )		core		two_star
 ""Shift left by 1; also works on unsigned numbers""
 n2 = 2*n1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup + ;
 
@@ -976,7 +980,7 @@ onDataStackChange();
 ""Arithmetic shift right by 1.  For signed numbers this is a floored
 division by 2 (note that @code{/} not necessarily floors).""
 n2 = n1>>1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup MINI and IF 1 ELSE 0 THEN
  [ bits/char cell * 1- ] literal 
@@ -999,7 +1003,7 @@ DCell r = fmdiv(d1,n1);
 n2=DHI(r);
 n3=DLO(r);
 #endif /* !defined(ASM_SM_SLASH_REM) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup >r dup 0< IF  negate >r dnegate r>  THEN
  over       0< IF  tuck + swap  THEN
@@ -1015,7 +1019,7 @@ DCell r = smdiv(d1,n1);
 n2=DHI(r);
 n3=DLO(r);
 #endif /* !defined(ASM_SM_SLASH_REM) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  over >r dup >r abs -rot
  dabs rot um/mod
@@ -1028,7 +1032,7 @@ d = mmul(n1,n2);
 #else
 d = (DCell)n1 * (DCell)n2;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2dup      0< and >r
  2dup swap 0< and >r
@@ -1041,7 +1045,7 @@ ud = ummul(u1,u2);
 #else
 ud = (UDCell)u1 * (UDCell)u2;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
    0 -rot dup [ 8 cells ] literal -
    DO
@@ -1060,7 +1064,7 @@ UDCell r = umdiv(ud,u1);
 u2=DHI(r);
 u3=DLO(r);
 #endif /* !defined(ASM_UM_SLASH_MOD) */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
    0 swap [ 8 cells 1 + ] literal 0
    ?DO /modstep
@@ -1078,7 +1082,7 @@ DHI_IS(d2, DHI(d1) - (n<0) + (DLO(d2)<DLO(d1)));
 #else
 d2 = d1+n;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  s>d d+ ;
 
@@ -1089,7 +1093,7 @@ DHI_IS(d, DHI(d1) + DHI(d2) + (d.lo<DLO(d1)));
 #else
 d = d1+d2;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rot + >r tuck + swap over u> r> swap - ;
 
@@ -1100,7 +1104,7 @@ DHI_IS(d, DHI(d1)-DHI(d2)-(DLO(d1)<DLO(d2)));
 #else
 d = d1-d2;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dnegate d+ ;
 
@@ -1111,14 +1115,14 @@ d2 = dnegate(d1);
 #else
 d2 = -d1;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  invert swap negate tuck 0= - ;
 
 d2*	( d1 -- d2 )		double		d_two_star
 ""Shift left by 1; also works on unsigned numbers""
 d2 = DLSHIFT(d1,1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2dup d+ ;
 
@@ -1131,28 +1135,28 @@ DLO_IS(d2, (DLO(d1)>>1) | (DHI(d1)<<(CELL_BITS-1)));
 #else
 d2 = d1>>1;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup 1 and >r 2/ swap 2/ [ 1 8 cells 1- lshift 1- ] Literal and
  r> IF  [ 1 8 cells 1- lshift ] Literal + THEN  swap ;
 
 and	( w1 w2 -- w )		core
 w = w1&w2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 or	( w1 w2 -- w )		core
 w = w1|w2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  invert swap invert and invert ;
 
 xor	( w1 w2 -- w )		core	x_or
 w = w1^w2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 invert	( w1 -- w2 )		core
 w2 = ~w1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  MAXU xor ;
 
@@ -1163,7 +1167,7 @@ rshift	( u1 n -- u2 )		core	r_shift
 #else
   u2 = u1 >> n;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
     0 ?DO 2/ MAXI and LOOP ;
 
@@ -1173,7 +1177,7 @@ lshift	( u1 n -- u2 )		core	l_shift
 #else
   u2 = u1 << n;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
     0 ?DO 2* LOOP ;
 
@@ -1183,7 +1187,7 @@ onDataStackChange();
 define(comparisons,
 $1=	( $2 -- f )		$6	$3equals
 f = FLAG($4==$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     [ char $1x char 0 = [IF]
@@ -1194,7 +1198,7 @@ onFloatStackChange();
 
 $1<>	( $2 -- f )		$7	$3not_equals
 f = FLAG($4!=$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     [ char $1x char 0 = [IF]
@@ -1205,7 +1209,7 @@ onFloatStackChange();
 
 $1<	( $2 -- f )		$8	$3less_than
 f = FLAG($4<$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     [ char $1x char 0 = [IF]
@@ -1219,7 +1223,7 @@ onFloatStackChange();
 
 $1>	( $2 -- f )		$9	$3greater_than
 f = FLAG($4>$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     [ char $1x char 0 = [IF] ] negate [ [ELSE] ] swap [ [THEN] ]
@@ -1227,14 +1231,14 @@ onFloatStackChange();
 
 $1<=	( $2 -- f )		gforth	$3less_or_equal
 f = FLAG($4<=$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     $1> 0= ;
 
 $1>=	( $2 -- f )		gforth	$3greater_or_equal
 f = FLAG($4>=$5);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onFloatStackChange();
 :
     [ char $1x char 0 = [IF] ] negate [ [ELSE] ] swap [ [THEN] ]
@@ -1254,7 +1258,7 @@ f = FLAG($4.lo==$5.lo && $4.hi==$5.hi);
 #else
 f = FLAG($4==$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 $1<>	( $2 -- f )		$7	$3not_equals
 #ifdef BUGGY_LL_CMP
@@ -1262,7 +1266,7 @@ f = FLAG($4.lo!=$5.lo || $4.hi!=$5.hi);
 #else
 f = FLAG($4!=$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 $1<	( $2 -- f )		$8	$3less_than
 #ifdef BUGGY_LL_CMP
@@ -1270,7 +1274,7 @@ f = FLAG($4.hi==$5.hi ? $4.lo<$5.lo : $4.hi<$5.hi);
 #else
 f = FLAG($4<$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 $1>	( $2 -- f )		$9	$3greater_than
 #ifdef BUGGY_LL_CMP
@@ -1278,7 +1282,7 @@ f = FLAG($4.hi==$5.hi ? $4.lo>$5.lo : $4.hi>$5.hi);
 #else
 f = FLAG($4>$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 $1<=	( $2 -- f )		gforth	$3less_or_equal
 #ifdef BUGGY_LL_CMP
@@ -1286,7 +1290,7 @@ f = FLAG($4.hi==$5.hi ? $4.lo<=$5.lo : $4.hi<=$5.hi);
 #else
 f = FLAG($4<=$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 $1>=	( $2 -- f )		gforth	$3greater_or_equal
 #ifdef BUGGY_LL_CMP
@@ -1294,7 +1298,7 @@ f = FLAG($4.hi==$5.hi ? $4.lo>=$5.lo : $4.hi>=$5.hi);
 #else
 f = FLAG($4>=$5);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 )
 
@@ -1315,7 +1319,7 @@ min-n for signed numbers); now consider the range from u2 towards
 increasing numbers up to and excluding u3 (giving an empty range if
 u2=u3); if u1 is in this range, @code{within} returns true.""
 f = FLAG(u1-u2 < u3-u2);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  over - >r - r> u< ;
 
@@ -1323,80 +1327,80 @@ onDataStackChange();
 
 useraddr	( #u -- a_addr )	new
 a_addr = (Cell *)(up+u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 up!	( a_addr -- )	gforth	up_store
 gforth_UP=up=(Address)a_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  up ! ;
 Variable UP
 
 sp@	( S:... -- a_addr )		gforth		sp_fetch
 a_addr = sp;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sp!	( a_addr -- S:... )		gforth		sp_store
 sp = a_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 rp@	( -- a_addr )		gforth		rp_fetch
 a_addr = rp;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 rp!	( a_addr -- )		gforth		rp_store
 rp = a_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+floating
 
 fp@	( f:... -- f_addr )	gforth	fp_fetch
 f_addr = fp;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 fp!	( f_addr -- f:... )	gforth	fp_store
 fp = f_addr;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 
 >r	( w -- R:w )		core	to_r
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  (>r) ;
 : (>r)  rp@ cell+ @ rp@ ! rp@ cell+ ! ;
 
 r>	( R:w -- w )		core	r_from
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rp@ cell+ @ rp@ @ rp@ cell+ ! (rdrop) rp@ ! ;
 Create (rdrop) ' ;s A,
 
 rdrop	( R:w -- )		gforth
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> r> drop >r ;
 
 2>r	( d -- R:d )	core-ext	two_to_r
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap r> swap >r swap >r >r ;
 
 2r>	( R:d -- d )	core-ext	two_r_from
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  r> r> swap r> swap >r swap ;
 
 2r@	( R:d -- R:d d )	core-ext	two_r_fetch
 onReturnStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  i' j ;
 
@@ -1406,28 +1410,28 @@ onReturnStackChange();
  r> r> drop r> drop >r ;
 
 over	( w1 w2 -- w1 w2 w1 )		core
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  sp@ cell+ @ ;
 
 drop	( w -- )		core
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  IF THEN ;
 
 swap	( w1 w2 -- w2 w1 )		core
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r (swap) ! r> (swap) @ ;
 Variable (swap)
 
 dup	( w -- w w )		core	dupe
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  sp@ @ ;
 
 rot	( w1 w2 w3 -- w2 w3 w1 )	core	rote
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 [ defined? (swap) [IF] ]
     (swap) ! (rot) ! >r (rot) @ (swap) @ r> ;
@@ -1437,17 +1441,17 @@ Variable (rot)
 [THEN]
 
 -rot	( w1 w2 w3 -- w3 w1 w2 )	gforth	not_rote
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rot rot ;
 
 nip	( w1 w2 -- w2 )		core-ext
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap drop ;
 
 tuck	( w1 w2 -- w2 w1 w2 )	core-ext
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  swap over ;
 
@@ -1457,49 +1461,49 @@ onDataStackChange();
 if (w!=0) {
   *--sp = w;
 }
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup IF dup THEN ;
 
 pick	( S:... u -- S:... w )		core-ext
 ""Actually the stack effect is @code{ x0 ... xu u -- x0 ... xu x0 }.""
 w = sp[u];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  1+ cells sp@ + @ ;
 
 2drop	( w1 w2 -- )		core	two_drop
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  drop drop ;
 
 2dup	( w1 w2 -- w1 w2 w1 w2 )	core	two_dupe
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  over over ;
 
 2over	( w1 w2 w3 w4 -- w1 w2 w3 w4 w1 w2 )	core	two_over
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  3 pick 3 pick ;
 
 2swap	( w1 w2 w3 w4 -- w3 w4 w1 w2 )	core	two_swap
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  rot >r rot r> ;
 
 2rot	( w1 w2 w3 w4 w5 w6 -- w3 w4 w5 w6 w1 w2 )	double-ext	two_rote
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r >r 2swap r> r> 2swap ;
 
 2nip	( w1 w2 w3 w4 -- w3 w4 )	gforth	two_nip
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2swap 2drop ;
 
 2tuck	( w1 w2 w3 w4 -- w3 w4 w1 w2 w3 w4 )	gforth	two_tuck
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  2swap 2over ;
 
@@ -1510,30 +1514,30 @@ onDataStackChange();
 @	( a_addr -- w )		core	fetch
 ""@i{w} is the cell stored at @i{a_addr}.""
 w = *a_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \ lit@ / lit_fetch = lit @
 
 lit@		( #a_addr -- w ) new	lit_fetch
 w = *a_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 !	( w a_addr -- )		core	store
 ""Store @i{w} into the cell at @i{a-addr}.""
 *a_addr = w;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 +!	( n a_addr -- )		core	plus_store
 ""Add @i{n} to the cell at @i{a-addr}.""
 *a_addr += n;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  tuck @ + swap ! ;
 
 c@	( c_addr -- c )		core	c_fetch
 ""@i{c} is the char stored at @i{c_addr}.""
 c = *c_addr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 [ bigendian [IF] ]
     [ cell>bit 4 = [IF] ]
@@ -1560,7 +1564,7 @@ onDataStackChange();
 c!	( c c_addr -- )		core	c_store
 ""Store @i{c} into the char at @i{c-addr}.""
 *c_addr = c;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
 [ bigendian [IF] ]
     [ cell>bit 4 = [IF] ]
@@ -1592,7 +1596,7 @@ onDataStackChange();
 ""Store @i{w2} into the cell at @i{c-addr} and @i{w1} into the next cell.""
 a_addr[0] = w2;
 a_addr[1] = w1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  tuck ! cell+ ! ;
 
@@ -1601,21 +1605,21 @@ onDataStackChange();
 the content of the next cell.""
 w2 = a_addr[0];
 w1 = a_addr[1];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup cell+ @ swap @ ;
 
 cell+	( a_addr1 -- a_addr2 )	core	cell_plus
 ""@code{1 cells +}""
 a_addr2 = a_addr1+1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  cell + ;
 
 cells	( n1 -- n2 )		core
 "" @i{n2} is the number of address units of @i{n1} cells.""
 n2 = n1 * sizeof(Cell);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  [ cell
  2/ dup [IF] ] 2* [ [THEN]
@@ -1627,13 +1631,13 @@ onDataStackChange();
 char+	( c_addr1 -- c_addr2 )	core	char_plus
 ""@code{1 chars +}.""
 c_addr2 = c_addr1 + 1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  1+ ;
 
 (chars)	( n1 -- n2 )	gforth	paren_chars
 n2 = n1 * sizeof(Char);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  ;
 
@@ -1642,7 +1646,7 @@ count	( c_addr1 -- c_addr2 u )	core
 counted string at @i{c-addr1}.""
 u = *c_addr1;
 c_addr2 = c_addr1+1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup 1+ swap c@ ;
 
@@ -1661,7 +1665,7 @@ fprintf(stderr, "F83find ");
 fwrite(c_addr, u, 1, stderr);
 fprintf(stderr, " found %08x\n", f83name2); 
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
     BEGIN  dup WHILE  (find-samelen)  dup  WHILE
 	>r 2dup r@ cell+ char+ capscomp  0=
@@ -1683,7 +1687,7 @@ onDataStackChange();
 
 (listlfind)	( c_addr u longname1 -- longname2 )	new	paren_listlfind
 longname2=listlfind(c_addr, u, longname1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
     BEGIN  dup WHILE  (findl-samelen)  dup  WHILE
 	>r 2dup r@ cell+ cell+ capscomp  0=
@@ -1705,7 +1709,7 @@ onDataStackChange();
 
 (hashlfind)	( c_addr u a_addr -- longname2 )	new	paren_hashlfind
 longname2 = hashlfind(c_addr, u, a_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  BEGIN  dup  WHILE
         2@ >r >r dup r@ cell+ @ lcount-mask and =
@@ -1717,7 +1721,7 @@ onDataStackChange();
 (tablelfind)	( c_addr u a_addr -- longname2 )	new	paren_tablelfind
 ""A case-sensitive variant of @code{(hashfind)}""
 longname2 = tablelfind(c_addr, u, a_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  BEGIN  dup  WHILE
         2@ >r >r dup r@ cell+ @ lcount-mask and =
@@ -1735,7 +1739,7 @@ onDataStackChange();
 (hashkey1)	( c_addr u ubits -- ukey )		gforth	paren_hashkey1
 ""ukey is the hash key for the string c_addr u fitting in ubits bits""
 ukey = hashkey1(c_addr, u, ubits);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  dup rot-values + c@ over 1 swap lshift 1- >r
  tuck - 2swap r> 0 2swap bounds
@@ -1757,7 +1761,7 @@ Create rot-values
 struct Cellpair r=parse_white(c_addr1, u1);
 c_addr2 = (Char *)(r.n1);
 u2 = r.n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  BEGIN  dup  WHILE  over c@ bl <=  WHILE  1 /string
  REPEAT  THEN  2dup
@@ -1767,14 +1771,14 @@ onDataStackChange();
 aligned	( c_addr -- a_addr )	core
 "" @i{a-addr} is the first aligned address greater than or equal to @i{c-addr}.""
 a_addr = (Cell *)((((Cell)c_addr)+(sizeof(Cell)-1))&(-sizeof(Cell)));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  [ cell 1- ] Literal + [ -1 cells ] Literal and ;
 
 faligned	( c_addr -- f_addr )	float	f_aligned
 "" @i{f-addr} is the first float-aligned address greater than or equal to @i{c-addr}.""
 f_addr = (Float *)((((Cell)c_addr)+(sizeof(Float)-1))&(-sizeof(Float)));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  [ 1 floats 1- ] Literal + [ -1 floats ] Literal and ;
 
@@ -1792,7 +1796,7 @@ n=0;
 n=1;
 # endif
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  1 ;
 
@@ -1812,7 +1816,7 @@ c = key((FILE*)wfileid);
 #else
 c = key(stdin);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 key?-file	( wfileid -- f )	        gforth	key_q_file
 ""@i{f} is true if at least one character can be read from @i{wfileid}
@@ -1825,22 +1829,22 @@ f = key_query((FILE*)wfileid);
 #else
 f = key_query(stdin);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 stdin	( -- wfileid )	gforth
 ""The standard input file of the Gforth process.""
 wfileid = (Cell)stdin;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 stdout	( -- wfileid )	gforth
 ""The standard output file of the Gforth process.""
 wfileid = (Cell)stdout;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 stderr	( -- wfileid )	gforth
 ""The standard error output file of the Gforth process.""
 wfileid = (Cell)stderr;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+os
 
@@ -1856,7 +1860,7 @@ Gforth.""
  think this is necessary or always beneficial */
 urows=rows;
 ucols=cols;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 wcwidth	( u -- n )	gforth
 ""The number of fixed-width characters per unicode character u""
@@ -1865,7 +1869,7 @@ n = wcwidth(u);
 #else
 n = 1;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 flush-icache	( c_addr u -- )	gforth	flush_icache
 ""Make sure that the instruction cache of the processor (if there is
@@ -1878,17 +1882,17 @@ your machine has a separate instruction cache. In such cases,
 @code{flush-icache} does nothing instead of flushing the instruction
 cache.""
 FLUSH_ICACHE((caddr_t)c_addr,u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (bye)	( n -- )	gforth	paren_bye
 SUPER_END;
 return (Label *)n;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (system)	( c_addr u -- wretval wior )	gforth	paren_system
 wretval = gforth_system(c_addr, u);  
 wior = IOR(wretval==-1 || (wretval==127 && errno != 0));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 getenv	( c_addr1 u1 -- c_addr2 u2 )	gforth
 ""The string @i{c-addr1 u1} specifies an environment variable. The string @i{c-addr2 u2}
@@ -1898,17 +1902,17 @@ in length.""
 /* close ' to keep fontify happy */
 c_addr2 = (Char *)getenv(cstr(c_addr1,u1,1));
 u2 = (c_addr2 == NULL ? 0 : strlen((char *)c_addr2));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 open-pipe	( c_addr u wfam -- wfileid wior )	gforth	open_pipe
 wfileid=(Cell)popen(cstr(c_addr,u,1),pfileattr[wfam]); /* ~ expansion of 1st arg? */
 wior = IOR(wfileid==0); /* !! the man page says that errno is not set reliably */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 close-pipe	( wfileid -- wretval wior )		gforth	close_pipe
 wretval = pclose((FILE *)wfileid);
 wior = IOR(wretval==-1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 time&date	( -- nsec nmin nhour nday nmonth nyear )	facility-ext	time_and_date
 ""Report the current time of day. Seconds, minutes and hours are numbered from 0.
@@ -1933,12 +1937,12 @@ nday  =ltime->tm_mday;
 nhour =ltime->tm_hour;
 nmin  =ltime->tm_min;
 nsec  =ltime->tm_sec;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 ms	( u -- )	facility-ext
 ""Wait at least @i{n} milli-second.""
 gforth_ms(u);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 allocate	( u -- a_addr wior )	memory
 ""Allocate @i{u} address units of contiguous data space. The initial
@@ -1948,7 +1952,7 @@ is 0. If the allocation fails, @i{a-addr} is undefined and @i{wior}
 is a non-zero I/O result code.""
 a_addr = (Cell *)malloc(u?u:1);
 wior = IOR(a_addr==NULL);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 free	( a_addr -- wior )		memory
 ""Return the region of data space starting at @i{a-addr} to the system.
@@ -1957,7 +1961,7 @@ The region must originally have been obtained using @code{allocate} or
 If the operation fails, @i{wior} is a non-zero I/O result code.""
 free(a_addr);
 wior = 0;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 resize	( a_addr1 u -- a_addr2 wior )	memory
 ""Change the size of the allocated area at @i{a-addr1} to @i{u}
@@ -1975,17 +1979,17 @@ if (a_addr1==NULL)
 else
   a_addr2 = (Cell *)realloc(a_addr1, u);
 wior = IOR(a_addr2==NULL);	/* !! Define a return code */
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 strerror	( n -- c_addr u )	gforth
 c_addr = (Char *)strerror(n);
 u = strlen((char *)c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 strsignal	( n -- c_addr u )	gforth
 c_addr = (Char *)strsignal(n);
 u = strlen((char *)c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 call-c	( ... w -- ... )	gforth	call_c
 ""Call the C function pointed to by @i{w}. The C function has to
@@ -2008,51 +2012,51 @@ fp=gforth_FP;
 rp=gforth_RP;
 lp=gforth_LP;
 IF_fpTOS(fpTOS=fp[0]);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 \+file
 
 close-file	( wfileid -- wior )		file	close_file
 wior = IOR(fclose((FILE *)wfileid)==EOF);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 open-file	( c_addr u wfam -- wfileid wior )	file	open_file
 wfileid = opencreate_file(tilde_cstr(c_addr,u,1), wfam, 0, &wior);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 create-file	( c_addr u wfam -- wfileid wior )	file	create_file
 wfileid = opencreate_file(tilde_cstr(c_addr,u,1), wfam, O_CREAT|O_TRUNC, &wior);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 delete-file	( c_addr u -- wior )		file	delete_file
 wior = IOR(unlink(tilde_cstr(c_addr, u, 1))==-1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 rename-file	( c_addr1 u1 c_addr2 u2 -- wior )	file-ext	rename_file
 ""Rename file @i{c_addr1 u1} to new name @i{c_addr2 u2}""
 wior = rename_file(c_addr1, u1, c_addr2, u2);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 file-position	( wfileid -- ud wior )	file	file_position
 /* !! use tell and lseek? */
 ud = OFF2UD(ftello((FILE *)wfileid));
 wior = IOR(UD2OFF(ud)==-1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 reposition-file	( ud wfileid -- wior )	file	reposition_file
 wior = IOR(fseeko((FILE *)wfileid, UD2OFF(ud), SEEK_SET)==-1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 file-size	( wfileid -- ud wior )	file	file_size
 struct stat buf;
 wior = IOR(fstat(fileno((FILE *)wfileid), &buf)==-1);
 ud = OFF2UD(buf.st_size);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 resize-file	( ud wfileid -- wior )	file	resize_file
 wior = IOR(ftruncate(fileno((FILE *)wfileid), UD2OFF(ud))==-1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 read-file	( c_addr u1 wfileid -- u2 wior )	file	read_file
 /* !! fread does not guarantee enough */
@@ -2061,7 +2065,7 @@ wior = FILEIO(u2<u1 && ferror((FILE *)wfileid));
 /* !! is the value of ferror errno-compatible? */
 if (wior)
   clearerr((FILE *)wfileid);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 (read-line)	( c_addr u1 wfileid -- u2 flag u3 wior ) file	paren_read_line
 struct Cellquad r = read_line(c_addr, u1, wfileid);
@@ -2069,7 +2073,7 @@ u2   = r.n1;
 flag = r.n2;
 u3   = r.n3;
 wior = r.n4;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 
@@ -2085,7 +2089,7 @@ write-file	( c_addr u1 wfileid -- wior )	file	write_file
 #else
 TYPE(c_addr, u1);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 emit-file	( c wfileid -- wior )	gforth	emit_file
 #ifdef HAS_FILE
@@ -2095,30 +2099,30 @@ if (wior)
 #else
 PUTC(c);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+file
 
 flush-file	( wfileid -- wior )		file-ext	flush_file
 wior = IOR(fflush((FILE *) wfileid)==EOF);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 file-status	( c_addr u -- wfam wior )	file-ext	file_status
 struct Cellpair r = file_status(c_addr, u);
 wfam = r.n1;
 wior = r.n2;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 file-eof?	( wfileid -- flag )	gforth	file_eof_query
 flag = FLAG(feof((FILE *) wfileid));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 open-dir	( c_addr u -- wdirid wior )	gforth	open_dir
 ""Open the directory specified by @i{c-addr, u}
 and return @i{dir-id} for futher access to it.""
 wdirid = (Cell)opendir(tilde_cstr(c_addr, u, 1));
 wior =  IOR(wdirid == 0);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 read-dir	( c_addr u1 wdirid -- u2 flag wior )	gforth	read_dir
 ""Attempt to read the next entry from the directory specified
@@ -2147,24 +2151,24 @@ if(dent == NULL) {
   }
   memmove(c_addr, dent->d_name, u2);
 }
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 close-dir	( wdirid -- wior )	gforth	close_dir
 ""Close the directory specified by @i{dir-id}.""
 wior = IOR(closedir((DIR *)wdirid));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 filename-match	( c_addr1 u1 c_addr2 u2 -- flag )	gforth	match_file
 char * string = cstr(c_addr1, u1, 1);
 char * pattern = cstr(c_addr2, u2, 0);
 flag = FLAG(!fnmatch(pattern, string, 0));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 set-dir	( c_addr u -- wior )	gforth set_dir
 ""Change the current directory to @i{c-addr, u}.
 Return an error if this is not possible""
 wior = IOR(chdir(tilde_cstr(c_addr, u, 1)));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 get-dir	( c_addr1 u1 -- c_addr2 u2 )	gforth get_dir
 ""Store the current directory in the buffer specified by @i{c-addr1, u1}.
@@ -2175,12 +2179,12 @@ if(c_addr2 != NULL) {
 } else {
   u2 = 0;
 }
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 =mkdir ( c_addr u wmode -- wior )        gforth equals_mkdir
 ""Create directory @i{c-addr u} with mode @i{wmode}.""
 wior = IOR(mkdir(tilde_cstr(c_addr,u,1),wmode));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 
@@ -2197,7 +2201,7 @@ static const char newline[] = {
 };
 c_addr=(Char *)newline;
 u=sizeof(newline);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  "newline count ;
 Create "newline e? crlf [IF] 2 c, $0D c, [ELSE] 1 c, [THEN] $0A c,
@@ -2209,7 +2213,7 @@ utime	( -- dtime )	gforth
 struct timeval time1;
 gettimeofday(&time1,NULL);
 dtime = timeval2us(&time1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 cputime ( -- duser dsystem ) gforth
 ""duser and dsystem are the respective user- and system-level CPU
@@ -2228,7 +2232,7 @@ gettimeofday(&time1,NULL);
 duser = timeval2us(&time1);
 dsystem = DZERO;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 
@@ -2242,7 +2246,7 @@ comparisons(f0, r, f_zero_, r, 0., float, gforth, float, gforth)
 s>f	( n -- r )		float	s_to_f
 r = n;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 d>f	( d -- r )		float	d_to_f
 #ifdef BUGGY_LL_D2F
@@ -2260,30 +2264,30 @@ if (DHI(d)<0) {
 r = d;
 #endif
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f>d	( r -- d )		float	f_to_d
 extern DCell double2ll(Float r);
 d = double2ll(r);
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f>s	( r -- n )		float	f_to_s
 n = (Cell)r;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f!	( r f_addr -- )	float	f_store
 ""Store @i{r} into the float at address @i{f-addr}.""
 *f_addr = r;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f@	( f_addr -- r )	float	f_fetch
 ""@i{r} is the float at address @i{f-addr}.""
 r = *f_addr;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 df@	( df_addr -- r )	float-ext	d_f_fetch
 ""Fetch the double-precision IEEE floating-point value @i{r} from the address @i{df-addr}.""
@@ -2293,7 +2297,7 @@ r = *df_addr;
 !! df@
 #endif
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 df!	( r df_addr -- )	float-ext	d_f_store
 ""Store @i{r} as double-precision IEEE floating-point value to the
@@ -2304,7 +2308,7 @@ address @i{df-addr}.""
 !! df!
 #endif
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sf@	( sf_addr -- r )	float-ext	s_f_fetch
 ""Fetch the single-precision IEEE floating-point value @i{r} from the address @i{sf-addr}.""
@@ -2314,7 +2318,7 @@ r = *sf_addr;
 !! sf@
 #endif
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sf!	( r sf_addr -- )	float-ext	s_f_store
 ""Store @i{r} as single-precision IEEE floating-point value to the
@@ -2325,17 +2329,17 @@ address @i{sf-addr}.""
 !! sf!
 #endif
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f+	( r1 r2 -- r3 )	float	f_plus
 r3 = r1+r2;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f-	( r1 r2 -- r3 )	float	f_minus
 r3 = r1-r2;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f*	( r1 r2 -- r3 )	float	f_star
 r3 = r1*r2;
@@ -2355,17 +2359,17 @@ onFloatStackChange();
 fm*	( r1 n -- r2 )	gforth	fm_star
 r2 = r1*n;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 fm/	( r1 n -- r2 )	gforth	fm_slash
 r2 = r1/n;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 fm*/	( r1 n1 n2 -- r2 )	gforth	fm_star_slash
 r2 = (r1*n1)/n2;
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 f**2	( r1 -- r2 )	gforth	fm_square
 r2 = r1*r1;
@@ -2399,12 +2403,12 @@ onFloatStackChange();
 float+	( f_addr1 -- f_addr2 )	float	float_plus
 ""@code{1 floats +}.""
 f_addr2 = f_addr1+1;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 floats	( n1 -- n2 )	float
 ""@i{n2} is the number of address units of @i{n1} floats.""
 n2 = n1*sizeof(Float);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 floor	( r1 -- r2 )	float
 ""Round towards the next smaller integral value, i.e., round toward negative infinity.""
@@ -2453,7 +2457,7 @@ if (!f2) /* workaround Cygwin trailing 0s for Inf and Nan */
 memcpy(c_addr,sig,siglen);
 memset(c_addr+siglen,f2?'0':' ',u-siglen);
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 >float	( c_addr u -- f:... flag )	float	to_float
 ""Actual stack effect: ( c_addr u -- r t | f ).  Attempt to convert the
@@ -2469,7 +2473,7 @@ if (flag) {
   fp[0]=r;
 }
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 fabs	( r1 -- r2 )	float-ext	f_abs
 r2 = fabs(r1);
@@ -2646,19 +2650,19 @@ sfloats	( n1 -- n2 )	float-ext	s_floats
 ""@i{n2} is the number of address units of @i{n1}
 single-precision IEEE floating-point numbers.""
 n2 = n1*sizeof(SFloat);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 dfloats	( n1 -- n2 )	float-ext	d_floats
 ""@i{n2} is the number of address units of @i{n1}
 double-precision IEEE floating-point numbers.""
 n2 = n1*sizeof(DFloat);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sfaligned	( c_addr -- sf_addr )	float-ext	s_f_aligned
 ""@i{sf-addr} is the first single-float-aligned address greater
 than or equal to @i{c-addr}.""
 sf_addr = (SFloat *)((((Cell)c_addr)+(sizeof(SFloat)-1))&(-sizeof(SFloat)));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  [ 1 sfloats 1- ] Literal + [ -1 sfloats ] Literal and ;
 
@@ -2666,7 +2670,7 @@ dfaligned	( c_addr -- df_addr )	float-ext	d_f_aligned
 ""@i{df-addr} is the first double-float-aligned address greater
 than or equal to @i{c-addr}.""
 df_addr = (DFloat *)((((Cell)c_addr)+(sizeof(DFloat)-1))&(-sizeof(DFloat)));
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  [ 1 dfloats 1- ] Literal + [ -1 dfloats ] Literal and ;
 
@@ -2676,7 +2680,7 @@ next at f_addr1+nstride1 and so on (similar for v2). Both vectors have
 ucount elements.""
 r = v_star(f_addr1, nstride1, f_addr2, nstride2, ucount);
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r swap 2swap swap 0e r> 0 ?DO
      dup f@ over + 2swap dup f@ f* f+ over + 2swap
@@ -2686,7 +2690,7 @@ faxpy	( ra f_x nstridex f_y nstridey ucount -- )	gforth
 ""vy=ra*vx+vy""
 faxpy(ra, f_x, nstridex, f_y, nstridey, ucount);
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  >r swap 2swap swap r> 0 ?DO
      fdup dup f@ f* over + 2swap dup f@ f+ dup f! over + 2swap
@@ -2707,23 +2711,23 @@ onDataStackChange();
 
 @local#	( #noffset -- w )	gforth	fetch_local_number
 w = *(Cell *)(lp+noffset);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 @local0	( -- w )	new	fetch_local_zero
 w = ((Cell *)lp)[0];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 @local1	( -- w )	new	fetch_local_four
 w = ((Cell *)lp)[1];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 @local2	( -- w )	new	fetch_local_eight
 w = ((Cell *)lp)[2];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 @local3	( -- w )	new	fetch_local_twelve
 w = ((Cell *)lp)[3];
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+floating
 
@@ -2744,14 +2748,14 @@ onFloatStackChange();
 laddr#	( #noffset -- c_addr )	gforth	laddr_number
 /* this can also be used to implement lp@ */
 c_addr = (Char *)(lp+noffset);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 lp+!#	( #noffset -- )	gforth	lp_plus_store_number
 ""used with negative immediate values it allocates memory on the
 local stack, a positive immediate argument drops memory from the local
 stack""
 lp += noffset;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 lp-	( -- )	new	minus_four_lp_plus_store
 lp += -sizeof(Cell);
@@ -2768,7 +2772,7 @@ lp = (Address)c_addr;
 >l	( w -- )	gforth	to_l
 lp -= sizeof(Cell);
 *(Cell *)lp = w;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+floating
 
@@ -2781,7 +2785,7 @@ fpick	( f:... u -- f:... r )		gforth
 ""Actually the stack effect is @code{ r0 ... ru u -- r0 ... ru r0 }.""
 r = fp[u];
 onFloatStackChange();
-onDataStackChange();
+onDataStackChange(sp, sp0);
 :
  floats fp@ + f@ ;
 
@@ -2794,7 +2798,7 @@ onDataStackChange();
 
 open-lib	( c_addr1 u1 -- u2 )	gforth	open_lib
 u2 = gforth_dlopen(c_addr1, u1);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 lib-sym	( c_addr1 u1 u2 -- u3 )	gforth	lib_sym
 #ifdef HAVE_LIBLTDL
@@ -2809,43 +2813,43 @@ u3 = (Cell) GetProcAddress((HMODULE)u2, cstr(c_addr1, u1, 1));
 u3 = 0;
 #  endif
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 wcall	( ... u -- ... )	gforth
 gforth_FP=fp;
 sp=(Cell*)(SYSCALL(Cell*(*)(Cell *, void *))u)(sp, &gforth_FP);
 fp=gforth_FP;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 uw@ ( c_addr -- u )	gforth u_w_fetch
 ""@i{u} is the zero-extended 16-bit value stored at @i{c_addr}.""
 u = *(UWyde*)(c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sw@ ( c_addr -- n )	gforth s_w_fetch
 ""@i{n} is the sign-extended 16-bit value stored at @i{c_addr}.""
 n = *(Wyde*)(c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 w! ( w c_addr -- )	gforth w_store
 ""Store the bottom 16 bits of @i{w} at @i{c_addr}.""
 *(Wyde*)(c_addr) = w;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 ul@ ( c_addr -- u )	gforth u_l_fetch
 ""@i{u} is the zero-extended 32-bit value stored at @i{c_addr}.""
 u = *(UTetrabyte*)(c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 sl@ ( c_addr -- n )	gforth s_l_fetch
 ""@i{n} is the sign-extended 32-bit value stored at @i{c_addr}.""
 n = *(Tetrabyte*)(c_addr);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 l! ( w c_addr -- )	gforth l_store
 ""Store the bottom 32 bits of @i{w} at @i{c_addr}.""
 *(Tetrabyte*)(c_addr) = w;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 lib-error ( -- c_addr u )       gforth  lib_error
 ""Error message for last failed @code{open-lib} or @code{lib-sym}.""
@@ -2856,7 +2860,7 @@ u = (c_addr == NULL) ? 0 : strlen((char *)c_addr);
 c_addr = "libltdl is not configured";
 u = strlen(c_addr);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 \g peephole
@@ -2866,7 +2870,7 @@ onDataStackChange();
 compile-prim1 ( a_prim -- ) gforth compile_prim1
 ""compile prim (incl. immargs) at @var{a_prim}""
 compile_prim1(a_prim);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 finish-code ( ... -- ... ) gforth finish_code
 ""Perform delayed steps in code generation (branch resolution, I-cache
@@ -2874,7 +2878,7 @@ flushing).""
 /* The ... above are a workaround for a bug in gcc-2.95, which fails
    to save spTOS (gforth-fast --enable-force-reg) */
 finish_code();
-onDataStackChange();/* TODO what? */
+onDataStackChange(sp, sp0);/* TODO what? */
 
 forget-dyncode ( c_code -- f ) gforth-internal forget_dyncode
 f = forget_dyncode(c_code);
@@ -2883,7 +2887,7 @@ decompile-prim ( a_code -- a_prim ) gforth-internal decompile_prim
 ""a_prim is the code address of the primitive that has been
 compile_prim1ed to a_code""
 a_prim = (Cell *)decompile_code((Label)a_code);
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \ set-next-code and call2 do not appear in images and can be
 \ renumbered arbitrarily
@@ -2892,7 +2896,7 @@ set-next-code ( #w -- ) gforth set_next_code
 #ifdef NO_IP
 next_code = (Label)w;
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 call2 ( #a_callee #a_ret_addr -- R:a_ret_addr ) gforth
 /* call with explicit return address */
@@ -2902,13 +2906,13 @@ JUMP(a_callee);
 #else
 assert(0);
 #endif
-onDataStackChange();
+onDataStackChange(sp, sp0);
 onReturnStackChange();
 
 tag-offsets ( -- a_addr ) gforth tag_offsets
 extern Cell groups[32];
 a_addr = groups;
-onDataStackChange();
+onDataStackChange(sp, sp0);
 
 \+
 

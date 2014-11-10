@@ -416,7 +416,7 @@ Cell strstartswith(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 void onReturnStackChange();
 
 /* called on data stack modifications */
-void onDataStackChange();
+void onDataStackChange(Cell *sp, Cell *sp0);
 
 /* called on floating point stack modifications */
 void onFloatStackChange();
@@ -462,6 +462,7 @@ extern Cell npriminfos;
 
 /* mga TODO how do we not compile that in ??! */
 extern Cell gfvis_enabled;
+extern FILE *stdvis;
 extern Address gfvis_here; /* us Cell or Address?*/
 /* /mga */
 
