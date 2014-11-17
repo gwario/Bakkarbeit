@@ -24,6 +24,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
@@ -2391,6 +2392,26 @@ int main(int argc, char **argv, char **env)
   return retvalue;
 }
 
+int fprint_stdvis(const char *format, ...)
+{
+	
+	va_list argp;
+	va_start(argp, format);
+	
+	int ret = vfprintf(stdvis, format, argp);
+	if(ret < 0)
+		fprintf(stderr, "Failed to print to stdvis!\n");
+
+	va_end(argp);	
+	
+	if(putc(0x0D, stdvis) == EOF)
+		fprintf(stderr, "Failed to send 0x0D to stdvis!\n");
+	if(putc(0x0A, stdvis) == EOF)
+		fprintf(stderr, "Failed to send 0x0A to stdvis!\n");
+	
+	return ret;
+}
+
 /* mga */
 void onReturnStackChange()
 {
@@ -2404,16 +2425,11 @@ void onDataStackChange(Cell *sp, Cell *sp0)
 	if (!gfvis_enabled)
 		return;
 	
-	/*fprintf(stderr, "R: TEST\n");
-	fprintf(stderr, "D: <%d>\n",dsize);
-	UCell i;*/
-	/*for(i = 0; i < ; i++) {
-	fprintf(stderr, "%d", *sp0);
-	fprintf(stderr, "%d", sp[0]);
-	}*/
-	/*fprintf(stdvis, "exit\n");*/
+	//fprintf(stderr, "D: TEST\n");
 	int dstacksize = &sp - &sp0;
-	fprintf(stdvis, "sp: %d    sp0: %d    sp - sp0: %d    sizeof(Cell): %d    tos: %016lx \n", &sp, &sp0, dstacksize, sizeof(Cell), sp[0]);
+	
+	fprint_stdvis("sp: %d    sp0: %d    sp - sp0: %d    sizeof(Cell): %d    tos: %016lx", &sp, &sp0, dstacksize, sizeof(Cell), sp[0]);
+	
 	fflush(stdvis);
 }
 
@@ -2422,11 +2438,10 @@ void onFloatStackChange()
 	if (!gfvis_enabled)
 		return;
 
-	/*fprintf(stderr, "F: TEST\n");*/
+	//int dstacksize = &fp - &fp0;
+	
+	//fprint_stdvis("fp: %d    fp0: %d    fp - fp0: %d    sizeof(Cell): %d    tos: %016lx", &fp, &fp0, dstacksize, sizeof(Cell), sp[0]);
+	
+	//fflush(stdvis);
 }
-
-/*void printStack(UCell from, UCell to, Cell *stack) {
-UCell fp_stack_size;
-UCell return_stack_size;
-}*/
 /* /mga */
