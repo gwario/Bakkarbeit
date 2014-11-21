@@ -412,14 +412,8 @@ Cell capscompare(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 /* mga */
 Cell strstartswith(Char *c_addr1, UCell u1, Char *c_addr2, UCell u2);
 
-/* called on return stack modifications */
-void onReturnStackChange();
-
-/* called on data stack modifications */
-void onDataStackChange(Cell *sp, Cell *sp0);
-
-/* called on floating point stack modifications */
-void onFloatStackChange();
+/* called on stack modifications */
+void onStackChange(Cell *sp, Cell *sp0, Float *fp, Float *fp0, Cell *rp, Cell *rp0);
 /* /mga */
 
 /* signal handler stuff */

@@ -308,7 +308,7 @@ void throw(int code)
 #endif /* ENGINE */
 
 /* the asm(""); is there to get a stop compiled on Itanium */
-#define LABEL2(name) K_##name: asm("");
+#define LABEL2(name)  /* mga */onStackChange(sp, sp0, fp, fp0, rp, rp0);/* /mga */ K_##name: asm("");
 
 Label *gforth_engine(Xt *ip0, Cell *sp0, Cell *rp0, Float *fp0, Address lp0 sr_proto)
 /* executes code at ip, if ip!=NULL

@@ -1,10 +1,11 @@
 create xterm s" xterm -Sab0 -g 150x15" 2,
-create pkillyterm s\" sh -c \"pkill -SIGTERM -f \"xterm -Sab0 -g 150x15\"\"" 2,
+create pkillxterm s\" sh -c \"pkill -SIGTERM -f \"xterm -Sab0 -g 150x15\"\"" 2,
 create dotty s" dotty" 2,
 create pkilldotty s\" sh -c \"pkill -SIGTERM -f \"dotty\"\"" 2,
 
-\ xterm 2@ w/o open-pipe throw constant visfile-id
-dotty 2@ w/o open-pipe throw constant visfile-id
+xterm 2@ w/o open-pipe throw constant visfile-id
+\ dotty 2@ w/o open-pipe throw constant visfile-id
+
 
 : .status1 ( -- )
     #cr emit cr ." base= " base @ dec.
@@ -28,8 +29,8 @@ visfile-id gfvis-fid
 
 : gfvis-close ( -- )
 	\ visfile-id close-pipe .s \ does not work
-	\ pkillxterm 2@ w/o open-pipe throw drop
-	pkilldotty 2@ w/o open-pipe throw drop
+	pkillxterm 2@ w/o open-pipe throw drop
+	\ pkilldotty 2@ w/o open-pipe throw drop
 ;
 
 : bye ( -- )

@@ -2392,56 +2392,75 @@ int main(int argc, char **argv, char **env)
   return retvalue;
 }
 
+/* mga */
 int fprint_stdvis(const char *format, ...)
 {
-	
+	int ret;
 	va_list argp;
 	va_start(argp, format);
 	
-	int ret = vfprintf(stdvis, format, argp);
+	ret = vfprintf(stdvis, format, argp);
 	if(ret < 0)
 		fprintf(stderr, "Failed to print to stdvis!\n");
 
 	va_end(argp);	
 	
-	if(putc(0x0D, stdvis) == EOF)
-		fprintf(stderr, "Failed to send 0x0D to stdvis!\n");
-	if(putc(0x0A, stdvis) == EOF)
-		fprintf(stderr, "Failed to send 0x0A to stdvis!\n");
+	printcrlf();
 	
 	return ret;
 }
 
-/* mga */
-void onReturnStackChange()
-{
-	if (!gfvis_enabled)
-		return;
-	/*fprintf(stderr, "R: TEST\n");*/
+void printcrlf() {
+	
+	if(putc(0x0D, stdvis) == EOF)
+			fprintf(stderr, "Failed to send 0x0D to stdvis!\n");
+	if(putc(0x0A, stdvis) == EOF)
+		fprintf(stderr, "Failed to send 0x0A to stdvis!\n");
 }
 
-void onDataStackChange(Cell *sp, Cell *sp0)
+void dprintstack(Cell *sp0, Cell *sp) {
+	
+	int ddepth = sp0 - sp;
+	
+	if(ddepth > 1)
+	{
+		//TODO asjust xp= sp+4
+		fprintf(stdvis, "<%d> ", --ddepth);
+		for(ddepth += 4; 5 <= ddepth; ddepth-- )
+			fprintf(stdvis, " (%d) %016ld ", ddepth, *(sp+ddepth));
+		
+	} else {
+		fprintf(stdvis, "<0> ");
+	}
+	
+	printcrlf();
+}
+
+void rprintstack(Cell *rp0, Cell *rp) {
+	
+	int rdepth = rp0 - rp;
+	
+	if(rdepth > 0)
+	{
+		fprintf(stdvis, "<%d> ", rdepth);
+		for(rdepth--; 0 <= rdepth; rdepth-- )
+			fprintf(stdvis, "%016ld ", *(rp+rdepth+4));
+		
+	} else {
+		fprintf(stdvis, "<0> ");
+	}
+	
+	printcrlf();
+}
+
+void onStackChange(Cell *sp, Cell *sp0, Float *fp, Float *fp0, Cell *rp, Cell *rp0)
 {
 	if (!gfvis_enabled)
 		return;
 	
-	//fprintf(stderr, "D: TEST\n");
-	int dstacksize = &sp - &sp0;
-	
-	fprint_stdvis("sp: %d    sp0: %d    sp - sp0: %d    sizeof(Cell): %d    tos: %016lx", &sp, &sp0, dstacksize, sizeof(Cell), sp[0]);
+	dprintstack(sp0, sp);
+	//rprintstack(rp0, rp);
 	
 	fflush(stdvis);
-}
-
-void onFloatStackChange()
-{
-	if (!gfvis_enabled)
-		return;
-
-	//int dstacksize = &fp - &fp0;
-	
-	//fprint_stdvis("fp: %d    fp0: %d    fp - fp0: %d    sizeof(Cell): %d    tos: %016lx", &fp, &fp0, dstacksize, sizeof(Cell), sp[0]);
-	
-	//fflush(stdvis);
 }
 /* /mga */

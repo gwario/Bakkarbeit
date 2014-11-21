@@ -428,11 +428,9 @@ RCS_FILES =  ToDo model high-level
 
 ENGINES = gforth$(EC)$(EXE) gforth-ditc$(EC)$(EXE) gforth-itc$(EC)$(EXE) $(PROFEXES)
 
-ENGINES_VIS = gforth-vis$(EC)$(EXE)
-
 ENGINES_FAST = gforth-fast$(OPT)$(EC)$(EXE) #gforth-native$(OPT)$(EC)$(EXE) 
 
-GEN = $(ENGINES) $(ENGINES_FAST) $(ENGINES_VIS) gforth.elc
+GEN = $(ENGINES) $(ENGINES_FAST) gforth.elc
 
 # things that need a working forth system to be generated
 FORTH_GEN_ENGINE=engine/prim.i engine/prim_lab.i engine/prim_names.i \
@@ -444,10 +442,6 @@ FORTH_GEN_ENGINE_FAST= \
 	engine/prim_superend-fast.i engine/profile-fast.i \
 	engine/prim_num-fast.i engine/prim_grp-fast.i \
 	engine/costs-fast.i engine/super2-fast.i
-FORTH_GEN_ENGINE_VIS=engine/prim-vis.i engine/prim_lab-vis.i engine/prim_names-vis.i \
-	engine/prim_superend-vis.i engine/profile-vis.i \
-	engine/prim_num-vis.i engine/prim_grp-vis.i \
-	engine/costs-vis.i engine/super2-vis.i
 FORTH_GEN_PRIMB = $(FORTH_GEN_ENGINE) kernel/aliases.fs kernel/prim.fs
 FORTH_GEN0 = prim.b $(FORTH_GEN_PRIMB)
 FORTH_GEN =  $(FORTH_GEN0) @KERNEL@ gforth.fi
@@ -529,20 +523,18 @@ docclean:	FORCE
 
 clean:		mostlyclean
 	-$(RM) -rf $(GEN) *.o engine/*.o arch/*/*.o version \
-	gforth-vis-noll$(EC)$(EXE) engine/gforth-vis-noll$(EC)$(EXE) \
 	gforth-itc-noll$(EC)$(EXE)  engine/gforth-itc-noll$(EC)$(EXE)  \
 	gforth-ditc-noll$(EC)$(EXE) engine/gforth-ditc-noll$(EC)$(EXE) \
 	gforth-prof-noll$(EC)$(EXE) engine/gforth-prof-noll$(EC)$(EXE) \
 	engine/prim-s.i
-	for i in gforth gforth-vis gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
+	for i in gforth gforth-fast gforth-native; do for j in $(OPTS); do rm -f engine/$$i$${j}$(EC)$(EXE) $$i$${j}$(EC)$(EXE); done; done
 
 distclean:	clean
 		-$(RM) -rf config.cache config.log config.status \
 		engine/config.h Makefile Makedist engine/Makefile \
 		stamp-h engine/stamp-h \
 		doc/version.texi gforthmi vmgen preforth \
-		prim-fast.b $(FORTH_GEN_ENGINE_FAST) \
-		prim-vis.b $(FORTH_GEN_ENGINE_VIS)
+		prim-fast.b $(FORTH_GEN_ENGINE_FAST)
 
 #realclean is useless, but dangerous, so it's commented out
 realclean:	distclean
@@ -787,18 +779,11 @@ prim-fast.b:	prim cache-fast$(STACK_CACHE_DEFAULT_FAST).vmg cache-regs$(STACK_CA
 		(cd $(srcdir) && $(M4) -Dcondbranch_opt=@condbranch_opt@ -DSTACK_CACHE_FILE=cache-fast$(STACK_CACHE_DEFAULT_FAST).vmg -DSTACK_CACHE_REGS=cache-regs$(STACK_CACHE_REGS).vmg prim) >$@
 		sleep 1 #should make hpux-workaround unnecessary
 
-prim-vis.b:	prim cache0.vmg
-		(cd $(srcdir) && $(M4) -DVIS -Dcondbranch_opt=0 prim) >$@
-		sleep 1 #should make hpux-workaround unnecessary
-
 $(FORTH_GEN_ENGINE_FAST): prim-fast.b prims2x.fs
 		GFORTH="$(PREFORTH)" $(srcdir)/gfgen -fast
 
 $(FORTH_GEN_ENGINE): prim.b prims2x.fs
 		GFORTH="$(PREFORTH)" $(srcdir)/gfgen
-
-$(FORTH_GEN_ENGINE_VIS): prim-vis.b prims2x.fs
-		GFORTH="$(PREFORTH)" $(srcdir)/gfgen -vis
 
 engine/prim-s.i: engine/prim.i
 	grep -v '^#line ' $(srcdir)/engine/prim.i >$@
@@ -837,20 +822,6 @@ gforth$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE) engine/config.h @
 optgforth:
 	$(MAKE) gforth$(OPT)$(EC)$(EXE) $(MAKELINE$(OPT))
 
-gforth-vis$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE_VIS) engine/config.h @kernel_anti_dependence@
-	if test -z "$(OPT)"; then \
-		for i in $(OPTS); do $(MAKE) optgforth-vis OPT=$$i && $(CP) gforth-vis$${i}$(EC)$(EXE) $@ && break; done; \
-	else \
-		( cd engine && $(MAKE) $@ ) && \
-		$(CP) engine/$@ $@ && \
-		$(MASSAGE_EXE) $@; \
-		@GFORTHVIS_EXE@; \
-		@NO_CHECK@$(MAKE) checkone check-nofast ENGINE=./engine/$@; \
-	fi
-
-optgforth-vis:
-	$(MAKE) gforth-vis$(OPT)$(EC)$(EXE) $(MAKELINE$(OPT))
-
 gforth-fast$(OPT)$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE_FAST) engine/config.h
 	if test -z "$(OPT)"; then \
 		for i in $(OPTS); do $(MAKE) optgforth-fast OPT=$$i && $(CP) gforth-fast$${i}$(EC)$(EXE) $@ && break; done; \
@@ -884,7 +855,7 @@ gforth-prof$(EC)$(EXE): $(ENGINE_SOURCES) $(FORTH_GEN_ENGINE) engine/Makefile en
 		cd engine && $(MAKE) gforth-prof-noll$(EC)$(EXE) $(MAKELINE-noll)
 		$(CP) engine/gforth-prof-noll$(EC)$(EXE) $@
 
-gforths: $(ENGINES) $(ENGINES_FAST) $(ENGINES_VIS)
+gforths: $(ENGINES) $(ENGINES_FAST)
 
 # ------------- additional C primitives
 

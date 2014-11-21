@@ -108,7 +108,6 @@ AOBJECTS = @signals_o@ support$(OPT).o @LIBOBJS@ $(OPTOBJECTS)
 @MAKEINC@
 
 OBJECTS = engine$(OPT).o @engine2@ main$(OPT).o
-OBJECTS_VIS = engine-vis$(OPT).o @engine_vis2@ main-vis$(OPT).o
 OBJECTS_NATIVE = engine-native$(OPT).o engine-native2$(OPT).o engine-native3$(OPT).o main-native$(OPT).o
 OBJECTS_FAST = engine-fast$(OPT).o @engine_fast2@ main-fast$(OPT).o
 OBJECTS_ITC = engine-itc$(OPT).o main-itc$(OPT).o
@@ -123,8 +122,6 @@ ENGINE_DEPS = engine.c $(DEPS) prim_lab.i prim.i @image_i@ fnmatch.h threaded.h
 MAIN_DEPS = main.c $(DEPS) prim_superend.i prim_num.i prim_grp.i costs.i super2.i
 ENGINE_FAST_DEPS = engine.c $(DEPS) prim_lab-fast.i prim-fast.i fnmatch.h threaded.h
 MAIN_FAST_DEPS = main.c $(DEPS) prim_superend-fast.i prim_num-fast.i prim_grp-fast.i costs-fast.i super2-fast.i
-ENGINE_VIS_DEPS = engine.c $(DEPS) prim_lab-vis.i prim-vis.i fnmatch.h threaded.h
-MAIN_VIS_DEPS = main.c $(DEPS) prim_superend-vis.i prim_num-vis.i prim_grp-vis.i costs-vis.i super2-vis.i
 
 #some makes don't do the -o $@ correctly, so we help them
 .c.o:
@@ -136,9 +133,6 @@ MAIN_VIS_DEPS = main.c $(DEPS) prim_superend-vis.i prim_num-vis.i prim_grp-vis.i
 support$(OPT).o: support.c config.h forth.h longlong.h
 	$(GCC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $(srcdir)/support.c
 
-support-vis$(OPT).o: support.c config.h forth.h longlong.h
-	$(GCC) -c $(CFLAGS) $(CPPFLAGS) -DVIS -o $@ $(srcdir)/support.c
-
 strtol.o: strtol.c ansidecl.h
 
 fnmatch.o: fnmatch.c fnmatch.h
@@ -149,9 +143,6 @@ getopt.o: getopt.c getopt.h
 
 gforth$(OPT)$(EC)$(EXE):	$(OBJECTS) $(AOBJECTS) $(LTDLDEPS)
 	$(GCCLD) $(LDFLAGS) $(OBJECTS) $(AOBJECTS) $(LDLIBS) -o $@
-
-gforth-vis$(OPT)$(EC)$(EXE):	$(OBJECTS_VIS) $(AOBJECTS) $(LTDLDEPS)
-	$(GCCLD) $(LDFLAGS) $(OBJECTS_VIS) $(AOBJECTS) $(LDLIBS) -DVIS -o $@
 
 gforth-native$(OPT)$(EC)$(EXE):	$(OBJECTS_NATIVE) $(AOBJECTS) $(LTDLDEPS)
 	$(GCCLD) $(LDFLAGS) $(OBJECTS_NATIVE) $(AOBJECTS) $(LDLIBS) -o $@
@@ -180,12 +171,6 @@ engine$(OPT).o:	$(ENGINE_DEPS)
 engine2$(OPT).o:	$(ENGINE_DEPS)
 		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DGFORTH_DEBUGGING -DENGINE=2 -o $@ -c $(srcdir)/engine.c
 
-engine-vis$(OPT).o:	$(ENGINE_VIS_DEPS)
-		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DVIS -DGFORTH_DEBUGGING -o $@ -c $(srcdir)/engine.c
-
-engine-vis2$(OPT).o:	$(ENGINE_VIS_DEPS)
-		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DVIS -DGFORTH_DEBUGGING -DENGINE=2 -o $@ -c $(srcdir)/engine.c
-
 engine-native$(OPT).o:$(ENGINE_FAST_DEPS)
 		$(GCC) $(CFLAGS2) $(CPPFLAGS) $(ENGINE_FLAGS) -DNO_IP -o $@ -c $(srcdir)/engine.c
 
@@ -212,9 +197,6 @@ engine-prof$(OPT).o:	$(ENGINE_DEPS)
 
 main$(OPT).o:		$(MAIN_DEPS) 
 		$(GCC) $(CFLAGS) $(CPPFLAGS) -DGFORTH_DEBUGGING @no_dynamic@ -o $@ -c $(srcdir)/main.c
-
-main-vis$(OPT).o:	$(MAIN_VIS_DEPS) 
-		$(GCC) $(CFLAGS) $(CPPFLAGS) -DVIS -DGFORTH_DEBUGGING @no_dynamic@ -o $@ -c $(srcdir)/main.c
 
 main-native$(OPT).o:	$(MAIN_FAST_DEPS) 
 		$(GCC) $(CFLAGS) $(CPPFLAGS) -DNO_IP -o $@ -c $(srcdir)/main.c
