@@ -2410,7 +2410,8 @@ int fprint_stdvis(const char *format, ...)
 	return ret;
 }
 
-void printcrlf() {
+void printcrlf()
+{
 	
 	if(putc(0x0D, stdvis) == EOF)
 			fprintf(stderr, "Failed to send 0x0D to stdvis!\n");
@@ -2418,48 +2419,116 @@ void printcrlf() {
 		fprintf(stderr, "Failed to send 0x0A to stdvis!\n");
 }
 
-void dprintstack(Cell *sp0, Cell *sp) {
+void corr_dprintstack(Cell *sp0, Cell *sp)
+{
 	
 	int ddepth = sp0 - sp;
 	
 	if(ddepth > 1)
 	{
-		//TODO asjust xp= sp+4
-		fprintf(stdvis, "<%d> ", --ddepth);
+		fprintf(stdvis, "D: <%d> ", --ddepth);
 		for(ddepth += 4; 5 <= ddepth; ddepth-- )
-			fprintf(stdvis, " (%d) %016ld ", ddepth, *(sp+ddepth));
+			fprintf(stdvis, "%016ld ", *(sp+ddepth));
 		
 	} else {
-		fprintf(stdvis, "<0> ");
+		fprintf(stdvis, "D: <0> ");
 	}
 	
 	printcrlf();
 }
 
-void rprintstack(Cell *rp0, Cell *rp) {
+void rprintstack(Cell *rp0, Cell *rp)
+{
 	
 	int rdepth = rp0 - rp;
 	
 	if(rdepth > 0)
 	{
-		fprintf(stdvis, "<%d> ", rdepth);
+		fprintf(stdvis, "R: <%d> ", rdepth);
 		for(rdepth--; 0 <= rdepth; rdepth-- )
-			fprintf(stdvis, "%016ld ", *(rp+rdepth+4));
+			fprintf(stdvis, "%016ld ", *(rp+rdepth));
 		
 	} else {
-		fprintf(stdvis, "<0> ");
+		fprintf(stdvis, "R: <0> ");
 	}
 	
 	printcrlf();
 }
 
-void onStackChange(Cell *sp, Cell *sp0, Float *fp, Float *fp0, Cell *rp, Cell *rp0)
+void fprintstack(Float *fp0, Float *fp)
 {
+	
+	int fdepth = fp0 - fp;
+	
+	if(fdepth > 0)
+	{
+		fprintf(stdvis, "F: <%d> ", fdepth);
+		for(fdepth--; 0 <= fdepth; fdepth-- )
+			fprintf(stdvis, "%016lf ", *(fp+fdepth));
+		
+	} else {
+		fprintf(stdvis, "F: <0> ");
+	}
+	
+	printcrlf();
+}
+
+typedef enum { false, true } bool;
+
+bool compare_string(char *first, char *second)
+{
+   while(*first==*second)
+   {
+      if ( *first == '\0' || *second == '\0' )
+         break;
+ 
+      first++;
+      second++;
+   }
+   if( *first == '\0' && *second == '\0' )
+      return true;
+   else
+      return false;
+}
+
+bool blacklisted(char *wordname)
+{
+	char *blacklist[] = {
+	"call",
+	"lit_fetch",
+	"store",
+	"semis",
+	"form",
+	"lit",
+	"lit_perform",
+	"paren_docol",
+	"question_branch",
+	"useraddr",
+	};
+	int len;
+	int i;
+	for(i = 0, len = sizeof blacklist / sizeof *blacklist; i < len; i++)
+		if(compare_string(blacklist[i], wordname) == true)
+			return true;
+		
+	return false;
+}
+
+void onStackChange(char* wordname, Cell *sp, Cell *sp0, Float *fp, Float *fp0, Cell *rp, Cell *rp0)
+{
+	//TODO maybe start vis here if wordname is gfvis_on to start logging after gfvis-on was processed....
+	
 	if (!gfvis_enabled)
 		return;
 	
-	dprintstack(sp0, sp);
-	//rprintstack(rp0, rp);
+	if(blacklisted(wordname))
+		return;
+	
+	fprintf(stdvis, "-- %s --", wordname);
+	printcrlf();
+	corr_dprintstack(sp0, sp);
+	fprintstack(fp0, fp);
+	rprintstack(rp0, rp);
 	
 	fflush(stdvis);
 }
