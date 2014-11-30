@@ -1,0 +1,8 @@
+digraph dstack {
+	abc [shape=none, margin=0, label=<
+	<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+	<tr><td>12</td></tr>
+	<tr><td>13</td></tr>
+	</table>
+>];
+}

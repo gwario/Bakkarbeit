@@ -1,4 +1,4 @@
-digraph G {
+digraph gfvis {
 	main -> parse -> execute;
 	main -> inti;
 	main -> cleanup;

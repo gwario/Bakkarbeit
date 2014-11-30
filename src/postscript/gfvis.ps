@@ -1,0 +1,61 @@
+%!PS
+/word (word) def
+/datastack [ (1234) (2345) (3456) (4567) (5678) (6789) (7890) (8901) (9012) ] def
+
+/stackline (------------) def
+/stackline_len { stackline stringwidth pop } def
+/dstackname ( data stack ) def
+/dstackname_len { dstackname stringwidth pop } def
+/arrow (   ->     ) def
+/arrow_len { arrow stringwidth pop } def
+
+/bottommargin 5 def
+/leftmargin 5 def
+
+/setwordcolor { 1 0 0 setrgbcolor } def
+
+/setstackfont {
+	/Courier 4 selectfont
+} def
+
+/movetoorigin {
+	leftmargin bottommargin moveto
+} def
+
+
+/stackindent { % word -- word
+	dup stringwidth pop stackline_len 2 -1 roll sub 0 rmoveto 
+} def
+/wordindent { % word -- % prints half of the word x-padding
+	stringwidth pop stackline_len 2 -1 roll sub 2 div 0 rmoveto 
+} def
+
+
+/printstack { % --
+	dstackname show gsave
+	dstackname_len -1 mul 4 rmoveto % move back and up
+	stackline show stackline_len -1 mul 4 rmoveto % move back and up
+	datastack { gsave stackindent show grestore 0 4 rmoveto } forall % print stack items
+	grestore
+} def
+
+/printword { % -- 
+	currentrgbcolor 3 -1 roll %backup color
+	setwordcolor
+	word wordindent word show word wordindent gsave
+	arrow_len -1 mul 4 rmoveto % move back and up
+	arrow show arrow_len -1 mul 4 rmoveto % move back and up
+	grestore
+	setrgbcolor
+} def
+
+setstackfont
+movetoorigin
+
+printstack printword
+/word (verylongword) def
+/datastack [ (1234) (2345) (3456) (4567) (5678) (6789) (7890) (8901) (9012) ] def
+printstack printword
+(X) show
+
+%showpage

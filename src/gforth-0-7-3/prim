@@ -1197,7 +1197,7 @@ starts-with?	( c_addr1 u1 c_addr2 u2 -- n )	gforth	starts_with_query
 ""@i{n} is true if the string at @i{c_addr1, u1} begins with the string in @i{c_addr2, u2}""
 n = strstartswith(c_addr1, u1, c_addr2, u2);
 
-gfvis-fid	( wfileid -- )	gforth gfvis_fid
+set-gfvis-fid	( wfileid -- )	gforth set_gfvis_fid
 ""@i{wfileid} is the file descriptor of the pipe to send the data structure changes to."" 
 stdvis = wfileid;
 
