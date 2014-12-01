@@ -53,19 +53,68 @@ s" pwd" system
 
 \ create trace file
 s" gfvis.ps" r/o open-file throw constant templatefile-id
-s" trace.ps" w/o create-file throw constant tracefile-id
+s" trace.ps" r/w create-file throw constant tracefile-id
 \ s" %!PS" tracefile-id write-line throw
 
 9999 constant max-line
 create line-buffer max-line 2 + allot
 
+create boundingbox-def s" %%BoundingBox:" 2,
+create cellwidth-def s" /cellwidth " 2,
+create wordcellwidth-def s" /wordcellwidth " 2,
+
+variable cellwidth
+variable wordcellwidth
+variable boundingboxwidth
+
+: parse-boundingboxwidth ( c-addr u -- boundingboxwidth )
+	610 \ TODO parse for real
+;
+: parse-cellwidth ( c-addr u -- cellwidth )
+	70 \ TODO parse for real
+;
+: parse-wordcellwidth ( c-addr u -- wordcellwidth )
+	50 \ TODO parse for real
+;
+
+\ copies the template's content to the trace file, parsing the cell width of stack and word as well as the initial boundingbox width
 : copy-template ( -- )
 	begin
 		line-buffer max-line templatefile-id read-line throw
 	while
+		dup line-buffer swap max-line boundingbox-def 2@ starts-width? if
+			dup line-buffer swap parse-boundingboxwidth boundingboxwidth !
+			." BoundingBox definition found!"
+		else
+			dup line-buffer swap max-line cellwidth-def 2@ starts-width? if
+				dup line-buffer swap parse-cellwidth cellwidth !
+				." cellwidth definition found!"
+			else
+				dup line-buffer swap max-line wordcellwidth-def starts-width? if
+					dup line-buffer swap parse-wordcellwidth wordcellwidth !
+					." wordcellwidth definition found!"
+				endif
+			endif
+		endif
+		
 		line-buffer swap tracefile-id write-line throw
 	repeat
 	drop
+;
+
+\ updates the boundingbox size: adds the cellwidth and the wordcellwidth 
+: update-boundingbox ( -- )
+	\ TODO reposition to the beginning
+	begin
+		line-buffer max-line trace-id read-line throw
+	while
+		dup line-buffer swap max-line s" %%BoundingBox:" starts-width? if
+			\ modify line-buffer to change width by 
+			line-buffer swap tracefile-id write-line throw
+		enif
+	repeat
+	drop
+	\ TODO reposition to the end
 ;
 
 copy-template templatefile-id close-file throw
@@ -111,7 +160,7 @@ run-ghostview-working
 create num$ 64 chars allot
 
 : write-word-def ( word -- )
-	s" /word (" pad place
+	s" /wordname (" pad place
 	pad +place
 	s" ) def" pad +place
 	pad count tracefile-id write-line throw
@@ -133,15 +182,16 @@ create num$ 64 chars allot
 	s" ] def" tracefile-id write-line throw
 ;
 
-: write-commands
-	s" printword printstack" tracefile-id write-line throw
+: write-command
+	s" printupdate" tracefile-id write-line throw
 ;
 
 
 : .ps-update ( -- )
 	s\" test" write-word-def
 	write-datastack-def
-	write-commands
+	write-command
+	updage-boundingbox tracefile-id throw
 ;
 
 
