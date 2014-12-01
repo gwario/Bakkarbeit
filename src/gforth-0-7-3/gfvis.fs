@@ -2,7 +2,8 @@
 \ create pkillxterm s\" sh -c \"pkill -SIGTERM -f \"xterm -Sab0 -g 150x15\"\"" 2,
 \ xterm 2@ w/o open-pipe throw constant visfile-id
 
-create PWD s" PWD" getenv 2, 
+create PWD s" PWD" getenv 2,
+s" pwd" system
 
 : run-ghostview ( -- )
 	s" gv --ad=" pad place
