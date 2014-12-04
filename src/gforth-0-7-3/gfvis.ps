@@ -1,5 +1,6 @@
 %!PS
-%%BoundingBox: 0 0 70 610
+%%BoundingBox: 0 0 2000 610
+%BoundingBox: 0 0 70 610
 /cellwidth { 70 } def %C increase to modify stack width
 /wordcellwidth { 50 } def %C increase to modify word width
 
@@ -13,7 +14,7 @@
 /floatstack [ ] def
 /returnstack [ ] def
 
-/stackline (--------------) def
+/stackline (----------------) def
 /arrow (---->) def
 
 /setwordcolor { 1 0 0 setrgbcolor } def
@@ -119,8 +120,7 @@
 	(float stack) floatstack printstack
 	rmovetonextstackarea
 	(return stack) returnstack printstack
-	rmovetofirststackarea
-	gsave
+	grestore
 	rmovetonextwordcell
 } def
 
@@ -135,7 +135,6 @@ rmovetonextstackarea
 (float stack) floatstack printstack
 rmovetonextstackarea
 (return stack) returnstack printstack
-rmovetofirststackarea
 grestore
 rmovetonextwordcell
 

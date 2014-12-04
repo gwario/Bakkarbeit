@@ -45,8 +45,8 @@ s" pwd" system
 
 \ what's wrong?
 : goto-eof ( fid -- )
-	dup ( c-addr n fid fid ) cr .s file-size ( c-addr n fid size wior wior ) cr .s throw drop ( c-addr n fid size ) cr .s
-	over ( c-addr n fid size fid ) cr .s reposition-file ( c-addr n fid wior ) cr .s throw ( c-addr n fid ) cr .s
+	dup ( fid fid ) file-size ( fid size-l size-h wior ) throw ( fid size-l size-h )
+	rot ( size-l size-h fid ) reposition-file ( wior ) throw
 ;
 
 
@@ -68,34 +68,74 @@ variable wordcellwidth
 variable boundingboxwidth
 
 : parse-boundingboxwidth ( c-addr u -- boundingboxwidth )
+	2drop
 	610 \ TODO parse for real
 ;
 : parse-cellwidth ( c-addr u -- cellwidth )
+	2drop
 	70 \ TODO parse for real
 ;
 : parse-wordcellwidth ( c-addr u -- wordcellwidth )
+	2drop
 	50 \ TODO parse for real
+;
+
+\ changes the font format using ansi control characters
+
+
+: color-blue ( -- )
+   27 emit ." [1;34m"
+;
+
+: color-green ( -- )
+   27 emit ." [1;32m"
+;
+
+: color-red ( -- )
+   27 emit ." [1;31m"
+;
+
+\ changes the font format using ansi control characters
+\ resets to normal
+: font-normal ( -- )
+   27 emit ." [0m"
+;
+
+: log-parsed-line ( c-addr-line u-line c-addr-comment u-comment -- )
+	color-blue cr type space ." -> " space
+	color-green type
+	font-normal
 ;
 
 \ copies the template's content to the trace file, parsing the cell width of stack and word as well as the initial boundingbox width
 : copy-template ( -- )
 	begin
 		line-buffer max-line templatefile-id read-line throw
-	while
-		dup line-buffer swap max-line boundingbox-def 2@ starts-width? if
+		
+	while ( n-read )
+	
+		dup line-buffer swap boundingbox-def 2@ starts-with? if ( n-read )
+		
 			dup line-buffer swap parse-boundingboxwidth boundingboxwidth !
-			." BoundingBox definition found!"
-		else
-			dup line-buffer swap max-line cellwidth-def 2@ starts-width? if
+			dup line-buffer swap s" BoundingBox definition found!" log-parsed-line
+			
+		else ( n-read )
+		
+			dup line-buffer swap cellwidth-def 2@ starts-with? if ( n-read )
+			
 				dup line-buffer swap parse-cellwidth cellwidth !
-				." cellwidth definition found!"
-			else
-				dup line-buffer swap max-line wordcellwidth-def starts-width? if
+				dup line-buffer swap s" cellwidth definition found!" log-parsed-line
+				
+			else ( n-read )
+			
+				dup line-buffer swap wordcellwidth-def 2@ starts-with? if ( n-read )
+				
 					dup line-buffer swap parse-wordcellwidth wordcellwidth !
-					." wordcellwidth definition found!"
-				endif
-			endif
-		endif
+					dup line-buffer swap s" wordcellwidth definition found!" log-parsed-line
+					
+				endif ( n-read )
+			endif ( n-read )
+		endif ( n-read )
 		
 		line-buffer swap tracefile-id write-line throw
 	repeat
@@ -106,18 +146,20 @@ variable boundingboxwidth
 : update-boundingbox ( -- )
 	\ TODO reposition to the beginning
 	begin
-		line-buffer max-line trace-id read-line throw
+		line-buffer max-line tracefile-id read-line throw
 	while
-		dup line-buffer swap max-line s" %%BoundingBox:" starts-width? if
+		dup line-buffer swap max-line s" %%BoundingBox:" starts-with? if
 			\ modify line-buffer to change width by 
 			line-buffer swap tracefile-id write-line throw
-		enif
+		endif
 	repeat
 	drop
-	\ TODO reposition to the end
+	
+	goto-eof
 ;
 
-copy-template templatefile-id close-file throw
+copy-template
+templatefile-id close-file throw
 
 \ set the c variable
 \ tracefile-id set-gfvis-fid \ not yet used
@@ -137,12 +179,6 @@ run-ghostview-working
 	tracefile-id close-file
 ;
 
-: bye ( -- )
-	cr
-	gfvis-close
-	0 (bye)
-;
-
 : .status1 ( -- )
     #cr emit cr ." base= " base @ dec.
     #cr emit cr .s
@@ -150,7 +186,7 @@ run-ghostview-working
     #cr emit cr order ;
 
 
-: n-string ( n c-addr -- )
+: n>str ( n c-addr -- )
 	>r dup >r
 	( n |r: c-addr n )
 	abs s>d <# #s r> sign #>
@@ -165,15 +201,30 @@ create num$ 64 chars allot
 	s" ) def" pad +place
 	pad count tracefile-id write-line throw
 ;
-: write-datastack-def
+: write-datastack-def ( -- )
 	s" /datastack [ " tracefile-id write-file throw
 	
-	depth 0 max maxdepth-.s @ min
-	dup 0
-	?do
+	depth 0 max maxdepth-.s @ min  \ not more than  maxdepth-.s
+	dup 0 ?do
 		dup i - pick
 		s" (" pad place
-		num$ n-string num$ count pad +place
+		num$ n>str  num$ count  pad +place
+		s" ) " pad +place
+		pad count tracefile-id write-file throw
+	loop
+	drop
+	
+	s" ] def" tracefile-id write-line throw
+;
+
+: write-floatstack-def ( -- )
+	s" /floatstack [ " tracefile-id write-file throw
+
+	fdepth 0 max maxdepth-.s @ min \ not more than maxdepth-.s
+	dup 0 ?DO
+		dup i - 1- floats fp@ + f@
+		s" (" pad place
+		16 5 11 ( f.rdp does the printing, actually f>str-rdp type ) f>str-rdp pad +place
 		s" ) " pad +place
 		pad count tracefile-id write-file throw
 	loop
@@ -190,8 +241,9 @@ create num$ 64 chars allot
 : .ps-update ( -- )
 	s\" test" write-word-def
 	write-datastack-def
+	write-floatstack-def
 	write-command
-	updage-boundingbox tracefile-id throw
+	\ update-boundingbox throw
 ;
 
 
@@ -210,3 +262,15 @@ create num$ 64 chars allot
     defers .status ;
 
 ' .status3 is .status
+
+
+\ \\\\\\\\\\\\\\\\\\\\\\\\\
+\ \\ redegines
+\ \\\\\\\\\\\\\\\\\\\\\\\\\
+cr
+: bye ( -- )
+	cr
+	gfvis-close
+	0 (bye)
+;
+cr
