@@ -39,6 +39,10 @@ s" pwd" system
 	pad count w/o open-pipe throw drop
 ;
 
+: rdepth ( -- n )
+    rp@ rp0 @ swap - cell /
+;
+
 : split ( str len separator len -- tokens count )
 	
 	here >r 2swap
@@ -309,6 +313,22 @@ run-ghostview-working
 	s" ] def" tracefile-id write-line throw
 ;
 
+: write-returnstack-def ( -- )
+	s" /returnstack [ " tracefile-id write-file throw
+
+	rdepth 0 max \ maxdepth-.s @ min \ not more than maxdepth-.s TODO set max depth in dependant of font height and document height / 3
+	dup 0 ?DO
+		dup i - rp@ + @
+		s" (" pad place
+		num$ n>str  num$ count  pad +place
+		s" ) " pad +place
+		pad count tracefile-id write-file throw
+	loop
+	drop
+	
+	s" ] def" tracefile-id write-line throw
+;
+
 : write-command
 	s" printupdate" tracefile-id write-line throw
 ;
@@ -318,6 +338,7 @@ run-ghostview-working
 	s\" test" write-word-def
 	write-datastack-def
 	write-floatstack-def
+	write-returnstack-def
 	write-command
 	tracefile-id update-boundingbox
 ;
