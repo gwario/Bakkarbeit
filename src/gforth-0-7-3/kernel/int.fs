@@ -670,6 +670,9 @@ has? backtrace [IF]
 	?stack [ has? EC 0= [IF] ] before-word [ [THEN] ] parse-name dup
     WHILE
 	parser1 execute
+	gfvis @ if
+		.gfvis-status
+	endif
     REPEAT
     2drop ;
     
@@ -691,8 +694,14 @@ has? backtrace [IF]
 
 \ interpreter                                 	30apr92py
 
+2variable gfvis-mrw s" "
+variable gfvis false
+
 \ not the most efficient implementations of interpreter and compiler
 : interpreter1 ( c-addr u -- ... xt ) 
+    gfvis @ if
+    	2dup gfvis-mrw 2!
+    endif
     2dup find-name dup
     if
 	nip nip name>int
@@ -832,6 +841,7 @@ Defer 'quit
 
 has? os [IF]
     Defer .status
+    Defer .gfvis-status
 [ELSE]
     [IFUNDEF] bye
 	: (bye)     ( 0 -- ) \ back to DOS

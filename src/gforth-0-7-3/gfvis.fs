@@ -275,9 +275,23 @@ run-ghostview-working
     #cr emit cr f.s
     #cr emit cr order ;
 
-: write-word-def ( word -- )
+: escape-wordname ( c-addr n -- c-addr n )
+	2dup s" \" str= if 
+		2drop s" \\"
+	else
+		2dup s" (" str= if
+			2drop s" \("
+		else
+			2dup s" )" str= if
+				2drop s" \)"
+			endif
+		endif
+	endif
+;
+
+: write-word-def ( -- )
 	s" /wordname (" pad place
-	pad +place
+	gfvis-mrw 2@ escape-wordname pad +place
 	s" ) def" pad +place
 	pad count tracefile-id write-line throw
 ;
@@ -335,7 +349,7 @@ run-ghostview-working
 
 
 : .ps-update ( -- )
-	s\" test" write-word-def
+	write-word-def
 	write-datastack-def
 	write-floatstack-def
 	write-returnstack-def
@@ -356,9 +370,9 @@ run-ghostview-working
 : .status3 ( -- )
     ['] .ps-update catch throw
     tracefile-id flush-file throw
-    defers .status ;
+    defers .gfvis-status ;
 
-' .status3 is .status
+' .status3 is .gfvis-status
 
 
 \ \\\\\\\\\\\\\\\\\\\\\\\\\
@@ -371,3 +385,4 @@ cr
 	0 (bye)
 ;
 cr
+true gfvis !
