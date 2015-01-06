@@ -2,26 +2,6 @@
 create PWD s" PWD" getenv 2,
 s" pwd" system
 
-: run-ghostview ( -- )
-	s" gv --ad=" pad place
-	PWD 2@ pad +place
-	s" /gfvis.ps" pad +place
-	s"  --watch " pad +place
-	PWD 2@ pad +place
-	s" /trace.ps" pad +place
-	pad count system
-;
-
-: kill-ghostview ( -- )
-	s\" pkill -SIGTERM -f \"gv --ad=" pad place
-	PWD 2@ pad +place
-	s\" /gfvis.ps" pad +place
-	s\" --watch "
-	PWD 2@ pad +place
-	s\" /trace.ps\"" pad +place
-	pad count system
-;
-
 : run-ghostview-working ( -- )
 	s" gv --watch " pad place
 	PWD 2@ pad +place
@@ -302,7 +282,7 @@ run-ghostview-working
 	dup 0 ?do
 		dup i - pick
 		s" (" pad place
-		num$ n>str  num$ count  pad +place
+		num$ n>str num$ count pad +place
 		s" ) " pad +place
 		pad count tracefile-id write-file throw
 	loop
@@ -327,6 +307,160 @@ run-ghostview-working
 	s" ] def" tracefile-id write-line throw
 ;
 
+: n>hex-char ( n -- c-addr len )
+	dup 9 > if
+		dup 10 = if
+			s" A"
+		else
+			dup 11 = if
+				s" B"
+			else
+				dup 12 = if
+					s" C"
+				else
+					dup 13 = if
+						s" D"
+					else
+						dup 14 = if
+							s" E"
+						else
+							dup 15 = if
+								s" F"
+							endif
+						endif
+					endif
+				endif
+			endif
+		endif
+		rot drop
+	else
+		0 <# # #>
+	endif
+;
+
+: test store-backtrace ." do something" true if dobacktrace ." do if" else ." do else" endif ." die" ;
+
+create reversebuffer 32 chars allot
+
+: exchange ( a1 a2 -- )
+  2dup c@ swap c@ rot c! swap c! ;
+: reverse ( c-addr u -- )
+  1- bounds begin 2dup > while
+    2dup exchange
+    -1 /string
+  repeat 2drop ;
+
+: n>hex-str ( n c-addr -- )
+ 	swap abs \ abs ? what does hex printing do?? fuck it
+	s" " reversebuffer place
+	begin
+		\ dup . ." / 16 = "
+		16 /mod
+		\ 2dup . ." R:" . cr
+		( n%16 n/16 ) swap ( n/16 n%16 )
+		\ 2dup . . cr
+		n>hex-char
+		\ 2dup ." char: " type cr
+		reversebuffer +place ( n/16 )
+		dup
+		\ dup ." next divident: " . cr
+		0=
+		\ dup ." f: " . ." (true=" true . ." - break loop |false=" false . ." - restart loop)" cr 
+	until ( n/16 f )
+	drop
+	s" $" reversebuffer +place
+	reversebuffer count reverse
+	reversebuffer count rot place
+	\ reversebuffer count type cr
+;
+
+: append-zeros-to-reversebuffer ( count -- )
+	-1 ?do
+		s" 0" reversebuffer +place
+	loop
+;
+
+: n>16hex-str ( n c-addr -- )
+ 	swap abs \ abs ? what does hex printing do?? fuck it
+	s" " reversebuffer place
+	begin
+		16 /mod
+		( n%16 n/16 ) swap ( n/16 n%16 )
+		n>hex-char
+		reversebuffer +place ( n/16 )
+		dup
+		0=
+	until ( n/16 f )
+	drop
+	16 reversebuffer count nip - append-zeros-to-reversebuffer
+	s" $" reversebuffer +place
+	reversebuffer count reverse
+	reversebuffer count rot place
+;
+
+: use-bt-entry ( return-stack-item -- addr count )
+    cell - dup in-dictionary? over dup aligned = and
+    if
+	@ dup threaded>name dup if
+	    nip name>string
+	else
+	    drop dup look if
+		nip name>string
+	    else
+		drop body> look \ !! check for "call" in cell before?
+		if
+		     name>string
+		else
+		    drop s" ???"
+		then
+	    then
+	then
+    else
+	drop  s" ???"
+    then ;
+
+: use-bt-entry-or-number ( return-stack-item -- addr count )
+	cell -
+	( original-value )
+	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
+		( original-value )
+		dup 
+		( original-value original-value )
+		@
+		( original-value ca )
+		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
+			( original-value ca nt )
+			nip ( original-value nt )
+			nip ( nt ) name>string ( addr count )
+		else
+			( original-value ca nt )
+			drop
+			( original-value ca )
+			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
+				( original-value ca lfa )
+				nip ( original-value lfa )
+				nip ( lfa ) name>string ( addr count )
+			else
+				( original-value ca lfa )
+				drop
+				( original-value ca )
+				body> ( original-value ca2 ) look ( original-value lfa f ) if
+					( original-value lfa )
+					nip ( lfa ) name>string ( original-value addr count )
+				else
+					( original-value lfa )
+					drop
+					( original-value )
+					num$ n>16hex-str num$ count ( addr count )
+				then
+			then
+		then
+	else
+		( original-value )
+		num$ n>16hex-str num$ count ( addr count )
+	then
+;
+
 : write-returnstack-def ( -- )
 	s" /returnstack [ " tracefile-id write-file throw
 
@@ -334,7 +468,10 @@ run-ghostview-working
 	dup 0 ?DO
 		dup i - rp@ + @
 		s" (" pad place
-		num$ n>str  num$ count  pad +place
+		\ dup . cr
+		\ num$ n>hex-str num$ count pad +place \ here we print the address in hex
+		\ use-bt-entry pad +place \ here we try to resolve the word entry addresses
+		use-bt-entry-or-number pad +place
 		s" ) " pad +place
 		pad count tracefile-id write-file throw
 	loop
