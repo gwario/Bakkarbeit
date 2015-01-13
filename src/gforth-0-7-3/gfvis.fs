@@ -339,6 +339,8 @@ run-ghostview-working
 ;
 
 : test store-backtrace ." do something" true if dobacktrace ." do if" else ." do else" endif ." die" ;
+: test2 12 12 + 24 = if ." dubi dubi du" endif ;
+: test 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif ;
 
 create reversebuffer 32 chars allot
 
@@ -461,19 +463,60 @@ create reversebuffer 32 chars allot
 	then
 ;
 
+: print-bt-entry-or-number-to-tracefile ( return-stack-item -- )
+	cell -
+	( original-value )
+	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
+		( original-value )
+		dup 
+		( original-value original-value )
+		@
+		( original-value ca )
+		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
+			( original-value ca nt )
+			nip ( original-value nt )
+			nip ( nt ) name>string ( addr count ) tracefile-id write-file
+		else
+			( original-value ca nt )
+			drop
+			( original-value ca )
+			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
+				( original-value ca lfa )
+				nip ( original-value lfa )
+				nip ( lfa ) name>string ( addr count ) tracefile-id write-file
+			else
+				( original-value ca lfa )
+				drop
+				( original-value ca )
+				body> ( original-value ca2 ) look ( original-value lfa f ) if
+					( original-value lfa )
+					nip ( lfa ) name>string ( addr count ) tracefile-id write-file
+				else
+					( original-value lfa )
+					drop
+					( original-value )
+					['] hex. tracefile-id outfile-execute
+				then
+			then
+		then
+	else
+		( original-value )
+		['] hex. tracefile-id outfile-execute
+	then
+;
+
 : write-returnstack-def ( -- )
 	s" /returnstack [ " tracefile-id write-file throw
-
+	
 	rdepth 0 max \ maxdepth-.s @ min \ not more than maxdepth-.s TODO set max depth in dependant of font height and document height / 3
 	dup 0 ?DO
 		dup i - rp@ + @
-		s" (" pad place
+		s" ("  tracefile-id write-file throw
 		\ dup . cr
 		\ num$ n>hex-str num$ count pad +place \ here we print the address in hex
 		\ use-bt-entry pad +place \ here we try to resolve the word entry addresses
-		use-bt-entry-or-number pad +place
-		s" ) " pad +place
-		pad count tracefile-id write-file throw
+		print-bt-entry-or-number-to-tracefile
+		s" ) "  tracefile-id write-file throw
 	loop
 	drop
 	

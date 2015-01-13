@@ -131,7 +131,9 @@ VARIABLE Colors Colors on
     2drop ;
 
 : .struc        
-	uppercase on Str# .string ;
+	gfvis @ if
+		2dup gfvis-mrw 2!
+	endif uppercase on Str# .string ;
 
 \ CODES (Branchtypes)                                    15may93jaw
 
@@ -278,9 +280,34 @@ VARIABLE C-Pass
     dup name>string rot wordinfo .string
     ;
 
+: .word-mrw ( addr x -- addr )
+    \ print x as a word if possible
+    dup look 0= IF
+	drop dup threaded>name dup 0= if
+	    drop over 1 cells - @ dup body> look
+	    IF
+		nip nip dup ." <" name>string rot wordinfo .string ." > "
+	    ELSE
+		2drop ." <" 0 .r ." > "
+	    THEN
+	    EXIT
+	then
+    THEN
+    nip dup cell+ @ immediate-mask and
+    IF
+	bl cemit  ." POSTPONE "
+    THEN
+    dup name>string
+    gfvis @ if
+	2dup gfvis-mrw 2!
+    endif
+    rot wordinfo .string
+    ;
+
+
 : c-call ( addr1 -- addr2 )
     Display? IF
-	dup @ body> .word bl cemit
+	dup @ body> .word-mrw bl cemit
     THEN
     cell+ ;
 
@@ -302,14 +329,18 @@ VARIABLE C-Pass
 	    endif
 	endif
 	\ !! test for cfa here, and print "['] ..."
-	dup abs 0 <# #S rot sign #> 0 .string bl cemit
+	dup abs 0 <# #S rot sign #> 0 gfvis @ if
+		>r 2dup gfvis-mrw 2! r>
+	endif .string bl cemit
     endif
     cell+ ;
 
 : c-lit+ ( addr1 -- addr2 )
     Display? if
 	dup @ dup abs 0 <# #S rot sign #> 0 .string bl cemit
-	s" + " 0 .string
+	s" + " 0 gfvis @ if
+		>r 2dup gfvis-mrw 2! r>
+	endif .string
     endif
     cell+ ;
 
@@ -331,7 +362,9 @@ VARIABLE C-Pass
 	Display? IF nl .name-without THEN
         count 2dup + aligned -rot
         Display?
-        IF      bl cemit 0 .string
+        IF      bl cemit 0 gfvis @ if
+		>r 2dup gfvis-mrw 2! r>
+	endif .string
                 [char] " cemit bl cemit
         ELSE    2drop
         THEN ;
@@ -363,6 +396,9 @@ VARIABLE C-Pass
 	    endif
 	    \ !! make newline if string too long?
 	    display? if
+		gfvis @ if
+			2dup gfvis-mrw 2!
+		endif
 		0 .string r@ cell+ @ r@ 3 cells + @ c-\type '" cemit bl cemit
 	    else
 		2drop
@@ -466,7 +502,9 @@ VARIABLE C-Pass
         THEN
         Display?
         IF      dup @ Back?
-                IF      level- nl S" UNTIL " .struc nl
+                IF      level- nl S" UNTIL " gfvis @ if
+		2dup gfvis-mrw 2!
+	endif .struc nl
                 ELSE    dup    dup @ over +
                         CheckWhile
                         IF      MyBranch
@@ -619,13 +657,13 @@ c-extender !
                         THEN
                   THEN ;
 
-: analyse ( a-addr1 -- a-addr2 )
+: analyse ( a-addr1 -- a-addr2 ) 
     Branches @ IF BranchTo? THEN
     dup cell+ swap @
     dup >r DoTable r> swap IF drop EXIT THEN
     Display?
     IF
-	.word bl cemit
+    	.word-mrw bl cemit
     ELSE
 	drop
     THEN ;

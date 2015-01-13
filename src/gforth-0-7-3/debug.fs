@@ -167,7 +167,7 @@ VARIABLE Unnest
                 cr ." Scanning code..." cr C-Formated on
                 swap scanword dbg-ip !
                 cr ." Nesting debugger ready!" cr
-                BEGIN   d.s disp-step D-Key
+                BEGIN  gfvis @ if .gfvis-status endif d.s disp-step D-Key
                 WHILE   C-Stop @ 0=
                 WHILE   0 get-next set-bp
                         dbg-ip @ jump
