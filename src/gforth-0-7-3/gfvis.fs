@@ -19,10 +19,6 @@ s" pwd" system
 	pad count w/o open-pipe throw drop
 ;
 
-: rdepth ( -- n )
-    rp@ rp0 @ swap - cell /
-;
-
 : split ( str len separator len -- tokens count )
 	
 	here >r 2swap
@@ -234,26 +230,14 @@ s" trace.ps" r/w create-file throw constant tracefile-id
 tracefile-id templatefile-id copy-template
 templatefile-id close-file throw
 
-\ set the c variable
-\ tracefile-id set-gfvis-fid \ not yet used
-
-\ to append to the existing content
-\ tracefile-id goto-eof \ no need since we moved the trace code exclusively to trace.ps
 
 run-ghostview-working
-\ run-ghostview
 
 
 : gfvis-close ( -- )
 	kill-ghostview-working
 	tracefile-id close-file
 ;
-
-: .status1 ( -- )
-    #cr emit cr ." base= " base @ dec.
-    #cr emit cr .s
-    #cr emit cr f.s
-    #cr emit cr order ;
 
 : escape-wordname ( c-addr n -- c-addr n )
 	2dup s" \" str= if 
@@ -307,121 +291,10 @@ run-ghostview-working
 	s" ] def" tracefile-id write-line throw
 ;
 
-: n>hex-char ( n -- c-addr len )
-	dup 9 > if
-		dup 10 = if
-			s" A"
-		else
-			dup 11 = if
-				s" B"
-			else
-				dup 12 = if
-					s" C"
-				else
-					dup 13 = if
-						s" D"
-					else
-						dup 14 = if
-							s" E"
-						else
-							dup 15 = if
-								s" F"
-							endif
-						endif
-					endif
-				endif
-			endif
-		endif
-		rot drop
-	else
-		0 <# # #>
-	endif
-;
-
-: test store-backtrace ." do something" true if dobacktrace ." do if" else ." do else" endif ." die" ;
 : test2 12 12 + 24 = if ." dubi dubi du" endif ;
-: test 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif ;
+: test 123 >r 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif rdrop ;
 
-create reversebuffer 32 chars allot
-
-: exchange ( a1 a2 -- )
-  2dup c@ swap c@ rot c! swap c! ;
-: reverse ( c-addr u -- )
-  1- bounds begin 2dup > while
-    2dup exchange
-    -1 /string
-  repeat 2drop ;
-
-: n>hex-str ( n c-addr -- )
- 	swap abs \ abs ? what does hex printing do?? fuck it
-	s" " reversebuffer place
-	begin
-		\ dup . ." / 16 = "
-		16 /mod
-		\ 2dup . ." R:" . cr
-		( n%16 n/16 ) swap ( n/16 n%16 )
-		\ 2dup . . cr
-		n>hex-char
-		\ 2dup ." char: " type cr
-		reversebuffer +place ( n/16 )
-		dup
-		\ dup ." next divident: " . cr
-		0=
-		\ dup ." f: " . ." (true=" true . ." - break loop |false=" false . ." - restart loop)" cr 
-	until ( n/16 f )
-	drop
-	s" $" reversebuffer +place
-	reversebuffer count reverse
-	reversebuffer count rot place
-	\ reversebuffer count type cr
-;
-
-: append-zeros-to-reversebuffer ( count -- )
-	-1 ?do
-		s" 0" reversebuffer +place
-	loop
-;
-
-: n>16hex-str ( n c-addr -- )
- 	swap abs \ abs ? what does hex printing do?? fuck it
-	s" " reversebuffer place
-	begin
-		16 /mod
-		( n%16 n/16 ) swap ( n/16 n%16 )
-		n>hex-char
-		reversebuffer +place ( n/16 )
-		dup
-		0=
-	until ( n/16 f )
-	drop
-	16 reversebuffer count nip - append-zeros-to-reversebuffer
-	s" $" reversebuffer +place
-	reversebuffer count reverse
-	reversebuffer count rot place
-;
-
-: use-bt-entry ( return-stack-item -- addr count )
-    cell - dup in-dictionary? over dup aligned = and
-    if
-	@ dup threaded>name dup if
-	    nip name>string
-	else
-	    drop dup look if
-		nip name>string
-	    else
-		drop body> look \ !! check for "call" in cell before?
-		if
-		     name>string
-		else
-		    drop s" ???"
-		then
-	    then
-	then
-    else
-	drop  s" ???"
-    then ;
-
-: use-bt-entry-or-number ( return-stack-item -- addr count )
+: print-bt-entry-or-number ( return-stack-item -- )
 	cell -
 	( original-value )
 	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
@@ -433,7 +306,7 @@ create reversebuffer 32 chars allot
 		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
 			( original-value ca nt )
 			nip ( original-value nt )
-			nip ( nt ) name>string ( addr count )
+			nip ( nt ) name>string ( addr count ) type
 		else
 			( original-value ca nt )
 			drop
@@ -441,85 +314,47 @@ create reversebuffer 32 chars allot
 			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
 				( original-value ca lfa )
 				nip ( original-value lfa )
-				nip ( lfa ) name>string ( addr count )
+				nip ( lfa ) name>string ( addr count ) type
 			else
 				( original-value ca lfa )
 				drop
 				( original-value ca )
 				body> ( original-value ca2 ) look ( original-value lfa f ) if
 					( original-value lfa )
-					nip ( lfa ) name>string ( original-value addr count )
+					nip ( lfa ) name>string ( addr count ) type
 				else
 					( original-value lfa )
 					drop
 					( original-value )
-					num$ n>16hex-str num$ count ( addr count )
+					hex.
 				then
 			then
 		then
 	else
 		( original-value )
-		num$ n>16hex-str num$ count ( addr count )
+		hex.
 	then
 ;
 
-: print-bt-entry-or-number-to-tracefile ( return-stack-item -- )
-	cell -
-	( original-value )
-	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
-		( original-value )
-		dup 
-		( original-value original-value )
-		@
-		( original-value ca )
-		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
-			( original-value ca nt )
-			nip ( original-value nt )
-			nip ( nt ) name>string ( addr count ) tracefile-id write-file
-		else
-			( original-value ca nt )
-			drop
-			( original-value ca )
-			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
-				( original-value ca lfa )
-				nip ( original-value lfa )
-				nip ( lfa ) name>string ( addr count ) tracefile-id write-file
-			else
-				( original-value ca lfa )
-				drop
-				( original-value ca )
-				body> ( original-value ca2 ) look ( original-value lfa f ) if
-					( original-value lfa )
-					nip ( lfa ) name>string ( addr count ) tracefile-id write-file
-				else
-					( original-value lfa )
-					drop
-					( original-value )
-					['] hex. tracefile-id outfile-execute
-				then
-			then
-		then
-	else
-		( original-value )
-		['] hex. tracefile-id outfile-execute
-	then
+: print-backtrace ( addr1 addr2 -- )
+	\G print a backtrace for the return stack addr1..addr2
+	swap
+	u+do
+		cr ." ("
+		i @ ( return-addr? )
+		print-bt-entry-or-number
+		." ) "
+		cell
+	+loop
+;
+
+: printbacktrace ( -- )
+	backtrace-rs-buffer 2@ over + print-backtrace
 ;
 
 : write-returnstack-def ( -- )
 	s" /returnstack [ " tracefile-id write-file throw
-	
-	rdepth 0 max \ maxdepth-.s @ min \ not more than maxdepth-.s TODO set max depth in dependant of font height and document height / 3
-	dup 0 ?DO
-		dup i - rp@ + @
-		s" ("  tracefile-id write-file throw
-		\ dup . cr
-		\ num$ n>hex-str num$ count pad +place \ here we print the address in hex
-		\ use-bt-entry pad +place \ here we try to resolve the word entry addresses
-		print-bt-entry-or-number-to-tracefile
-		s" ) "  tracefile-id write-file throw
-	loop
-	drop
-	
+	['] printbacktrace tracefile-id outfile-execute
 	s" ] def" tracefile-id write-line throw
 ;
 
@@ -538,15 +373,6 @@ create reversebuffer 32 chars allot
 ;
 
 
-: .status2 ( -- )
-    outfile-id >r
-    tracefile-id to outfile-id
-    ['] .status1 catch
-    r> to outfile-id
-    throw
-    tracefile-id flush-file throw
-    defers .status ;
-    
 : .status3 ( -- )
     ['] .ps-update catch throw
     tracefile-id flush-file throw

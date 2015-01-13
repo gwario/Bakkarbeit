@@ -19,6 +19,8 @@
 
 require see.fs
 
+Defer .gfvis-status
+    
 decimal
 
 VARIABLE dbg-ip     \ instruction pointer for debugger
@@ -167,9 +169,9 @@ VARIABLE Unnest
                 cr ." Scanning code..." cr C-Formated on
                 swap scanword dbg-ip !
                 cr ." Nesting debugger ready!" cr
-                BEGIN  gfvis @ if .gfvis-status endif d.s disp-step D-Key
+                BEGIN d.s disp-step gfvis @ if .gfvis-status endif D-Key
                 WHILE   C-Stop @ 0=
-                WHILE   0 get-next set-bp
+                WHILE   0 get-next store-backtrace set-bp
                         dbg-ip @ jump
                         [ here DebugLoop ! ]
                         restore-bp

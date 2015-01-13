@@ -352,10 +352,6 @@ has? peephole [IF]
 \ \ compiler loop
 
 : compiler1 ( c-addr u -- ... xt )
-    gfvis @ if
-    	2dup gfvis-mrw 2!
-    	\ .gfvis-status
-    endif
     2dup find-name dup
     if ( c-addr u nt )
 	nip nip name>comp
