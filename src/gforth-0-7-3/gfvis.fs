@@ -7,7 +7,6 @@ s" pwd" system
 	PWD 2@ pad +place
 	s" /trace.ps" pad +place
 	\ pad count system
-	\ pad count sh
 	pad count w/o open-pipe throw drop
 ;
 
@@ -192,6 +191,8 @@ variable wordcellwidth
 		line-buffer swap to-fid write-line throw
 		
 	repeat drop
+	
+	to-fid flush-file throw
 ;
 
 \ updates the boundingbox size: adds the cellwidth and the wordcellwidth 
@@ -226,13 +227,11 @@ variable wordcellwidth
 s" gfvis.ps" r/o open-file throw constant templatefile-id
 s" trace.ps" r/w create-file throw constant tracefile-id
 
-
 tracefile-id templatefile-id copy-template
 templatefile-id close-file throw
 
 
 run-ghostview-working
-
 
 : gfvis-close ( -- )
 	kill-ghostview-working
@@ -336,8 +335,9 @@ run-ghostview-working
 	then
 ;
 
-: print-backtrace ( addr1 addr2 -- )
-	\G print a backtrace for the return stack addr1..addr2
+
+: .backtrace ( -- )
+	backtrace-rs-buffer 2@ over +
 	swap
 	u+do
 		cr ." ("
@@ -348,13 +348,9 @@ run-ghostview-working
 	+loop
 ;
 
-: printbacktrace ( -- )
-	backtrace-rs-buffer 2@ over + print-backtrace
-;
-
 : write-returnstack-def ( -- )
 	s" /returnstack [ " tracefile-id write-file throw
-	['] printbacktrace tracefile-id outfile-execute
+	['] .backtrace tracefile-id outfile-execute
 	s" ] def" tracefile-id write-line throw
 ;
 
