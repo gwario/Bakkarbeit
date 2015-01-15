@@ -5,17 +5,17 @@ s" pwd" system
 : run-ghostview-working ( -- )
 	s" gv --watch " pad place
 	PWD 2@ pad +place
-	s" /trace.ps" pad +place
-	\ pad count system
-	pad count w/o open-pipe throw drop
+	s" /trace.ps &" pad +place
+	pad count system
+	\ pad count w/o open-pipe throw drop
 ;
 
 : kill-ghostview-working ( -- )
 	s\" pkill -SIGTERM -f \"gv --watch " pad place
 	PWD 2@ pad +place
 	s\" /trace.ps\"" pad +place
-	\ pad count system
-	pad count w/o open-pipe throw drop
+	pad count system
+	\ pad count w/o open-pipe throw drop
 ;
 
 : split ( str len separator len -- tokens count )
