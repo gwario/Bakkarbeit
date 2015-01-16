@@ -1,13 +1,22 @@
+variable debug
+
+false debug !
 
 create PWD s" PWD" getenv 2,
-s" pwd" system
+
+: log-pwd ( -- )
+	debug @ if
+		PWD 2@ type
+	endif
+;
+
+log-pwd
 
 : run-ghostview-working ( -- )
 	s" gv --watch " pad place
 	PWD 2@ pad +place
 	s" /trace.ps &" pad +place
 	pad count system
-	\ pad count w/o open-pipe throw drop
 ;
 
 : kill-ghostview-working ( -- )
@@ -15,7 +24,6 @@ s" pwd" system
 	PWD 2@ pad +place
 	s\" /trace.ps\"" pad +place
 	pad count system
-	\ pad count w/o open-pipe throw drop
 ;
 
 : split ( str len separator len -- tokens count )
@@ -144,14 +152,18 @@ variable wordcellwidth
 ;
 
 : log-parsed-line ( c-addr-line u-line c-addr-comment u-comment -- )
-	color-green cr type space ." -> " space
-	color-blue type
-	font-normal
+	debug @ if
+		color-green cr type space ." -> " space
+		color-blue type
+		font-normal
+	endif
 ;
 
 : log-parsed-value ( value c-addr-comment u-comment -- )
-	color-green cr type .
-	font-normal
+	debug @ if
+		color-green cr type .
+		font-normal
+	endif
 ;
 
 : copy-template { to-fid from-fid -- }
@@ -165,7 +177,9 @@ variable wordcellwidth
 		
 			dup line-buffer swap parse-boundingbox boundingboxend 2! boundingboxstart 2!
 			dup line-buffer swap s" BoundingBox definition found!" log-parsed-line
-			color-green cr ." boundingbox: " boundingboxstart 2@ . . boundingboxend 2@ . . font-normal
+			debug @ if
+				color-green cr ." boundingbox: " boundingboxstart 2@ . . boundingboxend 2@ . . font-normal
+			endif
 			
 		else ( n-read )
 			
@@ -301,61 +315,54 @@ s" trace.ps" r/w create-file throw constant tracefile-id
 tracefile-id templatefile-id copy-template
 templatefile-id close-file throw
 
-: write-word-def ( -- )
-	s" /wordname (" pad place
-	gfvis-mrw 2@ escape-wordname pad +place
-	s" ) def" pad +place
-	pad count tracefile-id write-line throw
+: print-word-def ( -- )
+	." /wordname ("
+	gfvis-mrw 2@ escape-wordname type
+	." ) def" cr
 ;
-: write-datastack-def ( -- )
-	s" /datastack [ " tracefile-id write-file throw
+: print-datastack-def ( -- )
+	." /datastack [ " cr
 	
-	depth 0 max \ maxdepth-.s @ min  \ not more than  maxdepth-.s
+	depth 0 max \ maxdepth-.s @ min \ not more than  maxdepth-.s
 	dup 0 ?do
 		dup i - pick
-		s" (" pad place
-		num$ n>str num$ count pad +place
-		s" ) " pad +place
-		pad count tracefile-id write-file throw
+		." (" num$ n>str num$ count type ." ) " cr
 	loop
 	drop
 	
-	s" ] def" tracefile-id write-line throw
+	." ] def" cr
 ;
 
-: write-floatstack-def ( -- )
-	s" /floatstack [ " tracefile-id write-file throw
+: print-floatstack-def ( -- )
+	." /floatstack [ " cr
 
 	fdepth 0 max \ maxdepth-.s @ min \ not more than maxdepth-.s TODO set max depth in dependant of font height and document height / 3
 	dup 0 ?DO
 		dup i - 1- floats fp@ + f@
-		s" (" pad place
-		16 5 11 ( f.rdp does the printing, actually f>str-rdp type ) f>str-rdp pad +place
-		s" ) " pad +place
-		pad count tracefile-id write-file throw
+		." (" 16 5 11 f.rdp ." ) " cr
 	loop
 	drop
 	
-	s" ] def" tracefile-id write-line throw
+	." ] def" cr
 ;
 
-: write-returnstack-def ( -- )
-	s" /returnstack [ " tracefile-id write-file throw
-	['] .backtrace tracefile-id outfile-execute
-	s" ] def" tracefile-id write-line throw
+: print-returnstack-def ( -- )
+	." /returnstack [ " cr
+	.backtrace cr
+	." ] def" cr
 ;
 
-: write-command ( -- )
-	s" printupdate" tracefile-id write-line throw
+: print-draw-word ( -- )
+	." printupdate" cr
 ;
 
 
 : .ps-update ( -- )
-	write-word-def
-	write-datastack-def
-	write-floatstack-def
-	write-returnstack-def
-	write-command
+	['] print-word-def		tracefile-id outfile-execute
+	['] print-datastack-def		tracefile-id outfile-execute
+	['] print-floatstack-def	tracefile-id outfile-execute
+	['] print-returnstack-def	tracefile-id outfile-execute
+	['] print-draw-word		tracefile-id outfile-execute
 	tracefile-id update-boundingbox
 ;
 
@@ -371,8 +378,6 @@ templatefile-id close-file throw
 \ \\\\\\\\\\\\\\\\\\\\\\\\\
 \ \\ redegines
 \ \\\\\\\\\\\\\\\\\\\\\\\\\
-cr
-
 : gfvis-close ( -- )
 	\ closes gv
 	kill-ghostview-working
@@ -399,4 +404,4 @@ cr
 : test2 12 12 + 24 = if ." dubi dubi du" endif ;
 : test 123 >r 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif rdrop ;
 : west 2 -1 ?DO ." lolipolli" i >r ." >r r>" r> . loop ['] test2 is test ;
-
+: float-test 1e20 2e20 f+ f. ;
