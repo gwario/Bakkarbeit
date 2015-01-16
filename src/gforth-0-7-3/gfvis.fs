@@ -223,20 +223,6 @@ variable wordcellwidth
 	trace-fid goto-eof
 ;
 
-\ create trace file
-s" gfvis.ps" r/o open-file throw constant templatefile-id
-s" trace.ps" r/w create-file throw constant tracefile-id
-
-tracefile-id templatefile-id copy-template
-templatefile-id close-file throw
-
-
-run-ghostview-working
-
-: gfvis-close ( -- )
-	kill-ghostview-working
-	tracefile-id close-file
-;
 
 : escape-wordname ( c-addr n -- c-addr n )
 	2dup s" \" str= if 
@@ -251,6 +237,69 @@ run-ghostview-working
 		endif
 	endif
 ;
+
+
+: print-bt-entry-or-number ( return-stack-item -- )
+	cell -
+	( original-value )
+	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
+		( original-value )
+		dup 
+		( original-value original-value )
+		@
+		( original-value ca )
+		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
+			( original-value ca nt )
+			nip ( original-value nt )
+			nip ( nt ) name>string ( addr count ) type
+		else
+			( original-value ca nt )
+			drop
+			( original-value ca )
+			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
+				( original-value ca lfa )
+				nip ( original-value lfa )
+				nip ( lfa ) name>string ( addr count ) type
+			else
+				( original-value ca lfa )
+				drop
+				( original-value ca )
+				body> ( original-value ca2 ) look ( original-value lfa f ) if
+					( original-value lfa )
+					nip ( lfa ) name>string ( addr count ) type
+				else
+					( original-value lfa )
+					drop
+					( original-value )
+					cell + hex.
+				then
+			then
+		then
+	else
+		( original-value )
+		cell + hex.
+	then
+;
+
+
+: .backtrace ( -- )
+	backtrace-rs-buffer 2@ over +
+	swap cell - swap cell -
+	u-do
+		cr ." ("
+		i @ ( return-addr? )
+		print-bt-entry-or-number
+		." ) "
+		cell
+	-loop
+;
+
+\ create trace file
+s" gfvis.ps" r/o open-file throw constant templatefile-id
+s" trace.ps" r/w create-file throw constant tracefile-id
+
+tracefile-id templatefile-id copy-template
+templatefile-id close-file throw
 
 : write-word-def ( -- )
 	s" /wordname (" pad place
@@ -290,71 +339,13 @@ run-ghostview-working
 	s" ] def" tracefile-id write-line throw
 ;
 
-: test2 12 12 + 24 = if ." dubi dubi du" endif ;
-: test 123 >r 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif rdrop ;
-
-: print-bt-entry-or-number ( return-stack-item -- )
-	cell -
-	( original-value )
-	dup in-dictionary? ( original-value f ) over dup ( original-value f original-value original-value ) aligned ( original-value f original-value original-aligned ) = ( original-value f f ) and ( original-value f ) if
-		( original-value )
-		dup 
-		( original-value original-value )
-		@
-		( original-value ca )
-		dup ( original-value ca ca ) threaded>name ( original-value ca nt ) dup ( original-value ca nt nt ) if
-			( original-value ca nt )
-			nip ( original-value nt )
-			nip ( nt ) name>string ( addr count ) type
-		else
-			( original-value ca nt )
-			drop
-			( original-value ca )
-			dup ( original-value ca ca ) look ( original-value ca lfa f ) if
-				( original-value ca lfa )
-				nip ( original-value lfa )
-				nip ( lfa ) name>string ( addr count ) type
-			else
-				( original-value ca lfa )
-				drop
-				( original-value ca )
-				body> ( original-value ca2 ) look ( original-value lfa f ) if
-					( original-value lfa )
-					nip ( lfa ) name>string ( addr count ) type
-				else
-					( original-value lfa )
-					drop
-					( original-value )
-					hex.
-				then
-			then
-		then
-	else
-		( original-value )
-		hex.
-	then
-;
-
-
-: .backtrace ( -- )
-	backtrace-rs-buffer 2@ over +
-	swap
-	u+do
-		cr ." ("
-		i @ ( return-addr? )
-		print-bt-entry-or-number
-		." ) "
-		cell
-	+loop
-;
-
 : write-returnstack-def ( -- )
 	s" /returnstack [ " tracefile-id write-file throw
 	['] .backtrace tracefile-id outfile-execute
 	s" ] def" tracefile-id write-line throw
 ;
 
-: write-command
+: write-command ( -- )
 	s" printupdate" tracefile-id write-line throw
 ;
 
@@ -381,10 +372,31 @@ run-ghostview-working
 \ \\ redegines
 \ \\\\\\\\\\\\\\\\\\\\\\\\\
 cr
-: bye ( -- )
+
+: gfvis-close ( -- )
+	\ closes gv
+	kill-ghostview-working
+	tracefile-id close-file
+;
+
+: close-and-bye ( -- )
 	cr
 	gfvis-close
 	0 (bye)
 ;
-cr
-true gfvis !
+
+: start-vis ( -- )
+	true gfvis !	
+	['] close-and-bye is bye
+	run-ghostview-working
+;
+
+: dbg ( "..." -- )
+	start-vis
+	dbg
+;
+
+: test2 12 12 + 24 = if ." dubi dubi du" endif ;
+: test 123 >r 1 2 3 + + 0<> if test2 else ." zero you madadaka!" endif rdrop ;
+: west 2 -1 ?DO ." lolipolli" i >r ." >r r>" r> . loop ['] test2 is test ;
+
