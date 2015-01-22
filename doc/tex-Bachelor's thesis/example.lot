@@ -1,0 +1,26 @@
+\select@language {naustrian}
+\select@language {naustrian}
+\select@language {english}
+\select@language {naustrian}
+\select@language {naustrian}
+\select@language {naustrian}
+\select@language {english}
+\select@language {naustrian}
+\select@language {naustrian}
+\addvspace {10pt}
+\select@language {naustrian}
+\select@language {english}
+\addvspace {10pt}
+\select@language {naustrian}
+\select@language {english}
+\addvspace {10pt}
+\contentsline {table}{\numberline {1.1}{\ignorespaces \textlatin {T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}}/\textlatin {\LaTeX }\ distributions for different operating systems. Recomended choice in \textbf {bold}.}}{1}{table.1.1}
+\contentsline {table}{\numberline {1.2}{\ignorespaces Compilation steps for this document. The following abbreviations were used: table of contents (toc), list of figures (lof), list of tables (lot), list of algorithms (loa).}}{2}{table.1.2}
+\contentsline {table}{\numberline {1.3}{\ignorespaces Adapted example from \url {http://en.wikibooks.org/wiki/LaTeX/Tables}. This example uses rules specific to the \texttt {booktabs} package and employs the multi-row functionality of the \texttt {multirow} package.}}{3}{table.1.3}
+\contentsline {table}{\numberline {1.4}{\ignorespaces Anonymization of \gls {pdf} documents.}}{6}{table.1.4}
+\addvspace {10pt}
+\addvspace {10pt}
+\contentsline {table}{\numberline {3.1}{\ignorespaces \textlatin {T\kern -.1667em\lower .5ex\hbox {E}\kern -.125emX\spacefactor \@m {}}/\textlatin {\LaTeX }\ distributions for different operating systems. Recomended choice in \textbf {bold}.}}{11}{table.3.1}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Compilation steps for this document. The following abbreviations were used: table of contents (toc), list of figures (lof), list of tables (lot), list of algorithms (loa).}}{12}{table.3.2}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Adapted example from \url {http://en.wikibooks.org/wiki/LaTeX/Tables}. This example uses rules specific to the \texttt {booktabs} package and employs the multi-row functionality of the \texttt {multirow} package.}}{13}{table.3.3}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Anonymization of \gls {pdf} documents.}}{16}{table.3.4}

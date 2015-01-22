@@ -1,144 +1,147 @@
-\documentclass[a4paper,11pt,twoside]{memoir}
-\chapterstyle{veelo}
+% Copyright (C) 2014 by Thomas Auzinger <thomas.auzinger@cg.tuwien.ac.at>
 
-\usepackage{TUINFDA}
+\documentclass[draft,final]{vutinfth} % Remove option 'final' to obtain debug information.
 
-\usepackage{url}
-\usepackage{hyperref}					% links in pdf
-\usepackage{graphicx}            			% Figures
-\usepackage{verbatim}            			% Code-Environment
-\usepackage[lined,linesnumbered,algochapter]{algorithm2e} % Algorithm-Environment
+% Extended LaTeX functionality is enables by including packages with \usepackage{...}.
+\usepackage{fixltx2e}  % Provides fixes for several errors in LaTeX2e.
+\usepackage{amsmath}   % Extended typesetting of mathematical expression.
+\usepackage{amssymb}   % Provides a multitude of mathematical symbols.
+\usepackage{mathtools} % Further extensions of mathematical typesetting.
+\usepackage{microtype} % Small-scale typographic enhancements.
+\usepackage{enumitem}  % User control over the layout of lists (itemize, enumerate, description).
+\usepackage{multirow}  % Allows table elements to span several rows.
+\usepackage{booktabs}  % Improves the typesettings of tables.
+\usepackage[ruled,linesnumbered,algochapter]{algorithm2e} % Enables the writing of pseudo code.
+\usepackage{nag}       % Issues warnings when best practices in writing LaTeX documents are violated.
+\usepackage{hyperref}  % Enables cross linking in the electronic document version. This package has to be included second to last.
+\usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists fo acronyms. This package has to be included last.
 
-\usepackage{pgf}					
-\usepackage{tikz}					% tikz graphics
-\usetikzlibrary{arrows,automata}
+\setsecnumdepth{subsection} % enumerate subsections
 
-\usepackage{ngerman}
-\usepackage[ngerman]{babel}
-\usepackage{bibgerm,cite}       % Deutsche Bezeichnungen, Automatisches Zusammenfassen von Literaturstellen
-\usepackage[ngerman]{varioref}  % Querverweise
-% to use the german charset include cp850 for MS-DOS, ansinew for Windows and latin1 for Linux.
-% \usepackage[latin1]{inputenc}
+% Use an optional index
+\makeindex
+% Use an optional glossary
+\makeglossaries
+%\glstocfalse % remove the glossaries from the table of contents
 
-\thesistitle{Visualization of program execution in gforth}
-\thesissubtitle{} % optional
-\thesisdate{TT.MM.JJJJ}
+% Set persons with 4 arguments:
+%  {title before name}{name}{title after name}{gender}
+%  where both titles are optional (i.e. can be given as empty brackets {})
+\setauthor{Pretitle}{Forename Surname}{Posttitle}{female}
+\setadvisor{Pretitle}{Forename Surname}{Posttitle}{male}
 
-% all titles and designations have to be gender-related!
-\thesisdegree{Bachelor of Science}{Bachelor of Science}
-\thesiscurriculum{Software \& Information Engineering}{Software \& Information Engineering} % your study
-\thesisverfassung{Verfasserin} % Verfasser
-\thesisauthor{Mario Gastegger} % your name
-\thesisauthoraddress{Ameisgasse 15/9, 1140 Wien} % your address
-\thesismatrikelno{0726289} % your registration number
+% For bachelor and master theses
+\setfirstassistant{Pretitle}{Forename Surname}{Posttitle}{male}
+\setsecondassistant{Pretitle}{Forename Surname}{Posttitle}{male}
+\setthirdassistant{Pretitle}{Forename Surname}{Posttitle}{male}
 
-\thesisbetreins{Ao.Univ.Prof. Dipl.-Ing. Dr.techn. Martin  Ertl}
-\thesisbetrzwei{Dr. Vorname Familienname}
-\thesisbetrdrei{Dr. Vorname Familienname} % optional
+% For dissertations
+\setfirstreviewer{Pretitle}{Forename Surname}{Posttitle}{male}
+\setsecondreviewer{Pretitle}{Forename Surname}{Posttitle}{male}
 
-% define page numbering styles
-\makepagestyle{numberCorner}
-\makeevenfoot{numberCorner}{\thepage}{}{}
-\makeoddfoot{numberCorner}{}{}{\thepage}
+% For dissertations at the PhD School
+\setsecondadvisor{Pretitle}{Forename Surname}{Posttitle}{male}
 
-% define custom macros for specific formats or names
-\newcommand{\uml}[1]{\texttt{#1}}
-\newcommand{\cd}{\textsf{Class Diagram}}
+% Required data
+\setaddress{Address}
+\setregnumber{0123456}
+\setdate{01}{01}{2001}
+\settitle{Title of the Thesis}{Titel der Arbeit} % sets English and German version of the title (both can be English or German)
+\setsubtitle{Optional Subtitle of the Thesis}{Optionaler Untertitel der Arbeit} % sets English and German version of the subtitle (both can be English or German)
+
+% Select the thesis type: bachelor / master / doctor / phd-school
+% Bachelor:
+\setthesis{bachelor}
+%
+% Master:
+%\setthesis{master}
+%\setmasterdegree{dipl.} % dipl. / rer.nat. / rer.soc.oec. / master
+%
+% Doctor:
+%\setthesis{doctor}
+%\setdoctordegree{rer.soc.oec.}% rer.nat. / techn. / rer.soc.oec.
+%
+% Doctor at the PhD School
+%\setthesis{phd-school} % Deactivate non-English title pages (see below)
+
+% For bachelor and master
+\setcurriculum{Media Informatics and Visual Computing}{Medieninformatik und Visual Computing} % sets the English and German name of the curriculum
+
+% For dissertations at the PhD School
+\setfirstreviewerdata{Affiliation, Country}
+\setsecondreviewerdata{Affiliation, Country}
+
 
 \begin{document}
 
-\captionnamefont{\bfseries}
+\frontmatter % switches to roman numbering
+% The structure of the thesis has to conform to
+%  http://www.informatik.tuwien.ac.at/dekanat
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   FRONTMATTER    %%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\frontmatter
-\pagenumbering{roman}
+\addtitlepage{naustrian} % German title page (not for dissertations at the PhD School)
+\addtitlepage{english} % English title page
+\addstatementpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   TITLEPAGES    %%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{danksagung*}
+Ihr Text hier.
+\end{danksagung*}
 
-% the german title page is required as first page
-\include{titlepage}
+\begin{acknowledgements*}
+Enter your text here.
+\end{acknowledgements*}
 
-% an english translation may follow
-\include{titlepage_en} % optional
+\begin{kurzfassung}
+Ihr Text hier.
+\end{kurzfassung}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   ERKLAERUNG DER SELBSTAENDIGKEIT   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage
-\selectlanguage{ngerman}
-\input{chapters/erklaerung}
+\begin{abstract}
+Enter your text here.
+\end{abstract}
+
+% Select the language of the thesis, e.g., english or naustrian.
 \selectlanguage{english}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   ACKNOWLEDGEMENTS    %%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add a table of contents (toc)
+\tableofcontents % starred version, i.e., \tableofcontents*, removes the self-entry
 
-% optional acknowledgements may be included in german or in english
-%\input{chapters/danksagung} 		% optional
-%\input{chapters/acknowledgements}	% optional TODO: thank anton
+% Use an optional list of figures
+\listoffigures % starred version, i.e., \listoffigures*, removes the toc entry
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   ABSTARCT    %%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use an optional list of tables
+\listoftables % starred version, i.e., \listoftables*, removes the toc entry
 
-\input{chapters/abstract_en}
-\cleardoublepage
-%\selectlanguage{ngerman}
-%\input{chapters/abstract_de}
-%\selectlanguage{english}
+% Use an optional list of alogrithms
+\listofalgorithms
+\addcontentsline{toc}{chapter}{List of Algorithms}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   CONTENTS    %%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% uncomment to set document language to german (results in "Inhaltsverzeichnis", "Kapitel", "Abbildung", etc. instead of "Contents", "Chapter", and "Figure"), otherwise the document's language is english
-%\selectlanguage{ngerman}
-
-\setcounter{tocdepth}{1}
-
-\cleardoublepage
-\pagestyle{numberCorner}
-\tableofcontents*
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   MAINMATTER    %%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% Switch to arabic numbering and start the enumeration of chapters in the table of content.
 \mainmatter
-\pagenumbering{arabic}
-\pagestyle{numberCorner}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Introduction}
-\label{ch:intro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{chapters/introduction.tex}
 
-\input{chapters/introduction}
+\input{chapters/state_of_the_art.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Typographic Design}
-\label{ch:typo}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{chapters/methodology.tex}
 
-\input{chapters/design}
+\input{chapters/suggested_solution.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Bibliographic Issues}
-\label{ch:bibliographic}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{chapters/critical_reflection.tex}
 
-\input{chapters/bibliographic}
+\input{chapters/summary_and_future_work.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% BACKMATTER %%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remove following line for the final thesis.
+% \input{chapters/intro.tex} % A short introduction to LaTeX.
 
-\appendix
+\backmatter
 
-\bibliographystyle{plain}
-\bibliography{references}
+% Add a bibliography
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+
+% Add an index
+\printindex
+
+% Add a glossary
+\printglossaries
 
 \end{document}

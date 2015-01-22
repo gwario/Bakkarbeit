@@ -1,0 +1,32 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Usage for Document Authors}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Data}{3}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Textual Data}{3}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Persons}{4}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Dates}{4}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}List Data}{5}{subsubsection.2.1.4}
+\contentsline {subsubsection}{\numberline {2.1.5}Polylingual Data}{6}{subsubsection.2.1.5}
+\contentsline {subsection}{\numberline {2.2}Layout}{6}{subsection.2.2}
+\contentsline {section}{\numberline {3}Usage for Class Writers}{7}{section.3}
+\contentsline {subsection}{\numberline {3.1}Data}{7}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Layout}{8}{subsection.3.2}
+\contentsline {section}{\numberline {4}Implementation}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Initialization}{9}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Class Options}{9}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Loaded Class and Packages}{9}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Low-Level Functionality}{10}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Fonts}{10}{subsubsection.4.1.4}
+\contentsline {subsection}{\numberline {4.2}Data}{11}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Dates}{11}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Textual Data}{11}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Persons}{12}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}Polylingual Text}{14}{subsubsection.4.2.4}
+\contentsline {subsubsection}{\numberline {4.2.5}Thesis Types}{16}{subsubsection.4.2.5}
+\contentsline {subsubsection}{\numberline {4.2.6}Declarations}{20}{subsubsection.4.2.6}
+\contentsline {subsection}{\numberline {4.3}Layout}{24}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}Setup}{24}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Title Page}{24}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Front Matter Material}{31}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.4}Page Style}{34}{subsubsection.4.3.4}
+\contentsline {section}{\numberline {5}{Change History}}{34}{section.5}
+\contentsline {section}{Index}{35}{section*.2}

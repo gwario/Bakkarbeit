@@ -1,0 +1,50 @@
+
+ \begin{theglossary} 
+
+    \makeatletter\scan@allowedfalse
+
+  \item v0.9\efill 
+ \subitem General:\ Pre-release version\pfill \hdpindex{}{1}
+  \item v1.0\efill 
+ \subitem General:\ Initial release version\pfill \hdpindex{}{1}
+  \item v1.1\efill 
+ \subitem General:\ Added references to the GitLab environment\pfill \hdpindex{}{1}
+  \item v1.3\efill 
+ \subitem General:\ Added support for a dissertation at the Vienna Phd School of Informatics. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{1}
+    \subitem \verb*+\AddStatementPage+:\ Updated to support multiple languages. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{31}
+    \subitem \verb*+\addstatementpage+:\ Updated to support english version. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{32}
+    \subitem \verb*+\AddTitlePage+:\ Added check for subtitle existance before usage. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/1}{Issue \#{}1}\pfill 
+		\hdpindex{}{29}
+      \subsubitem Updated to support PhD School mentioning and fixed the associated vertical overflow. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{29}
+    \subitem \verb*+\AdvisorBlock+:\ Updated to support second advisor. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{26}
+    \subitem \verb*+Persons+:\ Updated to support second advisor. Issue \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{20}
+    \subitem \verb*+Textual Data+:\ Updated to support external reviewer data. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{20}
+    \subitem \verb*+\ifdoctor+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+    \subitem \verb*+\ifphd+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+    \subitem \verb*+PolyLinguals+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{21}
+    \subitem \verb*+\ReviewerBlock+:\ Updated to support external reviewers. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{28}
+    \subitem \verb*+\setthesis+:\ Altered to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{18}
+    \subitem \verb*+\SignatureBlock+:\ Updated to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{29}
+    \subitem \verb*+\vutinfth@thesis@doctortype+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+    \subitem \verb*+\vutinfth@thesis@doctortype@doctor+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+    \subitem \verb*+\vutinfth@thesis@doctortype@phd+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+    \subitem \verb*+\vutinfth@thesis@phd+:\ Added to support multiple dissertation types. \href  {https://gitlab.cg.tuwien.ac.at/auzinger/vutinfth/issues/4}{Issue \#{}4}\pfill 
+		\hdpindex{}{17}
+
+ \end{theglossary}

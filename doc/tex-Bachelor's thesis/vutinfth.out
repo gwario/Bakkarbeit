@@ -1,0 +1,32 @@
+\BOOKMARK [1][-]{toc1.1}{Contents}{}% 1
+\BOOKMARK [1][-]{section.1}{1 Introduction}{}% 2
+\BOOKMARK [1][-]{section.2}{2 Usage for Document Authors}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{2.1 Data}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.1}{2.1.1 Textual Data}{subsection.2.1}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.2}{2.1.2 Persons}{subsection.2.1}% 6
+\BOOKMARK [3][-]{subsubsection.2.1.3}{2.1.3 Dates}{subsection.2.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.1.4}{2.1.4 List Data}{subsection.2.1}% 8
+\BOOKMARK [3][-]{subsubsection.2.1.5}{2.1.5 Polylingual Data}{subsection.2.1}% 9
+\BOOKMARK [2][-]{subsection.2.2}{2.2 Layout}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{3 Usage for Class Writers}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{3.1 Data}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{3.2 Layout}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{4 Implementation}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{4.1 Initialization}{section.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.1.1}{4.1.1 Class Options}{subsection.4.1}% 16
+\BOOKMARK [3][-]{subsubsection.4.1.2}{4.1.2 Loaded Class and Packages}{subsection.4.1}% 17
+\BOOKMARK [3][-]{subsubsection.4.1.3}{4.1.3 Low-Level Functionality}{subsection.4.1}% 18
+\BOOKMARK [3][-]{subsubsection.4.1.4}{4.1.4 Fonts}{subsection.4.1}% 19
+\BOOKMARK [2][-]{subsection.4.2}{4.2 Data}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.2.1}{4.2.1 Dates}{subsection.4.2}% 21
+\BOOKMARK [3][-]{subsubsection.4.2.2}{4.2.2 Textual Data}{subsection.4.2}% 22
+\BOOKMARK [3][-]{subsubsection.4.2.3}{4.2.3 Persons}{subsection.4.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.4}{4.2.4 Polylingual Text}{subsection.4.2}% 24
+\BOOKMARK [3][-]{subsubsection.4.2.5}{4.2.5 Thesis Types}{subsection.4.2}% 25
+\BOOKMARK [3][-]{subsubsection.4.2.6}{4.2.6 Declarations}{subsection.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.3}{4.3 Layout}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.1}{4.3.1 Setup}{subsection.4.3}% 28
+\BOOKMARK [3][-]{subsubsection.4.3.2}{4.3.2 Title Page}{subsection.4.3}% 29
+\BOOKMARK [3][-]{subsubsection.4.3.3}{4.3.3 Front Matter Material}{subsection.4.3}% 30
+\BOOKMARK [3][-]{subsubsection.4.3.4}{4.3.4 Page Style}{subsection.4.3}% 31
+\BOOKMARK [1][-]{section.5}{5 Change History}{}% 32

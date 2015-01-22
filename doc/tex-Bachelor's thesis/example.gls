@@ -1,0 +1,6 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{E}\relax \glsresetentrylist %
+\glossentry{texteditor}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{5}}}%
+\end{theglossary}\glossarypostamble
