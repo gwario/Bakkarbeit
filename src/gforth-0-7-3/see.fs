@@ -365,9 +365,7 @@ VARIABLE C-Pass
 	Display? IF nl .name-without THEN
         count 2dup + aligned -rot
         Display?
-        IF      bl cemit 0 gfvis @ if
-		>r 2dup gfvis-mrw 2! r>
-	endif .string
+        IF      bl cemit 0 gfvis @ if >r 2dup gfvis-mrw 2! r> endif .string
                 [char] " cemit bl cemit
         ELSE    2drop
         THEN ;

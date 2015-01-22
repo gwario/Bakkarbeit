@@ -156,6 +156,8 @@ variable wordcellwidth
 		color-green cr type space ." -> " space
 		color-blue type
 		font-normal
+	else
+		2drop 2drop
 	endif
 ;
 
@@ -163,6 +165,14 @@ variable wordcellwidth
 	debug @ if
 		color-green cr type .
 		font-normal
+	else
+		2drop drop
+	endif
+;
+
+: log-parsed-boundingbox ( -- )
+	debug @ if
+		color-green cr ." boundingbox: " boundingboxstart 2@ . . boundingboxend 2@ . . font-normal
 	endif
 ;
 
@@ -173,25 +183,26 @@ variable wordcellwidth
 		
 	while ( n-read )
 		
-		dup line-buffer swap boundingbox-def 2@ starts-with? if ( n-read )
+		dup line-buffer swap boundingbox-def 2@ string-prefix? if ( n-read )
 		
 			dup line-buffer swap parse-boundingbox boundingboxend 2! boundingboxstart 2!
+			
 			dup line-buffer swap s" BoundingBox definition found!" log-parsed-line
-			debug @ if
-				color-green cr ." boundingbox: " boundingboxstart 2@ . . boundingboxend 2@ . . font-normal
-			endif
+			log-parsed-boundingbox
 			
 		else ( n-read )
 			
-			dup line-buffer swap cellwidth-def 2@ starts-with? if ( n-read )
-				
+			dup line-buffer swap cellwidth-def 2@ string-prefix? if ( n-read )
+			
+				line-buffer count type
 				dup line-buffer swap parse-cellwidth cellwidth !
+				
 				dup line-buffer swap s" cellwidth definition found!" log-parsed-line
 				cellwidth @ s" cellwidth: " log-parsed-value
 				
 			else ( n-read )
 			
-				dup line-buffer swap wordcellwidth-def 2@ starts-with? if ( n-read )
+				dup line-buffer swap wordcellwidth-def 2@ string-prefix? if ( n-read )
 				
 					dup line-buffer swap parse-wordcellwidth wordcellwidth !
 					
@@ -201,6 +212,8 @@ variable wordcellwidth
 				endif ( n-read )
 			endif ( n-read )
 		endif ( n-read )
+	
+		line-buffer over type cr
 		
 		line-buffer swap to-fid write-line throw
 		
@@ -217,7 +230,7 @@ variable wordcellwidth
 	begin
 		line-buffer max-line trace-fid read-line throw
 	while
-		dup line-buffer swap boundingbox-def 2@ starts-with? if ( n-read )
+		dup line-buffer swap boundingbox-def 2@ string-prefix? if ( n-read )
 		
 			dup line-buffer swap trace-fid goto-bol ( n-read )
 			
@@ -326,7 +339,7 @@ templatefile-id close-file throw
 	depth 0 max \ maxdepth-.s @ min \ not more than  maxdepth-.s
 	dup 0 ?do
 		dup i - pick
-		." (" num$ n>str num$ count type ." ) " cr
+		." (" . ." ) " cr
 	loop
 	drop
 	
