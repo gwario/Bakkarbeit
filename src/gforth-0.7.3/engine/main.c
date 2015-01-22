@@ -24,6 +24,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
@@ -211,8 +212,10 @@ static int print_sequences = 0; /* print primitive sequences for optimization */
 static int relocs = 0;
 static int nonrelocs = 0;
 
-/* mga */
-Cell gfvis = F_FALSE;
+/* mga TODO how do we not compile that in ??! */
+Cell gfvis_enabled = F_FALSE;
+FILE *stdvis;
+Address gfvis_here;
 /* /mga */
 
 #ifdef HAS_DEBUG
@@ -2388,3 +2391,36 @@ int main(int argc, char **argv, char **env)
   }
   return retvalue;
 }
+
+/* mga */
+int fprint_stdvis(const char *format, ...)
+{
+	int ret;
+	va_list argp;
+	va_start(argp, format);
+	
+	ret = vfprintf(stdvis, format, argp);
+	if(ret < 0)
+		fprintf(stderr, "Failed to print to stdvis!\n");
+
+	va_end(argp);	
+	
+	if(putc(0x0D, stdvis) == EOF)
+		fprintf(stderr, "Failed to send 0x0D to stdvis!\n");
+	if(putc(0x0A, stdvis) == EOF)
+		fprintf(stderr, "Failed to send 0x0A to stdvis!\n");
+	
+	return ret;
+}
+
+void onStackChange(Cell *sp, Cell *sp0, Float *fp, Float *fp0, Cell *rp, Cell *rp0)
+{
+	if (!gfvis_enabled)
+		return;
+	fprint_stdvis("sp: %d    sp0: %d    sp - sp0: %d    sizeof(Cell): %d    tos: %016ld", &sp, &sp0, &sp0 - &sp, sizeof(Cell), sp[0]);
+	/*fprint_stdvis("fp: %d    fp0: %d    fp - fp0: %d    sizeof(Cell): %d    tos: %016lx", &fp, &fp0, &fp - &fp0, sizeof(Cell), fp[0]);*/
+	fprint_stdvis("rp: %d    rp0: %d    rp - rp0: %d    sizeof(Cell): %d    tos: %016ld", &rp, &rp0, &rp0 - &rp, sizeof(Cell), rp[0]);
+	/*fprint_stdvis("fuck you"); does work...*/
+	fflush(stdvis);
+}
+/* /mga */

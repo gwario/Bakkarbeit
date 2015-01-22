@@ -802,31 +802,3 @@ DCell fmdiv (DCell num, Cell denom)
   return res;
 }
 #endif
-
-/* mga */
-/* ifdef VIS */
-void onReturnStackChange()
-{
-	if (!gfvis)
-		return;
-
-	fprintf(stderr, "R: TEST\n");
-}
-
-void onDataStackChange()
-{
-	if (!gfvis)
-		return;
-
-	fprintf(stdout, "D: TEST\n");
-}
-
-void onFloatStackChange()
-{
-	if (!gfvis)
-		return;
-
-	fprintf(stderr, "F: TEST\n");
-}
-/* endif
-/ /mga */
