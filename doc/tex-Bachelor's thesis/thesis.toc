@@ -19,25 +19,25 @@
 \contentsline {chapter}{List of Algorithms}{xvii}{chapter*.9}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}problem statement (which problem should be solved?)}{1}{section.1.2}
-\contentsline {section}{\numberline {1.3}aim of the work}{1}{section.1.3}
-\contentsline {section}{\numberline {1.4}methodological approach}{2}{section.1.4}
-\contentsline {section}{\numberline {1.5}structure of the work}{2}{section.1.5}
-\contentsline {chapter}{\chapternumberline {2}State of the art / analysis of existing approaches}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}literature studies}{3}{section.2.1}
-\contentsline {section}{\numberline {2.2}analysis}{3}{section.2.2}
-\contentsline {section}{\numberline {2.3}comparison and summary of existing approaches}{4}{section.2.3}
-\contentsline {chapter}{\chapternumberline {3}Methodology}{5}{chapter.3}
-\contentsline {section}{\numberline {3.1}used concepts}{5}{section.3.1}
-\contentsline {section}{\numberline {3.2}methods and/or models}{5}{section.3.2}
-\contentsline {section}{\numberline {3.3}languages}{5}{section.3.3}
-\contentsline {section}{\numberline {3.4}design methods}{5}{section.3.4}
-\contentsline {section}{\numberline {3.5}data models}{6}{section.3.5}
-\contentsline {section}{\numberline {3.6}analysis methods}{6}{section.3.6}
-\contentsline {section}{\numberline {3.7}formalisms}{6}{section.3.7}
-\contentsline {chapter}{\chapternumberline {4}Suggested solution/implementation}{7}{chapter.4}
-\contentsline {chapter}{\chapternumberline {5}Critical reflection}{9}{chapter.5}
-\contentsline {section}{\numberline {5.1}comparison with related work}{9}{section.5.1}
-\contentsline {section}{\numberline {5.2}discussion of open issues}{9}{section.5.2}
-\contentsline {chapter}{\chapternumberline {6}Summary and future work}{11}{chapter.6}
-\contentsline {chapter}{Bibliography}{13}{section*.11}
+\contentsline {section}{\numberline {1.2}problem statement (which problem should be solved?)}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}aim of the work}{3}{section.1.3}
+\contentsline {section}{\numberline {1.4}methodological approach}{3}{section.1.4}
+\contentsline {section}{\numberline {1.5}structure of the work}{3}{section.1.5}
+\contentsline {chapter}{\chapternumberline {2}State of the art / analysis of existing approaches}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}literature studies}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}analysis}{6}{section.2.2}
+\contentsline {section}{\numberline {2.3}comparison and summary of existing approaches}{6}{section.2.3}
+\contentsline {chapter}{\chapternumberline {3}Methodology}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}used concepts}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}methods and/or models}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}languages}{7}{section.3.3}
+\contentsline {section}{\numberline {3.4}design methods}{7}{section.3.4}
+\contentsline {section}{\numberline {3.5}data models}{8}{section.3.5}
+\contentsline {section}{\numberline {3.6}analysis methods}{8}{section.3.6}
+\contentsline {section}{\numberline {3.7}formalisms}{8}{section.3.7}
+\contentsline {chapter}{\chapternumberline {4}Suggested solution/implementation}{9}{chapter.4}
+\contentsline {chapter}{\chapternumberline {5}Critical reflection}{11}{chapter.5}
+\contentsline {section}{\numberline {5.1}comparison with related work}{11}{section.5.1}
+\contentsline {section}{\numberline {5.2}discussion of open issues}{11}{section.5.2}
+\contentsline {chapter}{\chapternumberline {6}Summary and future work}{13}{chapter.6}
+\contentsline {chapter}{Bibliography}{15}{section*.11}

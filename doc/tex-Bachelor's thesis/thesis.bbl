@@ -1,9 +1,50 @@
-\begin{thebibliography}{Tur36}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{CZvD{\etalchar{+}}09}
 
-\bibitem[Tur36]{Turing1936}
-Alan~Mathison Turing.
-\newblock On computable numbers, with an application to the
-  entscheidungsproblem.
-\newblock {\em J. of Math}, 58:345--363, 1936.
+\bibitem[Bal99]{Ball:1999:CDA:318774.318944}
+Thoms Ball.
+\newblock The concept of dynamic analysis.
+\newblock {\em SIGSOFT Softw. Eng. Notes}, 24(6):216--234, October 1999.
+
+\bibitem[CZvD{\etalchar{+}}09]{Cornelissen:2009:SSP:1638616.1639301}
+Bas Cornelissen, Andy Zaidman, Arie van Deursen, Leon Moonen, and Rainer
+  Koschke.
+\newblock A systematic survey of program comprehension through dynamic
+  analysis.
+\newblock {\em IEEE Trans. Softw. Eng.}, 35(5):684--702, September 2009.
+
+\bibitem[ISO06]{ISOSWMaintainance}
+ISO.
+\newblock Software engineering -- software life cycle processes -- maintenance.
+\newblock ISO 14764:2006, International Organization for Standardization,
+  Geneva, Switzerland, 2006.
+
+\bibitem[LB85]{Lehman:1985:PEP:7261}
+M.~M. Lehman and L.~A. Belady, editors.
+\newblock {\em Program Evolution: Processes of Software Change}.
+\newblock Academic Press Professional, Inc., San Diego, CA, USA, 1985.
+
+\bibitem[LS80]{Lientz:1980:SMM:601062}
+Bennett~P. Lientz and E.~Burton Swanson.
+\newblock {\em Software Maintenance Management}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1980.
+
+\bibitem[Pig96]{Pigoski:1996:PSM:524398}
+Thomas~M. Pigoski.
+\newblock {\em Practical Software Maintenance: Best Practices for Managing Your
+  Software Investment}.
+\newblock John Wiley \& Sons, Inc., New York, NY, USA, 1996.
+
+\bibitem[PLVW98]{Pauw98executionpatterns}
+Wim~De Pauw, David Lorenz, John Vlissides, and Mark Wegman.
+\newblock Execution patterns in object-oriented visualization.
+\newblock In {\em In Proceedings Conference on Object-Oriented Technologies and
+  Systems (COOTS ’98}, pages 219--234, 1998.
+
+\bibitem[SFM99]{Storey:1999:CDE:308936.308940}
+M.-A.~D. Storey, F.~D. Fracchia, and H.~A. M\"{u}ller.
+\newblock Cognitive design elements to support the construction of a mental
+  model during software exploration.
+\newblock {\em J. Syst. Softw.}, 44(3):171--185, January 1999.
 
 \end{thebibliography}

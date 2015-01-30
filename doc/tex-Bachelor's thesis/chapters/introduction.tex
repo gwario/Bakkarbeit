@@ -35,18 +35,65 @@
 \section{Motivation}
 
 \begin{itemize}
-\item software -> bug -> statistics
+\item industrial software -> bug -> statistics -> understand(up to 60\% \cite{Pigoski:1996:PSM:524398}) to fix
+	\begin{itemize}
+	\item Industrial software, due to its(steady growning) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
+	\item The mental model of the client -> the specification(formal and informal) -> the mental model of developement team and the programmers -> the actual written behavior.
+	\item software evolution \\
+		Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
+	\item maintainance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
+		T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007
+	\item In all these transitions information maybe lost and thus some elements of the chain are encouraged to change behavior.
+	\end{itemize}
 \item code gets written one time and read 4 times
 \item program comprehension
-\item debugging -> different kind of paradigms and languages
+	\begin{itemize}
+	\item strategies \cite{Storey:1999:CDE:308936.308940}
+		\begin{itemize}
+		\item top down
+		\item bottom up
+		\item knowledgebased
+		\item systematic and as-needed
+		\item integrated approaches
+		\end{itemize}
+	\item dynamic analysis as defined by \cite{Ball:1999:CDA:318774.318944} \cite{Cornelissen:2009:SSP:1638616.1639301}
+		\begin{itemize}
+		\item actual behavior
+		\item incomplete view \cite{Ball:1999:CDA:318774.318944}
+		\item observer effect \\
+		Andrews, J. (1997). Testing using log file analysis: tools, methods, and issues.
+		In Proc. International Conference on Automated Software Engineering (ASE), pages 157–
+		166. IEEE Computer Society Press
+		\item scalability \\
+		Zaidman, A. (2006). Scalability Solutions for Program Comprehension through Dynamic
+		Analysis. PhD thesis, University of Antwerp
+		\end{itemize}
+	\item static analysis as defined by \cite{Ball:1999:CDA:318774.318944}
+		\begin{itemize}
+		\item ...
+		\end{itemize}
+	\item mental model
+	\item documentation
+	\item source code level documentation \\ Ninus Khamis , Juergen Rilling , René Witte, Assessing the quality factors found in in-line documentation written in natural language: The JavadocMiner, Data \& Knowledge Engineering, 87, p.19-40, September, 2013
+	\item requirements for tools
+	\end{itemize}
+\item debugging -> different kind of paradigms and languages and tools
+\item concatenative languages -> forth, postscript, factor
+\item comparisson to oo langs
 \end{itemize}
+
+David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA \\
+
+Martin P. Robillard , Wesley Coelho , Gail C. Murphy, How Effective Developers Investigate Source Code: An Exploratory Study, IEEE Transactions on Software Engineering, v.30 n.12, p.889-903, December 2004\\
+
+Darren C. Atkinson , William G. Griswold, The design of whole-program analysis tools, Proceedings of the 18th international conference on Software engineering, p.16-27, March 25-29, 1996, Berlin, Germany\\
 
 \section{problem statement (which problem should be solved?)}
 
 \begin{itemize}
 \item much work and tools on oo-languages
-\item not so much on stack oriented languages
-\item applicability of oo-methods for stack oriented languages at the example of forth
+\item not so much on concatenative \sout{stack oriented} languages
+\item applicability of oo-methods for concatenative \sout{stack oriented} languages at the example of forth
 \item applicability of oo-visualization methods
 \end{itemize}
 
@@ -61,7 +108,9 @@
 \section{methodological approach}
 
 \begin{itemize}
-\item qualitative approach
+\item qualitative approach(?)
+\item proposal
+\item Preliminary evaluations as defined by \cite{Cornelissen:2009:SSP:1638616.1639301}
 \item outcome is a subjectiv view of the available methods, and proposed enhancements which have been implemented and suggestions of further enhancements
 \end{itemize}
 
