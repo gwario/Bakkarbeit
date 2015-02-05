@@ -3,18 +3,41 @@
 \section{literature studies}
 
 \begin{itemize}
-\item about program comprehension
-	\begin{itemize} \item factoring \item displayed depth of factoring \end{itemize}
+	\item about program comprehension
+		\begin{itemize}
+		\item top down
+		\item bottom up
+		\item knowledgebased
+		\item systematic and as-needed
+		\item integrated approaches
+		\end{itemize}
+	\item dynamic analysis
+		\begin{itemize}
+		\item actual behavior
+		\item incomplete view \cite{Ball:1999:CDA:318774.318944}
+		\item observer effect \\
+		Andrews, J. (1997). Testing using log file analysis: tools, methods, and issues.
+		In Proc. International Conference on Automated Software Engineering (ASE), pages 157–
+		166. IEEE Computer Society Press
+		\item scalability \\
+		Zaidman, A. (2006). Scalability Solutions for Program Comprehension through Dynamic
+		Analysis. PhD thesis, University of Antwerp
+		\item debugging -> different kind of paradigms and languages and tools\\
+		 see @incollection{reiss1993trace,
+		  title={Trace-based debugging},
+		  author={Reiss, Steven P},
+		  booktitle={Automated and Algorithmic Debugging},
+		  pages={305--314},
+		  year={1993},
+		  publisher={Springer}
+		}
+		\end{itemize}
 	\begin{itemize} \item about debugging \end{itemize}
 	\begin{itemize}
 	\item dataflow analysis(Backward Analysis)(not sufficient in demo) \\
 		Darren C. Atkinson , William G. Griswold, Implementation Techniques for Efficient Data-Flow Analysis of Large Programs, Proceedings of the IEEE International Conference on Software Maintenance (ICSM'01), p.52, November 07-09, 2001
 	\end{itemize}
-\item about debugging in other paradigms
-	\begin{itemize} \item (?)about some tools \end{itemize}
-\item about debugging in stack oriented languages
-	\begin{itemize} \item (?)about some tools \end{itemize}
-\item (?)about visualization maybe some examples(and tools)
+\item about visualization maybe some examples(and tools)
 	\begin{itemize}
 	\item sequence diagram
 	\item circular diagram and interactive interaction sequance diagram \cite{Cornelissen2009}
@@ -30,22 +53,23 @@
 	\item architecture with dynamic information (Walker et al. 1998)
 	\item frequency spectrum analysis (Ball 1999)
 	\end{itemize}
-\item (?)about realtime/interactive vs post mortem
+\item about realtime/interactive vs post mortem
 \end{itemize}
 
 \section{analysis}
 
 \begin{itemize}
-\item existing methods abstract(abstract like print debugging and stepping and so on)
-\item applicability for so-languages
+\item existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above
+\item applicability for concatenative languages
 \end{itemize}
 
 \section{comparison and summary of existing approaches}
 
 \begin{itemize}
+\item kgforth http://sourceforge.net/projects/kgforth/
 \item existing methods(actual methods)
 	\begin{itemize}
-	\item factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
+	\item \hl{factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)} has to be considered during initial development
 	\item dump
 	\item . / type
 	\item dbg
