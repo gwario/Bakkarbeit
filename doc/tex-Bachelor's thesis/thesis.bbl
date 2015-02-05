@@ -1,10 +1,39 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{CZvD{\etalchar{+}}09}
 
+\bibitem[AKG{\etalchar{+}}10]{Aftandilian:2010:HIH:1879211.1879222}
+Edward~E. Aftandilian, Sean Kelley, Connor Gramazio, Nathan Ricci, Sara~L. Su,
+  and Samuel~Z. Guyer.
+\newblock Heapviz: Interactive heap visualization for program understanding and
+  debugging.
+\newblock In {\em Proceedings of the 5th International Symposium on Software
+  Visualization}, SOFTVIS '10, pages 53--62, New York, NY, USA, 2010. ACM.
+
 \bibitem[Bal99]{Ball:1999:CDA:318774.318944}
 Thoms Ball.
 \newblock The concept of dynamic analysis.
 \newblock {\em SIGSOFT Softw. Eng. Notes}, 24(6):216--234, October 1999.
+
+\bibitem[Bas97]{Basili:1997:EPR:257260.257262}
+Victor~R. Basili.
+\newblock Evolving and packaging reading technologies.
+\newblock {\em J. Syst. Softw.}, 38(1):3--12, July 1997.
+
+\bibitem[Boe76]{Boehm:1976:SE:1311958.1312684}
+B.~W. Boehm.
+\newblock Software engineering.
+\newblock {\em IEEE Trans. Comput.}, 25(12):1226--1241, December 1976.
+
+\bibitem[CDPC11]{Canfora:2011:ACS:1924421.1924451}
+Gerardo Canfora, Massimiliano Di~Penta, and Luigi Cerulo.
+\newblock Achievements and challenges in software reverse engineering.
+\newblock {\em Commun. ACM}, 54(4):142--151, April 2011.
+
+\bibitem[Cor09]{Cornelissen2009}
+Bas Cornelissen.
+\newblock {\em Evaluating Dynamic Analysis Techniques for Program
+  Comprehension}.
+\newblock Wohrmann Print Service, 2009.
 
 \bibitem[CZvD{\etalchar{+}}09]{Cornelissen:2009:SSP:1638616.1639301}
 Bas Cornelissen, Andy Zaidman, Arie van Deursen, Leon Moonen, and Rainer
@@ -29,6 +58,13 @@ Bennett~P. Lientz and E.~Burton Swanson.
 \newblock {\em Software Maintenance Management}.
 \newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1980.
 
+\bibitem[MJS{\etalchar{+}}00]{Muller:2000:RER:336512.336526}
+Hausi~A. M\"{u}ller, Jens~H. Jahnke, Dennis~B. Smith, Margaret-Anne Storey,
+  Scott~R. Tilley, and Kenny Wong.
+\newblock Reverse engineering: A roadmap.
+\newblock In {\em Proceedings of the Conference on The Future of Software
+  Engineering}, ICSE '00, pages 47--60, New York, NY, USA, 2000. ACM.
+
 \bibitem[Pig96]{Pigoski:1996:PSM:524398}
 Thomas~M. Pigoski.
 \newblock {\em Practical Software Maintenance: Best Practices for Managing Your
@@ -41,10 +77,45 @@ Wim~De Pauw, David Lorenz, John Vlissides, and Mark Wegman.
 \newblock In {\em In Proceedings Conference on Object-Oriented Technologies and
   Systems (COOTS ’98}, pages 219--234, 1998.
 
+\bibitem[RCM04]{Robillard:2004:EDI:1042203.1042417}
+Martin~P. Robillard, Wesley Coelho, and Gail~C. Murphy.
+\newblock How effective developers investigate source code: An exploratory
+  study.
+\newblock {\em IEEE Trans. Softw. Eng.}, 30(12):889--903, December 2004.
+
+\bibitem[Rei95]{ReissProgrammingEnvironments1995}
+S.~P. Reiss.
+\newblock {\em Visualization for Software Engineering -- Programming
+  Environments}.
+\newblock 1995.
+
+\bibitem[SB94]{Sarkar:1994:GFV:198366.198384}
+Manojit Sarkar and Marc~H. Brown.
+\newblock Graphical fisheye views.
+\newblock {\em Commun. ACM}, 37(12):73--83, December 1994.
+
 \bibitem[SFM99]{Storey:1999:CDE:308936.308940}
 M.-A.~D. Storey, F.~D. Fracchia, and H.~A. M\"{u}ller.
 \newblock Cognitive design elements to support the construction of a mental
   model during software exploration.
 \newblock {\em J. Syst. Softw.}, 44(3):171--185, January 1999.
+
+\bibitem[SLea97]{Singer97anexamination}
+Janice Singer, Timothy~C. Lethbridge, and et~al.
+\newblock An examination of software engineering work practices, 1997.
+
+\bibitem[SM96]{Storey:1995:GLA:647547.728600}
+Margaret-Anne~D. Storey and Hausi~A. M\"{u}ller.
+\newblock Graph layout adjustment strategies.
+\newblock In {\em Proceedings of the Symposium on Graph Drawing}, GD '95, pages
+  487--499, London, UK, UK, 1996. Springer-Verlag.
+
+\bibitem[SWFM97]{Storey:1997:IVT:857188.857642}
+M.-A.~D. Storey, K.~Wong, F.~D. Fracchia, and H.~A. Mueller.
+\newblock On integrating visualization techniques for effective software
+  exploration.
+\newblock In {\em Proceedings of the 1997 IEEE Symposium on Information
+  Visualization (InfoVis '97)}, INFOVIS '97, pages 38--, Washington, DC, USA,
+  1997. IEEE Computer Society.
 
 \end{thebibliography}

@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: alpha.bst
 Database file #1: bibliography.bib
-You've used 8 entries,
+Warning--empty publisher in ReissProgrammingEnvironments1995
+You've used 20 entries,
             2543 wiz_defined-function locations,
-            623 strings with 6126 characters,
-and the built_in function-call counts, 3181 in all, are:
-= -- 309
-> -- 154
-< -- 5
-+ -- 54
-- -- 52
-* -- 234
-:= -- 538
-add.period$ -- 24
-call.type$ -- 8
-change.case$ -- 48
-chr.to.int$ -- 8
-cite$ -- 8
-duplicate$ -- 129
-empty$ -- 230
-format.name$ -- 62
-if$ -- 638
+            709 strings with 8571 characters,
+and the built_in function-call counts, 8495 in all, are:
+= -- 854
+> -- 410
+< -- 13
++ -- 144
+- -- 141
+* -- 634
+:= -- 1388
+add.period$ -- 63
+call.type$ -- 20
+change.case$ -- 127
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 341
+empty$ -- 609
+format.name$ -- 165
+if$ -- 1739
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 9
-newline$ -- 44
-num.names$ -- 25
-pop$ -- 49
+missing$ -- 22
+newline$ -- 103
+num.names$ -- 61
+pop$ -- 126
 preamble$ -- 1
-purify$ -- 59
+purify$ -- 152
 quote$ -- 0
-skip$ -- 100
+skip$ -- 279
 stack$ -- 0
-substring$ -- 165
-swap$ -- 18
-text.length$ -- 5
-text.prefix$ -- 3
+substring$ -- 464
+swap$ -- 60
+text.length$ -- 13
+text.prefix$ -- 7
 top$ -- 0
-type$ -- 52
-warning$ -- 0
-while$ -- 30
-width$ -- 11
-write$ -- 108
+type$ -- 140
+warning$ -- 1
+while$ -- 84
+width$ -- 22
+write$ -- 270
+(There was 1 warning)

@@ -35,14 +35,15 @@
 \section{Motivation}
 
 \begin{itemize}
-\item industrial software -> bug -> statistics -> understand(up to 60\% \cite{Pigoski:1996:PSM:524398}) to fix
+\item industrial software -> bug -> statistics -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262} \cite{Pigoski:1996:PSM:524398} ) to fix
 	\begin{itemize}
 	\item Industrial software, due to its(steady growning) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
 	\item The mental model of the client -> the specification(formal and informal) -> the mental model of developement team and the programmers -> the actual written behavior.
 	\item software evolution \\
 		Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
 	\item maintainance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
-		T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007
+		T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007 \\
+		code has to be understood \cite{Boehm:1976:SE:1311958.1312684} in order to make changes or add features \cite{Singer97anexamination}
 	\item In all these transitions information maybe lost and thus some elements of the chain are encouraged to change behavior.
 	\end{itemize}
 \item code gets written one time and read 4 times
@@ -72,14 +73,44 @@
 		\begin{itemize}
 		\item ...
 		\end{itemize}
-	\item mental model
+	\item mental model(LaToza et al., 2006)\\ read: 
+	@inproceedings{Lieberman:1995:BGC:223904.223969,
+	 author = {Lieberman, Henry and Fry, Christopher},
+	 title = {Bridging the Gulf Between Code and Behavior in Programming},
+	 booktitle = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
+	 series = {CHI '95},
+	 year = {1995},
+	 isbn = {0-201-84705-1},
+	 location = {Denver, Colorado, USA},
+	 pages = {480--486},
+	 numpages = {7},
+	 url = {http://dx.doi.org/10.1145/223904.223969},
+	 doi = {10.1145/223904.223969},
+	 acmid = {223969},
+	 publisher = {ACM Press/Addison-Wesley Publishing Co.},
+	 address = {New York, NY, USA},
+	}
 	\item documentation
 	\item source code level documentation \\ Ninus Khamis , Juergen Rilling , René Witte, Assessing the quality factors found in in-line documentation written in natural language: The JavadocMiner, Data \& Knowledge Engineering, 87, p.19-40, September, 2013
 	\item requirements for tools
 	\end{itemize}
-\item debugging -> different kind of paradigms and languages and tools
+\item debugging -> different kind of paradigms and languages and tools\\
+ see @incollection{reiss1993trace,
+  title={Trace-based debugging},
+  author={Reiss, Steven P},
+  booktitle={Automated and Algorithmic Debugging},
+  pages={305--314},
+  year={1993},
+  publisher={Springer}
+}
 \item concatenative languages -> forth, postscript, factor
 \item comparisson to oo langs
+	\begin{itemize}
+	\item paradigm promotes a single shared data structure of high importance and thus may simplify the task of putting all the necesarry runtime information visually together(cite someone who says that its important to have all information visible at every point in time). Although there are several stacks, features like arbitary memory allocation, the focus on stacks is clearly stated.
+	\end{itemize}
+	\begin{itemize}
+	\item TODO implications from the concatenative nature...
+	\end{itemize}
 \end{itemize}
 
 David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA \\

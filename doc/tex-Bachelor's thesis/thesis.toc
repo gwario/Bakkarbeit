@@ -21,8 +21,8 @@
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}problem statement (which problem should be solved?)}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}aim of the work}{3}{section.1.3}
-\contentsline {section}{\numberline {1.4}methodological approach}{3}{section.1.4}
-\contentsline {section}{\numberline {1.5}structure of the work}{3}{section.1.5}
+\contentsline {section}{\numberline {1.4}methodological approach}{4}{section.1.4}
+\contentsline {section}{\numberline {1.5}structure of the work}{4}{section.1.5}
 \contentsline {chapter}{\chapternumberline {2}State of the art / analysis of existing approaches}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}literature studies}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}analysis}{6}{section.2.2}
