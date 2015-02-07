@@ -1,22 +1,36 @@
 \chapter{Suggested solution/implementation}
 
+kind of an \sout{ide} development environment\\
+light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate resonse of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
+eclipse ide(java)
+
+\section{suggested solution}
+
 \begin{itemize}
-\item kind of an ide \\
-light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate resonse of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software
-\\eclipse ide(java)
+
+\item emphasis on on comprehension code while writing. factoring suggestion, documentation, aliases(same code with multiple aliases to read more natural at different points in programs),  expressive naming, hard to generalize cause of the flexibility the language provides
+
+\item adequate search and corss reference facilities to support systematical investigation to benefit from effective program understanding as stated by \cite{Robillard:2004:EDI:1042203.1042417}
+
+\item display of the 'vocabulary' [cite moore: remember all the words]
+
+\item other data structures and variables should be displayed
 	\begin{itemize}
-	\item adequate search and corss reference facilities to support systematical investigation to benefit from effective program understanding as stated by \cite{Robillard:2004:EDI:1042203.1042417}
-	\item interactive program manipulation: state of the system before a word, after a word and by clicking on the word jumping to its definition or inserting it and there also providing those features
-	\item stepping debugger mode: simply stepping through the whole code word by word
-	\item goal-oriented strategy: the definition of an execution scenario such that only the parts of interest of the software system are analyzed (Koenemann and Robertson, 1991; Zaidman,
-	2006).
-	\item other data structures and variables should be displayed
-		\begin{itemize}
-		\item memory maybe like \cite{ReissProgrammingEnvironments1995} or \cite{Aftandilian:2010:HIH:1879211.1879222} but since there is no underlying object orientation and no standardized oo system this would be hard do accomplish
-		\item fisheye or word cloud like display(tree or sugiyama as of \cite{Storey:1997:IVT:857188.857642})
-		\end{itemize}
-	\item display of the 'vocabulary'
-	\item emphasis on on comprehension code while writing. factoring suggestion, documentation, aliases(same code with multiple aliases to read more natural at different points in programs),  expressive naming, hard to generalize cause of the flexibility the language provides
+	\item memory maybe like \cite{ReissProgrammingEnvironments1995} or \cite{Aftandilian:2010:HIH:1879211.1879222} but since there is no underlying object orientation and no standardized oo system this would be hard do accomplish
+	\item fisheye or word cloud like display(tree or sugiyama as of \cite{Storey:1997:IVT:857188.857642})
 	\end{itemize}
-\item proof of concept by enhancement of stepping debugger on forth code level(cause it has turned out to be the fastest and simples approach) by showing additional data: the other stacks
+	
+\item interactive program manipulation: state of the system before a word, after a word and by clicking on the word jumping to its definition or inserting it and there also providing those features
+
+\item stepping debugger mode: simply stepping through the whole code word by word
+
+\item goal-oriented strategy: the definition of an execution scenario such that only the parts of interest of the software system are analyzed (Koenemann and Robertson, 1991; Zaidman,
+2006).
+
+\item code analysis and visualization facilities see chapter 2 TODO
+
 \end{itemize}
+	
+\section{implementation}
+
+proof of concept by enhancement of stepping debugger on forth code level(cause it has turned out to be the fastest and simples approach) by showing additional data: the other stacks

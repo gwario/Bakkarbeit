@@ -1,14 +1,19 @@
 [Session]
 FileVersion=1
 File0\FileName=thesis.tex
-File0\Line=15
-File0\Col=23
+File0\Line=0
+File0\Col=14
 File0\FirstLine=0
 File0\FoldedLines=
 MasterFile=
-CurrentFile=thesis.tex
+CurrentFile=chapters/introduction.tex
 Bookmarks=@Invalid()
+File1\FileName=chapters/introduction.tex
+File1\Line=100
+File1\Col=59
+File1\FirstLine=70
+File1\FoldedLines=
 
 [InternalPDFViewer]
-File=thesis.pdf
+File=
 Embedded=true

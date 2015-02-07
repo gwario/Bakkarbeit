@@ -16,17 +16,20 @@
 \section{Motivation}
 
 \begin{itemize}
-\item software -> bug -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262} \cite{Pigoski:1996:PSM:524398} ) to fix
-	\begin{itemize}
-	\item Industrial software, due to its(steady growning) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
-	\item software evolution \\
-		Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
-	\item maintainance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
-		T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007 \\
-		code has to be understood \cite{Boehm:1976:SE:1311958.1312684} in order to make changes or add features \cite{Singer97anexamination}
-	\end{itemize}
+
+\item Industrial software, due to its(steady growning) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
+
+\item software evolution \\
+	Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
+
+\item maintainance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
+	T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007 \\
+	code has to be understood \cite{Boehm:1976:SE:1311958.1312684} in order to make changes or add features \cite{Singer97anexamination} \\
+	integrate somewhere here: software -> bug -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262}(is this really related? thorrow reading may be better) \cite{Pigoski:1996:PSM:524398} ) to fix
+
 \item program comprehension
 	\begin{itemize}
+	\item proper reading as of \cite{Basili:1997:EPR:257260.257262}(?) \\ systematic approach, strategy may depend on various attributes
 	\item strategies as stated by \cite{Storey:1999:CDE:308936.308940}
 	\item dynamic analysis as defined by \cite{Ball:1999:CDA:318774.318944} \cite{Cornelissen:2009:SSP:1638616.1639301}
 	\item static analysis as defined by \cite{Ball:1999:CDA:318774.318944}
@@ -52,40 +55,44 @@
 		\item source code level documentation \\ Ninus Khamis , Juergen Rilling , René Witte, Assessing the quality factors found in in-line documentation written in natural language: The JavadocMiner, Data \& Knowledge Engineering, 87, p.19-40, September, 2013
 		\end{itemize}
 	\end{itemize}
-\item concatenative languages -> forth, postscript, factor
+	
 \item comparisson to oo langs
 	\begin{itemize}
 	\item paradigm promotes a single shared data structure of high importance and thus may simplify the task of putting all the necesarry runtime information visually together(cite someone who says that its important to have all information visible at every point in time). Although there are several stacks, features like arbitary memory allocation, the focus on stacks is clearly stated.
+	\item higher abstraction, hard structur boundaries
 	\end{itemize}
 	\begin{itemize}
-	\item TODO implications from the concatenative nature...
+	\item TODO implications from the concatenative nature... ie potential to be more natural to read cause of reverse polish notation \\
+	David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA
+	\end{itemize}
+	
+\item concatenative languages -> forth, postscript, factor
+	\begin{itemize}
+	\item how does software maintenance work in those(evt to future work)
+	\item 
 	\end{itemize}
 \end{itemize}
 
-David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA \\
+Martin P. Robillard , Wesley Coelho , Gail C. Murphy, How Effective Developers Investigate Source Code: An Exploratory Study, IEEE Transactions on Software Engineering, v.30 n.12, p.889-903, December 2004
 
-Martin P. Robillard , Wesley Coelho , Gail C. Murphy, How Effective Developers Investigate Source Code: An Exploratory Study, IEEE Transactions on Software Engineering, v.30 n.12, p.889-903, December 2004\\
-
-Darren C. Atkinson , William G. Griswold, The design of whole-program analysis tools, Proceedings of the 18th international conference on Software engineering, p.16-27, March 25-29, 1996, Berlin, Germany\\
+Darren C. Atkinson , William G. Griswold, The design of whole-program analysis tools, Proceedings of the 18th international conference on Software engineering, p.16-27, March 25-29, 1996, Berlin, Germany
 
 \section{problem statement (which problem should be solved?)}
 
+hypothesis here
 \begin{itemize}
-\item much work and tools on oo-languages
-\item not so much on concatenative \sout{stack oriented} languages
-\item applicability of oo-methods for concatenative \sout{stack oriented} languages at the example of forth
+\item much work and tools on oo- or procedural languages \cite{Cornelissen:2009:SSP:1638616.1639301}
+\item not so much on concatenative \sout{stack oriented} languages... nothing in fact, although maybe similarities to procedural
+\item applicability of oo- and procedural methods for concatenative \sout{stack oriented} languages at the example of forth
 \item applicability of oo-visualization methods
-\item suggestions of (new) methods
+\item suggestions of (new) methods(lineout style wordlists/words)
 \end{itemize}
 
 \section{aim of the work}
 
-\begin{itemize}
-\item identify all the information to be considered (and helpful) for program comprehension
-\item actual visualization methods for these information
-\item improve efficiency of program comprehension of concatenative languages
-\item demonstration by enhancing the gforth stepping debugger(trace recording, trace visualization, goal-based approach possible)
-\end{itemize}
+This work aims to better understand how program comprehension is performed in concatenative languages and how it can be made more efficient. The secondary goal is analyse the applicability of existing analysis- and visualization methods and provide modifications to existing visualization methods(and maybe suggestion of new methods). The forth programming language is used as a representative of concatenative languages.
+
+\sout{demonstration by enhancing the gforth stepping debugger(trace recording, trace visualization, goal-based approach possible)}
 
 \section{methodological approach}
 
@@ -100,11 +107,6 @@ Darren C. Atkinson , William G. Griswold, The design of whole-program analysis t
 
 \section{structure of the work}
 
-\begin{itemize}
-\item summary of information to be considered helpful
-\item summary on the available methods for program comprehension in gforth
-\item summary and applicability of available methods for other paradigms and languages
-\item enhancement or modification of existing methods to fit the target program paradigm and proposal for further enhancements
-\item conclusion
-\item further work / suggestion for further research
-\end{itemize}
+At first, the available information of a forth program is identified. The next step is to characterize the information and its necessarity for program comprehension is investigated. The differences of forth and object oriented languages are summarized and then the applicability of existing analysis and visualization methods is presented.
+The last part of this thesis investigates probable enhancements and modifications to existing methods and proposes new approaches.
+After the conclusion, the thesis presents further suggestions to support program comprehension and further topics of research in this direction.
