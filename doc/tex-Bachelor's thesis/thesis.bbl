@@ -29,6 +29,12 @@ Gerardo Canfora, Massimiliano Di~Penta, and Luigi Cerulo.
 \newblock Achievements and challenges in software reverse engineering.
 \newblock {\em Commun. ACM}, 54(4):142--151, April 2011.
 
+\bibitem[CHLW06]{Cook:2006:ESS:1115566.1115567}
+Stephen Cook, Rachel Harrison, Meir~M. Lehman, and Paul Wernick.
+\newblock Evolution in software systems: Foundations of the spe classification
+  scheme: Research articles.
+\newblock {\em J. Softw. Maint. Evol.}, 18(1):1--35, January 2006.
+
 \bibitem[Cor09]{Cornelissen2009}
 Bas Cornelissen.
 \newblock {\em Evaluating Dynamic Analysis Techniques for Program
@@ -52,6 +58,11 @@ ISO.
 M.~M. Lehman and L.~A. Belady, editors.
 \newblock {\em Program Evolution: Processes of Software Change}.
 \newblock Academic Press Professional, Inc., San Diego, CA, USA, 1985.
+
+\bibitem[LR03]{Lehman:2003:SEB:950401.950407}
+Meir~M. Lehman and Juan~F. Ramil.
+\newblock Software evolution: Background, theory, practice.
+\newblock {\em Inf. Process. Lett.}, 88(1-2):33--44, October 2003.
 
 \bibitem[LS80]{Lientz:1980:SMM:601062}
 Bennett~P. Lientz and E.~Burton Swanson.

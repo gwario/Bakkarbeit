@@ -17,63 +17,65 @@
 
 \begin{itemize}
 
-\item Industrial software, due to its(steady growning) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
-
-\item software evolution \\
+\item OK software, due to its(steady growing) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ maybe better than the lehman85 cus available \cite{Lehman:2003:SEB:950401.950407} \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
+	
+\item OK software evolution \\
 	Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
 
-\item maintainance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
+\item OK maintenance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
 	T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007 \\
 	code has to be understood \cite{Boehm:1976:SE:1311958.1312684} in order to make changes or add features \cite{Singer97anexamination} \\
-	integrate somewhere here: software -> bug -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262}(is this really related? thorrow reading may be better) \cite{Pigoski:1996:PSM:524398} ) to fix
-
-\item program comprehension
-	\begin{itemize}
-	\item proper reading as of \cite{Basili:1997:EPR:257260.257262}(?) \\ systematic approach, strategy may depend on various attributes
-	\item strategies as stated by \cite{Storey:1999:CDE:308936.308940}
-	\item dynamic analysis as defined by \cite{Ball:1999:CDA:318774.318944} \cite{Cornelissen:2009:SSP:1638616.1639301}
-	\item static analysis as defined by \cite{Ball:1999:CDA:318774.318944}
-	\item mental model(LaToza et al., 2006)\\ read: 
-	@inproceedings{Lieberman:1995:BGC:223904.223969,
-	 author = {Lieberman, Henry and Fry, Christopher},
-	 title = {Bridging the Gulf Between Code and Behavior in Programming},
-	 booktitle = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
-	 series = {CHI '95},
-	 year = {1995},
-	 isbn = {0-201-84705-1},
-	 location = {Denver, Colorado, USA},
-	 pages = {480--486},
-	 numpages = {7},
-	 url = {http://dx.doi.org/10.1145/223904.223969},
-	 doi = {10.1145/223904.223969},
-	 acmid = {223969},
-	 publisher = {ACM Press/Addison-Wesley Publishing Co.},
-	 address = {New York, NY, USA},
-	}
-	\item documentation artifacts(requirements to component diagram)
-		\begin{itemize}
-		\item source code level documentation \\ Ninus Khamis , Juergen Rilling , René Witte, Assessing the quality factors found in in-line documentation written in natural language: The JavadocMiner, Data \& Knowledge Engineering, 87, p.19-40, September, 2013
-		\end{itemize}
-	\end{itemize}
-	
-\item comparisson to oo langs
-	\begin{itemize}
-	\item paradigm promotes a single shared data structure of high importance and thus may simplify the task of putting all the necesarry runtime information visually together(cite someone who says that its important to have all information visible at every point in time). Although there are several stacks, features like arbitary memory allocation, the focus on stacks is clearly stated.
-	\item higher abstraction, hard structur boundaries
-	\end{itemize}
-	\begin{itemize}
-	\item TODO implications from the concatenative nature... ie potential to be more natural to read cause of reverse polish notation \\
-	David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA
-	\end{itemize}
-	
-\item concatenative languages -> forth, postscript, factor
-	\begin{itemize}
-	\item how does software maintenance work in those(evt to future work)
-	\item 
-	\end{itemize}
+	integrate somewhere here: software -> bug -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262}(is this really related? thorough reading may be better) \cite{Pigoski:1996:PSM:524398} ) to fix
 \end{itemize}
 
-Martin P. Robillard , Wesley Coelho , Gail C. Murphy, How Effective Developers Investigate Source Code: An Exploratory Study, IEEE Transactions on Software Engineering, v.30 n.12, p.889-903, December 2004
+Software under lies a continuous changes, throughout its live cycle.
+The evolution process from the beginning of development until its release and maintenance. Large software\footnote{"The term large is, generally, used to describe software whose size in number of lines of code is greater than some arbitrary value. For reasons indicated in [leh79], it is more appropriate to define a large program as one developed by processes involving groups with two or more management levels."\cite{Lehman:2003:SEB:950401.950407}} and most of all software  classified as type E \cite{Cook:2006:ESS:1115566.1115567} gets more complex over time. If there are more than a few developers/development teams are involved or the developers/development teams are spread allover the world, there exists more foreign code than self written. 
+
+\begin{itemize}
+\item program comprehension
+\end{itemize}
+
+Since changes, enhancements or fixes of existing code demand the developers involved to gain a high level of understanding for the software at hand. This task is referred to by the scientific community as "program understanding" or "program comprehension". This thesis addresses the task of improving program comprehension of the concatenative programming language forth on several level.
+
+\begin{itemize}
+\item proper reading as of \cite{Basili:1997:EPR:257260.257262}(?) \cite{Robillard:2004:EDI:1042203.1042417} \\ systematic approach, strategy may depend on various attributes
+
+\item mental model(LaToza et al., 2006)\\ read: 
+@inproceedings{Lieberman:1995:BGC:223904.223969,
+author = {Lieberman, Henry and Fry, Christopher},
+title = {Bridging the Gulf Between Code and Behavior in Programming},
+booktitle = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
+series = {CHI '95},
+year = {1995},
+isbn = {0-201-84705-1},
+location = {Denver, Colorado, USA},
+pages = {480--486},
+numpages = {7},
+url = {http://dx.doi.org/10.1145/223904.223969},
+doi = {10.1145/223904.223969},
+acmid = {223969},
+publisher = {ACM Press/Addison-Wesley Publishing Co.},
+address = {New York, NY, USA},
+}
+
+\item strategies as stated by \cite{Storey:1999:CDE:308936.308940}
+
+\item dynamic analysis as defined by \cite{Ball:1999:CDA:318774.318944} \cite{Cornelissen:2009:SSP:1638616.1639301}
+
+\item static analysis as defined by \cite{Ball:1999:CDA:318774.318944}
+\end{itemize}
+
+Namely the the reading of source code, static analysis, dynamic analysis and the assistance of writing readable and easy to understand source code.
+
+\begin{itemize}
+\item concatenative languages -> forth, postscript, factor -> implications from the concatenative nature... ie potential to be more natural to read cause of reverse polish notation \\
+	David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA
+\item comparison to oo langs
+\item higher abstraction, hard structure boundaries
+\item paradigm promotes a single shared data structure of high importance and thus may simplify the task of putting all the necessary run-time information visually together(cite someone who says that its important to have all information visible at every point in time). Although there are several stacks, features like arbitrary memory allocation, the focus on stacks is clearly stated.
+\end{itemize}
+
+Due to the nature of concatenative languages, it is possible to write source code which ready very similar to natural language. There are no hard boundaries to the structure of the source code(custom defined loops and control structures) as in object oriented languages. Since forth directly operates only on stacks and memory, the information which is immediately needed to follow program execution is limited to those structures. In contrast, in object oriented languages there is also object state, object life cycle, concurrency of interest.
 
 Darren C. Atkinson , William G. Griswold, The design of whole-program analysis tools, Proceedings of the 18th international conference on Software engineering, p.16-27, March 25-29, 1996, Berlin, Germany
 
