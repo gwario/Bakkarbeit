@@ -16,36 +16,39 @@
 \contentsline {chapter}{Contents}{xv}{section*.6}
 \contentsline {chapter}{List of Figures}{xvi}{section*.7}
 \contentsline {chapter}{List of Tables}{xvi}{section*.8}
-\contentsline {chapter}{List of Algorithms}{xvii}{chapter*.9}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}problem statement (which problem should be solved?)}{3}{section.1.2}
 \contentsline {section}{\numberline {1.3}aim of the work}{3}{section.1.3}
-\contentsline {section}{\numberline {1.4}methodological approach}{3}{section.1.4}
+\contentsline {section}{\numberline {1.4}methodological approach}{4}{section.1.4}
 \contentsline {section}{\numberline {1.5}structure of the work}{4}{section.1.5}
 \contentsline {chapter}{\chapternumberline {2}State of the art / analysis of existing approaches}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}literature studies}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}analysis}{5}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}program comprehension strategies}{5}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}analysis to support program understanding}{6}{subsection.2.2.2}
-\contentsline {subsubsection}{dynamic analysis}{6}{section*.10}
-\contentsline {subsubsection}{static analysis}{6}{section*.11}
-\contentsline {subsection}{\numberline {2.2.3}applicability to concatenative languages}{6}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}visualization to support program understanding maybe some examples(and tools)}{6}{section.2.3}
-\contentsline {section}{\numberline {2.4}comparison and summary of existing approaches}{7}{section.2.4}
-\contentsline {chapter}{\chapternumberline {3}Methodology}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}used concepts}{9}{section.3.1}
-\contentsline {section}{\numberline {3.2}methods and/or models}{9}{section.3.2}
-\contentsline {section}{\numberline {3.3}languages}{9}{section.3.3}
-\contentsline {section}{\numberline {3.4}design methods}{10}{section.3.4}
-\contentsline {section}{\numberline {3.5}data models}{10}{section.3.5}
-\contentsline {section}{\numberline {3.6}analysis methods}{10}{section.3.6}
-\contentsline {section}{\numberline {3.7}formalisms}{10}{section.3.7}
-\contentsline {chapter}{\chapternumberline {4}Suggested solution/implementation}{11}{chapter.4}
-\contentsline {section}{\numberline {4.1}suggested solution}{11}{section.4.1}
-\contentsline {section}{\numberline {4.2}implementation}{12}{section.4.2}
-\contentsline {chapter}{\chapternumberline {5}Critical reflection}{13}{chapter.5}
-\contentsline {section}{\numberline {5.1}comparison with related work}{13}{section.5.1}
-\contentsline {section}{\numberline {5.2}discussion of open issues}{13}{section.5.2}
-\contentsline {chapter}{\chapternumberline {6}Summary and future work}{15}{chapter.6}
-\contentsline {chapter}{Bibliography}{17}{section*.13}
+\contentsline {subsection}{\numberline {2.2.1}software evolution}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}software maintenance}{5}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}program comprehension}{6}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}program comprehension strategies}{6}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}analysis to support program understanding}{6}{subsection.2.2.5}
+\contentsline {subsubsection}{dynamic analysis}{7}{section*.9}
+\contentsline {subsubsection}{static analysis}{7}{section*.10}
+\contentsline {subsection}{\numberline {2.2.6}applicability to concatenative languages}{7}{subsection.2.2.6}
+\contentsline {section}{\numberline {2.3}visualization to support program understanding maybe some examples(and tools)}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}comparison and summary of existing approaches}{8}{section.2.4}
+\contentsline {chapter}{\chapternumberline {3}Methodology}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}used concepts}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}methods and/or models}{11}{section.3.2}
+\contentsline {section}{\numberline {3.3}languages}{11}{section.3.3}
+\contentsline {section}{\numberline {3.4}design methods}{12}{section.3.4}
+\contentsline {section}{\numberline {3.5}data models}{12}{section.3.5}
+\contentsline {section}{\numberline {3.6}analysis methods}{12}{section.3.6}
+\contentsline {section}{\numberline {3.7}formalisms}{12}{section.3.7}
+\contentsline {chapter}{\chapternumberline {4}Suggested solution/implementation}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}suggested solution}{13}{section.4.1}
+\contentsline {section}{\numberline {4.2}implementation}{15}{section.4.2}
+\contentsline {chapter}{\chapternumberline {5}Critical reflection}{17}{chapter.5}
+\contentsline {section}{\numberline {5.1}comparison with related work}{17}{section.5.1}
+\contentsline {section}{\numberline {5.2}discussion of open issues}{17}{section.5.2}
+\contentsline {chapter}{\chapternumberline {6}Summary and future work}{19}{chapter.6}
+\contentsline {chapter}{Bibliography}{21}{section*.12}
+\contentsline {chapter}{Glossary}{25}{section*.13}

@@ -24,6 +24,12 @@ B.~W. Boehm.
 \newblock Software engineering.
 \newblock {\em IEEE Trans. Comput.}, 25(12):1226--1241, December 1976.
 
+\bibitem[BW09]{Biancuzzi:2009:MPC:1592983}
+Federico Biancuzzi and Shane Warden.
+\newblock {\em Masterminds of Programming: Conversations with the Creators of
+  Major Programming Languages}.
+\newblock O'Reilly Media, Inc., 1st edition, 2009.
+
 \bibitem[CDPC11]{Canfora:2011:ACS:1924421.1924451}
 Gerardo Canfora, Massimiliano Di~Penta, and Luigi Cerulo.
 \newblock Achievements and challenges in software reverse engineering.
@@ -41,12 +47,25 @@ Bas Cornelissen.
   Comprehension}.
 \newblock Wohrmann Print Service, 2009.
 
+\bibitem[CZH{\etalchar{+}}08]{Cornelissen:2008:ETA:1454787.1454981}
+Bas Cornelissen, Andy Zaidman, Danny Holten, Leon Moonen, Arie van Deursen, and
+  Jarke~J. van Wijk.
+\newblock Execution trace analysis through massive sequence and circular bundle
+  views.
+\newblock {\em J. Syst. Softw.}, 81(12):2252--2268, December 2008.
+
 \bibitem[CZvD{\etalchar{+}}09]{Cornelissen:2009:SSP:1638616.1639301}
 Bas Cornelissen, Andy Zaidman, Arie van Deursen, Leon Moonen, and Rainer
   Koschke.
 \newblock A systematic survey of program comprehension through dynamic
   analysis.
 \newblock {\em IEEE Trans. Softw. Eng.}, 35(5):684--702, September 2009.
+
+\bibitem[CZvD11]{Cornelissen:2011:CEP:1990772.1991009}
+Bas Cornelissen, Andy Zaidman, and Arie van Deursen.
+\newblock A controlled experiment for program comprehension through trace
+  visualization.
+\newblock {\em IEEE Trans. Softw. Eng.}, 37(3):341--355, May 2011.
 
 \bibitem[ISO06]{ISOSWMaintainance}
 ISO.

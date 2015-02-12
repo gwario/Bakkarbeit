@@ -1,18 +1,38 @@
+\newglossaryentry{Charles D. Moore}
+{
+  name={Charles D. Moore},
+  description={Charles D. Moore, is the inventor of the forth programming language.}
+}
+
 \chapter{Suggested solution/implementation}
 
 kind of an \sout{ide} development environment\\
-light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate resonse of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
+light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate response of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
 eclipse ide(java)
 
 \section{suggested solution}
 
 \begin{itemize}
 
-\item emphasis on on comprehension code while writing. factoring suggestion, documentation, aliases(same code with multiple aliases to read more natural at different points in programs),  expressive naming, hard to generalize cause of the flexibility the language provides
+\item OK emphasis on on comprehension code while writing. factoring suggestion, documentation, aliases(same code with multiple aliases to read more natural at different points in programs),  expressive naming, hard to generalize cause of the flexibility the language provides
 
-\item adequate search and corss reference facilities to support systematical investigation to benefit from effective program understanding as stated by \cite{Robillard:2004:EDI:1042203.1042417}
+\item OK adequate search and cross reference facilities to support systematical investigation to benefit from effective program understanding as stated by \cite{Robillard:2004:EDI:1042203.1042417}
 
-\item display of the 'vocabulary' [cite moore: remember all the words]
+\item OK display of the 'vocabulary' [cite moore: remember all the words]
+
+\end{itemize}
+
+A very important question in this concern is, how can developers be assisted to write readable code. Experienced developers may do that intuitively, but how can novice developers be encouraged and supported to write readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this attribute be supported?\\
+One answer is to provide hints based on static analysis.\\
+It is not possible to make every word completely readable and the perceived readability also depends on the experience of the developer. At some point  it always comes down to longer combinations of "nip tuck over rot", this is hardly avoidable at the lowest level. Thus, proper documentation of words is essential. Its pretty The obvious, that stack effect comment\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Stack\_002dEffect-Comments-Tutorial.html\#Stack\_002dEffect-Comments-Tutorial} in forth, are a must have, but also the behavior of the word should be explained if complex or not very natural to read words\footnote{Most notable \\G in gforth. See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Comments.html\#Comments}. Another advantage of word definition comments is the possibility of automated documentation generation.\\
+Very long word definitions tend increase the amount of brain capacity required to understand its behavior. The way to account this problem is to break down the overall task into manageable pieces. It is called factoring\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html\#Factoring-Tutorial} in context of concatenative languages. An approach could be to place a hint on word definitions which exceed a certain amount of lines or words or different words and suggest further factoring.\\
+Another tool to make code read more natural, is aliasing\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html}. By defining aliases for a certain word, its functionality can be used in different contexts and still read very natural.
+Expressive naming, although obvious, it should be mentioned that assigning expressive and fitting names for words is essential. This applies to any language[does it? cite...].\\
+To understand code, the systematic approach turned out to be most efficient\cite{Robillard:2004:EDI:1042203.1042417}. To ease afford of finding the definition of words used at a certain point, a hyperlink like referencing mechanism can be used[cite the visualization paper with the hyperlink feature].\\
+As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding
+which words are useful, and 2) remembering them all.", when programs get larger, the amount of words can grow big. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reverence to where they are used. Auto completion can also help a lot in finding words previously defined.
+
+\begin{itemize}
 
 \item other data structures and variables should be displayed
 	\begin{itemize}
@@ -32,5 +52,12 @@ eclipse ide(java)
 \end{itemize}
 	
 \section{implementation}
+\begin{itemize}
+\item OK proof of concept by enhancement of stepping debugger on forth code level(cause it has turned out to be the fastest and simples approach) by showing additional data: the other stacks
+\end{itemize}
 
-proof of concept by enhancement of stepping debugger on forth code level(cause it has turned out to be the fastest and simples approach) by showing additional data: the other stacks
+As a first step, in addition to this work, the stepping debugger of gforth was enhanced. The existing implementation only shows the data stack and the word to be executed. The enhanced version is now able to record the debugging trace as a postscript(trace.ps) file which shows the executed words and the state of the data stack, the float stack and the return stack. Since the return stack contains addresses related to the executed words, the word names were displayed when possible. The algorithm to resolve the word names corresponding to the address was already implemented in gforth's back-trace and not developed by myself. The debugging trace is stored as a postscript file and can be investigated during the debugging session as well as after the actual execution is complete.
+The implementation involved the modification of some gforth internal files as well as a file(gfvis.fs) which has to be loaded with gforth.
+The display layout was implemented in postscript. Every trace-file is constructed from a template file(gfvis.ps) which contains the postscript code to layout the recorded trace.
+(Since the debugger only works with the itc engine, the debugging has still to be performed with this engine.????)
+There was also made an attempt to accomplish this on the c source code level, but it turned out to be rather complicated and therefore the forth only level was chosen.

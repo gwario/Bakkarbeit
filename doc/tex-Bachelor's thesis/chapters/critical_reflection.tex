@@ -2,21 +2,29 @@
 
 \section{comparison with related work}
 
-\hl{? is there any? maybe the modifications to oo methods? or listing of the methods which did work and those which did not}
-
-kgforth in some way
+Quiet some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation, it is not possible to implement a general tool for visualization similar to the existing methods, but these methods should be applicable on an object oriented model implemented in forth in general. The research on trace visualization has proven to be very similar for concatenative languages since a program is also a concatenation of words. 
+The most similar existing work is kgforth, a development environment using qt. Although the outline looks promising, it is not in development anymore and I was not yet able to run it.
 
 \section{discussion of open issues}
 
 \begin{itemize}
-\item not scaling well cause of limited screen real estate and thus the need to scroll
-\item not scalign well cause of unpredictable stack height(maybe show only depth according to stack effect comment)
+\item OK not scaling well cause of limited screen real estate and thus the need to scroll
+\item OK not scalign well cause of unpredictable stack height(maybe show only depth according to stack effect comment)
+\item OK not suitable for performance meassuring cause debugger...
+\end{itemize}
+
+Concerning the implemented demo, most obvious is the lack of usability. First of all the second window turned out to be rather annoying, it would have been better to include the visualization within the gforth window and record the trace in a standardized data structure in a separate file.
+Another not yet addressed problem is the scalability of the view, the inefficient use of the screen real estate makes it unusable for very long traces. A possible solution would be to limit the displayed float and data stack depth to a certain number since it is not encouraged to manipulate more than some of the most upper stack elements. Or limit the depth per word to the number of elements as defined in the stack effect comment. Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by \cite{Cornelissen:2008:ETA:1454787.1454981}, where in addition nested words as well as the stack state between arbitrary words can be hidden and displayed on demand. The introduction of "watch points" to reduce the visual noise the size of trace file could also address the scale issue.
+It is also not practical to compare two traces to each other and it is very hard to understand the behavior of large systems. [A visualization of several traces like the massive sequence view where several traces are synchronized by word and differences are visualizes by colors could solve this problem.?????]
+
+Due to the implementation of the trace recording within the debugger, it is not possible to collect traces of live systems. Neither is performance analysis possible while recording traces/debugging.
+
+
+\begin{itemize}
 \item nature of gforth
 	\begin{itemize}
 	\item interpretation/compilation mix(how to integrate the adhook changes between modes '[]')
-	\item implementation within the executing system
+	\item implementation within the executing system(??)
 	\item lack of dynamic information(return stack add -> wordname heuristic)
 	\end{itemize}
-\item not suitable for performance meassuring cause debugger...
-\item quantitative data on the effects the enhancement needed
 \end{itemize}

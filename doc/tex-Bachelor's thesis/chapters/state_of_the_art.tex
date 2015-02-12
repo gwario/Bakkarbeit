@@ -4,18 +4,36 @@ This section presents an overview of the work relevant to program comprehension 
 
 \section{literature studies}
 
-software evolution
-software maintenance
-program comprehension
-structured approach and thorrow reading is the most efficient[cite]
+To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss the both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.
 
 \section{analysis}
 
-selected work
+selected work?
+
+\subsection{software evolution}
+
+\cite{Lehman:1985:PEP:7261} and \cite{Lehman:2003:SEB:950401.950407} (beide vllt kritisch zu betrachten und evt out of scope; wenn dann noch in den jüngeren citedbys schauen; die grund aussage hier könnte sein, dass E-Type software immer im wandel befinden wird und immer änderungen unterliegen wird()aus leh2003))
+
+\subsection{software maintenance}
+
+\begin{itemize}
+\item types of maintenance
+\item find bugs and fix them
+\item find the right place to implement a new feature.
+\item find the right place to modify a feature.
+\end{itemize}
+
+\subsection{program comprehension}
+
+\begin{itemize}
+\item structured approach
+\item thorough reading is the most efficient[cite]
+\item about the mental model building
+\item keeping the mental model up to date
+\item keeping artifacts up to date
+\end{itemize}
 
 \subsection{program comprehension strategies}
-
-about the mental model building
 
 \begin{itemize}
 \item top down
@@ -28,6 +46,14 @@ about the mental model building
 \subsection{analysis to support program understanding}
 
 Several analysis types
+\begin{itemize}
+\item source code reading
+\item documentation reading(everything except source code)
+\item static analysis
+\item dynamic analysis
+\item post mortem analysis
+\item realtime analysis
+\end{itemize}
 
 \subsubsection{dynamic analysis}
 
@@ -58,12 +84,19 @@ publisher={Springer}
 
 \subsubsection{static analysis}
 
-complete view
-no actual data present
+\begin{itemize}
+\item OK complete view
+\item OK no actual data present
+\item OK architecture and design documents
+\end{itemize}
+
+Static analysis is ...[cite]... not running code.
+Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there is no mean of covering the actual data and follow its manipulation. ...[cite]
+This makes it a most valuable tool for architecture, design, and algorithm analysis. ...[cite]
 
 \subsection{applicability to concatenative languages}
 
-existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above
+existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
 applicability for concatenative languages
 
 \section{visualization to support program understanding maybe some examples(and tools)}
@@ -86,17 +119,21 @@ applicability for concatenative languages
 
 \section{comparison and summary of existing approaches}
 
-existing approaches for gforth/forth
+existing approaches for gforth/forth and relation to above mentioned stuff
 
 \begin{itemize}
 \item kgforth http://sourceforge.net/projects/kgforth/
 \item existing methods(actual methods)
 	\begin{itemize}
-	\item \hl{factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)} has to be considered during initial development
+	\item factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
+	\item aliasing
+	\item organization of word lists
+	\item source code documentation
+	\item other documentation artifacts
 	\item dump
-	\item . / type
+	\item ., / and type
 	\item dbg
-	\item see/ code-see
+	\item see and code-see
 	\item \textasciitilde\textasciitilde
 	\end{itemize}
 \end{itemize}
