@@ -4,23 +4,17 @@
   description={Charles D. Moore, is the inventor of the forth programming language.}
 }
 
-\chapter{Suggested solution/implementation}
+\chapter{Results}
+
+To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.
+
+
 
 kind of an \sout{ide} development environment\\
 light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate response of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
 eclipse ide(java)
 
 \section{suggested solution}
-
-\begin{itemize}
-
-\item OK emphasis on on comprehension code while writing. factoring suggestion, documentation, aliases(same code with multiple aliases to read more natural at different points in programs),  expressive naming, hard to generalize cause of the flexibility the language provides
-
-\item OK adequate search and cross reference facilities to support systematical investigation to benefit from effective program understanding as stated by \cite{Robillard:2004:EDI:1042203.1042417}
-
-\item OK display of the 'vocabulary' [cite moore: remember all the words]
-
-\end{itemize}
 
 A very important question in this concern is, how can developers be assisted to write readable code. Experienced developers may do that intuitively, but how can novice developers be encouraged and supported to write readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this attribute be supported?\\
 One answer is to provide hints based on static analysis.\\
@@ -48,6 +42,135 @@ which words are useful, and 2) remembering them all.", when programs get larger,
 2006).
 
 \item code analysis and visualization facilities see chapter 2 TODO
+
+
+\subsection{software evolution}
+
+\cite{Lehman:1985:PEP:7261} and \cite{Lehman:2003:SEB:950401.950407} (beide vllt kritisch zu betrachten und evt out of scope; wenn dann noch in den jüngeren citedbys schauen; die grund aussage hier könnte sein, dass E-Type software immer im wandel befinden wird und immer änderungen unterliegen wird()aus leh2003))
+
+\subsection{software maintenance}
+
+\begin{itemize}
+\item types of maintenance
+\item find bugs and fix them
+\item find the right place to implement a new feature.
+\item find the right place to modify a feature.
+\end{itemize}
+
+\subsection{program comprehension}
+
+\begin{itemize}
+\item structured approach
+\item thorough reading is the most efficient[cite]
+\item about the mental model building
+\item keeping the mental model up to date
+\item keeping artifacts up to date
+\end{itemize}
+
+\subsection{program comprehension strategies}
+
+\begin{itemize}
+\item top down
+\item bottom up
+\item knowledgebased
+\item systematic and as-needed
+\item integrated approaches
+\end{itemize}
+
+\subsection{analysis to support program understanding}
+
+Several analysis types
+\begin{itemize}
+\item source code reading
+\item documentation reading(everything except source code)
+\item static analysis
+\item dynamic analysis
+\item post mortem analysis
+\item realtime analysis
+\end{itemize}
+
+\subsubsection{dynamic analysis}
+
+\begin{itemize}
+\item about realtime/interactive vs post mortem
+\item actual behavior
+\item incomplete view \cite{Ball:1999:CDA:318774.318944}
+\item observer effect \\
+Andrews, J. (1997). Testing using log file analysis: tools, methods, and issues.
+In Proc. International Conference on Automated Software Engineering (ASE), pages 157–
+166. IEEE Computer Society Press
+\item scalability \\
+Zaidman, A. (2006). Scalability Solutions for Program Comprehension through Dynamic
+Analysis. PhD thesis, University of Antwerp
+\item debugging -> different kind of paradigms and languages and tools\\
+see @incollection{reiss1993trace,
+title={Trace-based debugging},
+author={Reiss, Steven P},
+booktitle={Automated and Algorithmic Debugging},
+pages={305--314},
+year={1993},
+publisher={Springer}
+}
+\item about debugging
+\item dataflow analysis(Backward Analysis)(not sufficient in demo) \\
+	Darren C. Atkinson , William G. Griswold, Implementation Techniques for Efficient Data-Flow Analysis of Large Programs, Proceedings of the IEEE International Conference on Software Maintenance (ICSM'01), p.52, November 07-09, 2001
+\end{itemize}
+
+\subsubsection{static analysis}
+
+\begin{itemize}
+\item OK complete view
+\item OK no actual data present
+\item OK architecture and design documents
+\end{itemize}
+
+Static analysis is ...[cite]... not running code.
+Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there is no mean of covering the actual data and follow its manipulation. ...[cite]
+This makes it a most valuable tool for architecture, design, and algorithm analysis. ...[cite]
+
+\subsection{applicability to concatenative languages}
+
+existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
+applicability for concatenative languages
+
+\section{visualization to support program understanding maybe some examples(and tools)}
+
+\begin{itemize}
+\item sequence diagram
+\item circular diagram and interactive interaction sequance diagram \cite{Cornelissen2009}
+\item interaction diagrams (Jacobson, 1992)/ scenario diagrams (Koskimies and Mössenböck 1996)
+\item information murals (Jerding and Stasko, 1998)
+\item polymetric views (Ducasse et al., 2004)
+\item fisheye views (suggested by George W. Furnas, 1986, and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384})
+\item hierarchical edge bundling (Holten, 2006)
+\item structural and behavioral views of object-oriented program (Kleyn and Gingrich, 1988)
+\item matrix visualization and “execution pattern” notations \cite{Pauw98executionpatterns} to visualize traces in a scalable manner(De Pauw et al. 1993, 1994, 1998) 
+\item architecture oriented visualization (Sefika et al. 1996)
+\item a continuous sequence diagram, and the “information mural” (Jerding and Stasko, 1998)
+\item architecture with dynamic information (Walker et al. 1998)
+\item frequency spectrum analysis (Ball 1999)
+\end{itemize}
+
+\section{comparison and summary of existing approaches}
+
+existing approaches for gforth/forth and relation to above mentioned stuff
+
+\begin{itemize}
+\item kgforth http://sourceforge.net/projects/kgforth/
+\item existing methods(actual methods)
+	\begin{itemize}
+	\item factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
+	\item aliasing
+	\item organization of word lists
+	\item source code documentation
+	\item other documentation artifacts
+	\item dump
+	\item ., / and type
+	\item dbg
+	\item see and code-see
+	\item \textasciitilde\textasciitilde
+	\end{itemize}
+\end{itemize}
 
 \end{itemize}
 	

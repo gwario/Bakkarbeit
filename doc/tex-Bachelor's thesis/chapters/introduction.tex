@@ -8,28 +8,16 @@
 \begin{itemize}
 
 \item OK software, due to its(steady growing) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ maybe better than the lehman85 cus available \cite{Lehman:2003:SEB:950401.950407} \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
-	
-\item OK software evolution \\
-	Evelyn Barry , Sandra Slaughter , Chris F. Kemerer, An empirical analysis of software evolution profiles and outcomes, Proceedings of the 20th international conference on Information Systems, p.453-458, December 12-15, 1999, Charlotte, North Carolina, USA
 
-\item OK maintenance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} \\
-	T. H. Ng , S. C. Cheung , W. K. Chan , Y. T. Yu, Do Maintainers Utilize Deployed Design Patterns Effectively?, Proceedings of the 29th international conference on Software Engineering, p.168-177, May 20-26, 2007 \\
-	code has to be understood \cite{Boehm:1976:SE:1311958.1312684} in order to make changes or add features \cite{Singer97anexamination} \\
-	integrate somewhere here: software -> bug -> understand(up to 60\% \cite{Basili:1997:EPR:257260.257262}(is this really related? thorough reading may be better) \cite{Pigoski:1996:PSM:524398} ) to fix
+\item OK maintenance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} 
 \end{itemize}
 
 Software under lies a continuous changes, throughout its live cycle.
 The evolution process from the beginning of development until its release and maintenance. Large software\footnote{"The term large is, generally, used to describe software whose size in number of lines of code is greater than some arbitrary value. For reasons indicated in [leh79], it is more appropriate to define a large program as one developed by processes involving groups with two or more management levels."\cite{Lehman:2003:SEB:950401.950407}} and most of all software  classified as type E \cite{Cook:2006:ESS:1115566.1115567} gets more complex over time. If there are more than a few developers/development teams are involved or the developers/development teams are spread allover the world, there exists more foreign code than self written.
 
-\begin{itemize}
-\item OK program comprehension
-\end{itemize}
-
-Since changes, enhancements or fixes of existing code demand the developers involved to gain a high level of understanding for the software at hand. Due to \cite{Cornelissen:2011:CEP:1990772.1991009} "... up to 60\% of the maintenance effort is spent on gaining a sufficient understanding of the program ...". This task is referred to by the scientific community as "program understanding" or "program comprehension" and thus these words are considered synonym in this thesis. This thesis addresses the task of improving program comprehension of the concatenative programming language forth on several level.
+Since changes, enhancements or fixes of existing code demand the developers involved to gain a high level of understanding for the software at hand\cite{Boehm:1976:SE:1311958.1312684}\cite{Singer97anexamination}. Due to \cite{Cornelissen:2009:SSP:1638616.1639301} "... up to 60\% of the maintenance effort is spent on gaining a sufficient understanding of the program ...". This task is referred to by the scientific community as "program understanding" or "program comprehension" and thus these words are considered synonym in this thesis. This thesis addresses the task of improving program comprehension of the concatenative programming language forth on several level.
 
 \begin{itemize}
-\item OK proper reading as of \cite{Basili:1997:EPR:257260.257262}(?) \cite{Robillard:2004:EDI:1042203.1042417} \\ systematic approach, strategy may depend on various attributes
-
 \item OK mental model(LaToza et al., 2006)\\ read: 
 @inproceedings{Lieberman:1995:BGC:223904.223969,
 author = {Lieberman, Henry and Fry, Christopher},
@@ -71,25 +59,23 @@ Darren C. Atkinson , William G. Griswold, The design of whole-program analysis t
 
 \section{problem statement (which problem should be solved?)}
 
-\begin{itemize}
-\item OK much work and tools on oo- or procedural languages 
-\item OK not so much on concatenative \sout{stack oriented} languages... nothing in fact(except maybe kgforth), although maybe similarities to procedural
-\item OK applicability of oo- and procedural methods for concatenative \sout{stack oriented} languages at the example of forth
-\item OK applicability of oo-visualization methods
-\item OK suggestions of (new) methods(lineout style wordlists/words)
-\end{itemize}
-
 There is plenty of work done on the task of program comprehension in object oriented and procedural languages\cite{Cornelissen:2009:SSP:1638616.1639301}, but nearly none on concatenative languages. The qualitative exploratory approach of this thesis does not encourage the formulation of specific hypothesis. Therefore the first question, is the applicability of existing methods and their visualization techniques. The second question to be answered, concerns new approaches, which may be exclusive to concatenative languages or gforth/forth.
 
 \section{aim of the work}
 
-This work aims to better understand how program comprehension is performed in concatenative languages and how it can be made more efficient. The secondary goal is the analysis of the applicability of existing analysis- and visualization methods and provide modifications to existing visualization methods(and maybe suggestion of new methods). The forth programming language is used as a representative of concatenative languages.
+\hl{TODO: maybe cut scope down to dynamic analysis or trace visualization}
 
-\sout{demonstration by enhancing the gforth stepping debugger(trace recording, trace visualization, goal-based approach possible)}
+\sout{This work aims to better understand how program comprehension is performed in concatenative languages and how it can be made more efficient.} The secondary goal is the analysis of the applicability of existing analysis- and visualization methods and to provide modifications to existing visualization methods(and maybe suggestion of new methods). The forth programming language is used as a representative of concatenative languages.
 
 \section{methodological approach}
 
 \begin{itemize}
+\item qualitative approach
+\item exploratory case study
+\item prototype
+\item sketches
+\item trying to understand programs developed withing stackbasierte programmierung vl?
+
 \item \hl{qualitative approach , exploratory approach(?)}
 \item \hl{proposal}
 \item \hl{Preliminary evaluations as defined by} \cite{Cornelissen:2009:SSP:1638616.1639301}

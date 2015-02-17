@@ -1,49 +1,24 @@
-\chapter{State of the art / analysis of existing approaches}
+\chapter{Analysis of existing approaches}
 
-This section presents an overview of the work relevant to program comprehension regarding the aim of the work.
+The focus here lies on so called E type software. E stands for evolving \cite{Cook:2006:ESS:1115566.1115567}, most of the real world software systems are type E. These systems are of particular interest since they underlie changes throughout their whole life cycle. Thus understanding existing and maybe not well documented code is crucial for maintenance.
 
-\section{literature studies}
+\section{program comprehension}
 
-To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss the both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.
+Program comprehension can be gained through several approaches. First of all is reading the code.
+In \cite{Basili:1997:EPR:257260.257262}, Basili et al. approach the concept of reading on a very fundamental level. The natural way to learn writing, is to learn to read first, the reading the forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests, that readability of code does impact the efficiency of failure discovery. The most important issues stated, is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code properly is not properly addressed in education. The syntactical flexibility, forth provides compared to other languages(and paradigms), allows to achieve a very natural seeming reading experience. Thus our skills in natural languages could become in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
 
-\section{analysis}
+Besides the actual reading, there emerged several strategies on how to understand a program\cite{Storey:1999:CDE:308936.308940}: \hl{evt hier nur auf \\cite{Storey:1999:CDE:308936.308940} oder \\cite{Storey:1997:PUT:832304.836998} verweisen?!}
+\paragraph{Top down program comprehension} Using the top down strategy, the reader begins on the highest level of abstraction, the main purpose of the program and then builds a hierarchy by refining it into sub tasks until the lowest level of abstraction is reached.
+\paragraph{Bottom up program comprehension} Using the bottom up strategy, the reader builds the mental model by grouping low level parts of code building high levels abstraction until the whole program is understood.
+\paragraph{Knowledge based program comprehension} The knowledge based strategy, allows both, the bottom up and the top down approach. The assumption is, that programmers have a certain mental model of the software, this model is evolved by both refinement and abstraction.
+\paragraph{Systematic and as-needed program comprehension} This strategy embodies detailed reading as well as only focusing on the code necessary to fulfill the task at hand.
+\paragraph{Integrated approaches of program comprehension} This strategy allows freely switching between the top down, the bottom up and the knowledge based approach.
+\\\\
+As Storey et al.\cite{Storey:1999:CDE:308936.308940} points out, there are certain factors which influence the choice programmers take. Thus the programming environment should provide methods to support all the strategies.(See later section)
+\\\\
+Since software evolves throughout its whole life cycle, also the before mentioned mental model, the reader evolves, has to keep in sync with the software. This suggests, that it is essential to keep all types of artifacts(documentation, source level documentation, graphics,...) up to date.(See later section)
 
-selected work?
-
-\subsection{software evolution}
-
-\cite{Lehman:1985:PEP:7261} and \cite{Lehman:2003:SEB:950401.950407} (beide vllt kritisch zu betrachten und evt out of scope; wenn dann noch in den jüngeren citedbys schauen; die grund aussage hier könnte sein, dass E-Type software immer im wandel befinden wird und immer änderungen unterliegen wird()aus leh2003))
-
-\subsection{software maintenance}
-
-\begin{itemize}
-\item types of maintenance
-\item find bugs and fix them
-\item find the right place to implement a new feature.
-\item find the right place to modify a feature.
-\end{itemize}
-
-\subsection{program comprehension}
-
-\begin{itemize}
-\item structured approach
-\item thorough reading is the most efficient[cite]
-\item about the mental model building
-\item keeping the mental model up to date
-\item keeping artifacts up to date
-\end{itemize}
-
-\subsection{program comprehension strategies}
-
-\begin{itemize}
-\item top down
-\item bottom up
-\item knowledgebased
-\item systematic and as-needed
-\item integrated approaches
-\end{itemize}
-
-\subsection{analysis to support program understanding}
+\section{analysis to support program understanding}
 
 Several analysis types
 \begin{itemize}
@@ -55,7 +30,7 @@ Several analysis types
 \item realtime analysis
 \end{itemize}
 
-\subsubsection{dynamic analysis}
+\subsection{dynamic analysis}
 
 \begin{itemize}
 \item about realtime/interactive vs post mortem
@@ -82,24 +57,18 @@ publisher={Springer}
 	Darren C. Atkinson , William G. Griswold, Implementation Techniques for Efficient Data-Flow Analysis of Large Programs, Proceedings of the IEEE International Conference on Software Maintenance (ICSM'01), p.52, November 07-09, 2001
 \end{itemize}
 
-\subsubsection{static analysis}
-
-\begin{itemize}
-\item OK complete view
-\item OK no actual data present
-\item OK architecture and design documents
-\end{itemize}
+\subsection{static analysis}
 
 Static analysis is ...[cite]... not running code.
 Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there is no mean of covering the actual data and follow its manipulation. ...[cite]
 This makes it a most valuable tool for architecture, design, and algorithm analysis. ...[cite]
 
-\subsection{applicability to concatenative languages}
+\section{applicability to concatenative languages}
 
 existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
 applicability for concatenative languages
 
-\section{visualization to support program understanding maybe some examples(and tools)}
+\subsection{visualization to support program understanding maybe some examples(and tools)}
 
 \begin{itemize}
 \item sequence diagram
