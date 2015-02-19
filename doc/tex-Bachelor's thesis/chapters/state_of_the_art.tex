@@ -7,68 +7,47 @@ The focus here lies on so called E type software. E stands for evolving \cite{Co
 Program comprehension can be gained through several approaches. First of all is reading the code.
 In \cite{Basili:1997:EPR:257260.257262}, Basili et al. approach the concept of reading on a very fundamental level. The natural way to learn writing, is to learn to read first, the reading the forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests, that readability of code does impact the efficiency of failure discovery. The most important issues stated, is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code properly is not properly addressed in education. The syntactical flexibility, forth provides compared to other languages(and paradigms), allows to achieve a very natural seeming reading experience. Thus our skills in natural languages could become in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
 
-Besides the actual reading, there emerged several strategies on how to understand a program\cite{Storey:1999:CDE:308936.308940}: \hl{evt hier nur auf \\cite{Storey:1999:CDE:308936.308940} oder \\cite{Storey:1997:PUT:832304.836998} verweisen?!}
-\paragraph{Top down program comprehension} Using the top down strategy, the reader begins on the highest level of abstraction, the main purpose of the program and then builds a hierarchy by refining it into sub tasks until the lowest level of abstraction is reached.
-\paragraph{Bottom up program comprehension} Using the bottom up strategy, the reader builds the mental model by grouping low level parts of code building high levels abstraction until the whole program is understood.
-\paragraph{Knowledge based program comprehension} The knowledge based strategy, allows both, the bottom up and the top down approach. The assumption is, that programmers have a certain mental model of the software, this model is evolved by both refinement and abstraction.
-\paragraph{Systematic and as-needed program comprehension} This strategy embodies detailed reading as well as only focusing on the code necessary to fulfill the task at hand.
-\paragraph{Integrated approaches of program comprehension} This strategy allows freely switching between the top down, the bottom up and the knowledge based approach.
+Besides the actual reading, there emerged several strategies on how to understand a program\cite{Storey:1999:CDE:308936.308940}: \\\hl{evt hier nur auf \\cite{Storey:1999:CDE:308936.308940} oder \\cite{Storey:1997:PUT:832304.836998} verweisen?!}
+\subsubsection*{Top down program comprehension}
+Using the top down strategy, the reader begins on the highest level of abstraction, the main purpose of the program and then builds a hierarchy by refining it into sub tasks until the lowest level of abstraction is reached.
+\subsubsection*{Bottom up program comprehension} Using the bottom up strategy, the reader builds the mental model by grouping low level parts of code building high levels abstraction until the whole program is understood.
+\subsubsection*{Knowledge based program comprehension} The knowledge based strategy, allows both, the bottom up and the top down approach. The assumption is, that programmers have a certain mental model of the software, this model is evolved by both refinement and abstraction.
+\subsubsection*{Systematic and as-needed program comprehension} This strategy embodies detailed reading as well as only focusing on the code necessary to fulfill the task at hand.
+\subsubsection*{Integrated approaches of program comprehension} This strategy allows freely switching between the top down, the bottom up and the knowledge based approach.
 \\\\
 As Storey et al.\cite{Storey:1999:CDE:308936.308940} points out, there are certain factors which influence the choice programmers take. Thus the programming environment should provide methods to support all the strategies.(See later section)
 \\\\
 Since software evolves throughout its whole life cycle, also the before mentioned mental model, the reader evolves, has to keep in sync with the software. This suggests, that it is essential to keep all types of artifacts(documentation, source level documentation, graphics,...) up to date.(See later section)
 
-\section{analysis to support program understanding}
+\section{Analysis to support program understanding}
 
-Several analysis types
+Besides reading of the actual code, the source code and other textual documentation, there are also other methods to help increase program understanding.
+
+\subsection{Dynamic analysis}
+
+Dynamic analysis is performed on the image of a program, executed on a real or virtual processor. The advantage dynamic analysis is, due to the availability of the data to be manipulated, that the actual behavior of a program can be investigated. The major drawback here is that there exists only an incomplete view of the software at hand\cite{Ball:1999:CDA:318774.318944}. It is a very efficient way to evolve or correct the mental model of developers.
+I will distinct here between two categories of dynamic analysis:
+\hl{TODO... ???}
 \begin{itemize}
-\item source code reading
-\item documentation reading(everything except source code)
-\item static analysis
-\item dynamic analysis
-\item post mortem analysis
-\item realtime analysis
+\item interactive\\
+	The characteristics of interactive(stepped debugging, interpretative execution) approaches, is that the program is still executing during the analysis and thus time is a critical factor. This makes some analysis methods like performance analysis impossible. In networked environment, timeouts can make interactive analysis very hard.
+\item non interactive(real-time or post-mortem)\\
+	In real-time analysis(log analysis, trace analysis), data changes very quickly, which can make the task of tracking execution scenarios very resource intensive. In contrast, in post-mortem analysis(log analysis, trace analysis), the processing of very large files becomes a problem.
 \end{itemize}
 
-\subsection{dynamic analysis}
+\subsection{Static analysis}
 
-\begin{itemize}
-\item about realtime/interactive vs post mortem
-\item actual behavior
-\item incomplete view \cite{Ball:1999:CDA:318774.318944}
-\item observer effect \\
-Andrews, J. (1997). Testing using log file analysis: tools, methods, and issues.
-In Proc. International Conference on Automated Software Engineering (ASE), pages 157–
-166. IEEE Computer Society Press
-\item scalability \\
-Zaidman, A. (2006). Scalability Solutions for Program Comprehension through Dynamic
-Analysis. PhD thesis, University of Antwerp
-\item debugging -> different kind of paradigms and languages and tools\\
-see @incollection{reiss1993trace,
-title={Trace-based debugging},
-author={Reiss, Steven P},
-booktitle={Automated and Algorithmic Debugging},
-pages={305--314},
-year={1993},
-publisher={Springer}
-}
-\item about debugging
-\item dataflow analysis(Backward Analysis)(not sufficient in demo) \\
-	Darren C. Atkinson , William G. Griswold, Implementation Techniques for Efficient Data-Flow Analysis of Large Programs, Proceedings of the IEEE International Conference on Software Maintenance (ICSM'01), p.52, November 07-09, 2001
-\end{itemize}
+Although this thesis focuses on dynamic analysis, for the sake of completeness, also static analysis should be mentioned here.
+Static analysis is performed on the source code. Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there are no means of covering the actual data follow and the manipulation of data.
 
-\subsection{static analysis}
+\section{Applicability to concatenative languages}
 
-Static analysis is ...[cite]... not running code.
-Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there is no mean of covering the actual data and follow its manipulation. ...[cite]
-This makes it a most valuable tool for architecture, design, and algorithm analysis. ...[cite]
-
-\section{applicability to concatenative languages}
+\hl{hier werden die ausgewählten und verworfenen methode nur auf gelistet und erst in folgendne kapitelen benauer analysiert}
 
 existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
 applicability for concatenative languages
 
-\subsection{visualization to support program understanding maybe some examples(and tools)}
+\subsection{Some visualization methods}
 
 \begin{itemize}
 \item sequence diagram
@@ -86,23 +65,53 @@ applicability for concatenative languages
 \item frequency spectrum analysis (Ball 1999)
 \end{itemize}
 
-\section{comparison and summary of existing approaches}
+\section{Existing approaches}
 
-existing approaches for gforth/forth and relation to above mentioned stuff
+\subsection{Gforth/Forth}
 
-\begin{itemize}
-\item kgforth http://sourceforge.net/projects/kgforth/
-\item existing methods(actual methods)
-	\begin{itemize}
-	\item factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
-	\item aliasing
-	\item organization of word lists
-	\item source code documentation
-	\item other documentation artifacts
-	\item dump
-	\item ., / and type
-	\item dbg
-	\item see and code-see
-	\item \textasciitilde\textasciitilde
-	\end{itemize}
-\end{itemize}
+In this section I'm going to present the tools Gforth/Forth provides to support program understanding and maintenance\footnote{For further tools see https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Programming-Tools.html\#Programming-Tools}.
+
+\subsubsection*{Examining data and code}
+Gforth provides several tools to display data as well as code which support program understanding and support maintenance.\\
+For displaying data, the most important words are \emph{.}, \emph{.s}, \emph{."}, \emph{type} and \emph{dump}.\\
+\emph{.} and \emph{.s} simply print out elements of the stack, there are also words to vizualize the other stacks.
+The words \emph{."} and \emph{type} print out text. These can be utilized to print logging information.\\
+Last but not least, \emph{dump} displays memory areas(address, hex and ascii).\\
+\textasciitilde\textasciitilde\: prints the location of itself in the source-file(file and line number) as well as the data stack.\\
+These are usable in interactive as well in non-interactive analysis.\\
+There are also words to investigate the inner workings of other words. 
+\emph{see} displays the definition of words written in forth. It can be used to quickly look at the behavior of words provided by gforth without looking into source-files. The use of \emph{see} and its relatives only makes sense in interactive analysis.
+
+\subsubsection*{status.fs}
+Status.fs is contained in gforth(since 0.7.0), it opens a separate xterm window, displaying the current number base, the float stack, the data stack and the current search order. The view is updated after each execution in the interpreter. Thus it is only useful for interactive analysis.
+
+\subsubsection*{Stepping debugger}
+\emph{dbg\footnote{For further information see: https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Debugging.html\#Debugging}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. The debugger is only usable for interactive analysis.
+
+\subsubsection*{Assertions}
+Assertions\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions} can be used to verify that the program at a certain point is in a certain state. For example pre-conditions and post-conditions of words could be implemented. With the use of assertions, the code can be prevented from breaking during maintenance. The word \emph{assert(} starts the assertion, the following words until the \emph{)} is executed and has to leave a flag on the stack. If the flag is true, the asserted condition is meet, if false, the execution of the program ends and the location of the failed assertion is printed(source file and line number).\\
+There are several assertion levels and by setting the \emph{assert-level}, assertions can be deactivated.
+
+\subsubsection*{Organisational <irgendwas>}
+
+other documentation artifacts
+
+source code documentation(stack effect comments, word comments)
+
+organization of word lists, naming strategies
+
+factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
+modularisazion
+
+aliasing: achtung hier stößt man schnell auf philosophische fragen. aliasing kann sowohl in der einen als auch in der anderen richtugn betrieben werden. zu viel abstraktion entspricht nicht der philosphie von forth
+	
+
+
+\subsection{emacs forth-mode}
+
+The emacs forth-mode(forth.el and gforth.el)
+
+\subsection{Kgforth}
+
+There has also been an afford to integrate some of those tools into an graphical development environment. The project is called Kgforth\footnote{http://sourceforge.net/projects/kgforth/: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
+It provides an editor, gforth window,debug and dump window, forth toolbar and menu.}, but its development seems to be discontinued.
