@@ -47,7 +47,7 @@ Static analysis is performed on the source code. Therefore and in contrast to dy
 existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
 applicability for concatenative languages
 
-\subsection{Some visualization methods}
+\subsection{\hl{Some visualization methods}}
 
 \begin{itemize}
 \item sequence diagram
@@ -69,7 +69,7 @@ applicability for concatenative languages
 
 \subsection{Gforth/Forth}
 
-In this section I'm going to present the tools Gforth/Forth provides to support program understanding and maintenance\footnote{For further tools see https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Programming-Tools.html\#Programming-Tools}.
+In this section I'm going to present the tools Gforth/Forth provides to support program understanding and maintenance\footnote{For further tools see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Programming-Tools.html\#Programming-Tools}}.
 
 \subsubsection*{Examining data and code}
 Gforth provides several tools to display data as well as code which support program understanding and support maintenance.\\
@@ -86,32 +86,35 @@ There are also words to investigate the inner workings of other words.
 Status.fs is contained in gforth(since 0.7.0), it opens a separate xterm window, displaying the current number base, the float stack, the data stack and the current search order. The view is updated after each execution in the interpreter. Thus it is only useful for interactive analysis.
 
 \subsubsection*{Stepping debugger}
-\emph{dbg\footnote{For further information see: https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Debugging.html\#Debugging}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. The debugger is only usable for interactive analysis.
+\emph{dbg}\footnote{For further information see: \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Debugging.html\#Debugging}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. The debugger is only usable for interactive analysis.
 
 \subsubsection*{Assertions}
-Assertions\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions} can be used to verify that the program at a certain point is in a certain state. For example pre-conditions and post-conditions of words could be implemented. With the use of assertions, the code can be prevented from breaking during maintenance. The word \emph{assert(} starts the assertion, the following words until the \emph{)} is executed and has to leave a flag on the stack. If the flag is true, the asserted condition is meet, if false, the execution of the program ends and the location of the failed assertion is printed(source file and line number).\\
+Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify that the program at a certain point is in a certain state. For example pre-conditions and post-conditions of words could be implemented. With the use of assertions, the code can be prevented from breaking during maintenance. The word \emph{assert(} starts the assertion, the following words until the \emph{)} is executed and has to leave a flag on the stack. If the flag is true, the asserted condition is meet, if false, the execution of the program ends and the location of the failed assertion is printed(source file and line number).\\
 There are several assertion levels and by setting the \emph{assert-level}, assertions can be deactivated.
 
-\subsubsection*{Organisational <irgendwas>}
+\subsubsection*{Documentation}
+Thorough and up to date documentation is undoubtedly important, this also applies to concatenative languages. Besides word documentation, since forth is by default a untyped language, there is special kind of documentation encouraged to ease the understanding of words namely the stack effect comment\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Notation.html\#Notation}}. It is written next to the name of the defined word and contains the number and kind of elements on the stack which are manipulated by the word. These comments describe the state of the stack before and after the execution of a word.\hl{There is also a distinction to be made between interpretation, compile and run-time behavior ...dont mention it!?.}
 
-other documentation artifacts
+\subsection*{Words and word lists}
+Like in any other language, words should be named expressive. However sometimes, it may not be avoidable or desirable to reuse names. Forth provides an elegant mechanism, called word lists\footnote{For more information on word lists, see \url{http://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Word-Lists.html\#Word-Lists}}, to account these issues and to organize words. With word lists, words can be defined in a certain context. Like in natural languages words can have a different meaning in separate contexts. Using word lists, developers can prevent name clashes and separate interface words from internal words. In large project it may be necessary to define a naming strategy.
 
-source code documentation(stack effect comments, word comments)
+\subsection*{Factoring}
+As in any other programming language, to solve complex problems, it is necessary to split the overall problem down into less complex sub problems. In concatenative languages this is also referred to as factoring. Factoring helps keeping definitions short(and thus easier to understand), reusable and easier to test(\url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html}).
 
-organization of word lists, naming strategies
+\subsection*{Aliasing}
+In gforth, there can be multiple aliases\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html} for a word. Aliases can be used to use the same underlying implementation in different contexts, to make code more readable.
 
-factoring (http://en.wikipedia.org/wiki/Modular\_programming https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html http://www.ultratechnology.com/Forth-factors.htm)
-modularisazion
+\subsection*{Emacs forth-mode}
 
-aliasing: achtung hier stößt man schnell auf philosophische fragen. aliasing kann sowohl in der einen als auch in der anderen richtugn betrieben werden. zu viel abstraktion entspricht nicht der philosphie von forth
-	
+The emacs forth-mode(gforth.el, which is based on forth.el) provides many help features\footnote{For a more information see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Emacs-and-Gforth.html\#Emacs-and-Gforth}} to ease the writing of forth. Most notable, related to program understanding, are:
+\begin{itemize}
+\item Word documentation lookup
+\item Jump to line from, error messages, debug output and failed assertions. \emph{\textasciitilde\textasciitilde} output
+\item Highlighting
+\item Indention handling
+\end{itemize}
 
+\subsection*{Kgforth}
 
-\subsection{emacs forth-mode}
-
-The emacs forth-mode(forth.el and gforth.el)
-
-\subsection{Kgforth}
-
-There has also been an afford to integrate some of those tools into an graphical development environment. The project is called Kgforth\footnote{http://sourceforge.net/projects/kgforth/: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
+There has also been an afford to integrate some of those tools into an graphical development environment. The project is called Kgforth\footnote{\url{http://sourceforge.net/projects/kgforth/}: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
 It provides an editor, gforth window,debug and dump window, forth toolbar and menu.}, but its development seems to be discontinued.
