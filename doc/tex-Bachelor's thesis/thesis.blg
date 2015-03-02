@@ -4,45 +4,45 @@ The top-level auxiliary file: thesis.aux
 The style file: alpha.bst
 Database file #1: bibliography.bib
 Warning--empty publisher in ReissProgrammingEnvironments1995
-You've used 23 entries,
+You've used 28 entries,
             2543 wiz_defined-function locations,
-            736 strings with 9400 characters,
-and the built_in function-call counts, 9989 in all, are:
-= -- 1004
-> -- 511
-< -- 12
-+ -- 181
-- -- 178
-* -- 773
-:= -- 1644
-add.period$ -- 72
-call.type$ -- 23
-change.case$ -- 153
-chr.to.int$ -- 23
-cite$ -- 24
-duplicate$ -- 382
-empty$ -- 696
-format.name$ -- 203
-if$ -- 2026
+            772 strings with 10545 characters,
+and the built_in function-call counts, 12196 in all, are:
+= -- 1245
+> -- 590
+< -- 16
++ -- 207
+- -- 203
+* -- 935
+:= -- 1984
+add.period$ -- 89
+call.type$ -- 28
+change.case$ -- 182
+chr.to.int$ -- 28
+cite$ -- 29
+duplicate$ -- 476
+empty$ -- 864
+format.name$ -- 235
+if$ -- 2495
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 25
-newline$ -- 118
-num.names$ -- 70
-pop$ -- 141
+missing$ -- 30
+newline$ -- 143
+num.names$ -- 85
+pop$ -- 161
 preamble$ -- 1
-purify$ -- 180
+purify$ -- 214
 quote$ -- 0
-skip$ -- 317
+skip$ -- 398
 stack$ -- 0
-substring$ -- 551
-swap$ -- 63
-text.length$ -- 12
-text.prefix$ -- 6
+substring$ -- 709
+swap$ -- 84
+text.length$ -- 16
+text.prefix$ -- 8
 top$ -- 0
-type$ -- 164
+type$ -- 204
 warning$ -- 1
-while$ -- 100
-width$ -- 25
-write$ -- 309
+while$ -- 125
+width$ -- 30
+write$ -- 380
 (There was 1 warning)

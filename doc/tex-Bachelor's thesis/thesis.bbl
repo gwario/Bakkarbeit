@@ -61,11 +61,44 @@ Bas Cornelissen, Andy Zaidman, Arie van Deursen, Leon Moonen, and Rainer
   analysis.
 \newblock {\em IEEE Trans. Softw. Eng.}, 35(5):684--702, September 2009.
 
+\bibitem[DLB04]{Ducasse:2004:HPV:977397.977739}
+St{\'e}phane Ducasse, Michele Lanza, and Roland Bertuli.
+\newblock High-level polymetric views of condensed run-time information.
+\newblock In {\em Proceedings of the Eighth Euromicro Working Conference on
+  Software Maintenance and Reengineering (CSMR'04)}, CSMR '04, pages 309--,
+  Washington, DC, USA, 2004. IEEE Computer Society.
+
+\bibitem[Fur86]{Furnas:1986:GFV:22627.22342}
+G.~W. Furnas.
+\newblock Generalized fisheye views.
+\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
+  Computing Systems}, CHI '86, pages 16--23, New York, NY, USA, 1986. ACM.
+
+\bibitem[Hol06]{Holten:2006:HEB:1187627.1187772}
+Danny Holten.
+\newblock Hierarchical edge bundles: Visualization of adjacency relations in
+  hierarchical data.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  12(5):741--748, September 2006.
+
 \bibitem[ISO06]{ISOSWMaintainance}
 ISO.
 \newblock Software engineering -- software life cycle processes -- maintenance.
 \newblock ISO 14764:2006, International Organization for Standardization,
   Geneva, Switzerland, 2006.
+
+\bibitem[JS98]{Jerding:1998:IMT:614271.614408}
+Dean~F. Jerding and John~T. Stasko.
+\newblock The information mural: A technique for displaying and navigating
+  large information spaces.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  4(3):257--271, July 1998.
+
+\bibitem[KG88]{Kleyn:1988:GOS:62084.62101}
+Michael~F. Kleyn and Paul~C. Gingrich.
+\newblock Graphtrace\&mdash;understanding object-oriented systems using
+  concurrently animated views.
+\newblock {\em SIGPLAN Not.}, 23(11):191--205, January 1988.
 
 \bibitem[LB85]{Lehman:1985:PEP:7261}
 M.~M. Lehman and L.~A. Belady, editors.

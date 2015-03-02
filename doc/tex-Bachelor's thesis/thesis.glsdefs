@@ -28,6 +28,36 @@ parent={},%
 %
 }%
 }%
+\ifglsentryexists{UML}{}%
+{%
+\gls@defglossaryentry{UML}%
+{%
+name={Unified Modeling Language},%
+sort={Unified Modeling Language},%
+type={main},%
+first={Unified Modeling Language},%
+firstplural={Unified Modeling Languages},%
+text={Unified Modeling Language},%
+plural={Unified Modeling Languages},%
+description={The Unified Modeling Language provides a standard way for modeling artifacts of software engineering. See \url {http://www.uml.org/} for detailed information on UML.},%
+descriptionplural={The Unified Modeling Language provides a standard way for modeling artifacts of software engineering. See \url {http://www.uml.org/} for detailed information on UML.},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
 \ifglsentryexists{Charles D. Moore}{}%
 {%
 \gls@defglossaryentry{Charles D. Moore}%

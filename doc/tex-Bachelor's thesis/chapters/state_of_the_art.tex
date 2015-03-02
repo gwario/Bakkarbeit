@@ -1,3 +1,9 @@
+\newglossaryentry{UML}
+{
+  name={Unified Modeling Language},
+  description={The Unified Modeling Language provides a standard way for modeling artifacts of software engineering. See \url{http://www.uml.org/} for detailed information on UML.}
+}
+
 \chapter{Analysis of existing approaches}
 
 The focus here lies on so called E type software. E stands for evolving \cite{Cook:2006:ESS:1115566.1115567}, most of the real world software systems are type E. These systems are of particular interest since they underlie changes throughout their whole life cycle. Thus understanding existing and maybe not well documented code is crucial for maintenance.
@@ -26,12 +32,12 @@ Besides reading of the actual code, the source code and other textual documentat
 \subsection{Dynamic analysis}
 
 Dynamic analysis is performed on the image of a program, executed on a real or virtual processor. The advantage dynamic analysis is, due to the availability of the data to be manipulated, that the actual behavior of a program can be investigated. The major drawback here is that there exists only an incomplete view of the software at hand\cite{Ball:1999:CDA:318774.318944}. It is a very efficient way to evolve or correct the mental model of developers.
-I will distinct here between two categories of dynamic analysis:
+I will \hl{focus on} distinct here between two categories of dynamic analysis:
 \hl{TODO... ???}
 \begin{itemize}
 \item interactive\\
 	The characteristics of interactive(stepped debugging, interpretative execution) approaches, is that the program is still executing during the analysis and thus time is a critical factor. This makes some analysis methods like performance analysis impossible. In networked environment, timeouts can make interactive analysis very hard.
-\item non interactive(real-time or post-mortem)\\
+\item non interactive(real-time and post-mortem)\\
 	In real-time analysis(log analysis, trace analysis), data changes very quickly, which can make the task of tracking execution scenarios very resource intensive. In contrast, in post-mortem analysis(log analysis, trace analysis), the processing of very large files becomes a problem.
 \end{itemize}
 
@@ -39,31 +45,6 @@ I will distinct here between two categories of dynamic analysis:
 
 Although this thesis focuses on dynamic analysis, for the sake of completeness, also static analysis should be mentioned here.
 Static analysis is performed on the source code. Therefore and in contrast to dynamic analysis, it has the capability to provide a complete view of the software at hands. The drawback is that there is no actual data present and thus there are no means of covering the actual data follow and the manipulation of data.
-
-\section{Applicability to concatenative languages}
-
-\hl{hier werden die ausgewählten und verworfenen methode nur auf gelistet und erst in folgendne kapitelen benauer analysiert}
-
-existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.
-applicability for concatenative languages
-
-\subsection{\hl{Some visualization methods}}
-
-\begin{itemize}
-\item sequence diagram
-\item circular diagram and interactive interaction sequance diagram \cite{Cornelissen2009}
-\item interaction diagrams (Jacobson, 1992)/ scenario diagrams (Koskimies and Mössenböck 1996)
-\item information murals (Jerding and Stasko, 1998)
-\item polymetric views (Ducasse et al., 2004)
-\item fisheye views (suggested by George W. Furnas, 1986, and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384})
-\item hierarchical edge bundling (Holten, 2006)
-\item structural and behavioral views of object-oriented program (Kleyn and Gingrich, 1988)
-\item matrix visualization and “execution pattern” notations \cite{Pauw98executionpatterns} to visualize traces in a scalable manner(De Pauw et al. 1993, 1994, 1998) 
-\item architecture oriented visualization (Sefika et al. 1996)
-\item a continuous sequence diagram, and the “information mural” (Jerding and Stasko, 1998)
-\item architecture with dynamic information (Walker et al. 1998)
-\item frequency spectrum analysis (Ball 1999)
-\end{itemize}
 
 \section{Existing approaches}
 
@@ -118,3 +99,62 @@ The emacs forth-mode(gforth.el, which is based on forth.el) provides many help f
 
 There has also been an afford to integrate some of those tools into an graphical development environment. The project is called Kgforth\footnote{\url{http://sourceforge.net/projects/kgforth/}: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
 It provides an editor, gforth window,debug and dump window, forth toolbar and menu.}, but its development seems to be discontinued.
+
+\section{Applicability to concatenative languages}
+
+In this section I will present a hand full of visualization methods and will discuss the applicability to gforth/forth. In the following chapter I will present an example on the most promising methods and analyze the actual outcome regarding program understanding. 
+
+\hl{existing methods abstract(abstract like print debugging and stepping and so on) furthermore the abstraction of all those methods mentioned above to find similarities and then adapt them to fit the characteristics of concatenative languages.}
+
+\subsection*{Interaction diagram, sequence diagram and scenario diagram}
+
+The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object oriented forth and there is no standard concurrency, th word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a syntax tree. On the system level although, the sequence diagram can provide useful information on the interaction between system components.
+\hl{TODO drop scenario diagram???\\ The scenario diagram as implemented by \\cite Koskimies:1996:SUS:871313, is essentially the same as the sequence diagram and the interaction diagram(Jacobson, 1992) which has been proposed by.}
+\\
+Since the system level visualization applies to almost any paradigm and the word level don't seem promising, I will not investigate the benefits of the UML sequence diagram in this thesis.
+
+\subsection*{Hierarchical edge bundles}
+Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be the hierarchic relations. Like in object oriented systems, the proper organization of directories, files and word definitions has to be considered to make such a visualization helpful.
+Another possible mapping could depend on word list as words hierarchic and word execution as non hierarchic relation.
+\\
+In the following chapter I will analyze both possibilities using a real forth software as an example.
+
+\subsection*{Information murals and massive sequence view}
+The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, mass sequence view proposed by \cite{Cornelissen2009}, which turns the horizontal scrolling into vertical scrolling and also contains the hierarchic aspect could be more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical component depends highly on the organization of the software at hand.
+\\
+In the following chapter I will analyze the massive sequence view using a real forth software as an example.
+
+\subsection*{High-Level polymetric views}
+Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with more information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but  only condensed data required.
+\hl{Large forth programs tend to consist of no more 1000 words[cite], thus the complexity and visual size of polymetric views can be kept at a moderate level. ... citation needed!}
+\\
+In the following chapter I will analyze forms of polymetric views of real software as an example.
+
+\subsection*{Fisheye views}
+Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle found in nature. It's basically described as a function, expressing the degree of interest of an subject, depending on an a priori importance and the distance from the current point of view. With growing distance lowers the degree of interest.
+\\
+This method is related to polymetric views, as mentioned above.
+
+\subsection*{Execution pattern view}
+The execution pattern view proposed by \cite{Pauw98executionpatterns} to visualize large traces in a scalable manner and helps to identify execution patterns, represent an interesting evolution of simple sequence diagrams and interaction diagrams.
+\\
+Since it is somehow related to the massive sequence view, I will not pursue this approach in detail.
+
+\subsection*{Method invocation view and taxonomy view}
+The tool GraphTrace\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze object oriented programs. I provides a method invocation view and a taxonomy view. Although the method invocation approach of GraphTrace seems not practical for forth programs, the authors mentioned two very interesting ideas.
+\begin{itemize}
+\item Displaying variable access:\\
+	The idea of showing words which access variables and the other way round, showing which words access a specific variable is very interesting. Thus it would be easier to track the global state of a program.
+\item Concurrent views:\\
+	The authors of \cite{Kleyn:1988:GOS:62084.62101} present a quiet interesting analogy. They compare the execution of a program with a tennis and football and refer to the multiple perspectives necessary to understand all aspects of a match and the whole outcome.
+\end{itemize}
+
+In the following chapter I will create a variable access graph inspired by the tree like visualization of GraphTrace.
+\hl{TODO: Glossry entry for GraphTrace....}
+
+
+\begin{itemize}
+\item frequency spectrum analysis (Ball 1999)
+\item architecture oriented visualization (Sefika et al. 1996)
+\item architecture with dynamic information (Walker et al. 1998)
+\end{itemize}
