@@ -100,6 +100,12 @@ Michael~F. Kleyn and Paul~C. Gingrich.
   concurrently animated views.
 \newblock {\em SIGPLAN Not.}, 23(11):191--205, January 1988.
 
+\bibitem[KM96]{Koskimies:1996:SUS:871313}
+K.~Koskimies and H.~Mossenbock.
+\newblock Scene: Using scenario diagrams and active text for illustrating
+  object-oriented programs.
+\newblock Technical report, 1996.
+
 \bibitem[LB85]{Lehman:1985:PEP:7261}
 M.~M. Lehman and L.~A. Belady, editors.
 \newblock {\em Program Evolution: Processes of Software Change}.
@@ -168,5 +174,13 @@ M.-A.~D. Storey, K.~Wong, F.~D. Fracchia, and H.~A. Mueller.
 \newblock In {\em Proceedings of the 1997 IEEE Symposium on Information
   Visualization (InfoVis '97)}, INFOVIS '97, pages 38--, Washington, DC, USA,
   1997. IEEE Computer Society.
+
+\bibitem[SWM97]{Storey:1997:PUT:832304.836998}
+M.-A.~D. Storey, K.~Wong, and H.~A. Muller.
+\newblock How do program understanding tools affect how programmers understand
+  programs.
+\newblock In {\em Proceedings of the Fourth Working Conference on Reverse
+  Engineering (WCRE '97)}, WCRE '97, pages 12--, Washington, DC, USA, 1997.
+  IEEE Computer Society.
 
 \end{thebibliography}

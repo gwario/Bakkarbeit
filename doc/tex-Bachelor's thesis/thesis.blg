@@ -3,46 +3,51 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: alpha.bst
 Database file #1: bibliography.bib
+Repeated entry---line 375 of file bibliography.bib
+ : @article{Ball:1999:CDA:318774.318944
+ :                                     ,
+I'm skipping whatever remains of this entry
+Warning--empty institution in Koskimies:1996:SUS:871313
 Warning--empty publisher in ReissProgrammingEnvironments1995
-You've used 28 entries,
+You've used 30 entries,
             2543 wiz_defined-function locations,
-            772 strings with 10545 characters,
-and the built_in function-call counts, 12196 in all, are:
-= -- 1245
-> -- 590
-< -- 16
-+ -- 207
-- -- 203
-* -- 935
-:= -- 1984
-add.period$ -- 89
-call.type$ -- 28
-change.case$ -- 182
-chr.to.int$ -- 28
-cite$ -- 29
-duplicate$ -- 476
-empty$ -- 864
-format.name$ -- 235
-if$ -- 2495
+            784 strings with 11019 characters,
+and the built_in function-call counts, 13045 in all, are:
+= -- 1336
+> -- 634
+< -- 17
++ -- 222
+- -- 218
+* -- 991
+:= -- 2126
+add.period$ -- 96
+call.type$ -- 30
+change.case$ -- 196
+chr.to.int$ -- 30
+cite$ -- 32
+duplicate$ -- 511
+empty$ -- 919
+format.name$ -- 252
+if$ -- 2673
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 30
-newline$ -- 143
-num.names$ -- 85
-pop$ -- 161
+missing$ -- 31
+newline$ -- 153
+num.names$ -- 91
+pop$ -- 172
 preamble$ -- 1
-purify$ -- 214
+purify$ -- 229
 quote$ -- 0
-skip$ -- 398
+skip$ -- 429
 stack$ -- 0
-substring$ -- 709
-swap$ -- 84
-text.length$ -- 16
+substring$ -- 741
+swap$ -- 92
+text.length$ -- 17
 text.prefix$ -- 8
 top$ -- 0
-type$ -- 204
-warning$ -- 1
-while$ -- 125
-width$ -- 30
-write$ -- 380
-(There was 1 warning)
+type$ -- 220
+warning$ -- 2
+while$ -- 134
+width$ -- 33
+write$ -- 408
+(There was 1 error message)

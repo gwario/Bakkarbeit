@@ -3,89 +3,53 @@
 
 \chapter{Introduction}
 
-\section{Motivation}
-
-\begin{itemize}
-
-\item OK software, due to its(steady growing) complexity \cite{Lehman:1985:PEP:7261}(need to read) \\ maybe better than the lehman85 cus available \cite{Lehman:2003:SEB:950401.950407} \\ structured programming http://dl.acm.org/citation.cfm?id=1243380
-
-\item OK maintenance \cite{Lientz:1980:SMM:601062} \cite{ISOSWMaintainance} 
-\end{itemize}
+\section*{Motivation}
 
 Software under lies a continuous changes, throughout its live cycle.
-The evolution process from the beginning of development until its release and maintenance. Large software\footnote{"The term large is, generally, used to describe software whose size in number of lines of code is greater than some arbitrary value. For reasons indicated in [leh79], it is more appropriate to define a large program as one developed by processes involving groups with two or more management levels."\cite{Lehman:2003:SEB:950401.950407}} and most of all software  classified as type E \cite{Cook:2006:ESS:1115566.1115567} gets more complex over time. If there are more than a few developers/development teams are involved or the developers/development teams are spread allover the world, there exists more foreign code than self written.
+The evolution process from the beginning of development until its release and maintenance. Large software\footnote{"The term large is, generally, used to describe software whose size in number of lines of code is greater than some arbitrary value. For reasons indicated in [leh79], it is more appropriate to define a large program as one developed by processes involving groups with two or more management levels."\cite{Lehman:2003:SEB:950401.950407}} and most of all, software  classified as type E \cite{Cook:2006:ESS:1115566.1115567}, gets more complex over time. If there are more than a few developers/development teams are involved or the developers/development teams are spread allover the world, there exists more foreign code than self written.
 
-Since changes, enhancements or fixes of existing code demand the developers involved to gain a high level of understanding for the software at hand\cite{Boehm:1976:SE:1311958.1312684}\cite{Singer97anexamination}. Due to \cite{Cornelissen:2009:SSP:1638616.1639301} "... up to 60\% of the maintenance effort is spent on gaining a sufficient understanding of the program ...". This task is referred to by the scientific community as "program understanding" or "program comprehension" and thus these words are considered synonym in this thesis. This thesis addresses the task of improving program comprehension of the concatenative programming language forth on several level.
-
-\begin{itemize}
-\item OK mental model(LaToza et al., 2006)\\ read: 
-@inproceedings{Lieberman:1995:BGC:223904.223969,
-author = {Lieberman, Henry and Fry, Christopher},
-title = {Bridging the Gulf Between Code and Behavior in Programming},
-booktitle = {Proceedings of the SIGCHI Conference on Human Factors in Computing Systems},
-series = {CHI '95},
-year = {1995},
-isbn = {0-201-84705-1},
-location = {Denver, Colorado, USA},
-pages = {480--486},
-numpages = {7},
-url = {http://dx.doi.org/10.1145/223904.223969},
-doi = {10.1145/223904.223969},
-acmid = {223969},
-publisher = {ACM Press/Addison-Wesley Publishing Co.},
-address = {New York, NY, USA},
-}
-
-\item OK strategies as stated by \cite{Storey:1999:CDE:308936.308940}
-
-\item OK dynamic analysis as defined by \cite{Ball:1999:CDA:318774.318944} \cite{Cornelissen:2009:SSP:1638616.1639301}
-
-\item OK static analysis as defined by \cite{Ball:1999:CDA:318774.318944}
-\end{itemize}
+Changes, enhancements or fixes of existing code demand the developers involved, to gain a high level of understanding of the software at hand\cite{Boehm:1976:SE:1311958.1312684}\cite{Singer97anexamination}. Due to \cite{Cornelissen:2009:SSP:1638616.1639301} "... up to 60\% of the maintenance effort is spent on gaining a sufficient understanding of the program ...". This task is referred to by the scientific community as "program understanding" or "program comprehension" and thus these words are considered synonym in this thesis. This thesis addresses the task of improving program comprehension of the concatenative programming language forth on several levels.
 
 Namely the the reading of source code, static analysis, dynamic analysis and the assistance of writing readable and easy to understand source code.
 
-\begin{itemize}
-\item OK concatenative languages -> forth, postscript, factor -> implications from the concatenative nature... ie potential to be more natural to read cause of reverse polish notation \\
-	David Shepherd , Lori Pollock , K. Vijay-Shanker, Case study: supplementing program analysis with natural language analysis to improve a reverse engineering task, Proceedings of the 7th ACM SIGPLAN-SIGSOFT workshop on Program analysis for software tools and engineering, p.49-54, June 13-14, 2007, San Diego, California, USA
-\item OK comparison to oo langs
-\item OK higher abstraction, hard structure boundaries
-\item OK paradigm promotes a single shared data structure of high importance and thus may simplify the task of putting all the necessary run-time information visually together(cite someone who says that its important to have all information visible at every point in time). Although there are several stacks, features like arbitrary memory allocation, the focus on stacks is clearly stated.
-\end{itemize}
-
 Due to the nature of concatenative languages, it is possible to write source code which ready very similar to natural language. There are no hard boundaries to the structure of the source code(custom defined loops and control structures) as in object oriented languages. Since forth directly operates only on stacks and memory, the information which is immediately needed to follow program execution is limited to those structures. In contrast, in object oriented languages there is also object state, object life cycle and concurrency of interest.
 
-Darren C. Atkinson , William G. Griswold, The design of whole-program analysis tools, Proceedings of the 18th international conference on Software engineering, p.16-27, March 25-29, 1996, Berlin, Germany
+\hl{mental model(LaToza et al., 2006) read: ..comment}
+\begin{comment}
+\@inproceedings\{Lieberman:1995:BGC:223904.223969,
+author = \{Lieberman, Henry and Fry, Christopher\},
+title = \{Bridging the Gulf Between Code and Behavior in Programming\},
+booktitle = \{Proceedings of the SIGCHI Conference on Human Factors in Computing Systems\},
+series = \{CHI '95\},
+year = \{1995\},
+isbn = \{0-201-84705-1\},
+location = \{Denver, Colorado, USA\},
+pages = \{480--486\},
+numpages = \{7\},
+url = \{http://dx.doi.org/10.1145/223904.223969\},
+doi = \{10.1145/223904.223969\},
+acmid = \{223969\},
+publisher = \{ACM Press/Addison-Wesley Publishing Co.\},
+address = \{New York, NY, USA\},
+\}
+\end{comment}
 
-\section{problem statement (which problem should be solved?)}
+
+\section*{Problem statement}
 
 There is plenty of work done on the task of program comprehension in object oriented and procedural languages\cite{Cornelissen:2009:SSP:1638616.1639301}, but nearly none on concatenative languages. The qualitative exploratory approach of this thesis does not encourage the formulation of specific hypothesis. Therefore the first question, is the applicability of existing methods and their visualization techniques. The second question to be answered, concerns new approaches, which may be exclusive to concatenative languages or gforth/forth.
 
-\section{aim of the work}
+\section*{Aim of the work}
 
-\hl{TODO: maybe cut scope down to dynamic analysis or trace visualization}
+This work aims to give a brief overview of the field program comprehension and its methods, to show existing aids to program understanding in gforth/forth and to study the applicability of some existing analysis and visualization approaches for other paradigms. Further more the suggestion of new methods or the modification of existing methods to meet the characteristics of gforth/forth.
 
-\sout{This work aims to better understand how program comprehension is performed in concatenative languages and how it can be made more efficient.} The secondary goal is the analysis of the applicability of existing analysis- and visualization methods and to provide modifications to existing visualization methods(and maybe suggestion of new methods). The forth programming language is used as a representative of concatenative languages.
+\section*{Structure of the work}
 
-\section{structure of the work}
+In \autoref{chap:Methodology} I will line out the methodological character of this thesis. In \autoref{chap:StateOfTheArt} there will be a brief overview on the topic of program comprehension, an overview on the existing tools to improve program understand in general and specific to gforth/forth and after wards I will present a selection of visualization approaches for procedural and object oriented languages. In \autoref{chap:Results} I will present some of the previously mentioned approaches for other paradigms applied on a real worlds forth program, analyze their applicability and propose modification to those approaches. Afterwards I will present a prototype implementation of a program trace visualization enhancement to Gforth. \autoref{chap:Summary} concludes the paper with a summary and topics of further investigation.
+
 
 At first, the available information of a forth program is identified. The next step is to characterize the information and its necessity for program comprehension is investigated. The differences of forth and object oriented languages are summarized and then the applicability of existing analysis and visualization methods is presented. \hl{Since there is no standard implementation of object orientation if forth, this thesis won't take any object orientation implementation into account.}
 The last part of this thesis investigates probable enhancements and modifications to existing methods and proposes new approaches.
 After the conclusion, the thesis presents further suggestions to support program comprehension and further topics of research in this direction.
 
-//\hl{TODO: move to methodology}
-\begin{itemize}
-\item qualitative approach
-\item exploratory case study
-\item prototype
-\item sketches
-\item trying to understand programs developed withing stackbasierte programmierung vl?
-
-\item \hl{qualitative approach , exploratory approach(?)}
-\item \hl{proposal}
-\item \hl{Preliminary evaluations as defined by} \cite{Cornelissen:2009:SSP:1638616.1639301}
-\item \hl{outcome is a subjectiv view of the available methods, and proposed enhancements which have been implementet}
-\item \hl{case study of the implemented enhancement}
-\item \hl{suggestions of further enhancements}
-\end{itemize}
-
+\hl{TODO make the structure and the content of the chapters more clear here....}

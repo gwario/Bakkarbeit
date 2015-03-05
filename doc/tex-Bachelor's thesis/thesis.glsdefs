@@ -58,6 +58,36 @@ parent={},%
 %
 }%
 }%
+\ifglsentryexists{GraphTrace}{}%
+{%
+\gls@defglossaryentry{GraphTrace}%
+{%
+name={GraphTrace},%
+sort={GraphTrace},%
+type={main},%
+first={GraphTrace},%
+firstplural={GraphTraces},%
+text={GraphTrace},%
+plural={GraphTraces},%
+description={This paper describes GraphTrace, a tool we have developed to assist in understanding object-oriented programs, GraphTrace allows a user to create displays revealing different aspects of the structure of an object-oriented program, and then to animate these displays in order to visually understand how the program works.},%
+descriptionplural={This paper describes GraphTrace, a tool we have developed to assist in understanding object-oriented programs, GraphTrace allows a user to create displays revealing different aspects of the structure of an object-oriented program, and then to animate these displays in order to visually understand how the program works.},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
 \ifglsentryexists{Charles D. Moore}{}%
 {%
 \gls@defglossaryentry{Charles D. Moore}%

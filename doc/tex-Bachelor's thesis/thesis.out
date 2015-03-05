@@ -4,26 +4,20 @@
 \BOOKMARK [0][-]{section*.7}{List of Figures}{}% 4
 \BOOKMARK [0][-]{section*.8}{List of Tables}{}% 5
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
-\BOOKMARK [1][-]{section.1.1}{Motivation}{chapter.1}% 7
-\BOOKMARK [1][-]{section.1.2}{problem statement \(which problem should be solved?\)}{chapter.1}% 8
-\BOOKMARK [1][-]{section.1.3}{aim of the work}{chapter.1}% 9
-\BOOKMARK [1][-]{section.1.4}{structure of the work}{chapter.1}% 10
-\BOOKMARK [0][-]{chapter.2}{Analysis of existing approaches}{}% 11
-\BOOKMARK [1][-]{section.2.1}{program comprehension}{chapter.2}% 12
-\BOOKMARK [1][-]{section.2.2}{Analysis to support program understanding}{chapter.2}% 13
-\BOOKMARK [1][-]{section.2.3}{Existing approaches}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.4}{Applicability to concatenative languages}{chapter.2}% 15
-\BOOKMARK [0][-]{chapter.3}{Methodology}{}% 16
-\BOOKMARK [0][-]{chapter.4}{Results}{}% 17
-\BOOKMARK [1][-]{section.4.1}{suggested solution}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.2}{visualization to support program understanding maybe some examples\(and tools\)}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.3}{comparison and summary of existing approaches}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.4}{implementation}{chapter.4}% 21
-\BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 22
-\BOOKMARK [0][-]{chapter.6}{Critical reflection}{}% 23
-\BOOKMARK [1][-]{section.6.1}{comparison with related work}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.2}{discussion of open issues}{chapter.6}% 25
-\BOOKMARK [1][-]{section.6.3}{further work to be done}{chapter.6}% 26
-\BOOKMARK [1][-]{section.6.4}{further reading}{chapter.6}% 27
-\BOOKMARK [0][-]{section*.34}{Bibliography}{}% 28
-\BOOKMARK [0][-]{section*.35}{Glossary}{}% 29
+\BOOKMARK [0][-]{chapter.2}{Methodology}{}% 7
+\BOOKMARK [0][-]{chapter.3}{Analysis of existing approaches}{}% 8
+\BOOKMARK [1][-]{section.3.1}{Program comprehension}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{Analysis to support program understanding}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Existing approaches}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Applicability to concatenative languages}{chapter.3}% 12
+\BOOKMARK [0][-]{chapter.4}{Results}{}% 13
+\BOOKMARK [1][-]{section.4.1}{The software under investigation}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.2}{The application of the previously presented methods}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.3}{gfvis - A trace visualization enhancement for Gforth}{chapter.4}% 16
+\BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 17
+\BOOKMARK [1][-]{section.5.1}{comparison with related work}{chapter.5}% 18
+\BOOKMARK [1][-]{section.5.2}{discussion of open issues}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.3}{further work to be done}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.4}{further reading}{chapter.5}% 21
+\BOOKMARK [0][-]{section*.44}{Bibliography}{}% 22
+\BOOKMARK [0][-]{section*.45}{Glossary}{}% 23
