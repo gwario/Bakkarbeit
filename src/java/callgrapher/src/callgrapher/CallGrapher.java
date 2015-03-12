@@ -52,6 +52,15 @@ public class CallGrapher {
 				@Override
 				public void onWordExecution(String definition, String wordname) {
 					
+					Long number = null;
+					try {
+						number = Long.valueOf(wordname);
+					} catch(NumberFormatException e) {
+					}
+					boolean isNumber = number != null;
+					if(isNumber)
+						return;
+					
 					if(!adjacencyMatrix.containsKey(definition))
 						adjacencyMatrix.put(definition, new HashSet<String>());
 					adjacencyMatrix.get(definition).add(wordname);

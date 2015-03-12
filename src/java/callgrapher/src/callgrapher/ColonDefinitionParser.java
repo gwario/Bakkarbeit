@@ -45,6 +45,9 @@ public class ColonDefinitionParser {
 		ignoreSystemWord("endif");
 		ignoreSystemWord("else");
 		ignoreSystemWord("i");
+		ignoreSystemWord("j");
+		ignoreSystemWord("k");
+		ignoreSystemWord("+!");
 		ignoreSystemWord("@");
 		ignoreSystemWord("!");
 		ignoreSystemWord("then");
@@ -64,23 +67,123 @@ public class ColonDefinitionParser {
 		ignoreSystemWord("=");
 		ignoreSystemWord("0");
 		ignoreSystemWord("1");
-		ignoreSystemWord("100");
 		ignoreSystemWord("?do");
+		ignoreSystemWord("2>r");
+		ignoreSystemWord("2r>");
+		ignoreSystemWord("negate");
+		ignoreSystemWord("space");
 		ignoreSystemWord("to");
 		ignoreSystemWord("+do");
 		ignoreSystemWord("-do");
+		ignoreSystemWord("do");
 		ignoreSystemWord("loop");
+		ignoreSystemWord("+loop");
 		ignoreSystemWord("begin");
 		ignoreSystemWord("again");
-		ignoreSystemWord("2");
-		ignoreSystemWord("3");
-		ignoreSystemWord("4");
-		ignoreSystemWord("5");
-		ignoreSystemWord("6");
-		ignoreSystemWord("7");
-		ignoreSystemWord("8");
-		ignoreSystemWord("9");
 		ignoreSystemWord("search-wordlist");
+		ignoreSystemWord("1-");
+		ignoreSystemWord("2/");
+		ignoreSystemWord("0<>");
+		ignoreSystemWord("tuck");
+		ignoreSystemWord("abs");
+		ignoreSystemWord("cells");
+		ignoreSystemWord("allot");
+		ignoreSystemWord("create");
+		ignoreSystemWord("does>");
+		ignoreSystemWord("<>");
+		ignoreSystemWord("nip");
+		ignoreSystemWord("-1");
+		ignoreSystemWord("0=");
+		ignoreSystemWord("1+");
+		ignoreSystemWord("2*");
+		ignoreSystemWord("r@");
+		ignoreSystemWord("?dup");
+		ignoreSystemWord("here");
+		ignoreSystemWord("[']");
+		ignoreSystemWord("literal");
+		ignoreSystemWord("immediate");
+		ignoreSystemWord("sliteral");
+		ignoreSystemWord("cr");
+		ignoreSystemWord("compare");
+		ignoreSystemWord("repeat");
+		ignoreSystemWord("while");
+		ignoreSystemWord("2!");
+		ignoreSystemWord("abort\"");
+		ignoreSystemWord("bl");
+		ignoreSystemWord("exit");
+		ignoreSystemWord("state");
+		ignoreSystemWord("refill");
+		ignoreSystemWord("2@");
+		ignoreSystemWord("find");
+		ignoreSystemWord("word");
+		ignoreSystemWord("<");
+		ignoreSystemWord(">");
+		ignoreSystemWord("d0=");
+		ignoreSystemWord("*");
+		ignoreSystemWord("recurse");
+		ignoreSystemWord("rshift");
+		ignoreSystemWord("2r@");
+		ignoreSystemWord("2>r");
+		ignoreSystemWord("2r>");
+		ignoreSystemWord("move");
+		ignoreSystemWord("throw");
+		ignoreSystemWord("open-file");
+		ignoreSystemWord("true");
+		ignoreSystemWord("false");
+		ignoreSystemWord("[char]");
+		ignoreSystemWord("2over");
+		ignoreSystemWord("until");
+		ignoreSystemWord("close-file");
+		ignoreSystemWord("[then]");
+		ignoreSystemWord("[else]");
+		ignoreSystemWord("[if]");
+		ignoreSystemWord("um/mod");
+		ignoreSystemWord("cputime");
+		ignoreSystemWord("d=");
+		ignoreSystemWord(".r");
+		ignoreSystemWord("unloop");
+		ignoreSystemWord("/");
+		ignoreSystemWord("get-order");
+		ignoreSystemWord("xor");
+		ignoreSystemWord("2rot");
+		ignoreSystemWord("words");
+		ignoreSystemWord("is");
+		ignoreSystemWord("/mod");
+		ignoreSystemWord("d>");
+		ignoreSystemWord("case");
+		ignoreSystemWord("endcase");
+		ignoreSystemWord("endof");
+		ignoreSystemWord("of");
+		ignoreSystemWord("d=");
+		ignoreSystemWord("emit");
+		ignoreSystemWord("catch");
+		ignoreSystemWord("0<");
+		ignoreSystemWord("c@");
+		ignoreSystemWord("chars");
+		ignoreSystemWord("perform");
+		ignoreSystemWord("c!");
+		ignoreSystemWord(",");
+		ignoreSystemWord("max");
+		ignoreSystemWord("append");
+		ignoreSystemWord("pad");
+		ignoreSystemWord("included");
+		ignoreSystemWord("d.r");
+		ignoreSystemWord("spaces");
+		ignoreSystemWord("file-status");
+		ignoreSystemWord("min");
+		ignoreSystemWord("noop");
+		ignoreSystemWord("time&date");
+		ignoreSystemWord("d-");
+		ignoreSystemWord("d+");
+		ignoreSystemWord("within");
+		ignoreSystemWord("r/o");
+		ignoreSystemWord("r/w");
+		ignoreSystemWord("read-line");
+		ignoreSystemWord("*/");
+		ignoreSystemWord("create-file");
+		ignoreSystemWord("lshift");
+		ignoreSystemWord(":noname");
+		
 	}
 	
 	private List<String> ignoreWords = new ArrayList<String>();
@@ -106,6 +209,8 @@ public class ColonDefinitionParser {
 	private boolean nextWordIsDefinitionName = false;
 	
 	private boolean inBlockComment = false;
+	
+	private boolean inString = false;
 	
 	public ColonDefinitionParser(File file, boolean ignoreSystemWords) throws Exception {
 		
@@ -137,8 +242,26 @@ public class ColonDefinitionParser {
 			    	boolean isLineComment = word.equalsIgnoreCase("\\");
 			    	boolean isDefinitionStart = word.equalsIgnoreCase(":");
 			    	boolean isDefinitionEnd = word.equalsIgnoreCase(";");
-
-			    	if(inBlockComment) {
+			    	boolean isStringStart = word.equalsIgnoreCase(".\"") || word.equalsIgnoreCase("C\"") || word.equalsIgnoreCase("S\"") || word.equalsIgnoreCase("ABORT\"");
+			    	boolean isStringEnd = word.endsWith("\"");
+			    	
+			    	if(inString) {
+			    		
+			    		if(isStringEnd) {
+			    			
+			    			if(DEBUG)
+			    				System.out.println("End of string detected!");
+			    			inString = false;
+			    			continue;
+			    			
+			    		} else {
+			    			
+			    			if(DEBUG)
+			    				System.out.println("Skipping "+word+" (in string)...");
+			    			continue;
+			    		}
+			    		
+			    	} else if(inBlockComment) {
 			    		
 			    		if(isCommentEnd) {
 			    			
@@ -195,7 +318,14 @@ public class ColonDefinitionParser {
 			    					System.out.println("Line comment detected! Skipping until end of line...");
 				    			break;
 				    			
-			    			} else {
+			    			} else if(isStringStart) {
+				    			
+				    			if(DEBUG)
+				    				System.out.println("Start of string detected!");
+				    			inString = true;
+				    			continue;
+				    			
+				    		} else {
 			    				
 			    				if(ignoreSystemWords && isIgnoreWord(word, ignoreWords)) {
 			    					
