@@ -7,25 +7,35 @@
 \chapter{Results}
 \label{chap:Results}
 
-To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.
+In this chapter, I will introduce the chosen forth software. Afterwards, I will manually or semi automatically produce the graphics according to the selected Visualization methods.
 
+\section{The software under investigation: Brainless}
 
+Brainless\footnote{Brainless verion 0.1.2 is used, the source code can be optained on \url{http://sourceforge.net/projects/forth-brainless/}} is chess-playing program written in ANS Forth. The source code consists of several files with an overall size\footnote{The command to calculate the size was \emph{find . -name '*.fs' -maxdepth 1 | xargs wc -l}} of about 139497 bytes and 4108 lines of code\footnote{The command used to count the lines of code, was \emph{find . -name '*.fs' -maxdepth 1 | xargs wc -l}}.
+This measure is somehow controversial, but since the files contain only a short header and are formatted in the usual manner, it seems appropriate for comparison.
 
-kind of an \sout{ide} development environment\\
-light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate response of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
-eclipse ide(java)
-
-\section{The software under investigation}
-
-
+The other software, I took into consideration, was brew\footnote{brew version 0.2.0 was used. The source code can be obtained on \url{http://www.robertepprecht.ch/brew/index.html}}. Brew is a 'playground for evolutionary programming', as the author calls it. Due to its size of 1062857 bytes and 36801 lines of code, this project seem to large to analyze manually in a reasonable time.
 
 \section{The application of the previously presented methods}
 
 \subsection*{Hierarchical edge bundles}
-Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be the hierarchic relations. Like in object oriented systems, the proper organization of directories, files and word definitions has to be considered to make such a visualization helpful.
-Another possible mapping could depend on word list as words hierarchic and word execution as non hierarchic relation.
-\\
-In the following chapter I will analyze both possibilities using a real forth software as an example.
+
+The source code of brainless is organizes in a flat structure, there is only one directory, which contains all the source files.
+
+\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=1.75]
+    \draw [thick] (0,0) circle (1);
+    \foreach \angle in {90,78,...,-78}
+        \draw (\angle:1) -- (\angle-180:1);
+    \node [circle,thick,fill=white,draw=black,align=center,minimum size=3cm] at (0,0) {};
+    (Head.west);
+\end{tikzpicture}
+
+
+There is only one word list created by brainless, so the hierarchy utilizing the search order would be as follows.
+
+
+\hl{In context of forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be the hierarchic relations. Like in object oriented systems, the proper organization of directories, files and word definitions has to be considered to make such a visualization helpful.
+Another possible mapping could depend on word list as words hierarchic and word execution as non hierarchic relation.}
 
 \subsection*{Information murals and massive sequence view}
 The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, mass sequence view proposed by \cite{Cornelissen2009}, which turns the horizontal scrolling into vertical scrolling and also contains the hierarchic aspect could be more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical component depends highly on the organization of the software at hand.
@@ -65,7 +75,6 @@ The frequency spectrum analysis as proposed by \cite{Ball:1999:CDA:318774.318944
 In the following chapter I will briefly analyze this approach at an example of a large forth program.
 
 \section{gfvis - A trace visualization enhancement for Gforth}
-
 
 \hl{TODO put this under the matching viz methods!!}
 A very important question in this concern is, how can developers be assisted to write readable code. Experienced developers may do that intuitively, but how can novice developers be encouraged and supported to write readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this attribute be supported?\\

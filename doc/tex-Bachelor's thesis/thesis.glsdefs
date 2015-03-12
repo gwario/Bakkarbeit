@@ -1,16 +1,16 @@
-\ifglsentryexists{ctan}{}%
+\ifglsentryexists{ACM}{}%
 {%
-\gls@defglossaryentry{ctan}%
+\gls@defglossaryentry{ACM}%
 {%
-name={CTAN},%
-sort={CTAN},%
-type={acronym},%
-first={Comprehensive TeX Archive Network (CTAN)},%
-firstplural={Comprehensive TeX Archive Networks(CTANs)},%
-text={CTAN},%
-plural={CTANs},%
-description={Comprehensive TeX Archive Network},%
-descriptionplural={Comprehensive TeX Archive Network\acrpluralsuffix },%
+name={ACM},%
+sort={ACM},%
+type={main},%
+first={ACM},%
+firstplural={ACMs},%
+text={ACM},%
+plural={ACMs},%
+description={\ACM is widely recognized as the premier membership organization for computing professionals, delivering resources that advance computing as a science and a profession; enable professional development; and promote policies and research that benefit society.},%
+descriptionplural={\ACM is widely recognized as the premier membership organization for computing professionals, delivering resources that advance computing as a science and a profession; enable professional development; and promote policies and research that benefit society.},%
 symbol={\relax },%
 symbolplural={\relax },%
 user1={},%
@@ -19,10 +19,10 @@ user3={},%
 user4={},%
 user5={},%
 user6={},%
-long={Comprehensive TeX Archive Network},%
-longplural={Comprehensive TeX Archive Networks},%
-short={CTAN},%
-shortplural={CTANs},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
 counter={page},%
 parent={},%
 %

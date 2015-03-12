@@ -1,0 +1,26 @@
+\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=1.75]
+
+	% outer ring
+	\draw [thick] (0,0) circle (10);
+	\draw [thick] (0,0) circle (9.6);
+
+	% 2. outer ring
+    \foreach \angle in {90, 60, ..., -90}
+        \draw (\angle:9.6) -- (\angle-180:9.6);
+    \draw [thick] (0,0) circle (9.2);
+
+	% 3. outer ring
+	% section 90-60
+	\foreach \angle in {90, 80, ..., 0}
+		\draw (\angle:9.2) -- (\angle-180:0);
+	% section 60-30
+	%\foreach \angle in {90, 60, ..., -90}
+	%	\draw (\angle:9.2) -- (\angle-180:0);
+	% section 30-0
+	%\foreach \angle in {30, 0}
+	%	\draw (\angle:9.2) -- (\angle-180:0);
+	\draw [thick,fill=white] (0,0) circle (8.8);
+
+%    \node [circle,thick,fill=white,draw=black,align=center,minimum size=5cm] at (0,0) {};
+%    (Head.west);
+\end{tikzpicture}

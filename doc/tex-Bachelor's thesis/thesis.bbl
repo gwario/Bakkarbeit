@@ -81,12 +81,6 @@ Danny Holten.
 \newblock {\em IEEE Transactions on Visualization and Computer Graphics},
   12(5):741--748, September 2006.
 
-\bibitem[ISO06]{ISOSWMaintainance}
-ISO.
-\newblock Software engineering -- software life cycle processes -- maintenance.
-\newblock ISO 14764:2006, International Organization for Standardization,
-  Geneva, Switzerland, 2006.
-
 \bibitem[JS98]{Jerding:1998:IMT:614271.614408}
 Dean~F. Jerding and John~T. Stasko.
 \newblock The information mural: A technique for displaying and navigating
@@ -106,20 +100,10 @@ K.~Koskimies and H.~Mossenbock.
   object-oriented programs.
 \newblock Technical report, 1996.
 
-\bibitem[LB85]{Lehman:1985:PEP:7261}
-M.~M. Lehman and L.~A. Belady, editors.
-\newblock {\em Program Evolution: Processes of Software Change}.
-\newblock Academic Press Professional, Inc., San Diego, CA, USA, 1985.
-
 \bibitem[LR03]{Lehman:2003:SEB:950401.950407}
 Meir~M. Lehman and Juan~F. Ramil.
 \newblock Software evolution: Background, theory, practice.
 \newblock {\em Inf. Process. Lett.}, 88(1-2):33--44, October 2003.
-
-\bibitem[LS80]{Lientz:1980:SMM:601062}
-Bennett~P. Lientz and E.~Burton Swanson.
-\newblock {\em Software Maintenance Management}.
-\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1980.
 
 \bibitem[MJS{\etalchar{+}}00]{Muller:2000:RER:336512.336526}
 Hausi~A. M\"{u}ller, Jens~H. Jahnke, Dennis~B. Smith, Margaret-Anne Storey,

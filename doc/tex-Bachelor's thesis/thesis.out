@@ -9,9 +9,9 @@
 \BOOKMARK [1][-]{section.3.1}{Program comprehension}{chapter.3}% 9
 \BOOKMARK [1][-]{section.3.2}{Analysis to support program understanding}{chapter.3}% 10
 \BOOKMARK [1][-]{section.3.3}{Existing approaches}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.4}{Applicability to concatenative languages}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.4}{Applicability of methods for other paradigms to concatenative languages}{chapter.3}% 12
 \BOOKMARK [0][-]{chapter.4}{Results}{}% 13
-\BOOKMARK [1][-]{section.4.1}{The software under investigation}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.1}{The software under investigation: Brainless}{chapter.4}% 14
 \BOOKMARK [1][-]{section.4.2}{The application of the previously presented methods}{chapter.4}% 15
 \BOOKMARK [1][-]{section.4.3}{gfvis - A trace visualization enhancement for Gforth}{chapter.4}% 16
 \BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 17
@@ -20,4 +20,3 @@
 \BOOKMARK [1][-]{section.5.3}{further work to be done}{chapter.5}% 20
 \BOOKMARK [1][-]{section.5.4}{further reading}{chapter.5}% 21
 \BOOKMARK [0][-]{section*.44}{Bibliography}{}% 22
-\BOOKMARK [0][-]{section*.45}{Glossary}{}% 23

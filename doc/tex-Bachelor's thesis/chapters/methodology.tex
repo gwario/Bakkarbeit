@@ -1,24 +1,37 @@
+\newglossaryentry{ACM}
+{
+  name={ACM},
+  description={ACM is widely recognized as the premier membership organization for computing professionals, delivering resources that advance computing as a science and a profession; enable professional development; and promote policies and research that benefit society.}
+}
+
+% \newacronym{acm}{ACM}{Association for Computing Machinery}
+
 \chapter{Methodology}
 \label{chap:Methodology}
 
-\hl{describe the actual flow of work}
+This chapter contains the meteorologic methods used to approach the topic of this thesis.
 
-\hl{describe what what the goal is and how its completion is verified}
-
-ich schaue was es gibt und versuche es auf forth anzuwenden und probiere es exemplarisch aus, was raus gekommen ist und mutmaße die hilfreichigkeit
-
-//\hl{TODO: move to methodology}
+I will use a qualitative approach. In \autoref{chap:StateOfTheArt} I will gain an over view of program comprehension and it's techniques in general and I will summarize the actual techniques available for Gforth/Forth. The main resources for that was \cite{Cornelissen:2009:SSP:1638616.1639301} and keyword search on the \gls{ACM} digital library\footnote{\url{http://dl.acm.org/}}.
+Since I will investigate the applicability to Gforth/Forth of only a handful of concrete techniques, I used the following criteria for selection:
 \begin{itemize}
-\item qualitative approach
-\item exploratory case study
-\item prototype
-\item sketches
-\item trying to understand programs developed withing stackbasierte programmierung vl?
-
-\item \hl{qualitative approach , exploratory approach(?)}
-\item \hl{proposal}
-\item \hl{Preliminary evaluations as defined by} \cite{Cornelissen:2009:SSP:1638616.1639301}
-\item \hl{outcome is a subjectiv view of the available methods, and proposed enhancements which have been implementet}
-\item \hl{case study of the implemented enhancement}
-\item \hl{suggestions of further enhancements}
+\item Graphical visualization 
+\item Applicable to imperative languages(procedural and object oriented)
+\item Behavioral analysis
+\item Suitable for trace visualization
 \end{itemize}
+A probable issue introduced by the initial keyword search, is the lack of previous knowledge on the topic and the lack of experience with Gforth/Forth.
+
+In \autoref{chap:Results}, I will analyze the graphics which would be produced as a result of the selected techniques. First, I will introduce the software on which I applied the techniques. The software was chosen with the following criteria in mind:
+\begin{itemize}
+\item Size: The software should consist of at least hundred kilobytes of source code.
+\item Complexity: It should have at least a medium level of complexity.
+\item \hl{WEG, SONST KANN ICH BRAINLESS NICHT NEHMEN: Practicality: It should solve a real problem.}
+\end{itemize}
+Since software characteristics can vary greatly depending on the domain, the selection of only one program may be meaningful enough to confirm whether a certain technique is useful or not for arbitrary Gforth/Forth programs.
+Second, I will analyze the the graphics in a exploratory fashion. Due to the lack of automated implementations of the selected techniques for Gforth/Forth, I will produce these graphics manually. \hl{wenns fertig ist dann schreib ich rein obs verbessert werden oder nicht, das geht so nicht} If necessary, I will propose modifications of these techniques to improve their usefulness\hl{in this specific case}.
+Third, I will introduces the prototype of an enhancement for the Gforth step-debugger which was implement in the course of this thesis and discuss its usefulness.\hl{TODO bei den methoden noch irgendwo meine erwähnen}
+\hl{Fourth, i will suggest new techniques.}
+
+It is obvious, that due to the chosen methodology, there will be now quantitative confirmation of the usefulness of the techniques under investigation. Due to the limited selection of techniques, there may be other methods which maybe invaluable to program comprehension.\hl{die hier nicht sind weil pech gehabt...}
+
+In \autoref{chap:Summary}, I will \hl{schreib ob und welche unterschied es gibt zwischen program comprehension zwischen verschiedenen paradigmen}
