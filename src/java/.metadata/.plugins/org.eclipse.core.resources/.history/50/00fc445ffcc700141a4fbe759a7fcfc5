@@ -1,0 +1,11 @@
+package callgrapher;
+
+public class ColonDefinitionParser {
+
+	
+	public interface OnDefinitionFoundListener {
+		
+		void onDefinitionFound(String wordname);
+		void onDefinitionEnd(String wordname);
+	}
+}

@@ -1,0 +1,164 @@
+package callgrapher;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ColonDefinitionParser {
+
+	/**
+	 * The list of system words.
+	 */
+	public static List<String> systemWords;
+	static {
+		systemWords = new ArrayList<String>();
+		
+		systemWords.add("dup");
+		systemWords.add("2dup");
+		systemWords.add("drop");
+		systemWords.add("2drop");
+		systemWords.add(">r");
+		systemWords.add("r>");
+		systemWords.add("rdrop");
+		systemWords.add("over");
+		systemWords.add("+");
+		systemWords.add("-");
+		systemWords.add("execute");
+		systemWords.add("'");
+		systemWords.add("[");
+		systemWords.add("]");
+		systemWords.add("rot");
+		systemWords.add("-rot");
+		
+	}
+	
+	private static final String PATTERN_COLONDEFINITION_START = "\\s+:\\s+((?<wordname>[^\\s.]+)\\s+";
+	private static final String PATTERN_COLONDEFINITION_END = "\\s+;\\s+";
+	private static final String PATTERN_AFTER_AND_INCLUDING_SEMICOLON = ";.*$";
+	
+	private static final String PATTERN_LINE_COMMENT = "\\\\.*";
+	private static final String PATTERN_BLOCK_COMMENT = "\\(.*\\)";
+	
+	private File file;
+	private boolean ignoreSystemWords;
+	private static Pattern colonDefinitionStartPattern = Pattern.compile(PATTERN_COLONDEFINITION_START, Pattern.CASE_INSENSITIVE);
+	private static Pattern colonDefinitionEndPattern = Pattern.compile(PATTERN_COLONDEFINITION_END, Pattern.CASE_INSENSITIVE);
+	
+	private OnDefinitionParserEventListener definitionParserListener;
+	private OnFileParserEventListener fileParserListener;
+	
+	private String currentDefinition;
+	
+	public ColonDefinitionParser(File file, boolean ignoreSystemWords) throws Exception {
+		
+		if(!file.exists() || !file.isFile() || !file.canRead())
+			throw new Exception("Failed to parse "+file);
+		
+		this.file = file;
+		this.ignoreSystemWords = ignoreSystemWords;
+	}
+	
+	public void parse() throws Exception {
+	
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+			
+		    for(String line; (line = br.readLine()) != null; ) {
+		        
+		    	//strip comments
+		    	line.replaceAll(PATTERN_LINE_COMMENT, "");
+		    	line.replaceAll(PATTERN_BLOCK_COMMENT, "");
+		    	
+		    	final Matcher definitionMatcherStart = colonDefinitionStartPattern.matcher(line);
+	    		final Matcher definitionMatcherEnd = colonDefinitionEndPattern.matcher(line);
+		    	
+		    	if(currentDefinition == null && definitionMatcherEnd.matches())
+		    		throw new Exception("Unformed colon definition: Definition end without a start!");
+		    	
+		    	if(currentDefinition != null && definitionMatcherStart.matches())
+		    		throw new Exception("Unformed colon definition: Definition start in a definition!");
+		    		
+		    	if(currentDefinition == null) {
+		    		
+		    		/*
+		    		 * Look for new definitions
+		    		 */
+		    		if(definitionMatcherStart.matches()) {
+			    		
+		    			currentDefinition = definitionMatcherStart.group("wordname");
+			    		fileParserListener.onDefinitionStart(currentDefinition);
+			    		
+			    		lookForWordExecutions(line);
+			    	}
+		    	
+		    	} else {
+		    		
+		    		/*
+		    		 * Look for definition end
+		    		 */
+		    		if(definitionMatcherEnd.matches()) {
+		    			//line contains a definition end!
+		    			
+		    			//TODO strip everything after and including the ;
+		    			
+		    			lookForWordExecutions(line);
+		    			
+		    		} else {
+		    			//line does not contain a definition end
+		    			lookForWordExecutions(line);
+		    		}
+		    	}
+		    }
+		    // line is not visible here.
+		}
+	}
+	
+	private void lookForWordExecutions(String line) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setDefinitionParserListener(
+			OnDefinitionParserEventListener definitionParserListener) {
+		this.definitionParserListener = definitionParserListener;
+	}
+
+	public void setFileParserListener(OnFileParserEventListener fileParserListener) {
+		this.fileParserListener = fileParserListener;
+	}
+	
+	
+	
+	public interface OnDefinitionParserEventListener {
+		
+		/**
+		 * Called when a word is executed within a colon definition.
+		 * This method is called with any word 
+		 * @param wordname
+		 */
+		void onWordExecution(String definition, String wordname);
+		
+	}
+	
+	public interface OnFileParserEventListener {
+		
+		/**
+		 * Called when a colon definition starts.
+		 * 
+		 * @param wordname the word after " : "
+		 */
+		void onDefinitionStart(String wordname);
+		
+		/**
+		 * Called when a colon definition ends.
+		 * Called when " ; " was discovered.
+		 * @param wordname the word after the " : "
+		 */
+		void onDefinitionEnd(String wordname);
+	}
+}

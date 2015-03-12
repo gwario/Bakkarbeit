@@ -1,0 +1,21 @@
+package callgrapher;
+
+public class ColonDefinitionParser {
+
+	
+	public interface OnDefinitionFoundListener {
+		
+		/**
+		 * Called when a colon definition starts.
+		 * 
+		 * @param wordname the word after " : "
+		 */
+		void onDefinitionStart(String wordname);
+		/**
+		 * Called when a colon definition ends.
+		 * Called when " ; " was discovered.
+		 * @param wordname the word after the " : "
+		 */
+		void onDefinitionEnd(String wordname);
+	}
+}

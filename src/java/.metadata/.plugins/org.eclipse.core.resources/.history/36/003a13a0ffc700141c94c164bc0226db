@@ -1,0 +1,43 @@
+package callgrapher;
+
+import java.io.File;
+
+public class CallGrapher {
+
+	public static void main(String[] args) {
+		
+		if(args.length < 1)
+			bail("Dir missing: java callgrapher.Callgrapher <dir>");
+		
+		final File dir = new File(args[0]);
+		
+		if(!dir.isDirectory())
+			bail("Not a directory: "+dir);
+		else
+			print("Working dir: "+dir);
+		
+		for(File file : dir.listFiles()) {
+			
+			if(!file.canRead()) {
+				print("skipped '"+file.getName()+"'...unable to read!");
+				continue;
+			}
+			
+			final ColonDefinitionParser parser = new ColonDefinitionParser(file, true);
+			parser.setOnDefinitionFoundListener(new ColonDefinitionParser.OnDefinitionFoundListener());
+			parser.setOnWordExecutionListener(new ColonDefinitionParser.OnWordExecutionListener());
+		}
+		
+	}
+
+	public static final void print(String msg) {
+		
+		System.out.println(msg);
+	}
+	
+	public static final void bail(String msg) {
+		
+		System.out.println(msg);
+		System.exit(1);
+	}
+}

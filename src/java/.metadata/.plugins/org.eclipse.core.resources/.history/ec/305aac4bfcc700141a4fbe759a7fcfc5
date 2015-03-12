@@ -1,0 +1,13 @@
+package callgrapher;
+
+public class ColonDefinitionParser {
+
+	
+	/**
+	 * 
+	 * @author mariogastegger
+	 */
+	public interface OnDefinitionFoundListener {
+		
+	}
+}

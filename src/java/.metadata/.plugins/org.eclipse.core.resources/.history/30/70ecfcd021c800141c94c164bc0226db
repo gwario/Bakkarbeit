@@ -1,0 +1,74 @@
+package callgrapher;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import callgrapher.ColonDefinitionParser.OnDefinitionParserEventListener;
+import callgrapher.ColonDefinitionParser.OnFileParserEventListener;
+
+public class CallGrapher {
+
+	public static void main(String[] args) throws Exception {
+		
+		if(args.length < 1)
+			bail("Dir missing: java callgrapher.Callgrapher <dir>");
+		
+		final File dir = new File(args[0]);
+		
+		if(!dir.isDirectory())
+			bail("Not a directory: "+dir);
+		else
+			print("Working dir: "+dir);
+		
+		/*
+		 * Adjacency matrix, the map's keys are the nodes(words), and the values is the list of words which are called by the key.
+		 */
+		final Map<String, List<String>> adjacencyMatrix = new HashMap<String, List<String>>();
+		
+		for(File file : dir.listFiles()) {
+			
+			if(!file.canRead()) {
+				print("skipped '"+file.getName()+"'...unable to read!");
+				continue;
+			}
+			
+			final ColonDefinitionParser parser = new ColonDefinitionParser(file, true);
+			parser.setDefinitionParserListener(new OnDefinitionParserEventListener() {
+				
+				@Override
+				public void onWordExecution(String definition, String wordname) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			parser.setFileParserListener(new OnFileParserEventListener() {
+				
+				@Override
+				public void onDefinitionStart(String wordname) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onDefinitionEnd(String wordname) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
+		
+	}
+
+	public static final void print(String msg) {
+		
+		System.out.println(msg);
+	}
+	
+	public static final void bail(String msg) {
+		
+		System.out.println(msg);
+		System.exit(1);
+	}
+}

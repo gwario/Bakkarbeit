@@ -1,0 +1,34 @@
+package callgrapher;
+
+import java.util.ArrayList;
+
+public class ColonDefinitionParser {
+
+	public static List<String> systemWords = new ArrayList<E>();
+	public interface OnWordExecutionListener {
+		
+		/**
+		 * Called when a word is executed within a colon definition.
+		 * This method is called with any word 
+		 * @param wordname
+		 */
+		void onWordExecution(String wordname);
+	}
+	
+	public interface OnDefinitionFoundListener {
+		
+		/**
+		 * Called when a colon definition starts.
+		 * 
+		 * @param wordname the word after " : "
+		 */
+		void onDefinitionStart(String wordname);
+		
+		/**
+		 * Called when a colon definition ends.
+		 * Called when " ; " was discovered.
+		 * @param wordname the word after the " : "
+		 */
+		void onDefinitionEnd(String wordname);
+	}
+}

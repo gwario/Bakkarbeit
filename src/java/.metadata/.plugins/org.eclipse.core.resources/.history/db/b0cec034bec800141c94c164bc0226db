@@ -1,0 +1,333 @@
+package callgrapher;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+public class ColonDefinitionParserTest {
+
+	@Test
+	public void test_split_emtyLine_shouldReturnEmptyArray_1() {
+		
+		final String TEXT = "\r\n";
+
+		assertEquals(0, ColonDefinitionParser.getWords(TEXT).length);
+	}
+	
+	@Test
+	public void test_split_emtyLine_shouldReturnEmptyArray_2() {
+		
+		final String TEXT = "\n\r";
+
+		assertEquals(0, ColonDefinitionParser.getWords(TEXT).length);
+	}
+	
+	@Test
+	public void test_split_emtyLine_shouldReturnEmptyArray_3() {
+		
+		final String TEXT = "\n";
+
+		assertEquals(0, ColonDefinitionParser.getWords(TEXT).length);
+	}
+	
+	@Test
+	public void test_split_emtyLine_shouldReturnEmptyArray_4() {
+		
+		final String TEXT = "  \n";
+
+		assertEquals(0, ColonDefinitionParser.getWords(TEXT).length);
+	}
+	
+	@Test
+	public void test_split_emtyLine_shouldReturnEmptyArray_5() {
+		
+		final String TEXT = "   ";
+
+		assertEquals(0, TEXT.trim().split(" ").length);
+	}
+	
+//	@Test
+//	public void test_getExecutedWords_ignoreWordsTrueAndListWithWords_shouldReturnNonIgnoreWords() {
+//		
+//		final String WORDNAME_1 = "testword";
+//		final String WORDNAME_2 = "sds";
+//		final String WORDNAME_3 = "sdsss";
+//		final String WORDNAME_4 = "sffffd";
+//		final String WORDNAME_5 = "asdasd";
+//
+//		final String TEXT = " "+WORDNAME_1+" "+WORDNAME_2+"  "+WORDNAME_3+" "+WORDNAME_4+"    "+WORDNAME_5;
+//		
+//		final boolean IGNORE_WORDS = true;
+//		@SuppressWarnings("serial")
+//		final List<String> IGNORE_WORDS_LIST = new ArrayList<String>() {{ this.add(WORDNAME_1); this.add(WORDNAME_5); }};
+//		
+//		List<String> actualWords = ColonDefinitionParser.getExecutedWords(TEXT, IGNORE_WORDS, IGNORE_WORDS_LIST);
+//		
+//		assertEquals(3, actualWords.size());
+//		assertFalse(actualWords.contains(WORDNAME_1));
+//		assertTrue(actualWords.contains(WORDNAME_2));
+//		assertTrue(actualWords.contains(WORDNAME_3));
+//		assertTrue(actualWords.contains(WORDNAME_4));
+//		assertFalse(actualWords.contains(WORDNAME_5));
+//	}
+//	
+//	@Test
+//	public void test_getExecutedWords_ignoreWordsFalseAndListWithWords_shouldReturnAllWords() {
+//		
+//		final String WORDNAME_1 = "testword";
+//		final String WORDNAME_2 = "sds";
+//		final String WORDNAME_3 = "sdsss";
+//		final String WORDNAME_4 = "sffffd";
+//		final String WORDNAME_5 = "asdasd";
+//
+//		final String TEXT = " "+WORDNAME_1+" "+WORDNAME_2+"  "+WORDNAME_3+" "+WORDNAME_4+"    "+WORDNAME_5;
+//		
+//		final boolean IGNORE_WORDS = false;
+//		@SuppressWarnings("serial")
+//		final List<String> IGNORE_WORDS_LIST = new ArrayList<String>() {{ this.add(WORDNAME_1); this.add(WORDNAME_5); }};
+//		
+//		List<String> actualWords = ColonDefinitionParser.getExecutedWords(TEXT, IGNORE_WORDS, IGNORE_WORDS_LIST);
+//		
+//		assertEquals(5, actualWords.size());
+//		assertTrue(actualWords.contains(WORDNAME_1));
+//		assertTrue(actualWords.contains(WORDNAME_2));
+//		assertTrue(actualWords.contains(WORDNAME_3));
+//		assertTrue(actualWords.contains(WORDNAME_4));
+//		assertTrue(actualWords.contains(WORDNAME_5));
+//	}
+//	
+//	@Test
+//	public void test_getExecutedWords_ignoreWordsFalseAndEmptyList_shouldReturnAllWords() {
+//		
+//		final String WORDNAME_1 = "testword";
+//		final String WORDNAME_2 = "sds";
+//		final String WORDNAME_3 = "sdsss";
+//		final String WORDNAME_4 = "sffffd";
+//		final String WORDNAME_5 = "asdasd";
+//
+//		final String TEXT = " "+WORDNAME_1+" "+WORDNAME_2+"  "+WORDNAME_3+" "+WORDNAME_4+"    "+WORDNAME_5;
+//		
+//		final boolean IGNORE_WORDS = false;
+//		final List<String> IGNORE_WORDS_LIST = new ArrayList<String>();
+//		
+//		List<String> actualWords = ColonDefinitionParser.getExecutedWords(TEXT, IGNORE_WORDS, IGNORE_WORDS_LIST);
+//		
+//		assertEquals(5, actualWords.size());
+//		assertTrue(actualWords.contains(WORDNAME_1));
+//		assertTrue(actualWords.contains(WORDNAME_2));
+//		assertTrue(actualWords.contains(WORDNAME_3));
+//		assertTrue(actualWords.contains(WORDNAME_4));
+//		assertTrue(actualWords.contains(WORDNAME_5));
+//	}
+//	
+//	@Test
+//	public void test_getExecutedWords_emptyText_shouldReturnEmptyList() {
+//		
+//		final String TEXT = "   		 ";
+//		
+//		final boolean IGNORE_WORDS = false;
+//		final List<String> IGNORE_WORDS_LIST = new ArrayList<String>();
+//		
+//		List<String> actualWords = ColonDefinitionParser.getExecutedWords(TEXT, IGNORE_WORDS, IGNORE_WORDS_LIST);
+//		
+//		assertTrue(actualWords.isEmpty());
+//	}
+//	
+//	/**
+//	 * Strips the ending part of the block comment.
+//	 * @param text
+//	 * @return a string with out comments
+//	 */
+//	//static String stripBeforeAndIncludingBlockCommentEnd(String text)
+//
+//	/**
+//	 * @param text
+//	 * @return true if the text contains a block comment end but no start
+//	 */
+//	//static boolean containsBlockCommentEndButNoStart(String text)
+//
+//	/**
+//	 * Strips the beginning part of the block comment
+//	 * @param text
+//	 * @return  a string with out comments
+//	 */
+//	//static String stripAfterAndIncludingBlockCommentStart(String text)
+//
+//	/**
+//	 * @param text
+//	 * @return true if the text contains a block comment start
+//	 */
+//	//static boolean containsBlockCommentStartButNoEnd(String text)
+//	
+//	
+//	
+//	
+//	/**
+//	 * Removes all the commends from the text.
+//	 * @param text
+//	 * @return a string with out comments
+//	 */
+//	//static final String stripComments(String text) {
+//	
+//	@Test
+//	public void test_stripComments_1() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = " : "+WORDNAME+" ( sds sd sd -- sd sd ) sdsd sd s ; \\ asdasd";
+//		
+//		assertEquals(" : "+WORDNAME+" sdsd sd s ; ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripComments_2() {
+//		
+//		final String TEXT = " sasd testword ( sds sd ) sdsd sd s ; \\ asdasd";
+//		
+//		assertEquals(" sasd testword sdsd sd s ; ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripComments_3() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = " sasd "+WORDNAME+" \\ sdsd sd s ; ";
+//		
+//		assertEquals(" sasd "+WORDNAME+" ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripComments_4() {
+//		
+//		final String TEXT = ": add-board-hook  ( xt -- )";
+//		
+//		assertEquals(": add-board-hook ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripComments_notWellFormedMultilineBlockComment_blockCommentStartShouldRemain() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = "   :   ( \\ ) "+WORDNAME+" sdsd : \\ ( ) ; sdsd ";
+//		
+//		assertEquals("   :   ( ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripComments_notWellFormedMultilineBlockComment_blockCommentEndShouldRemain() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = "   :   ) \\ ) "+WORDNAME+" sdsd : \\ ( ) ; sdsd ";
+//		
+//		assertEquals("   :   ) ", ColonDefinitionParser.stripComments(TEXT));
+//	}
+//	
+//	/**
+//	 * Strips the " :  <wordname>    " part of the text
+//	 * @param text
+//	 * @param wordname
+//	 * @return
+//	 */
+//	//static final String stripDefinitionPart(String text, String wordname) {
+//	
+//	@Test
+//	public void test_stripDefinitionPart_1() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = "   :     "+WORDNAME+" sdsd ; sdsd ";
+//		
+//		assertEquals(" sdsd ; sdsd ", ColonDefinitionParser.stripDefinitionPart(TEXT, WORDNAME));
+//	}
+//	
+//	@Test
+//	public void test_stripDefinitionPart_2() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = "   :     "+WORDNAME+" testword dsd ";
+//		
+//		assertEquals(" testword dsd ", ColonDefinitionParser.stripDefinitionPart(TEXT, WORDNAME));
+//	}
+//	
+//	@Test
+//	public void test_stripDefinitionPart_3() {
+//		
+//		final String WORDNAME = "testword";
+//		final String TEXT = ": "+WORDNAME+" testw!34rd ddd_DS%sd ";
+//		
+//		assertEquals(" testw!34rd ddd_DS%sd ", ColonDefinitionParser.stripDefinitionPart(TEXT, WORDNAME));
+//	}
+//	
+//	/**
+//	 * Removes everything after and including the semicolon.
+//	 * @param text
+//	 * @return the string without the 
+//	 */
+//	//static final String stripAfterAndIncludingSemicolon(String text) {
+//
+//	@Test
+//	public void test_stripAfterAndIncludingSemicolon_1() {
+//		
+//		final String TEXT = "sd ssd s dsdsd ; sdsd";
+//		
+//		assertEquals("sd ssd s dsdsd", ColonDefinitionParser.stripAfterAndIncludingSemicolon(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripAfterAndIncludingSemicolon_2() {
+//		
+//		final String TEXT = " ; ";
+//		
+//		assertEquals("", ColonDefinitionParser.stripAfterAndIncludingSemicolon(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripAfterAndIncludingSemicolon_3() {
+//		
+//		final String TEXT = " ; ssdsd";
+//		
+//		assertEquals("", ColonDefinitionParser.stripAfterAndIncludingSemicolon(TEXT));
+//	}
+//	
+//	@Test
+//	public void test_stripAfterAndIncludingSemicolon_4() {
+//		
+//		final String TEXT = "   LOOP ;";
+//		
+//		assertEquals("   LOOP", ColonDefinitionParser.stripAfterAndIncludingSemicolon(TEXT));
+//	}
+//	
+//	/**
+//	 * @param word
+//	 * @return true if word is to be ignored
+//	 */
+//	//static final boolean isIgnoreWord(String word, List<String> ignoreWords) {
+//
+//	@Test
+//	public void test_isIgnoreWord_wordInList_shouldReturnTrue() {
+//		
+//		final String WORD = "sdsd";
+//		@SuppressWarnings("serial")
+//		final List<String> IGNORE_WORDS = new ArrayList<String>() {{ this.add(WORD); this.add("dfdsf"); }};
+//		
+//		assertTrue(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+//	}
+//	
+//	@Test
+//	public void test_isIgnoreWord_listEmpty_shouldReturnFalse() {
+//		
+//		final String WORD = "sdsd";
+//		final List<String> IGNORE_WORDS = new ArrayList<String>();
+//		
+//		assertFalse(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+//	}
+//	
+//	@Test
+//	public void test_isIgnoreWord_wordNotInList_shouldReturnFalse() {
+//		
+//		final String WORD = "sdsd";
+//		@SuppressWarnings("serial")
+//		final List<String> IGNORE_WORDS = new ArrayList<String>() {{ this.add("ssssssss"); this.add("dfdsf"); }};
+//		
+//		assertFalse(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+//	}
+	
+}

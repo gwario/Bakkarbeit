@@ -1,0 +1,9 @@
+package callgrapher;
+
+public class ColonDefinitionParser {
+
+	
+	public interface OnDefinitionFoundListener {
+		
+	}
+}

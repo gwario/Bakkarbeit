@@ -1,0 +1,462 @@
+package callgrapher;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class ColonDefinitionParser {
+
+	/**
+	 * The list of system words.
+	 */
+	private static List<String> systemWords = new ArrayList<String>();
+	
+	private static void ignoreSystemWord(String systemWord) {
+		
+		systemWords.add(systemWord.trim().toLowerCase());
+	}
+	static {
+		/*
+		 * Default system words from ans forth
+		 */
+		ignoreSystemWord("dup");
+		ignoreSystemWord("2dup");
+		ignoreSystemWord("drop");
+		ignoreSystemWord("2drop");
+		ignoreSystemWord(">r");
+		ignoreSystemWord("r>");
+		ignoreSystemWord("rdrop");
+		ignoreSystemWord("over");
+		ignoreSystemWord("+");
+		ignoreSystemWord("-");
+		ignoreSystemWord("execute");
+		ignoreSystemWord("'");
+		ignoreSystemWord("[");
+		ignoreSystemWord("]");
+		ignoreSystemWord("rot");
+		ignoreSystemWord("-rot");
+		ignoreSystemWord("if");
+		ignoreSystemWord("endif");
+		ignoreSystemWord("else");
+		ignoreSystemWord("i");
+		ignoreSystemWord("@");
+		ignoreSystemWord("!");
+		ignoreSystemWord("then");
+	}
+	
+	private List<String> ignoreWords = new ArrayList<String>();
+	/**
+	 * Only words ignored before {@link ColonDefinitionParser#parse()} was called are ignored.
+	 * @param word	the word to be ignored.
+	 */
+	public void ignoreWord(String word) {
+		
+		ignoreWords.add(word.trim().toLowerCase());
+	}
+	
+	static final String PATTERN_COLON_DEFINITION_START = "^\\s*:\\s+(?<wordname>[^\\s]+)(\\s+|[\n\r]*)$";
+	static final String PATTERN_COLON_DEFINITION_END = "\\s+;(\\s+|[\n\r]*)";
+	static final String PATTERN_WORD_SEPARATOR = "\\s+";
+
+	
+	static final String PATTERN_AFTER_AND_INCLUDING_SEMICOLON = "\\s+;.*$";
+	
+	static final String PATTERN_LINE_COMMENT = "\\s+\\\\.*";
+	static final String PATTERN_BLOCK_COMMENT = "\\s+\\(\\s+.*\\s+\\)(\\s+|[\n\r]*)";
+	
+	static final String PATTERN_BLOCK_COMMENT_START = "\\s+\\(\\s+";
+	static final String PATTERN_BLOCK_COMMENT_END = "[.^\\(]*\\s+\\)\\s+";//since the still active block comment can contain a "("!
+	
+	static final String PATTERN_AFTER_AND_INCLUDING_BLOCK_COMMENT_START = "\\s+\\(.*$";
+	static final String PATTERN_BEFORE_AND_INCLUDING_BLOCK_COMMENT_END = "^.*\\)\\s+";
+	
+	private File file;
+	private boolean ignoreSystemWords;
+	private static Pattern colonDefinitionStartPattern = Pattern.compile(PATTERN_COLON_DEFINITION_START, Pattern.CASE_INSENSITIVE);
+	private static Pattern colonDefinitionEndPattern = Pattern.compile(PATTERN_COLON_DEFINITION_END, Pattern.CASE_INSENSITIVE);
+	private static Pattern blockCommentStartPattern = Pattern.compile(PATTERN_BLOCK_COMMENT_START);
+	private static Pattern blockCommentEndPattern = Pattern.compile(PATTERN_BLOCK_COMMENT_END);
+	
+	private OnDefinitionParserEventListener definitionParserListener;
+	private OnFileParserEventListener fileParserListener;
+	
+	private String currentDefinition;
+	private boolean inBlockComment = false;
+	
+	public ColonDefinitionParser(File file, boolean ignoreSystemWords) throws Exception {
+		
+		if(!file.exists() || !file.isFile() || !file.canRead())
+			throw new Exception("Failed to parse "+file);
+		
+		this.file = file;
+		this.ignoreSystemWords = ignoreSystemWords;
+		this.ignoreWords.addAll(systemWords);
+	}
+	
+	public void parse() throws Exception {
+	
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+			
+			int lineNumber = 0;
+			
+		    for(String line; (line = br.readLine()) != null; ) {
+		        
+		    	lineNumber++;
+		    	
+		    	//strip all single line and inline comments
+		    	CallGrapher.print("line with comments: "+line);
+		    	line = stripComments(line);
+		    	CallGrapher.print("line w/o  comments: "+line);
+		    	
+		    	int commentStartIndex = blockCommentStart(line);
+		    	boolean containsCommentStart = commentStartIndex > -1;
+		    	
+		    	int commentEndIndex = blockCommentEnd(line);
+		    	boolean containsCommentEnd = commentEndIndex > -1;
+		    	
+		    	int definitionStartIndex = colonDefinitionStart(line);
+		    	boolean containsDefinitionStart = definitionStartIndex > -1;
+		    	
+		    	int definitionEndIndex = colonDefinitionEnd(line);
+		    	boolean containsDefinitionEnd = definitionEndIndex > -1;
+		    	
+		    	if() {
+		    		
+		    		inBlockComment = true;
+		    		line = stripUntilBlockCommentEndOrEndOfLine(line);
+		    		
+		    	} else if(containsCommentEnd(line)) {
+		    		
+		    		if(!inBlockComment) {
+		    			
+			    		throw new ParserException("Block comment not well-formed: Comment end without a start!", line, file, lineNumber);
+		    			
+		    		} else {
+		    			
+		    			//end of block comment
+		    		}
+		    		
+		    		inBlockComment = false;
+		    		line = stripBeforeAndIncludingBlockCommentEnd(line);
+		    		//continue with the remaining line as usual
+		    		
+		    	} else if(inBlockComment) {
+		    		
+		    		//in between a multi line block comment, skip it
+		    		continue;
+		    	}
+		    	
+		    	/*
+		    	 * line is a normal line
+		    	 */
+		    	
+		    	
+		    	
+		    	final Matcher definitionMatcherStart = colonDefinitionStartPattern.matcher(line);
+	    		final Matcher definitionMatcherEnd = colonDefinitionEndPattern.matcher(line);
+		    	
+		    	if(currentDefinition == null && definitionMatcherEnd.matches())
+		    		throw new ParserException("Colon definition not well formed: Definition end without a start!", line, file, lineNumber);
+		    	
+		    	if(currentDefinition != null && definitionMatcherStart.matches())
+		    		throw new ParserException("colon definition well formed: Definition start in a definition!", line, file, lineNumber);
+		    	
+		    	
+		    	if(currentDefinition == null) {
+		    		
+		    		if(definitionMatcherStart.matches()) {
+		    			
+		    			/*
+			    		 * line starts a new definitions
+			    		 */
+		    			currentDefinition = definitionMatcherStart.group("wordname");
+		    			CallGrapher.print(currentDefinition);
+			    		fileParserListener.onDefinitionStart(currentDefinition);
+			    		
+			    		//strip : <wordname> part of the colon definition
+			    		line = stripDefinitionPart(line, currentDefinition);
+			    		
+			    		for(String word : getExecutedWords(line, this.ignoreSystemWords, ignoreWords))
+		    				definitionParserListener.onWordExecution(currentDefinition, word);
+			    		
+			    	} else {
+			    		
+			    		//this is executed between definitions
+			    	}
+		    	
+		    	} else {
+		    		
+		    		if(definitionMatcherEnd.matches()) {
+		    			
+		    			/*
+		    			 * line contains a definition end!
+		    			 */
+		    			
+		    			//strip ; word_n+1 part of the colon definition
+		    			line = stripAfterAndIncludingSemicolon(line);
+		    			
+		    			//TODO colon on definitions which begin in the same line as the ; of the previous definition are not supported yet
+		    			
+		    			for(String word : getExecutedWords(line, this.ignoreSystemWords, ignoreWords))
+		    				definitionParserListener.onWordExecution(currentDefinition, word);
+		    			
+		    			fileParserListener.onDefinitionEnd(currentDefinition);
+		    			currentDefinition = null;
+		    			
+		    		} else {
+		    			
+		    			/*
+		    			 * line does not contain a definition end
+		    			 */
+		    			for(String word : getExecutedWords(line, this.ignoreSystemWords, ignoreWords))
+		    				definitionParserListener.onWordExecution(currentDefinition, word);
+		    		}
+		    	}
+		    }
+		}
+	}
+	
+	/**
+	 * Strips the ending part of the block comment.
+	 * @param text
+	 * @return a string with out comments
+	 */
+	static String stripBeforeAndIncludingBlockCommentEnd(String text) {
+		
+		String ret;
+		
+		ret = text.replaceAll(PATTERN_BEFORE_AND_INCLUDING_BLOCK_COMMENT_END, "");
+		
+		return ret;
+	}
+
+	/**
+	 * Strips the beginning part of the block comment.
+	 * @param text
+	 * @return  a string with out comments
+	 */
+	static String stripUntilBlockCommentEndOrEndOfLine(String text) {
+		
+		String ret;
+		
+		ret = text.replaceAll(PATTERN_AFTER_AND_INCLUDING_BLOCK_COMMENT_START, "");
+		
+		return ret;
+	}
+
+	/**
+	 * @param text
+	 * @return the position of the block comment start or -1 if there is none.
+	 */
+	static int blockCommentStart(String text) {
+		
+		final Matcher m = blockCommentStartPattern.matcher(text);
+		
+		if(m.matches())
+			return m.start();
+		else
+			return -1;
+	}
+	
+	/**
+	 * @param text
+	 * @return the position of the block comment end or -1 if there is none.
+	 */
+	static int blockCommentEnd(String text) {
+		
+		final Matcher m = blockCommentEndPattern.matcher(text);
+		
+		if(m.matches())
+			return m.start();
+		else
+			return -1;
+	}
+	
+	/**
+	 * @param text
+	 * @return the position of the colon definition start or -1 if there is none.
+	 */
+	static int colonDefinitionStart(String text) {
+		
+		final Matcher m = colonDefinitionStartPattern.matcher(text);
+		
+		if(m.matches())
+			return m.start();
+		else
+			return -1;
+	}
+	
+	/**
+	 * @param text
+	 * @return the position of the colon definition end or -1 if there is none.
+	 */
+	static int colonDefinitionEnd(String text) {
+		
+		final Matcher m = colonDefinitionEndPattern.matcher(text);
+		
+		if(m.matches())
+			return m.start();
+		else
+			return -1;
+	}
+
+	/**
+	 * Adds the words to the matrix ignoring the "ignore words" if necessary.
+	 * 
+	 * @param definitionLine 	must not contain comments, <code>;</code> or anything after a <code>;</code>!
+	 * @return 
+	 * @return the words which were executed 
+	 */
+	static final List<String> getExecutedWords(String definitionLine, boolean ignoreSystemWords, List<String> systemWords) {
+		
+		final List<String> ret = new ArrayList<String>();
+		
+		String[] words = definitionLine.split(PATTERN_WORD_SEPARATOR);
+		
+		for(String word : words) {
+			
+			word = word.trim().toLowerCase();
+			
+			if(word.isEmpty())
+				continue;
+			
+			if(ignoreSystemWords) {
+				
+				if(!isIgnoreWord(word, systemWords)) {
+					
+					ret.add(word);
+				}
+					
+			} else {
+				
+				ret.add(word.trim().toLowerCase());
+			}
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * Removes all the commends from the text.
+	 * @param text
+	 * @return a string with out comments
+	 */
+	static final String stripComments(String text) {
+		
+		String ret;
+		
+		ret = text.replaceAll(PATTERN_LINE_COMMENT, " ");
+		ret = ret.replaceAll(PATTERN_BLOCK_COMMENT, " ");
+		
+		return ret;
+	}
+	
+	/**
+	 * Strips the " :  <wordname>    " part of the text
+	 * @param text
+	 * @param wordname
+	 * @return
+	 */
+	static final String stripDefinitionPart(String text, String wordname) {
+		
+		String ret;
+		
+		ret = text.substring(text.indexOf(wordname)+wordname.length());
+		
+		return ret;
+	}
+	
+	/**
+	 * Removes everything after and including the semicolon(and the whitespace before the semicolon).
+	 * @param text
+	 * @return the string without the 
+	 */
+	static final String stripAfterAndIncludingSemicolon(String text) {
+		
+		String ret;
+		
+		ret = text.replaceAll(PATTERN_AFTER_AND_INCLUDING_SEMICOLON, "");
+		
+		return ret;
+	}
+
+	/**
+	 * @param word
+	 * @return true if word is to be ignored
+	 */
+	static final boolean isIgnoreWord(String word, List<String> ignoreWords) {
+		
+		return ignoreWords.contains(word.trim().toLowerCase());
+	}
+
+	public void setDefinitionParserListener(
+			OnDefinitionParserEventListener definitionParserListener) {
+		this.definitionParserListener = definitionParserListener;
+	}
+
+	public void setFileParserListener(OnFileParserEventListener fileParserListener) {
+		this.fileParserListener = fileParserListener;
+	}
+	
+	
+	
+	public interface OnDefinitionParserEventListener {
+		
+		/**
+		 * Called when a word is executed within a colon definition.
+		 * This method is called with any word 
+		 * @param wordname
+		 */
+		void onWordExecution(String definition, String wordname);
+		
+	}
+	
+	public interface OnFileParserEventListener {
+		
+		/**
+		 * Called when a colon definition starts.
+		 * 
+		 * @param wordname the word after " : "
+		 */
+		void onDefinitionStart(String wordname);
+		
+		/**
+		 * Called when a colon definition ends.
+		 * Called when " ; " was discovered.
+		 * @param wordname the word after the " : "
+		 */
+		void onDefinitionEnd(String wordname);
+	}
+	
+	@SuppressWarnings("serial")
+	public static final class ParserException extends Exception {
+		
+		private String lastLine = null;
+		private Integer lineNumber = null;
+		private File file = null;
+		
+		public ParserException(String message, String lastLine, File file, Integer lineNumber) {
+			
+			super(message);
+			
+			this.lastLine = lastLine;
+			this.file = file;
+			this.lineNumber = lineNumber;
+		}
+		
+		public String getLastLine() {
+			
+			return this.lastLine;
+		}
+
+		@Override
+		public String toString() {
+			return getMessage() + " (in "+file.getName()+":"+lineNumber+": "+lastLine+")";
+		}
+	}
+}

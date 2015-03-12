@@ -1,0 +1,90 @@
+package callgrapher;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+public class ColonDefinitionParserTest {
+
+	/**
+	 * Adds the words to the matrix ignoring the "ignore words" if necessary.
+	 * 
+	 * @param definitionLine 	must not contain comments, <code>;</code> or anything after a <code>;</code>!
+	 * @return 
+	 * @return the words which were executed 
+	 */
+	//static final List<String> getExecutedWords(String definitionLine, boolean ignoreSystemWords, List<String> systemWords)
+		
+	/**
+	 * Removes all the commends from the text.
+	 * @param text
+	 * @return a string with out comments
+	 */
+	//static final String stripComments(String text) {
+	
+	/**
+	 * Strips the " :  <wordname>    " part of the text
+	 * @param text
+	 * @param wordname
+	 * @return
+	 */
+	//static final String stripDefinitionPart(String text, String wordname) {
+	
+	/**
+	 * Removes everything after and including the semicolon.
+	 * @param text
+	 * @return the string without the 
+	 */
+	//static final String stripAfterAndIncludingSemicolon(String text) {
+
+	@Test
+	public void test_stripAfterAndIncludingSemicolon_wordInList_shouldReturnTrue() {
+		
+		final String WORD = "sdsd";
+		@SuppressWarnings("serial")
+		final List<String> IGNORE_WORDS = new ArrayList<String>() {{ this.add(WORD); this.add("dfdsf"); }};
+		
+		assertTrue(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+	}
+	
+	
+	/**
+	 * @param word
+	 * @return true if word is to be ignored
+	 */
+	//static final boolean isIgnoreWord(String word, List<String> ignoreWords) {
+
+	@Test
+	public void test_isIgnoreWord_wordInList_shouldReturnTrue() {
+		
+		final String WORD = "sdsd";
+		@SuppressWarnings("serial")
+		final List<String> IGNORE_WORDS = new ArrayList<String>() {{ this.add(WORD); this.add("dfdsf"); }};
+		
+		assertTrue(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+	}
+	
+	@Test
+	public void test_isIgnoreWord_listEmpty_shouldReturnFalse() {
+		
+		final String WORD = "sdsd";
+		final List<String> IGNORE_WORDS = new ArrayList<String>();
+		
+		assertFalse(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+	}
+	
+	@Test
+	public void test_isIgnoreWord_wordNotInList_shouldReturnFalse() {
+		
+		final String WORD = "sdsd";
+		@SuppressWarnings("serial")
+		final List<String> IGNORE_WORDS = new ArrayList<String>() {{ this.add("ssssssss"); this.add("dfdsf"); }};
+		
+		assertFalse(ColonDefinitionParser.isIgnoreWord(WORD, IGNORE_WORDS));
+	}
+	
+}

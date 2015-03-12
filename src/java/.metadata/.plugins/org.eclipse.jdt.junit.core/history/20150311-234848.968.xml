@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun Rerun Rerun Rerun Rerun ColonDefinitionParserTest (Failed Tests first)" project="callgrapher" tests="22" started="22" failures="0" errors="0" ignored="0">
+  <testsuite name="callgrapher.ColonDefinitionParserTest" time="0.005">
+    <testcase name="test_isIgnoreWord_wordNotInList_shouldReturnFalse" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_1" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_2" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_3" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_4" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_isIgnoreWord_wordInList_shouldReturnTrue" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_1" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_2" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_3" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_4" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_5" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_getExecutedWords_ignoreWordsTrueAndListWithWords_shouldReturnNonIgnoreWords" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+    <testcase name="test_stripComments_notWellFormedMultilineBlockComment_blockCommentStartShouldRemain" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_getExecutedWords_emptyText_shouldReturnEmptyList" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_getExecutedWords_ignoreWordsTrueAndListEmpty_shouldReturnAllWords" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+    <testcase name="test_getExecutedWords_ignoreWordsFalseAndListWithWords_shouldReturnAllWords" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+    <testcase name="test_isIgnoreWord_listEmpty_shouldReturnFalse" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_getExecutedWords_ignoreWordsFalseAndEmptyList_shouldReturnAllWords" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripDefinitionPart_1" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+    <testcase name="test_stripDefinitionPart_2" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripDefinitionPart_3" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripComments_notWellFormedMultilineBlockComment_blockCommentEndShouldRemain" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+  </testsuite>
+</testrun>

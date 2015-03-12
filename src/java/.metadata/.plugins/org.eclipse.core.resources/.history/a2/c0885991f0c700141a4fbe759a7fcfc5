@@ -1,0 +1,16 @@
+package callgrapher;
+
+import java.io.File;
+import java.util.logging.Logger;
+
+public class CallGrapher {
+
+	private static final Logger log = Logger.getLogger(CallGrapher.class.getSimpleName());
+	
+	public static void main(String[] args) {
+		
+		File dir = new File(args[1]);
+		log.finer("Working dir: "+dir);
+	}
+
+}

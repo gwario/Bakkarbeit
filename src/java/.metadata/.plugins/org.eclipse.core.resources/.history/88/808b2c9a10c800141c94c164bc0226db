@@ -1,0 +1,16 @@
+package callgrapher;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ColonDefinitionParserTest {
+
+	@Test
+	public void test_PATTERN_COLON_DEFINITION_START_1() {
+		
+		ColonDefinitionParser.PATTERN_COLON_DEFINITION_START
+		fail("Not yet implemented");
+	}
+
+}

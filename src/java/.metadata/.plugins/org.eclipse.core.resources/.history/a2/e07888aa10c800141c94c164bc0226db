@@ -1,0 +1,18 @@
+package callgrapher;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ColonDefinitionParserTest {
+
+	@Test
+	public void test_PATTERN_COLON_DEFINITION_START_1() {
+		
+		final String LINE = " : sdsd";
+		
+		LINE.matches(ColonDefinitionParser.PATTERN_COLON_DEFINITION_START)
+		
+	}
+
+}

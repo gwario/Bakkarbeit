@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun ColonDefinitionParserTest (Failed Tests first)" project="callgrapher" tests="9" started="9" failures="0" errors="0" ignored="0">
+  <testsuite name="callgrapher.ColonDefinitionParserTest" time="0.001">
+    <testcase name="test_isIgnoreWord_wordNotInList_shouldReturnFalse" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_1" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_2" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripAfterAndIncludingSemicolon_3" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_isIgnoreWord_wordInList_shouldReturnTrue" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_isIgnoreWord_listEmpty_shouldReturnFalse" classname="callgrapher.ColonDefinitionParserTest" time="0.001"/>
+    <testcase name="test_stripDefinitionPart_1" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripDefinitionPart_2" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+    <testcase name="test_stripDefinitionPart_3" classname="callgrapher.ColonDefinitionParserTest" time="0.0"/>
+  </testsuite>
+</testrun>

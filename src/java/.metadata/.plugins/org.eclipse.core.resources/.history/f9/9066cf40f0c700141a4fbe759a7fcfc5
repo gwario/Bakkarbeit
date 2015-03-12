@@ -1,0 +1,15 @@
+package callgrapher;
+
+import java.util.logging.Logger;
+
+public class CallGrapher {
+
+	private static final sLogger log = Logger.getLogger(CallGrapher.class.getSimpleName());
+	
+	public static void main(String[] args) {
+		
+		String dir = args[1];
+		log
+	}
+
+}
