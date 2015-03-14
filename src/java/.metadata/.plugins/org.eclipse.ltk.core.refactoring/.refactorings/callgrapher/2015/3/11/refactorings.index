@@ -18,3 +18,5 @@
 1426154945974	Rename method 'stripAfterAndIncludingBlockCommentStart'
 1426154986252	Rename method 'containsBlockCommentEndButNoStart'
 1426155280601	Rename method 'stripTileeBlockCommentEndOrEndOfLine'
+1426239807218	Rename local variable 'dir'
+1426240980682	Rename local variable 'wordname'

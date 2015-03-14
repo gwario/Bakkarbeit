@@ -103,6 +103,7 @@ public class CallGrapher {
 				
 				if(!adjacencyMatrix.containsKey(definition))
 					adjacencyMatrix.put(definition, new HashSet<String>());
+				adjacencyMatrix.put(definition, new HashSet<String>());
 				//print("Start of '"+wordname+"'");
 			}
 			

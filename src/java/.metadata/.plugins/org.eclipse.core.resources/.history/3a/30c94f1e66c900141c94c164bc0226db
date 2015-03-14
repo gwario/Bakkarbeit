@@ -71,7 +71,7 @@ public class CallGrapher {
 		print(adjacencyMatrix);
 	}
 	
-	private static void processFile(File file, final Map<String, Set<String>> adjacencyMatrix) throws Exception {
+	private static void processFile(File file, Map<String, Set<String>> adjacencyMatrix) throws Exception {
 		
 		final ColonDefinitionParser parser = new ColonDefinitionParser(file, true);
 		
@@ -99,10 +99,8 @@ public class CallGrapher {
 		parser.setFileParserListener(new OnFileParserEventListener() {
 			
 			@Override
-			public void onDefinitionStart(String definition) {
-				
-				if(!adjacencyMatrix.containsKey(definition))
-					adjacencyMatrix.put(definition, new HashSet<String>());
+			public void onDefinitionStart(String wordname) {
+				adjacencyMatrix.put(wordname, new HashSet<String>());
 				//print("Start of '"+wordname+"'");
 			}
 			

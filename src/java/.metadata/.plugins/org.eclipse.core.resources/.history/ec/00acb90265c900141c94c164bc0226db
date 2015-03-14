@@ -16,62 +16,43 @@ public class CallGrapher {
 		if(args.length < 1)
 			bail("Dir missing: java callgrapher.Callgrapher <dir>");
 		
-		final File dirOrFile = new File(args[0]);
+		final File dir = new File(args[0]);
 		
-		if(!dirOrFile.isDirectory() && !dirOrFile.isFile())
-			bail("Not a directory or file: "+dirOrFile);
+		if(!dir.isDirectory())
+			bail("Not a directory: "+dir);
 		else
-			print("Working on: "+dirOrFile);
+			print("Working dir: "+dir);
 		
 		/*
 		 * Adjacency matrix, the map's keys are the nodes(words), and the values is the list of words which are called by the key.
 		 */
 		final Map<String, Set<String>> adjacencyMatrix = new HashMap<String, Set<String>>();
 		
-		if(dirOrFile.isFile()) {
+		for(File file : dir.listFiles()) {
 			
-			if(!dirOrFile.canRead()) {
-				
-				print("Skipped '"+dirOrFile.getName()+"'...unable to read!");
-				
-			} else if(!dirOrFile.getName().endsWith(".fs")) {
-				
-				print("Skipped '"+dirOrFile.getName()+"'...no forth file!");
-				
-			} else {
-				
-				print("Processing '"+dirOrFile.getName()+"'...");
-			}
-			
-			processFile(dirOrFile, adjacencyMatrix);
-			
-		} else {
-			
-			for(File file : dirOrFile.listFiles()) {
-				
-				if(!file.canRead()) {
-					
-					print("Skipped '"+file.getName()+"'...unable to read!");
-					continue;
-					
-				} else if(!file.getName().endsWith(".fs")) {
-					
-					print("Skipped '"+file.getName()+"'...no forth file!");
-					continue;
-					
-				} else {
-					
-					print("Processing '"+file.getName()+"'...");
-				}
-				
-				processFile(file, adjacencyMatrix);
-			}
+			processFile(adjacencyMatrix, file);
 		}
 		
 		print(adjacencyMatrix);
 	}
-	
-	private static void processFile(File file, final Map<String, Set<String>> adjacencyMatrix) throws Exception {
+
+	private static ColonDefinitionParser processFile(
+			final Map<String, Set<String>> adjacencyMatrix, File file)
+			throws Exception {
+		if(!file.canRead()) {
+			
+			print("Skipped '"+file.getName()+"'...unable to read!");
+			return parser;
+			
+		} else if(!file.getName().endsWith(".fs")) {
+			
+			print("Skipped '"+file.getName()+"'...no forth file!");
+			return parser;
+			
+		} else {
+			
+			print("Processing '"+file.getName()+"'...");
+		}
 		
 		final ColonDefinitionParser parser = new ColonDefinitionParser(file, true);
 		
@@ -99,10 +80,8 @@ public class CallGrapher {
 		parser.setFileParserListener(new OnFileParserEventListener() {
 			
 			@Override
-			public void onDefinitionStart(String definition) {
-				
-				if(!adjacencyMatrix.containsKey(definition))
-					adjacencyMatrix.put(definition, new HashSet<String>());
+			public void onDefinitionStart(String wordname) {
+				adjacencyMatrix.put(wordname, new HashSet<String>());
 				//print("Start of '"+wordname+"'");
 			}
 			
@@ -113,6 +92,7 @@ public class CallGrapher {
 		});
 		
 		parser.parse();
+		return parser;
 	}
 
 	private static void print(Map<String, Set<String>> adjacencyMatrix) {

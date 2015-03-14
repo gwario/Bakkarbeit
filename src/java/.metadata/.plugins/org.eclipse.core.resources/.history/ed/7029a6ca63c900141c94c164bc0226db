@@ -184,7 +184,6 @@ public class ColonDefinitionParser {
 		ignoreSystemWord("lshift");
 		ignoreSystemWord(":noname");
 		ignoreSystemWord(":");
-		ignoreSystemWord("%allot");
 	}
 	
 	private List<String> ignoreWords = new ArrayList<String>();

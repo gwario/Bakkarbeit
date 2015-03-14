@@ -16,38 +16,38 @@ public class CallGrapher {
 		if(args.length < 1)
 			bail("Dir missing: java callgrapher.Callgrapher <dir>");
 		
-		final File dirOrFile = new File(args[0]);
+		final File dir = new File(args[0]);
 		
-		if(!dirOrFile.isDirectory() && !dirOrFile.isFile())
-			bail("Not a directory or file: "+dirOrFile);
+		if(!dir.isDirectory() && !dir.isFile())
+			bail("Not a directory or file: "+dir);
 		else
-			print("Working on: "+dirOrFile);
+			print("Working on: "+dir);
 		
 		/*
 		 * Adjacency matrix, the map's keys are the nodes(words), and the values is the list of words which are called by the key.
 		 */
 		final Map<String, Set<String>> adjacencyMatrix = new HashMap<String, Set<String>>();
 		
-		if(dirOrFile.isFile()) {
+		if(dir.isFile()) {
 			
-			if(!dirOrFile.canRead()) {
+			if(!dir.canRead()) {
 				
-				print("Skipped '"+dirOrFile.getName()+"'...unable to read!");
+				print("Skipped '"+dir.getName()+"'...unable to read!");
 				
-			} else if(!dirOrFile.getName().endsWith(".fs")) {
+			} else if(!dir.getName().endsWith(".fs")) {
 				
-				print("Skipped '"+dirOrFile.getName()+"'...no forth file!");
+				print("Skipped '"+dir.getName()+"'...no forth file!");
 				
 			} else {
 				
-				print("Processing '"+dirOrFile.getName()+"'...");
+				print("Processing '"+dir.getName()+"'...");
 			}
 			
-			processFile(dirOrFile, adjacencyMatrix);
+			processFile(dir, adjacencyMatrix);
 			
 		} else {
 			
-			for(File file : dirOrFile.listFiles()) {
+			for(File file : dir.listFiles()) {
 				
 				if(!file.canRead()) {
 					
@@ -71,7 +71,7 @@ public class CallGrapher {
 		print(adjacencyMatrix);
 	}
 	
-	private static void processFile(File file, final Map<String, Set<String>> adjacencyMatrix) throws Exception {
+	private static void processFile(File file, Map<String, Set<String>> adjacencyMatrix) throws Exception {
 		
 		final ColonDefinitionParser parser = new ColonDefinitionParser(file, true);
 		
@@ -99,10 +99,8 @@ public class CallGrapher {
 		parser.setFileParserListener(new OnFileParserEventListener() {
 			
 			@Override
-			public void onDefinitionStart(String definition) {
-				
-				if(!adjacencyMatrix.containsKey(definition))
-					adjacencyMatrix.put(definition, new HashSet<String>());
+			public void onDefinitionStart(String wordname) {
+				adjacencyMatrix.put(wordname, new HashSet<String>());
 				//print("Start of '"+wordname+"'");
 			}
 			

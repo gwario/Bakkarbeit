@@ -183,8 +183,6 @@ public class ColonDefinitionParser {
 		ignoreSystemWord("create-file");
 		ignoreSystemWord("lshift");
 		ignoreSystemWord(":noname");
-		ignoreSystemWord(":");
-		ignoreSystemWord("%allot");
 	}
 	
 	private List<String> ignoreWords = new ArrayList<String>();
@@ -245,6 +243,7 @@ public class ColonDefinitionParser {
 			    	boolean isDefinitionEnd = word.equalsIgnoreCase(";");
 			    	boolean isStringStart = word.equalsIgnoreCase(".\"") || word.equalsIgnoreCase("C\"") || word.equalsIgnoreCase("S\"") || word.equalsIgnoreCase("ABORT\"");
 			    	boolean isStringEnd = word.endsWith("\"");
+			    	boolean isChar = word.equalsIgnoreCase("[CHAR]");
 			    	
 			    	if(inString) {
 			    		

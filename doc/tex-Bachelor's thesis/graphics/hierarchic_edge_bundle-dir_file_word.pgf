@@ -1,25 +1,172 @@
 \begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=1.75]
 
 	% outer ring
-	\draw [thick] (0,0) circle (10);
-	\draw [thick] (0,0) circle (9.6);
+	\draw [thick] (0,0) circle (29.65);
+	\draw [thick] (0,0) circle (28);
 
-	% 2. outer ring
-    \foreach \angle in {90, 60, ..., -90}
-        \draw (\angle:9.6) -- (\angle-180:9.6);
-    \draw [thick] (0,0) circle (9.2);
+	% 2. outer ring 30 sectors => 12Â° per sector
+    \foreach \angle in {90, 78, ..., -90}
+        \draw (\angle:28) -- (\angle-180:0);
+	\foreach \angle in {90, 78, ..., -90}
+		\draw (\angle:0) -- (\angle-180:28);
+        
+	\draw [thick] (0,0) circle (26);
 
 	% 3. outer ring
-	% section 90-60
-	\foreach \angle in {90, 80, ..., 0}
-		\draw (\angle:9.2) -- (\angle-180:0);
-	% section 60-30
-	%\foreach \angle in {90, 60, ..., -90}
-	%	\draw (\angle:9.2) -- (\angle-180:0);
-	% section 30-0
-	%\foreach \angle in {30, 0}
-	%	\draw (\angle:9.2) -- (\angle-180:0);
-	\draw [thick,fill=white] (0,0) circle (8.8);
+	% board.fs
+	% sector 90-78Â°  51 sectors => 0,235294118Â°
+	\foreach \angle in {90, 89.764705882, ..., 78}
+		\draw (\angle:26) -- (\angle-180:0);
+	
+	% drawing.fs
+	% sector 78-66Â°  24 sectors => 0,5Â°
+	\foreach \angle in {78, 77.5, ..., 66}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% environ.fs
+	% sector 66-54Â°  24 sectors => 0,857142857Â°
+	\foreach \angle in {66, 65.142857143, ..., 54}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% benchmark.fs
+	% sector 54-42Â°   sectors 22 => 0,545454545 Â°
+	\foreach \angle in {54, 53.454545455, ..., 42}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% epd.fs
+	% sector 42-30Â°   sectors 25 => 0,48 Â°
+	\foreach \angle in {42, 41.52, ..., 30}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% eval.fs
+	% sector 30-18Â°   sectors 26 => 0,461538462 Â°
+	\foreach \angle in {30, 29.538461538, ..., 18}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% flyeval.fs
+	% sector 18-6Â°   sectors 19 => 0,631578947 Â°
+	\foreach \angle in {18, 17.368421053, ..., 6}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% hash.fs
+	% sector 6 - -6Â°   sectors 17 => 0,705882353 Â°
+	\foreach \angle in {6, 5.294117647, ..., -6}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% history.fs
+	% sector -6 - -18Â°   sectors 6 => 2 Â°
+	\foreach \angle in {-6, -8, ..., -18}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% killer.fs
+	% sector -18 - -30Â°   sectors 43 => 0,279069767 Â°
+	\foreach \angle in {-18, -18.279069767, ..., -30}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% moveconv.fs
+	% sector -30 - -42Â°   sectors 21 => 0,571428571 Â°
+	\foreach \angle in {-30, -30.571428571, ..., -42}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% movegen.fs
+	% sector -42 - -54Â°   sectors 63 => 0,19047619 Â°
+	\foreach \angle in {-42, -42.19047619, ..., -54}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% moves.fs
+	% sector -54 - -66Â°   sectors 90 => 0,133333333 Â°
+	\foreach \angle in {-54, -54.133333333, ..., -66}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% null.fs
+	% sector -66 - -78Â°   sectors 5 => 2,4 Â°
+	\foreach \angle in {-66, -68.4, ..., -78}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% options.fs
+	% sector -78 - -90Â°   sectors 1 => 12 Â°
+	\foreach \angle in {-78, -78, ..., -90}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% profiler.fs
+	% sector -90 - -102Â°   sectors 13 => 0,923076923 Â°
+	\foreach \angle in {-90, -90.923076923, ..., -102}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% quiescence.fs
+	% sector -102 - -114Â°   sectors 7 => 1,714285714 Â°
+	\foreach \angle in {-102, -103.714285714, ..., -114}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% repeat.fs
+	% sector -114 - -126   sectors 4 => 3 Â°
+	\foreach \angle in {-114, -117, ..., -126}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% searchdefs.fs
+	% sector -126 - -138   sectors 4 => 3 Â°
+	\foreach \angle in {-126, -129, ..., -138}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% search.fs
+	% sector -138 - -150   sectors 36 => 0,461538462 Â°
+	\foreach \angle in {-138, -138.461538462, ..., -150}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% glsmoves.fs
+	% sector -150 - -162   sectors 14 => 0,857142857 Â°
+	\foreach \angle in {-150, -150.857142857, ..., -162}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% sorting.fs
+	% sector -162 - -174   sectors 6 => 2 Â°
+	\foreach \angle in {-162, -164, ..., -174}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% string.fs
+	% sector -174 - -186   sectors 6 => 0,666666667 Â°
+	\foreach \angle in {-174, -176.666666667, ..., -186}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% tests.fs
+	% sector -186 - -198   sectors 11 => 1,090909091 Â°
+	\foreach \angle in {-186, -187.090909091, ..., -198}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% threats.fs
+	% sector -198 - -210   sectors 35 => 0,342857143 Â°
+	\foreach \angle in {-198, -198.342857143, ..., -210}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% tgmovegen.fs
+	% sector -210 - -222   sectors 27 => 0,444444444 Â°
+	\foreach \angle in {-210, -210.444444444, ..., -222}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% ttable.fs
+	% sector -222 - -234   sectors 14 => 0,857142857 Â°
+	\foreach \angle in {-222, -222.857142857, ..., -234}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% tui.fs
+	% sector -234 - -246   sectors 29 => 0,857142857 Â°
+	\foreach \angle in {-234, -234.857142857, ..., -246}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% utils.fs
+	% sector -246 - -258   sectors 15 => 0,413793103 Â°
+	\foreach \angle in {-246, -246.413793103, ..., -258}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	% brainless.fs
+	% sector -258 - -270   sectors 4 => 3 Â°
+	\foreach \angle in {-258, -261, ..., -270}
+		\draw (\angle:26) -- (\angle-180:0);
+
+	%inner plain white ring
+	\draw [thick,fill=white] (0,0) circle (24);
+
+	
 
 %    \node [circle,thick,fill=white,draw=black,align=center,minimum size=5cm] at (0,0) {};
 %    (Head.west);

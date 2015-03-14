@@ -99,10 +99,8 @@ public class CallGrapher {
 		parser.setFileParserListener(new OnFileParserEventListener() {
 			
 			@Override
-			public void onDefinitionStart(String definition) {
-				
-				if(!adjacencyMatrix.containsKey(definition))
-					adjacencyMatrix.put(definition, new HashSet<String>());
+			public void onDefinitionStart(String wordname) {
+				adjacencyMatrix.put(wordname, new HashSet<String>());
 				//print("Start of '"+wordname+"'");
 			}
 			
