@@ -16,19 +16,35 @@ This measure is somehow controversial, but since the files contain only a short 
 
 The other software, I took into consideration, was brew\footnote{brew version 0.2.0 was used. The source code can be obtained on \url{http://www.robertepprecht.ch/brew/index.html}}. Brew is a 'playground for evolutionary programming', as the author calls it. Due to its size of 1062857 bytes and 36801 lines of code, this project seem to large to analyze manually in a reasonable time.
 
+For the following figures, I used a snapshot of an execution trace.
+Since the calculations of the computer moves take a huge amount of word executions, the example trace, was created by making only the player move: \emph{d2 d3 m} \keys{\return}. The snapshot contains all word executions after and including the execution of the word \emph{m}. It consists of 4709 word executions. \ref{fig:brainless_before_m} and \ref{fig:brainless_after_m} show the state of the game before and after entering \emph{d2 d3 m} \keys{\return}.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.4]{graphics/brainless_before.png}
+    \caption{State of the game before entering \emph{d2 d3 m}}
+    \label{fig:brainless_before_m}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.4]{graphics/brainless_after.png}
+    \caption{State of the game after entering \emph{d2 d3 m}}
+    \label{fig:brainless_after_m}
+\end{figure}
+
 \section{The application of the previously presented methods}
 
 \subsection*{Hierarchical edge bundles}
 
-The source code of brainless is organizes in a flat structure, there is only one directory, which contains all the source files.
+The source code of brainless is organizes in a flat structure, there is only one directory, which contains all the source files. \ref{fig:hierarchic_edge_bundle}
 
-\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=1.75]
-    \draw [thick] (0,0) circle (1);
-    \foreach \angle in {90,78,...,-78}
-        \draw (\angle:1) -- (\angle-180:1);
-    \node [circle,thick,fill=white,draw=black,align=center,minimum size=3cm] at (0,0) {};
-    (Head.west);
-\end{tikzpicture}
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.5]{graphics/hierarchic_edge_bundle-dir_file_word-with_text.png}
+    \caption{Hierarchic edge bundle of Brainless after \emph{d2 d3 m}}
+    \label{fig:hierarchic_edge_bundle}
+\end{figure}
 
 
 There is only one word list created by brainless, so the hierarchy utilizing the search order would be as follows.
