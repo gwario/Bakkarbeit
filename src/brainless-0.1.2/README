@@ -1,0 +1,47 @@
+Brainless -- A chess playing program written in ANS Forth.
+
+Copyright (C) 2010 David Kühling <dvdkhlng TA gmx TOD de>
+
+Use this program under the GPLv3. NO WARRANTY!
+
+Get the latest Version from:
+
+  http://sourceforge.net/projects/forth-brainless/
+
+As this is work in progress, there are still several missing features, the
+most important being:
+	
+  * no documentation
+  * 50-move rule isn't checked yet
+  * human players must use >remove< and >add< after a pawn promotion to
+    select the piece of their choice
+
+To run the program on ANS Forth systems, just load 'brainless.fs'.  On Unix
+systems with Gforth installed, try './configure && make install' to install
+Brainless as stand-alone application.
+
+A long time ago I tested this program with GForth, PFE and BIGForth, but
+nowadays I'm using Gforth exclusively.  If you find problems on an otherwise
+ANS conforming system, please contact me!
+
+If you want to play a game against Brainless, you'll have to use the Forth
+terminal interface (have a look at tui.fs).  Load "brainless.fs", and type:
+
+        help            \ to get Brainless' integrated help texts
+	e2 e4 m		\ to do a move from e2 to e4
+	cm		\ to let the computer move
+	look		\ to have a look on the chessboard
+	init-board	\ to initialize the chessboard to defaults
+	e4 remove	\ to remove the piece on e4
+	w pawn e4 add	\ to add a white pawn on e4
+	clear		\ to clear the whole chessboard
+	other-party	\ to switch the party that is at move
+	6 TO max-think-limit	\ to let the computer think up to 6 plies
+	3 TO abort-time		\ to make the computer abort thinking after
+				\ 3 seconds
+        TRUE TO use-arith-notation?	\ switch to arithmetic move notation
+
+For Benchmarking load the file "benchmark.fs", and run the 'benchmark' word.
+
+
+

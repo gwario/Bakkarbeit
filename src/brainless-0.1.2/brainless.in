@@ -1,0 +1,29 @@
+#! @GFORTH_BINARY@
+\ -*- forth -*-
+\
+\ Brainless -- a chess-playing program written in ANS Forth
+\
+\ Copyright (C) 2011 David Kühling <dvdkhlng TA gmx TOD de> 
+\
+\ You may use this program under the GPLv3 or later.  NO WARRANTY.
+\
+\ Gforth-specific startup code for Brainless
+
+warnings off
+' noop is bootmessage
+
+\ Keep brainless.fs from immeadiately initializing and printing board.  Want
+\ to delay that until Gforth command line parameters -e ... have bee
+\ evaluated, so that board size etc. settings take effect.
+FALSE CONSTANT run-tui-startup
+
+\ Hmm, cannot use @datarootdir@ since that leaveas a literal ${prefix} in the
+\ string.  Why that?
+S" @prefix@/share/@PACKAGE@/brainless.fs" INCLUDED
+
+\ We now give control back to Gforth to parse the command line and enter the
+\ prompt.  However, we tell Gforth to run tui-startup bofer entering the
+\ prompt.
+' tui-startup is bootmessage
+
+ 

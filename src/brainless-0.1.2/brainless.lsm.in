@@ -1,0 +1,15 @@
+Begin3
+Title:		brainless
+Version:	@VERSION@
+Entered-date:	@ISODATE@
+Description:	a chess-playing program written in ANS Forth
+		@configure_input@
+Keywords:	[substitute your keywords here]
+Author: 	dvdkhlng@gmx.de (David Kuehling)
+Maintained-by:	dvdkhlng@gmx.de (David Kuehling)
+Primary-site:	https://sourceforge.net/projects/forth-brainless/
+Alternate-site: 
+Original-site:  
+Platforms:      
+Copying-policy:	GNU copyleft
+End

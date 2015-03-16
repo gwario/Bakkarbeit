@@ -1,0 +1,63 @@
+.\"                              hey, Emacs:   -*- nroff -*-
+.\" brainless is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 3 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; see the file COPYING.  If not, write to
+.\" the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+.\"
+.TH BRAINLESS 1 "Februrary, 2011"
+.\" Please update the above date whenever this man page is modified.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins (default)
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+brainless \- a chess-playing program written in ANS Forth
+.SH SYNOPSIS
+.B brainless
+.RI [ options ]
+.SH DESCRIPTION
+\fBbrainless\fP is a chess-playing program written in ANS Forth. It uses the
+Forth terminal for interacting with the user, making use of ANSI color terminals and Utf-8 chess-piece glyphs for quasi-graphical display.
+.SH OPTIONS
+\fBbrainless\fP accepts the following options:
+.TP
+.B \-e COMMANDS
+Execute COMMANDS after loading brainless, before entering the prompt.
+.TP
+.B \-e 'NNN strength'
+Set playing strength at startup to NNN
+.TP
+.B \-e 'true set-option utf8-terminal?'
+Use UTF-8 chesspiece glyphs for display (instead of letters PKBRQK)
+.TP
+.B \-e small-board|normal-board|huge-board
+Set size of chess-board display
+.TP
+.B \-e ':noname c" FILENAME" ; execute set-option history-filename'
+Use FILENAME to store history of moves.  (Default: ~/.brainless_history)
+.SH "FILES"
+.TP
+~/.brainless_history
+Holds history of board positions.  Used for recalling board position at startup
+and for implementing the undo functionality.
+.\" .SH "SEE ALSO"
+.\" .BR foo (1), 
+.\" .BR bar (1).
+.SH AUTHOR
+David Kühling <dvdkhlng@gmx.de>.
