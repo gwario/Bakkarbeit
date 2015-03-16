@@ -6,25 +6,29 @@
 \
 \ New Tree search 
 
-: switch-alpha-beta  ( -- )  alpha NEGATE beta NEGATE TO alpha TO beta ;
-: check-mate-eval  ( -- eval )  -infinity 1+  think-depth + ;
+: switch-alpha-beta  ( -- ) 	s" switch-alpha-beta" print-def alpha NEGATE beta NEGATE TO alpha TO beta ;
+: check-mate-eval  ( -- eval ) 	s" check-mate-eval" print-def -infinity 1+  think-depth + ;
 : ?game-ended  ( -- )
+	s" ?game-ended" print-def
    moves-exist? 0= IF
       check? ABORT" check mate"
       TRUE   ABORT" stale mate"
    THEN ;
 
 0 VALUE cutoff?
-: is-cutoff?  ( eval -- flag )  beta < 0= DUP TO cutoff? ;
+: is-cutoff?  ( eval -- flag ) 	s" is-cutoff?" print-def beta < 0= DUP TO cutoff? ;
 : adjust-alpha  ( move-index eval -- )
+	s" adjust-alpha" print-def
    DUP alpha < 0= IF
       TO alpha  is-principal-move
    ELSE 2DROP THEN ;
 : remember-bestmove  ( move-index -- ) 
+	s" remember-bestmove" print-def
    think-depth think-limit < IF
       get-move-squares tt-set-bestmove
    ELSE DROP THEN ;
 : best-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" best-move-eval" print-def
    0 TO cutoff?
    BEGIN next-best-move DUP 0< 0= WHILE		( S: eval move-i )
       DUP >R eval-move-recursive		( S: eval eval2 ) ( R: move-i )
@@ -39,6 +43,7 @@
    REPEAT DROP ;
 0 VALUE #null
 : null-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" null-move-eval" print-def
    0 TO cutoff?
    ( disabled...) EXIT
    curr-eval beta <  think-depth think-limit < OR IF EXIT THEN
@@ -50,6 +55,7 @@
       MAX
    THEN ;
 : single-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" single-move-eval" print-def
    0 TO cutoff?
    0 set-move-eval  0 eval-move-recursive
    DUP is-cutoff? IF  0 is-killer THEN
@@ -57,65 +63,81 @@
    2DUP < IF  0 remember-bestmove THEN
    MAX ;
 : killer-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" killer-move-eval" print-def
    0 TO cutoff?
    generate-fast-killer #moves IF
       single-move-eval
    THEN forget-moves ;
 : capture-killer-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" capture-killer-move-eval" print-def
    0 TO cutoff?
    generate-fast-strike-killer #moves IF
       single-move-eval
    THEN forget-moves ;
 : target-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" target-move-eval" print-def
    opponent-move-target
    generate-moves-to delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : capture-not-target-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" capture-not-target-move-eval" print-def
    opponent-move-target DUP opponent? 0= IF DROP 0 THEN
    generate-strike-moves-not-to delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : capture-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" capture-move-eval" print-def
    generate-strike-moves delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : full-quiescence-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" full-quiescence-move-eval" print-def
    generate-quiescence-moves delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : quiescence-capture-eval  ( curr-eval -- curr-eval|better-eval )
+	s" quiescence-capture-eval" print-def
    generate-quiescence-captures delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : quiescence-promotion-eval  ( curr-eval -- curr-eval|better-eval )
+	s" quiescence-promotion-eval" print-def
    generate-promotions delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : all-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" all-move-eval" print-def
    generate-moves delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : not-target-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" not-target-move-eval" print-def
    opponent-move-target DUP opponent? 0= IF DROP 0 THEN
    generate-moves-not-to delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : peaceful-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" peaceful-move-eval" print-def
    generate-peaceful-moves delete-fast-killer eval-moves weight-moves
    best-move-eval forget-move-weights forget-moves ;
 : minimum-quiescence-move-eval  ( curr-eval -- curr-eval|better-eval )
+	s" minimum-quiescence-move-eval" print-def
    0 TO cutoff?
    opponent-move-target generate-cheapest-move-to #moves IF
       single-move-eval
    THEN  forget-moves ;
 
 : ?stale-mate  ( eval -- eval|stale-mate-eval)
+	s" ?stale-mate" print-def
    think-depth curr-think-limit > 0= IF
       moves-exist? 0= IF   DROP stale-mate THEN
    THEN ;
 : ?check/stale-mate  ( eval -- eval|stale-mate-eval)
+	s" ?check/stale-mate" print-def
    moves-exist? 0= IF
       DROP curr-check? IF check-mate-eval ELSE stale-mate THEN
    THEN ;
 
 : only-aggression-hopeful?  ( -- flag ) \ my version of futility pruning
+	s" only-aggression-hopeful?" print-def
    curr-eval alpha 128 - <
    curr-check? 0= AND   \ this is important! (else checking could save pieces)
    think-depth think-limit 2 - < 0= AND ;
 : (eval-position-recursive)  ( -- eval )
+	s" (eval-position-recursive)" print-def
    #nodes 1+ TO #nodes
    only-aggression-hopeful? IF
       \ futility pruning: if I'm bad, only try good captures and checking moves
@@ -129,14 +151,17 @@
    target-move-eval cutoff? IF EXIT THEN
    not-target-move-eval cutoff? IF EXIT THEN   ?check/stale-mate ;
 : eval>tt  ( eval1 -- eval2 ) \ convert evaluation for storing in ttable
+	s" eval>tt" print-def
    DUP -infinity check-mate WITHIN IF  think-depth - EXIT THEN
    DUP [ check-mate NEGATE ] LITERAL +infinity
    WITHIN IF  think-depth + EXIT THEN ;
 : tt>eval  ( eval1 -- eval2 ) \ convert evaluation from ttable
+	s" tt>eval" print-def
    DUP -infinity 1+ check-mate WITHIN IF  think-depth + EXIT THEN
    DUP [ check-mate NEGATE ] LITERAL +infinity
    WITHIN IF  think-depth - EXIT THEN ;
 : store-evaluation  ( eval -- )
+	s" store-evaluation" print-def
    aborting? IF  DROP EXIT THEN
    tt-store ?DUP IF   >R
       horizon-distance R@ ttentry-distance !
@@ -144,6 +169,7 @@
       DUP beta <  IF DUP eval>tt ELSE +infinity THEN   R> ttentry-up !
    THEN DROP ;
 : eval-position-with-memory  ( -- eval )
+	s" eval-position-with-memory" print-def
    tt-retrieve ?DUP IF
       DUP ttentry-up @ undefined <>
       OVER ttentry-distance @ horizon-distance < 0= AND IF  >R
@@ -160,6 +186,7 @@
 ' eval-position-with-memory IS eval-position-recursive
 
 : (quiescence-eval-nocheck)  ( -- eval ) \ used if not in check
+	s" (quiescence-eval-nocheck)" print-def
    #nodes 1+ TO #nodes
    curr-eval DUP is-cutoff? IF  ?stale-mate EXIT THEN
    DUP alpha MAX TO alpha
@@ -168,6 +195,7 @@
    quiescence-capture-eval cutoff? IF  EXIT THEN
    ?stale-mate ;
 : (quiescence-eval-check)  ( -- eval ) \ used if in check
+	s" (quiescence-eval-check)" print-def
    #nodes 1+ TO #nodes
    curr-eval DUP is-cutoff? IF  ?check/stale-mate EXIT THEN
    DUP alpha MAX TO alpha
@@ -192,18 +220,22 @@
 \   THEN ;
 
 : (quiescence-eval-position)  ( -- eval )
+	s" (quiescence-eval-position)" print-def
    curr-check?
    IF (quiescence-eval-check) ELSE (quiescence-eval-nocheck) THEN ;
 ' (quiescence-eval-position) IS quiescence-eval-position
 
 : ?abort-search  ( -- ) \ check for timeout etc
+	s" ?abort-search" print-def
    abort-search? think-depth 1 > AND TO aborting? ;
 : ?check-extension  ( -- )
+	s" ?check-extension" print-def
    curr-check? IF
       think-depth think-limit < IF 2 ELSE 1 THEN
       curr-think-limit + think-extend MIN TO curr-think-limit
    THEN ;
 : (eval-move-recursive)  ( move-index|-1 -- eval )
+	s" (eval-move-recursive)" print-def
    check-mate-eval NEGATE 1- DUP alpha > 0= IF NIP EXIT ELSE DROP THEN
    aborting? IF  DROP -infinity EXIT THEN
    alpha beta 2>R switch-alpha-beta
@@ -230,11 +262,13 @@
 ' (eval-move-recursive) IS eval-move-recursive
 
 : setup-think-limit  ( limit -- )
+	s" setup-think-limit" print-def
    DUP TO think-limit TO curr-think-limit
    think-limit 2 * TO think-extend
    ( tt-expired) ;
 
 : show-thoughts  ( limit -- )
+	s" show-thoughts" print-def
    setup-think-limit abort-time >R -1 TO abort-time
    -infinity TO alpha  +infinity TO beta
    0 TO aborting?
@@ -256,10 +290,12 @@
 0 VALUE root-beta
 
 : (abort-search?)  ( -- flag )
+	s" (abort-search?)" print-def
    abort-time 0< IF  FALSE
    ELSE  secs start-time - abort-time > THEN ;
 ' (abort-search?) IS abort-search?
 : root-search  ( -- eval )
+	s" root-search" print-def
    -infinity
    root-alpha -infinity MAX TO alpha
    root-beta +infinity MIN TO beta
@@ -289,6 +325,7 @@
    ELSE  DUP . print-principal-variation SPACE THEN ;
 
 : calculate-move  ( -- move-index )
+	s" calculate-move" print-def
    ?game-ended check? TO curr-check?
    total-eval TO curr-abs-eval
    generate-moves eval-moves weight-moves init-killers

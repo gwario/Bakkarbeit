@@ -10,6 +10,7 @@
 \ the moving piece)
 \
 : rook-threats-delta-eval  ( direction -- delta-eval )
+	s" rook-threats-delta-eval" print-def
    \ get evaluation delta value resulting from change of rook/queen threats
    \ caused by adding a new piece (or removing, if delta-eval is substracted)
    eval-square board   BEGIN  OVER CELLS +  DUP @ ?DUP UNTIL
@@ -19,6 +20,7 @@
    THEN
    2DROP DROP 0 ;
 : bishop-threats-delta-eval  ( direction -- delta-eval )
+	s" bishop-threats-delta-eval" print-def
    \ same as `rook-threats-delta-eval', just for bishops/queens
    eval-square board   BEGIN  OVER CELLS +  DUP @ ?DUP UNTIL
    DUP piece-mask AND  DUP queen =  SWAP bishop = OR IF
@@ -27,6 +29,7 @@
    THEN
    2DROP DROP 0 ;
 : threats-delta-eval  ( -- delta-eval )
+	s" threats-delta-eval" print-def
    0
    -11 bishop-threats-delta-eval +   -10 rook-threats-delta-eval +
     -9 bishop-threats-delta-eval +    -1 rook-threats-delta-eval +
@@ -40,6 +43,7 @@
 \ pawn evaluation
 \
 : pawn-delta-eval  ( -- delta-eval ) \ eval changes, not handled by pawn-eval
+	s" pawn-delta-eval" print-def
    set-this-pawn&king
    pawn-weight eval-pawn-threats +	( S: eval )
    double-pawn-weight	    10  ?pawn-eval
@@ -62,6 +66,7 @@ vector-table: (piece-delta-eval)  ( piece -- eval )
    ( queen)  ' queen-eval ,           ( king)   ' king-eval ,
      
 : piece-delta-eval  ( -- eval )
+	s" piece-delta-eval" print-def
    eval-piece piece-mask AND (piece-delta-eval)
    eval-piece f-white AND 0= IF NEGATE THEN ;
 
@@ -71,15 +76,19 @@ vector-table: (piece-delta-eval)  ( piece -- eval )
 0 VALUE fly-eval		\ currently generated evaluation
 
 : delta-eval  ( piece square -- delta-eval )
+	s" delta-eval" print-def
    TO eval-square TO eval-piece 
    piece-delta-eval threats-delta-eval + ;
 : eval-put  ( piece square -- )
+	s" eval-put" print-def
    delta-eval fly-eval + TO fly-eval ;
 : eval-remove  ( field -- )
+	s" eval-remove" print-def
    DUP board @ ?DUP IF
       SWAP delta-eval fly-eval SWAP - TO fly-eval
    ELSE  DROP THEN ;
 : eval-replace  ( piece square -- )
+	s" eval-replace" print-def
    DUP eval-remove eval-put ;
 
 \
@@ -89,24 +98,31 @@ vector-table: (piece-delta-eval)  ( piece -- eval )
 0 VALUE fly-eval-square
 
 : fly-eval-strike-move  ( to -- )
+	s" fly-eval-strike-move" print-def
    fly-eval-piece moved SWAP eval-replace ;
 : fly-eval-normal-move  ( to -- )
+	s" fly-eval-normal-move" print-def
    fly-eval-piece moved SWAP eval-put ;
 : fly-eval-strike-ep-move  ( to -- )
+	s" fly-eval-strike-ep-move" print-def
    fly-eval-piece moved SWAP 2DUP eval-put TUCK put-piece
    DUP 10 ?direction - eval-remove
    remove-piece ;
 : fly-eval-trans-knight  ( to -- )
+	s" fly-eval-trans-knight" print-def
    knight my-piece OR SWAP eval-replace ;
 : fly-eval-trans-queen  ( to -- )
+	s" fly-eval-trans-queen" print-def
    queen my-piece OR SWAP eval-replace ;
 : fly-eval-castle-near  ( to -- )
+	s" fly-eval-castle-near" print-def
    fly-eval-piece moved castled SWAP TUCK   2DUP eval-put put-piece
    white? IF f1 h1 ELSE f8 h8 THEN
    DUP eval-remove DUP board @     ( S: to to2 from2 was-rook )
    OVER remove-piece ROT OVER SWAP eval-put   SWAP board !
    remove-piece ;
 : fly-eval-castle-far  ( to -- )
+	s" fly-eval-castle-far" print-def
    fly-eval-piece moved castled SWAP TUCK   2DUP eval-put put-piece
    white? IF d1 a1 ELSE d8 a8 THEN
    DUP eval-remove DUP board @     ( S: to to2 from2 was-rook )
@@ -121,6 +137,7 @@ vector-table: (fly-eval-move)  ( to class -- )
    ' fly-eval-castle-near ,     ' fly-eval-castle-far ,
 
 : fly-eval-move  ( to from class 0 -- eval )
+	s" fly-eval-move" print-def
    DROP curr-abs-eval TO fly-eval
    SWAP DUP TO fly-eval-square   board @ TO fly-eval-piece
    fly-eval-square DUP eval-remove   remove-piece
@@ -130,6 +147,7 @@ vector-table: (fly-eval-move)  ( to class -- )
    fly-eval ;
 
 : fly-eval-moves  ( -- ) \ evaluate complete move-list, in an optimized way
+	s" fly-eval-moves" print-def
    0 TO fly-eval-square   border TO fly-eval-piece
    TRUE TO moves-evaluated?
    #moves 0 ?DO
@@ -149,10 +167,12 @@ vector-table: (fly-eval-move)  ( to class -- )
    #evals #moves + TO #evals ;
 
 : +fly-eval  ( -- )
+	s" +fly-eval" print-def
    total-eval TO curr-abs-eval
    ['] fly-eval-move IS eval-move 
    ['] fly-eval-moves IS eval-moves ;
 : -fly-eval  ( -- )
+	s" -fly-eval" print-def
    ['] (eval-move) IS eval-move
    ['] (eval-moves) IS eval-moves ;
 

@@ -13,15 +13,20 @@
 0 VALUE black-null-moves?
 
 : use-null-moves?  ( -- flag )
+	s" use-null-moves?" print-def
    white? IF white-null-moves? ELSE black-null-moves? THEN ;
 : to-null-moves?  ( flag -- )
+	s" to-null-moves?" print-def
    white? IF TO white-null-moves? ELSE TO black-null-moves? THEN ;
 : decide-null-moves?  ( -- flag )
+	s" decide-null-moves?" print-def
    count-my-non-pawn-pieces null-move-threshold > ;
 : ?use-null-moves  ( -- )
+	s" ?use-null-moves" print-def
    decide-null-moves? to-null-moves? other-party
    decide-null-moves? to-null-moves? other-party ;
 : null-move?  ( -- flag )
+	s" null-move?" print-def
    use-null-moves? IF
       think-depth 1 >  check? 0= AND
    ELSE FALSE THEN ;

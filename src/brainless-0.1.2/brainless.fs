@@ -6,16 +6,34 @@
 \
 \ Main load file to use on standard ANS Forth systems.
 
+s" trace.txt" r/w create-file throw constant tracefile-id
+
+: print-word ( c-addr c -- )
+	cr type
+;
+
+: print-def ( c-addr n -- ) \ usage: s" <wordname>" print-def
+	['] print-word tracefile-id outfile-execute
+;
+
+: bye ( -- )
+	cr
+	tracefile-id close-file
+	bye
+;
+
 .( Loading Brainless...) CR
 .( License: GPLv3. NO WARRANTY!) CR
 
-: file-prefix  ( -- c-addr u )  S" ./" ;
-: file-suffix  ( -- c-addr u )  S" .fs" ;
+: file-prefix  ( -- c-addr u ) 	s" file-prefix" print-def S" ./" ;
+: file-suffix  ( -- c-addr u ) 	s" file-suffix" print-def S" .fs" ;
 
 : append  ( c-addr1 u1 c-addr2 u2 -- c-addr3 u3 ) \ append str2 to str1 -> str3
+	s" append" print-def
    2>R 2DUP +  2R@ ROT SWAP MOVE 2R> NIP + ;
 
 : load-part  ( "filename" -- )
+	s" load-part" print-def
    PAD 0
    file-prefix append
    BL WORD COUNT append

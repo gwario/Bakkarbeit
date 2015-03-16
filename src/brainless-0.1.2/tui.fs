@@ -7,32 +7,41 @@
 \ Terminal user interface
 
 : .party  ( -- )  \ printy which party's move it is
+	s" .party" print-def
    white? IF ." White" ELSE ." Black" THEN SPACE ." moves." ;
 : look  ( -- )  \ Print board and party
+	s" look" print-def
    .board .party ;
 : graphical  ( -- )  \ toggle use of utf-8 chess glyphs
+	s" graphical" print-def
    utf8-terminal? 0= ['] utf8-terminal? >BODY !
    look ;
-: huge  ( -- )   huge-board look ;
-: normal  ( -- )  normal-board look ;
-: small  ( -- )   small-board look ;
+: huge  ( -- ) 	s" huge" print-def  huge-board look ;
+: normal  ( -- ) 	s" normal" print-def normal-board look ;
+: small  ( -- )  	s" small" print-def small-board look ;
 
-: init  ( -- )  init-board hist-record look ;
-: clear  ( -- )  empty-board look ;
+: init  ( -- ) 	s" init" print-def init-board hist-record look ;
+: clear  ( -- ) 	s" clear" print-def empty-board look ;
 : ?square  ( square -- square )
+	s" ?square" print-def
    DUP a1 h8 1+ WITHIN 0= ABORT" Invalid square!" ;
 : ?empty  ( square -- square )
+	s" ?empty" print-def
    DUP empty? 0= ABORT" Square not empty! (use `remove' first)" ;
 : ?not-empty  ( field -- )
+	s" ?not-empty" print-def
    DUP empty? ABORT" Square is empty!" ;
 : add  ( piece color square -- )
+	s" add" print-def
    ?square ?empty   -ROT OR 
    OVER initial-board @ full-piece-mask AND OVER =   f-unmoved AND   OR
    f-piece OR SWAP board !
    update-board ;
 : remove  ( square -- )
+	s" remove" print-def
    ?square ?not-empty   remove-piece   update-board ;
 : xsave
+	s" xsave" print-def
    BL WORD COUNT
    2DUP file-exists? IF
       epd-append-to-file
@@ -42,46 +51,57 @@
       ." Created new file, current position is entry 0"
    THEN ;
 : xload  ( "name" -- ) \ load entry from file
+	s" xload" print-def
    BL WORD COUNT epd-read-file ;
-: save  ( "name" -- )   BL WORD COUNT epd-create-file ;
-: load  ( "name" -- )  0 xload ;
+: save  ( "name" -- ) 	s" save" print-def  BL WORD COUNT epd-create-file ;
+: load  ( "name" -- ) 	s" load" print-def 0 xload ;
    
 : ?find-move  ( i*x from to -- i*x index | )
+	s" ?find-move" print-def
    find-move 0= ABORT" Invalid move!" ;
 : ?valid-move  ( i*x from to --  |i*x )
+	s" ?valid-move" print-def
    generate-moves find-move forget-moves 0= ABORT" Invalid move!"   DROP ;
 : m  ( from to -- ) \ perform a move
+	s" m" print-def
    2DUP ?valid-move
    generate-moves eval-moves ?find-move DUP display-move SPACE
    get-move do-move forget-moves
    hist-record
    look ;
 : cm  ( -- ) \ let the computer move
+	s" cm" print-def
    ." Hmm..."  generate-moves eval-moves calculate-move
    CR ." my move is " DUP display-move SPACE
    get-move do-move forget-moves
    hist-record
    look ;
 : lm  ( -- ) \ print list of moves
+	s" lm" print-def
    generate-moves ?eval-moves .emoves forget-moves ;
 : undo  ( -- )  \ undo last move
+	s" undo" print-def
    hist-undo
    look ;
 : best  ( -- ) \ print evaluated and sorted list of moves
+	s" best" print-def
    generate-moves sort-moves .emoves forget-moves ;
 : demo  ( -- )
+	s" demo" print-def
    2 2 DO
       CR I 2 / 3 .R ." : " cm 
       KEY? IF LEAVE THEN
    LOOP ;
 FALSE VALUE had-strength?
 : strength  ( n -- )  \ set strength of computer player
+	s" strength" print-def
    0 MAX 10 MIN >R
    R@ 5 < IF R@ 1+ 2* ELSE max-think-depth THEN TO max-think-limit
    R@ DUP * 1+ TO abort-time
    CR ." Playing strength of computer set to " R> 0 .R ." ."
    TRUE TO had-strength? ;
 : ?default-strength  ( -- ) \ set default strength, if no strength set yet
+	s" ?default-strength" print-def
    had-strength? 0= IF
       2 strength
    THEN ;
@@ -170,6 +190,7 @@ text: help
 SET-CURRENT
 
 : help  ( "name" -- )
+	s" help" print-def
    BL WORD COUNT help-wid SEARCH-WORDLIST 0= IF
       CR ."     Type 'look' to see the board."
       CR ."     Type '<from> <to> m' to make a move."
@@ -183,6 +204,7 @@ SET-CURRENT
    EXECUTE ;
 
 : tui-startup  ( -- )  \ ui entry
+	s" tui-startup" print-def
    ?default-strength
    ?history-load
    look

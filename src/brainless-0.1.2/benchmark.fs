@@ -9,6 +9,7 @@
 S" brainless.fs" INCLUDED
 
 : millisecs  ( -- u )
+	s" millisecs" print-def
    [-DEF?] cputime [IF]
       secs 1000 *
    [ELSE]
@@ -16,16 +17,19 @@ S" brainless.fs" INCLUDED
    [THEN] ;
 
 : position1  ( -- )
+	s" position1" print-def
    CR ." Position1: initial chess board"
    CR
    init-board  ;
 : position2  ( -- )
+	s" position2" print-def
    CR ." Position2: chess board after "
    init-board
    e2 e4 m  e7 e5 m
    b1 c3 m  g8 f6 m
    g1 f3 m  b8 c6 m CR ;
 : position3  ( -- )
+	s" position3" print-def
    CR ." Position3: David&Clemens vs GForth. Berlin, 2000 ;-)"
    CR ." Black to play"
    CR 
@@ -41,6 +45,7 @@ S" brainless.fs" INCLUDED
    b pawn f7 add    b pawn g7 add     b pawn h7 add
    b rook a8 add    b bishop c8 add   b rook f8 add    b king g8 add ;
 : position4  ( -- )
+	s" position4" print-def
    CR ." Position4: Study by Dr. Lasker and Reichhel" 
    CR ." White to play and win:"
    CR ."   1. Ka1-b1 Ka7-b7 2. Kb1-c1"
@@ -50,6 +55,7 @@ S" brainless.fs" INCLUDED
    w pawn a4 add    w pawn d4 add     w pawn f4 add    w pawn d5 add
    b king a7 add    b pawn a5 add     b pawn d6 add    b pawn f5 add ;
 : position5  ( -- )
+	s" position5" print-def
    CR ." Position5: Marco vs Maroczy. Paris, 1900"
    CR ." Black to play and win:"
    CR ."   1. ... Nb2-d3 2. Nc1-b3 Nd3-e1+ 3. Kc2-d1 Ke3-d3 4. Kd1xe1 Kd3xc3"
@@ -60,6 +66,7 @@ S" brainless.fs" INCLUDED
    b king e3 add    b knight b2 add   b pawn a3 add    b pawn b5 add
    b pawn c6 add    b pawn d5 add ;
 : position6  ( -- )
+	s" position6" print-def
    CR ." Position6: GForth vs GNUChess. Berlin, Nov 19 2000"
    CR ." white (GForth) to play"
    CR
@@ -75,6 +82,7 @@ S" brainless.fs" INCLUDED
    w pawn f2 add    w pawn g2 add     w pawn h2 add
    w rook a1 add    w bishop c1 add   w king e1 add    w rook h1 add ;
 : position7  ( -- )
+	s" position7" print-def
    CR ." Position7: GForth vs GNUChess. Berlin, Nov 19 2000 (2)"
    CR ." black(GNUChess) to play"
    CR 
@@ -90,6 +98,7 @@ S" brainless.fs" INCLUDED
    w pawn f2 add    w pawn g2 add
    w rook a1 add    w bishop c1 add   w king d1 add    w rook e1 add ;
 : position8  ( -- )
+	s" position8" print-def
    CR ." Position8: GForth vs GNUChess. Berlin, Nov 19 2000 (3)"
    CR ." white(GForth) to play"
    CR 
@@ -105,6 +114,7 @@ S" brainless.fs" INCLUDED
    w pawn g2 add
    w rook a1 add    w bishop c1 add   w king d1 add    b rook e1 add ;
 : position9  ( -- )
+	s" position9" print-def
    CR ." Position9: GForth vs GNUChess. Berlin, Nov 19 2000 (4)"
    CR ." white(GForth) to play"
    CR 
@@ -118,6 +128,7 @@ S" brainless.fs" INCLUDED
    w pawn f2 add    w king g2 add
    w rook a1 add    w bishop c1 add  b queen e1 add ;
 : position10  ( -- )
+	s" position10" print-def
    CR ." Position10: GForth vs GNUChess. Berlin, Nov 19 2000 (5)"
    CR ." white(GForth) to play"
    CR 
@@ -131,6 +142,7 @@ S" brainless.fs" INCLUDED
    w pawn f2 add    w king g2 add
    w rook a1 add    w bishop c1 add ;
 : position11  ( -- )
+	s" position11" print-def
    CR ." Position11: GForth vs GNUChess. Berlin, Nov 19 2000 (6)"
    CR ." black(GNUChess) to play and win in 4"
    CR 
@@ -144,6 +156,7 @@ S" brainless.fs" INCLUDED
    w pawn b2 add    b rook f2 add
    w rook b1 add    w bishop c1 add ;
 : position12  ( -- )
+	s" position12" print-def
    CR ." Position12: GForth vs GNUChess (2). Berlin, Nov 19 2000 ()"
    CR ." white(GForth) to play"
    CR 
@@ -153,19 +166,22 @@ S" brainless.fs" INCLUDED
    w pawn a3 add    b pawn e3 add    b king f3 add    b pawn h3 add
    w king f1 add ;
 : position13  ( -- )
+	s" position13" print-def
    CR ." Position13: GForth vs GForth. Berlin, Dec 10 2000"
    CR ." white to play"
    S" 3r1rk1/B1p2ppp/1p6/3Np1Pn/3nP3/5P2/PP5P/3R1RK1 w - h5 bm 1; id 1;"
    epd>position ;
 
-: <stat  ( -- evals nodes msecs )   #evals #nodes millisecs ;
+: <stat  ( -- evals nodes msecs ) 	s" <stat" print-def  #evals #nodes millisecs ;
 : stat>  ( evals nodes msecs -- )
+	s" stat>" print-def
    CR   millisecs SWAP - DUP >R . ." ms, "
    #nodes SWAP - DUP . ." nodes (" 1000 R@ 1 MAX */ . ." Hz), "
    #evals SWAP - DUP . ." evals (" 1000 R@ 1 MAX */ . ." Hz) "
    R> DROP ;
 
 : benchmark-eval  ( -- )
+	s" benchmark-eval" print-def
    generate-moves
    -fly-eval ." Static evaluation:"
    <stat 8000 0 DO eval-moves #moves +LOOP stat>
@@ -177,6 +193,7 @@ S" brainless.fs" INCLUDED
    <stat 40000 0 DO eval-moves #moves +LOOP stat>
    forget-moves ;
 : benchmark-movegen  ( -- )
+	s" benchmark-movegen" print-def
    <stat
    30000 0 DO
       generate-moves #moves #evals + TO #evals
@@ -185,6 +202,7 @@ S" brainless.fs" INCLUDED
    stat> ;
    
 : benchmark1  ( -- )
+	s" benchmark1" print-def
    small-board \ clear-killer-hist
    <stat
    -1 TO abort-time
@@ -202,12 +220,14 @@ S" brainless.fs" INCLUDED
    CR ." ---------------------------- " CR
    stat> ;
 : benchmark2  ( -- )
+	s" benchmark2" print-def
    position1 benchmark-eval
    position2 benchmark-eval
    position3 benchmark-eval
    position4 benchmark-eval
    position5 benchmark-eval ;
 : benchmark3  ( -- )
+	s" benchmark3" print-def
    <stat
    position1 benchmark-movegen
    position2 benchmark-movegen
@@ -217,6 +237,7 @@ S" brainless.fs" INCLUDED
    CR ." ---------------------------- "
    stat> ;
 : benchmark  ( -- )
+	s" benchmark" print-def
    benchmark1 ; \ benchmark2 benchmark3 ;
 
 

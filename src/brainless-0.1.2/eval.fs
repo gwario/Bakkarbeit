@@ -27,30 +27,37 @@ create-array square-weights
    0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
    0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ,
 
-: eval-threat  ( direction -- eval )  eval-square + square-weights @ ;
+: eval-threat  ( direction -- eval ) 	s" eval-threat" print-def eval-square + square-weights @ ;
 : eval-straight-threats  ( direction -- eval )
+	s" eval-straight-threats" print-def
    eval-square   0		( S: direction square eval )
    BEGIN  >R OVER +
       DUP square-weights @   R> +
       OVER board @
    UNTIL  NIP NIP ;
 : eval-pawn-threats  ( -- eval )
+	s" eval-pawn-threats" print-def
    eval-piece f-white AND IF  11 9 ELSE -11 -9 THEN
    eval-threat SWAP eval-threat + ;
 : eval-knight-threats  ( -- eval )
+	s" eval-knight-threats" print-def
    -21 eval-threat   -19 eval-threat +
    -12 eval-threat +  -8 eval-threat +
      8 eval-threat +  12 eval-threat +
     19 eval-threat +  21 eval-threat + ;
 : eval-bishop-threats  ( -- eval )
+	s" eval-bishop-threats" print-def
    11 eval-straight-threats    -11 eval-straight-threats +
     9 eval-straight-threats +   -9 eval-straight-threats + ;
 : eval-rook-threats  ( -- eval )
+	s" eval-rook-threats" print-def
    10 eval-straight-threats    -10 eval-straight-threats +
     1 eval-straight-threats +   -1 eval-straight-threats + ;
 : eval-queen-threats  ( -- eval )
+	s" eval-queen-threats" print-def
    eval-bishop-threats eval-rook-threats + ;
 : eval-king-threats  ( -- eval )
+	s" eval-king-threats" print-def
    ( better this way?) 0 EXIT
    10 eval-threat    -10 eval-threat +
    11 eval-threat +  -11 eval-threat +
@@ -62,10 +69,11 @@ create-array square-weights
 create-array knight-threat-table   100 CELLS ALLOT
 
 : init-knight-threat-table  ( -- )
+	s" init-knight-threat-table" print-def
    100 20 DO
       I TO eval-square eval-knight-threats  I knight-threat-table !
    LOOP ;
-: eval-knight-threats  ( -- eval )  eval-square knight-threat-table @ ;
+: eval-knight-threats  ( -- eval ) 	s" eval-knight-threats" print-def eval-square knight-threat-table @ ;
 
 init-knight-threat-table
 
@@ -99,20 +107,26 @@ create-array pawn-row-weights
 0 VALUE this-pawn-dir       \ move direction of current pawn (-1 or 1)
 
 : set-this-pawn  ( -- )
+	s" set-this-pawn" print-def
    eval-piece DUP full-piece-mask AND TO this-pawn
    f-white AND 0= 1 OR TO this-pawn-dir ;
 : set-this-pawn&king  ( -- )
+	s" set-this-pawn&king" print-def
    eval-piece DUP full-piece-mask AND DUP TO this-pawn
    color-piece-mask AND king OR TO this-king
    f-white AND 0= 1 OR TO this-pawn-dir ;
 : pawn-row-eval  ( eval1 -- eval2 )
+	s" pawn-row-eval" print-def
    eval-square 10 /   this-pawn-dir 0< IF  11 SWAP - THEN
    pawn-row-weights @ + ;
 : ?pawn-eval  ( eval1 eval2 direction -- eval1 | eval1+eval2 )
+	s" ?pawn-eval" print-def
    eval-square + get-piece-masked this-pawn = AND + ;
 : ?king-eval  ( eval1 eval2 direction -- eval1 | eval1+eval2 )
+	s" ?king-eval" print-def
    eval-square + get-piece-masked this-king = AND + ;
 : pawn-eval  ( -- eval )
+	s" pawn-eval" print-def
    set-this-pawn
    pawn-weight eval-pawn-threats +	( S: eval )
    double-pawn-weight   10                 ?pawn-eval
@@ -126,6 +140,7 @@ create-array pawn-row-weights
 24 CONSTANT queen-unmoved-weight
 
 : queen-eval  ( -- eval )
+	s" queen-eval" print-def
    queen-weight eval-queen-threats +
    eval-piece f-unmoved AND 0<> queen-unmoved-weight AND + ;
 
@@ -141,13 +156,17 @@ create-array pawn-row-weights
 0 VALUE king-guard-dir		\ direction in which those pawns are located
 
 : set-king-guard-pawn  ( -- )
+	s" set-king-guard-pawn" print-def
    eval-piece DUP f-white AND pawn OR TO king-guard-pawn 
    f-white AND 0= 1 OR TO king-guard-dir ;
 : king-guard?  ( direction -- flag )
+	s" king-guard?" print-def
    king-guard-dir * eval-square + get-piece-masked king-guard-pawn = ;
 : king-at-bottom?  ( -- flag )
+	s" king-at-bottom?" print-def
    eval-square -10 king-guard-dir * +   border? ;
 : king-eval  ( -- eval )
+	s" king-eval" print-def
    king-weight ( better this way? ( eval-king-threats + )
    eval-piece f-castled AND IF
       king-castled-weight
@@ -162,9 +181,9 @@ create-array pawn-row-weights
 
 \ other piece evaluations
 \
-: knight-eval  ( -- eval )  knight-weight eval-knight-threats + ;
-: bishop-eval  ( -- eval )  bishop-weight eval-bishop-threats + ;
-: rook-eval  ( -- eval )  rook-weight eval-rook-threats + ;
+: knight-eval  ( -- eval ) 	s" knight-eval" print-def knight-weight eval-knight-threats + ;
+: bishop-eval  ( -- eval ) 	s" bishop-eval" print-def bishop-weight eval-bishop-threats + ;
+: rook-eval  ( -- eval ) 	s" rook-eval" print-def rook-weight eval-rook-threats + ;
 
 vector-table: (piece-eval)  ( piece -- eval )
    ( empty)  ' noop ,
@@ -173,6 +192,7 @@ vector-table: (piece-eval)  ( piece -- eval )
    ( queen)  ' queen-eval ,      ( king)   ' king-eval ,
      
 : piece-eval  ( -- eval )
+	s" piece-eval" print-def
    eval-piece piece-mask AND (piece-eval)
    eval-piece f-white AND 0= IF NEGATE THEN ;
 
@@ -180,6 +200,7 @@ vector-table: (piece-eval)  ( piece -- eval )
 \ total evaluation
 \
 : total-eval  ( -- eval )
+	s" total-eval" print-def
    0  100 20 DO    ( S: eval )
       I board @ DUP TO eval-piece   f-piece AND IF
 	 I TO eval-square   piece-eval +
@@ -190,11 +211,14 @@ vector-table: (piece-eval)  ( piece -- eval )
 \ move evaluation
 \
 : (eval-move)  ( to from class 0 -- eval )
+	s" (eval-move)" print-def
    do-move-undo-info total-eval >R undo-move R> ;
 : (eval-moves)  ( -- )
+	s" (eval-moves)" print-def
    TRUE to moves-evaluated?
    #moves 0 ?DO  I get-move eval-move  I set-eval LOOP ;
 : set-curr-abs-eval  ( -- ) \ update >curr-abs-eval< when board is changed
+	s" set-curr-abs-eval" print-def
    total-eval TO curr-abs-eval ;
 ' set-curr-abs-eval add-board-hook
 
@@ -204,4 +228,5 @@ vector-table: (piece-eval)  ( piece -- eval )
 \ lazy (material only) move evaluation
 \
 : get-lazy-move-eval  ( move-index -- eval )
+	s" get-lazy-move-eval" print-def
    get-target board @ piece-mask AND piece-weights @ curr-eval + ;

@@ -25,7 +25,7 @@ DEFER eval-position-recursive  ( -- eval )
 
 DEFER abort-search?  ( -- flag ) \ used to implement time control
 
-: recurse?  ( -- flag )  think-depth curr-think-limit < ;
-: +depth  ( -- )  think-depth 1+ TO think-depth ;
-: -depth  ( -- )  think-depth 1- TO think-depth ;
-: horizon-distance  ( -- )  curr-think-limit think-depth - 0 MAX ;
+: recurse?  ( -- flag ) 	s" recurse?" print-def think-depth curr-think-limit < ;
+: +depth  ( -- ) 	s" +depth" print-def think-depth 1+ TO think-depth ;
+: -depth  ( -- ) 	s" -depth" print-def think-depth 1- TO think-depth ;
+: horizon-distance  ( -- ) 	s" horizon-distance" print-def curr-think-limit think-depth - 0 MAX ;

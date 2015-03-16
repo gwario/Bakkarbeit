@@ -17,11 +17,13 @@ position-hash-size 1- CONSTANT position-hash-mask
 position-hash-size hash-array position-hashs
 
 : clear-position-hashs  ( -- )
+	s" clear-position-hashs" print-def
    0 position-hashs  position-hash-size /hash * ERASE ;
 
 ' clear-position-hashs add-board-hook
 
 : remember-position  ( -- )
+	s" remember-position" print-def
    hash @ 
    BEGIN		
       position-hash-mask AND		( S: #entry )
@@ -32,6 +34,7 @@ position-hash-size hash-array position-hashs
    AGAIN ;
 0 VALUE most-recent-match
 : forget-position  ( -- )
+	s" forget-position" print-def
    0 TO most-recent-match
    hash @ 
    BEGIN
@@ -45,6 +48,7 @@ position-hash-size hash-array position-hashs
       /hash ERASE   #hashed-positions 1- TO #hashed-positions
    THEN ;
 : remembering-position?  ( -- )
+	s" remembering-position?" print-def
    hash @
    BEGIN		
       position-hash-mask AND		( S: #entry )

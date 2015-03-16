@@ -9,13 +9,15 @@
 0 VALUE move-weights
 
 : create-move-weights  ( -- )
+	s" create-move-weights" print-def
    move-weights ,
    HERE #moves CELLS ALLOT TO move-weights ;
 : forget-move-weights  ( -- )
+	s" forget-move-weights" print-def
    move-weights HERE - ALLOT
    HERE 1 CELLS - @ TO move-weights
    -1 CELLS ALLOT ;
-: move-weight  ( index -- a-addr )  CELLS move-weights + ;
+: move-weight  ( index -- a-addr ) 	s" move-weight" print-def CELLS move-weights + ;
 
 200 CONSTANT killer-weight
 
@@ -24,6 +26,7 @@ create-array piece-move-weights  0 ,
    ( rook) -15 ,   ( queen) -30 ,    ( king) -9 ,
 
 : ttable-adjust-weight  ( weight1 move-index -- weight2 )
+	s" ttable-adjust-weight" print-def
    tt-retrieve-move ?DUP IF  >R
       R@ ttentry-up @ undefined <> IF
 	 R@ ttentry-distance @ horizon-distance 1- < 0= 
@@ -37,6 +40,7 @@ create-array piece-move-weights  0 ,
       R> DROP
    THEN ;
 : weight-moves  ( -- )
+	s" weight-moves" print-def
    create-move-weights
    #moves 0 ?DO
       I get-eval  ( DUP undefined <> AND)  my-eval
@@ -51,6 +55,7 @@ create-array piece-move-weights  0 ,
    LOOP ;
       
 : next-best-move  ( -- move-index|-1 )
+	s" next-best-move" print-def
    -1 -infinity
    #moves 0 ?DO
       I move-weight @ 2DUP < IF
@@ -59,10 +64,12 @@ create-array piece-move-weights  0 ,
    LOOP DROP
    DUP -1 <> IF -infinity OVER move-weight ! THEN ;
 : swap-moves&weights  ( index1 index2 -- )
+	s" swap-moves&weights" print-def
    2DUP swap-moves
    OVER move-weight @ OVER move-weight @ SWAP
    ROT move-weight !   SWAP move-weight ! ;
 : sort-moves-by-weight  ( -- )
+	s" sort-moves-by-weight" print-def
    #moves 2 < IF  EXIT THEN
    #moves 1- 0 ?DO
       -1 I move-weight @   ( S: best-index best-eval )

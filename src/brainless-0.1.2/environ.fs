@@ -10,9 +10,11 @@
 \ Count cell sizes
 \
 : count-bits  ( u -- )
+	s" count-bits" print-def
    1 SWAP
    BEGIN 1 RSHIFT ?DUP WHILE  SWAP 1+ SWAP   REPEAT ;
 : d-count-bits  ( ud -- )
+	s" d-count-bits" print-def
    count-bits SWAP count-bits + ;
 
 S" MAX-U"  ENVIRONMENT? 0= THROW count-bits    CONSTANT bits/u
@@ -50,42 +52,47 @@ gforth? [IF]
 256 CONSTANT #PAD
 CREATE PAD #PAD CHARS ALLOT
 
-: [DEF?]  ( "name" -- flag )  BL WORD FIND NIP ; IMMEDIATE
-: [-DEF?]  ( "name" -- flag )  POSTPONE [DEF?] 0= ; IMMEDIATE
+: [DEF?]  ( "name" -- flag ) 	s" [DEF?]" print-def BL WORD FIND NIP ; IMMEDIATE
+: [-DEF?]  ( "name" -- flag ) 	s" [-DEF?]" print-def POSTPONE [DEF?] 0= ; IMMEDIATE
 
-[-DEF?] NOOP [IF] : NOOP  ( -- ) ; [THEN]
+[-DEF?] NOOP [IF] : NOOP  ( -- ) 	s" NOOP" print-def ; [THEN]
 [-DEF?] 3DUP [IF]
    : 3DUP  ( x1 x2 x3 -- x1 x2 x3 x1 x2 x3 )
+		s" 3DUP" print-def
       STATE @ IF
 	 POSTPONE DUP  POSTPONE 2OVER  POSTPONE ROT
       ELSE  DUP 2OVER ROT  THEN ; IMMEDIATE
 [THEN]
 [-DEF?] 3DROP [IF]
    : 3DROP  ( x1 x2 x3 -- )
+		s" 3DROP" print-def
       STATE @ IF
 	 POSTPONE 2DROP  POSTPONE DROP
       ELSE  2DROP DROP  THEN ; IMMEDIATE
 [THEN]
 [-DEF?] DEFER [-DEF?] IS OR [IF]
-   : DEFER  ( "name" -- )  CREATE ['] NOOP ,  DOES> @ EXECUTE ;
+   : DEFER  ( "name" -- ) 	s" DEFER" print-def CREATE ['] NOOP ,  DOES> @ EXECUTE ;
    : IS  ( xt "name" -- )
+		s" IS" print-def
       ' >BODY
       STATE @ IF  POSTPONE LITERAL  POSTPONE !  ELSE ! THEN ; IMMEDIATE
 [THEN]
 
 [-DEF?] PERFORM [IF]
    : PERFORM  ( j*x a-addr -- i*x )
+		s" PERFORM" print-def
       STATE @ IF  POSTPONE @  POSTPONE EXECUTE  ELSE @ EXECUTE THEN ; IMMEDIATE
 [THEN]
 
 [-DEF?] -ROT [IF]
    : -ROT  ( x1 x2 x3 -- x3 x1 x2 )
+		s" -ROT" print-def
       STATE @ IF  POSTPONE ROT  POSTPONE ROT  ELSE ROT ROT THEN ; IMMEDIATE
 [THEN]
 
 [-DEF?] TIME&DATE [IF]
    .( !TIME&DATE not defined!  )
-   : TIME&DATE  ( -- 0 0 0 0 0 0 )  0 0 0 0 0 0 ;
+   : TIME&DATE  ( -- 0 0 0 0 0 0 ) 	s" TIME&DATE" print-def 0 0 0 0 0 0 ;
 [THEN]
 
 [-DEF?] ARRAY bigforth? AND [IF]
@@ -96,16 +103,18 @@ CREATE PAD #PAD CHARS ALLOT
       Next
    END-CODE MACRO
    ALSO dos
-   : ARRAY  ( size -- )  ALIGN HERE >R CELLS ALLOT
-   : POSTPONE array-access  R> HERE 6 - ! POSTPONE ; MACRO ;
+   : ARRAY  ( size -- ) 	s" ARRAY" print-def ALIGN HERE >R CELLS ALLOT
+   : POSTPONE 	s" POSTPONE" print-def array-access  R> HERE 6 - ! POSTPONE ; MACRO ;
 [THEN]
 [-DEF?] ARRAY iforth? AND [IF] \ thanx to Marcel Hendrix...
    : ARRAY  ( u "name" -- )
+		s" ARRAY" print-def
       CREATE IMMEDIATE  CELLS ALLOT   DOES> POSTPONE LITERAL EVAL" []CELL " ;
 [THEN]
 [-DEF?] ARRAY [IF]
    \ : ARRAY  ( u "name" -- )  CREATE CELLS ALLOT   DOES>  SWAP CELLS + ;
    : ARRAY  ( u "name" -- )
+		s" ARRAY" print-def
       CREATE IMMEDIATE CELLS ALLOT
       DOES>
 	 STATE @ IF
@@ -115,11 +124,12 @@ CREATE PAD #PAD CHARS ALLOT
    
 [-DEF?] ARRAY iforth? AND [IF]
    : 2ARRAY  ( u "name" -- )
+		s" 2ARRAY" print-def
       CREATE IMMEDIATE  2* CELLS ALLOT
       DOES>  POSTPONE LITERAL EVAL" []DOUBLE " ;
 [THEN]
 [-DEF?] 2ARRAY [IF]
-  : 2ARRAY  ( u "name" -- )  CREATE 2* CELLS ALLOT   DOES> SWAP 2* CELLS + ;
+  : 2ARRAY  ( u "name" -- ) 	s" 2ARRAY" print-def CREATE 2* CELLS ALLOT   DOES> SWAP 2* CELLS + ;
 [THEN]
 
 

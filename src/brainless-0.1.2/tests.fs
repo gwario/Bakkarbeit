@@ -11,11 +11,12 @@ S" brainless.fs" INCLUDED
 0 VALUE check-limit
 0 VALUE check-depth
 
-: +check  ( -- )  check-depth 1+ TO check-depth ;
-: -check  ( -- )  check-depth 1- TO check-depth ;
-: continue-check?  ( -- )  check-depth check-limit < ;
+: +check  ( -- ) 	s" +check" print-def check-depth 1+ TO check-depth ;
+: -check  ( -- ) 	s" -check" print-def check-depth 1- TO check-depth ;
+: continue-check?  ( -- ) 	s" continue-check?" print-def check-depth check-limit < ;
 
 : check-fly-eval  ( -- )
+	s" check-fly-eval" print-def
    continue-check? 0= IF EXIT THEN
    +check  generate-moves eval-moves
    #moves 0 ?DO
@@ -26,10 +27,12 @@ S" brainless.fs" INCLUDED
    LOOP
    forget-moves -check ;
 : perform-fly-eval-test  ( -- )
+	s" perform-fly-eval-test" print-def
    CR ."  Testing whether flyeval keeps synchronized..."
    fly-eval-check-limit TO check-limit  +fly-eval check-fly-eval ;
 
 : check-check  ( -- )
+	s" check-check" print-def
    continue-check? 0= IF EXIT THEN
    +check  generate-moves 
    #moves 0 ?DO
@@ -41,10 +44,12 @@ S" brainless.fs" INCLUDED
    LOOP
    forget-moves -check ;
 : perform-check-test  ( -- )
+	s" perform-check-test" print-def
    CR ."  Testing whether check state keeps synchronized..."
    check-check-limit TO check-limit  check-check ;
 
 : check-hash  ( -- )
+	s" check-hash" print-def
    continue-check? 0= IF EXIT THEN
    +check  generate-moves
    #moves 0 ?DO
@@ -60,17 +65,20 @@ S" brainless.fs" INCLUDED
    LOOP
    forget-moves -check ;
 : perform-hash-test  ( -- )
+	s" perform-hash-test" print-def
    CR ."  Testing whether 64bit hash keeps synchronized..."
    hash-check-limit TO check-limit  check-hash ;
       
 
 : perform-tests  ( -- )
+	s" perform-tests" print-def
    0 TO check-depth
    perform-fly-eval-test
    perform-check-test
    perform-hash-test ;
 
 : test  ( -- )
+	s" test" print-def
    ." Reading tests.epd for test positions."
    S" tests.epd" R/O OPEN-FILE THROW TO epd-fileid
    BEGIN
