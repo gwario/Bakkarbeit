@@ -1,0 +1,51 @@
+\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=2,]
+
+\def \width { 30 }
+
+\def \wordCount { 663 }
+
+\pgfmathsetmacro{\wordWidth}{\width / \wordCount} % 30 / 663 = 0.045248869
+
+% dir
+\draw (0,0) rectangle (\width,-1);
+
+% files
+\draw (\wordWidth *      0,-1) rectangle (\wordWidth *   51,-2); %board.fs 51 sections
+\draw (\wordWidth *   51,-1) rectangle (\wordWidth *   75,-2); %drawing.fs 24 sections
+\draw (\wordWidth *   75,-1) rectangle (\wordWidth *   89,-2); %environ.fs 14 sections
+\draw (\wordWidth *   89,-1) rectangle (\wordWidth * 111,-2); %benchmark.fs 22 sections
+\draw (\wordWidth * 111,-1) rectangle (\wordWidth * 136,-2); %epd.fs 25 sections
+\draw (\wordWidth * 136,-1) rectangle (\wordWidth * 162,-2); %eval.fs 26 sections
+\draw (\wordWidth * 162,-1) rectangle (\wordWidth * 181,-2); %flyeval.fs 19 sections
+\draw (\wordWidth * 181,-1) rectangle (\wordWidth * 198,-2); %hash.fs 17 sections
+\draw (\wordWidth * 198,-1) rectangle (\wordWidth * 204,-2); %history.fs 6 sections
+\draw (\wordWidth * 204,-1) rectangle (\wordWidth * 247,-2); %killer.fs 43 sections
+\draw (\wordWidth * 247,-1) rectangle (\wordWidth * 268,-2); %moveconv.fs 21 sections
+\draw (\wordWidth * 268,-1) rectangle (\wordWidth * 331,-2); %movegen.fs 63 sections
+\draw (\wordWidth * 331,-1) rectangle (\wordWidth * 421,-2); %moves.fs 90 sections
+\draw (\wordWidth * 421,-1) rectangle (\wordWidth * 426,-2); %null.fs 5 sections
+\draw (\wordWidth * 426,-1) rectangle (\wordWidth * 426,-2); %options.fs 0 sections
+\draw (\wordWidth * 426,-1) rectangle (\wordWidth * 439,-2); %profiler.fs 13 sections
+\draw (\wordWidth * 439,-1) rectangle (\wordWidth * 446,-2); %quiescence.fs 7 sections
+\draw (\wordWidth * 446,-1) rectangle (\wordWidth * 450,-2); %repeat.fs 4 sections
+\draw (\wordWidth * 450,-1) rectangle (\wordWidth * 454,-2); %searchdefs.fs 4 sections
+\draw (\wordWidth * 454,-1) rectangle (\wordWidth * 490,-2); %search.fs 36 sections
+\draw (\wordWidth * 490,-1) rectangle (\wordWidth * 504,-2); %sglmoves.fs 14 sections
+\draw (\wordWidth * 504,-1) rectangle (\wordWidth * 510,-2); %sorting.fs 6 sections
+\draw (\wordWidth * 510,-1) rectangle (\wordWidth * 528,-2); %string.fs 18 sections
+\draw (\wordWidth * 528,-1) rectangle (\wordWidth * 539,-2); %tests.fs 11 sections
+\draw (\wordWidth * 539,-1) rectangle (\wordWidth * 574,-2); %threats.fs 35 sections
+\draw (\wordWidth * 574,-1) rectangle (\wordWidth * 601,-2); %tmovegen.fs 27 sections
+\draw (\wordWidth * 601,-1) rectangle (\wordWidth * 615,-2); %ttable.fs 14 sections
+\draw (\wordWidth * 615,-1) rectangle (\wordWidth * 644,-2); %tui.fs 29 sections
+\draw (\wordWidth * 644,-1) rectangle (\wordWidth * 659,-2); %utils.fs 15 sections
+\draw (\wordWidth * 659,-1) rectangle (\wordWidth * 663,-2); %brainless.fs 4 sections
+
+% words
+\foreach \x in {0,...,\wordCount}
+	\draw (\x * \wordWidth,-2) rectangle (\x * \wordWidth + \wordWidth,-3);
+
+%\filldraw[left color=red, right color=green] 
+%(0,-0.1)--(1,-0.1)--(1,0)--(0,0)--cycle;
+
+\end{tikzpicture}
