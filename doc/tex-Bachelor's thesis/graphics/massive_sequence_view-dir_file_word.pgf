@@ -42,8 +42,8 @@
 \draw (\wordWidth * 659,-1) rectangle (\wordWidth * 663,-2); %brainless.fs 4 sections
 
 % words
-\foreach \x in {0,...,\wordCount}
-	\draw (\x * \wordWidth,-2) rectangle (\x * \wordWidth + \wordWidth,-3);
+\foreach \x in {1,...,\wordCount}
+	\draw (\x * \wordWidth - \wordWidth,-2) rectangle (\x * \wordWidth,-3);
 
 %\filldraw[left color=red, right color=green] 
 %(0,-0.1)--(1,-0.1)--(1,0)--(0,0)--cycle;
