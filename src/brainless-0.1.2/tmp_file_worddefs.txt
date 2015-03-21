@@ -1,0 +1,30 @@
+: eval-threat  ( direction -- eval ) 	s" eval-threat" print-def eval-square + square-weights @ ;
+: eval-straight-threats  ( direction -- eval )
+: eval-pawn-threats  ( -- eval )
+: eval-knight-threats  ( -- eval )
+: eval-bishop-threats  ( -- eval )
+: eval-rook-threats  ( -- eval )
+: eval-queen-threats  ( -- eval )
+: eval-king-threats  ( -- eval )
+: init-knight-threat-table  ( -- )
+: eval-knight-threats  ( -- eval ) 	s" eval-knight-threats" print-def eval-square knight-threat-table @ ;
+: set-this-pawn  ( -- )
+: set-this-pawn&king  ( -- )
+: pawn-row-eval  ( eval1 -- eval2 )
+: ?pawn-eval  ( eval1 eval2 direction -- eval1 | eval1+eval2 )
+: ?king-eval  ( eval1 eval2 direction -- eval1 | eval1+eval2 )
+: pawn-eval  ( -- eval )
+: queen-eval  ( -- eval )
+: set-king-guard-pawn  ( -- )
+: king-guard?  ( direction -- flag )
+: king-at-bottom?  ( -- flag )
+: king-eval  ( -- eval )
+: knight-eval  ( -- eval ) 	s" knight-eval" print-def knight-weight eval-knight-threats + ;
+: bishop-eval  ( -- eval ) 	s" bishop-eval" print-def bishop-weight eval-bishop-threats + ;
+: rook-eval  ( -- eval ) 	s" rook-eval" print-def rook-weight eval-rook-threats + ;
+: piece-eval  ( -- eval )
+: total-eval  ( -- eval )
+: (eval-move)  ( to from class 0 -- eval )
+: (eval-moves)  ( -- )
+: set-curr-abs-eval  ( -- ) \ update >curr-abs-eval< when board is changed
+: get-lazy-move-eval  ( move-index -- eval )
