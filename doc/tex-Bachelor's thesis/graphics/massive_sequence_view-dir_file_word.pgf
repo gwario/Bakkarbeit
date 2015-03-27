@@ -1,14 +1,14 @@
-\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=2,] % 0.8 fits into latex doc(width only)
+\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.8,] % 1 nice; 0.8 fits into latex doc(width only)
 
-\tikzstyle{every node}=[font=\large] %\Å§iny for 0.8 and 20
+\tikzstyle{every node}=[font=\tiny] %\ÃÂ§iny for 1 and 20
 
-\def \width { 25 } %20 fits into latex doc(width only)
-\pgfmathsetmacro {\dirHeight} { -1 } %
-\pgfmathsetmacro {\fileHeight} { 3 }
+\def \width { 20 } %20 nice; 20 fits into latex doc(width only)
+\pgfmathsetmacro {\dirHeight} { -1 }
+\pgfmathsetmacro {\fileHeight} { 1.9 }
 \pgfmathsetmacro {\wordHeight} { 1 }
 
 \def \interactionHeight { 0.0125 }
-\def \wordCount { 663 }
+\def \wordCount { 443 } %663 overall, 443 in the files displayed
 
 \pgfmathsetmacro {\wordWidth } { \width / \wordCount } % 30 / 663 = 0.045248869
 
@@ -54,34 +54,34 @@
 % file coord offset
 \pgfmathsetmacro{\boardFs}				{  									  0 * \wordWidth }
 \pgfmathsetmacro{\drawingFs}		{ \boardFs				+ 51 * \wordWidth }
-\pgfmathsetmacro{\environFs}			{ \drawingFs		+ 24 * \wordWidth }
-\pgfmathsetmacro{\benchmarkFs}	{ \environFs			+ 14 * \wordWidth }
-\pgfmathsetmacro{\epdFs}					{ \benchmarkFs	+ 22 * \wordWidth }
+%\pgfmathsetmacro{\environFs}			{ \drawingFs		+ 24 * \wordWidth }
+%\pgfmathsetmacro{\benchmarkFs}	{ \environFs			+ 14 * \wordWidth }
+\pgfmathsetmacro{\epdFs}					{ \drawingFs				+ 	24 * \wordWidth }
 \pgfmathsetmacro{\evalFs}				{ \epdFs					+ 25 * \wordWidth }
 \pgfmathsetmacro{\flyevalFs}			{ \evalFs					+ 26 * \wordWidth }
 \pgfmathsetmacro{\hashFs}				{ \flyevalFs			+ 19 * \wordWidth }
 \pgfmathsetmacro{\historyFs}			{ \hashFs				+ 17 * \wordWidth }
-\pgfmathsetmacro{\killerFs}				{ \historyFs			+   6 * \wordWidth }
-\pgfmathsetmacro{\moveconvFs}		{ \killerFs				+ 43 * \wordWidth }
+%\pgfmathsetmacro{\killerFs}				{ \historyFs			+   6 * \wordWidth }
+\pgfmathsetmacro{\moveconvFs}		{ \historyFs				+ 6 * \wordWidth }
 \pgfmathsetmacro{\movegenFs}		{ \moveconvFs		+ 21 * \wordWidth }
 \pgfmathsetmacro{\movesFs}			{ \movegenFs		+ 63 * \wordWidth }
-\pgfmathsetmacro{\nullFs}					{ \movesFs			+ 90 * \wordWidth }
-\pgfmathsetmacro{\optionsFs}			{ \nullFs					+   5 * \wordWidth }
-\pgfmathsetmacro{\profilerFs}			{ \optionsFs			+   0 * \wordWidth }
-\pgfmathsetmacro{\quiescenceFs}	{ \profilerFs			+ 13 * \wordWidth }
-\pgfmathsetmacro{\repeatFs}			{ \quiescenceFs	+   7 * \wordWidth }
-\pgfmathsetmacro{\searchdefsFs}	{ \repeatFs			+   4 * \wordWidth }
-\pgfmathsetmacro{\searchFs}			{ \searchdefsFs	+   4 * \wordWidth }
-\pgfmathsetmacro{\sglmovesFs}		{ \searchFs			+ 36 * \wordWidth }
-\pgfmathsetmacro{\sortingFs}			{ \sglmovesFs		+ 14 * \wordWidth }
-\pgfmathsetmacro{\stringFs}				{ \sortingFs			+   6 * \wordWidth }
-\pgfmathsetmacro{\testsFs}				{ \stringFs				+ 18 * \wordWidth }
-\pgfmathsetmacro{\threatsFs}			{ \testsFs				+ 11 * \wordWidth }
-\pgfmathsetmacro{\tmovegenFs}		{ \threatsFs			+ 35 * \wordWidth }
-\pgfmathsetmacro{\ttableFs}				{ \tmovegenFs		+ 27 * \wordWidth }
-\pgfmathsetmacro{\tuiFs}					{ \ttableFs				+ 14 * \wordWidth }
+%\pgfmathsetmacro{\nullFs}					{ \movesFs			+ 90 * \wordWidth }
+%\pgfmathsetmacro{\optionsFs}			{ \nullFs					+   5 * \wordWidth }
+%\pgfmathsetmacro{\profilerFs}			{ \optionsFs			+   0 * \wordWidth }
+%\pgfmathsetmacro{\quiescenceFs}	{ \profilerFs			+ 13 * \wordWidth }
+\pgfmathsetmacro{\repeatFs}			{ \movesFs	+   90 * \wordWidth }
+%\pgfmathsetmacro{\searchdefsFs}	{ \repeatFs			+   4 * \wordWidth }
+%\pgfmathsetmacro{\searchFs}			{ \searchdefsFs	+   4 * \wordWidth }
+%\pgfmathsetmacro{\sglmovesFs}		{ \searchFs			+ 36 * \wordWidth }
+%\pgfmathsetmacro{\sortingFs}			{ \sglmovesFs		+ 14 * \wordWidth }
+\pgfmathsetmacro{\stringFs}				{ \repeatFs			+   4 * \wordWidth }
+%\pgfmathsetmacro{\testsFs}				{ \stringFs				+ 18 * \wordWidth }
+\pgfmathsetmacro{\threatsFs}			{ \stringFs				+ 18 * \wordWidth }
+%\pgfmathsetmacro{\tmovegenFs}		{ \threatsFs			+ 35 * \wordWidth }
+%\pgfmathsetmacro{\ttableFs}				{ \tmovegenFs		+ 27 * \wordWidth }
+\pgfmathsetmacro{\tuiFs}					{ \threatsFs				+ 35 * \wordWidth }
 \pgfmathsetmacro{\utilsFs}				{ \tuiFs					+ 29 * \wordWidth }
-\pgfmathsetmacro{\brainlessFs}		{ \utilsFs				+ 15 * \wordWidth }
+%\pgfmathsetmacro{\brainlessFs}		{ \utilsFs				+ 15 * \wordWidth }
 
 % word coord offset to the middle of the word section
 \newcommand{ \wordOffset }[1] {
@@ -282,70 +282,70 @@
 
 % dir ------- y 0 to -1
 \draw (0,0) rectangle (\width, \dirHeight);
-\node [font=\large] at (\width / 2, \dirHeight / 2) {brainless-0.1.2}; 
+\node [font=\small] at (\width / 2, \dirHeight / 2) {brainless-0.1.2}; 
 
 % files ------- y -1 to -2.5
 
 \draw (\wordWidth *      0,\fileYMin) rectangle (\wordWidth *   51,\fileYMax); %board.fs 51 sections
-\node [rotate=90] at ({\fileTextX{0}{51}}, \fileTextY) {board.fs}; 
+\node [rotate=0] at ({\fileTextX{0}{51}}, \fileTextY) {board.fs}; 
 \draw (\wordWidth *   51,\fileYMin) rectangle (\wordWidth *   75,\fileYMax); %drawing.fs 24 sections
 \node [rotate=90] at ({\fileTextX{51}{75}} , \fileTextY) {drawing.fs}; 
-\draw (\wordWidth *   75,\fileYMin) rectangle (\wordWidth *   89,\fileYMax); %environ.fs 14 sections
-\node [rotate=90] at ({\fileTextX{75}{89}} , \fileTextY) {environ.fs}; 
-\draw (\wordWidth *   89,\fileYMin) rectangle (\wordWidth * 111,\fileYMax); %benchmark.fs 22 sections
-\node [rotate=90] at ({\fileTextX{89}{111}} , \fileTextY) {benchmark.fs}; 
-\draw (\wordWidth * 111,\fileYMin) rectangle (\wordWidth * 136,\fileYMax); %epd.fs 25 sections
-\node [rotate=90] at ({\fileTextX{111}{136}} , \fileTextY) {epd.fs}; 
-\draw (\wordWidth * 136,\fileYMin) rectangle (\wordWidth * 162,\fileYMax); %eval.fs 26 sections
-\node [rotate=90] at ({\fileTextX{136}{162}} , \fileTextY) {eval.fs}; 
-\draw (\wordWidth * 162,\fileYMin) rectangle (\wordWidth * 181,\fileYMax); %flyeval.fs 19 sections
-\node [rotate=90] at ({\fileTextX{162}{181}} , \fileTextY) {flyeval.fs}; 
-\draw (\wordWidth * 181,\fileYMin) rectangle (\wordWidth * 198,\fileYMax); %hash.fs 17 sections
-\node [rotate=90] at ({\fileTextX{181}{198}} , \fileTextY) {hash.fs}; 
-\draw (\wordWidth * 198,\fileYMin) rectangle (\wordWidth * 204,\fileYMax); %history.fs 6 sections
-\node [rotate=90] at ({\fileTextX{198}{204}} , \fileTextY) {history.fs}; 
-\draw (\wordWidth * 204,\fileYMin) rectangle (\wordWidth * 247,\fileYMax); %killer.fs 43 sections
-\node [rotate=90] at ({\fileTextX{204}{247}} , \fileTextY) {killer.fs}; 
-\draw (\wordWidth * 247,\fileYMin) rectangle (\wordWidth * 268,\fileYMax); %moveconv.fs 21 sections
-\node [rotate=90] at ({\fileTextX{247}{268}} , \fileTextY) {moveconv.fs}; 
-\draw (\wordWidth * 268,\fileYMin) rectangle (\wordWidth * 331,\fileYMax); %movegen.fs 63 sections
-\node [rotate=90] at ({\fileTextX{268}{331}} , \fileTextY) {movegen.fs}; 
-\draw (\wordWidth * 331,\fileYMin) rectangle (\wordWidth * 421,\fileYMax); %moves.fs 90 sections
-\node [] at ({\fileTextX{331}{421}} , \fileTextY) {moves.fs}; 
-\draw (\wordWidth * 421,\fileYMin) rectangle (\wordWidth * 426,\fileYMax); %null.fs 5 sections
-\node [rotate=90] at ({\fileTextX{421}{426}} , \fileTextY) {null.fs}; 
+%\draw (\wordWidth *   75,\fileYMin) rectangle (\wordWidth *   89,\fileYMax); %environ.fs 14 sections
+%\node [rotate=90] at ({\fileTextX{75}{89}} , \fileTextY) {environ.fs}; 
+%\draw (\wordWidth *   89,\fileYMin) rectangle (\wordWidth * 111,\fileYMax); %benchmark.fs 22 sections
+%\node [rotate=90] at ({\fileTextX{89}{111}} , \fileTextY) {benchmark.fs}; 
+\draw (\wordWidth * 75,\fileYMin) rectangle (\wordWidth * 100,\fileYMax); %epd.fs 25 sections
+\node [rotate=0] at ({\fileTextX{75}{100}} , \fileTextY) {epd.fs}; 
+\draw (\wordWidth * 100,\fileYMin) rectangle (\wordWidth * 126,\fileYMax); %eval.fs 26 sections
+\node [rotate=0] at ({\fileTextX{100}{126}} , \fileTextY) {eval.fs}; 
+\draw (\wordWidth * 126,\fileYMin) rectangle (\wordWidth * 145,\fileYMax); %flyeval.fs 19 sections
+\node [rotate=90] at ({\fileTextX{126}{145}} , \fileTextY) {flyeval.fs}; 
+\draw (\wordWidth * 145,\fileYMin) rectangle (\wordWidth * 162,\fileYMax); %hash.fs 17 sections
+\node [rotate=90] at ({\fileTextX{145}{162}} , \fileTextY) {hash.fs}; 
+\draw (\wordWidth * 162,\fileYMin) rectangle (\wordWidth * 168,\fileYMax); %history.fs 6 sections
+\node [rotate=90] at ({\fileTextX{162}{168}} , \fileTextY) {history.fs}; 
+%\draw (\wordWidth * 204,\fileYMin) rectangle (\wordWidth * 247,\fileYMax); %killer.fs 43 sections
+%\node [rotate=90] at ({\fileTextX{204}{247}} , \fileTextY) {killer.fs}; 
+\draw (\wordWidth * 168,\fileYMin) rectangle (\wordWidth * 189,\fileYMax); %moveconv.fs 21 sections
+\node [rotate=90] at ({\fileTextX{168}{189}} , \fileTextY) {moveconv.fs}; 
+\draw (\wordWidth * 189,\fileYMin) rectangle (\wordWidth * 252,\fileYMax); %movegen.fs 63 sections
+\node [rotate=0] at ({\fileTextX{189}{252}} , \fileTextY) {movegen.fs}; 
+\draw (\wordWidth * 252,\fileYMin) rectangle (\wordWidth * 342,\fileYMax); %moves.fs 90 sections
+\node [] at ({\fileTextX{252}{342}} , \fileTextY) {moves.fs}; 
+%\draw (\wordWidth * 421,\fileYMin) rectangle (\wordWidth * 426,\fileYMax); %null.fs 5 sections
+%\node [rotate=90] at ({\fileTextX{421}{426}} , \fileTextY) {null.fs}; 
 %\draw (\wordWidth * 426,\fileYMin) rectangle (\wordWidth * 426,\fileYMax); %options.fs 0 sections
 %\node [] at ({\fileTextX{426}{426}} , \fileTextY) {options.fs}; 
-\draw (\wordWidth * 426,\fileYMin) rectangle (\wordWidth * 439,\fileYMax); %profiler.fs 13 sections
-\node [rotate=90] at ({\fileTextX{426}{439}} , \fileTextY) {profiler.fs}; 
-\draw (\wordWidth * 439,\fileYMin) rectangle (\wordWidth * 446,\fileYMax); %quiescence.fs 7 sections
-\node [rotate=90] at ({\fileTextX{439}{446}} , \fileTextY) {quiescence.fs}; 
-\draw (\wordWidth * 446,\fileYMin) rectangle (\wordWidth * 450,\fileYMax); %repeat.fs 4 sections
-\node [rotate=90] at ({\fileTextX{446}{450}} , \fileTextY) {repeat.fs}; 
-\draw (\wordWidth * 450,\fileYMin) rectangle (\wordWidth * 454,\fileYMax); %searchdefs.fs 4 sections
-\node [rotate=90] at ({\fileTextX{450}{454}} , \fileTextY) {searchdefs.fs}; 
-\draw (\wordWidth * 454,\fileYMin) rectangle (\wordWidth * 490,\fileYMax); %search.fs 36 sections
-\node [rotate=90] at ({\fileTextX{454}{490}} , \fileTextY) {search.fs}; 
-\draw (\wordWidth * 490,\fileYMin) rectangle (\wordWidth * 504,\fileYMax); %sglmoves.fs 14 sections
-\node [rotate=90] at ({\fileTextX{490}{504}} , \fileTextY) {sglmoves.fs}; 
-\draw (\wordWidth * 504,\fileYMin) rectangle (\wordWidth * 510,\fileYMax); %sorting.fs 6 sections
-\node [rotate=90] at ({\fileTextX{504}{510}} , \fileTextY) {sorting.fs}; 
-\draw (\wordWidth * 510,\fileYMin) rectangle (\wordWidth * 528,\fileYMax); %string.fs 18 sections
-\node [rotate=90] at ({\fileTextX{510}{528}} , \fileTextY) {string.fs}; 
-\draw (\wordWidth * 528,\fileYMin) rectangle (\wordWidth * 539,\fileYMax); %tests.fs 11 sections
-\node [rotate=90] at ({\fileTextX{528}{539}} , \fileTextY) {tests.fs}; 
-\draw (\wordWidth * 539,\fileYMin) rectangle (\wordWidth * 574,\fileYMax); %threats.fs 35 sections
-\node [rotate=90] at ({\fileTextX{539}{574}} , \fileTextY) {threats.fs}; 
-\draw (\wordWidth * 574,\fileYMin) rectangle (\wordWidth * 601,\fileYMax); %tmovegen.fs 27 sections
-\node [rotate=90] at ({\fileTextX{574}{601}} , \fileTextY) {tmovegen.fs}; 
-\draw (\wordWidth * 601,\fileYMin) rectangle (\wordWidth * 615,\fileYMax); %ttable.fs 14 sections
-\node [rotate=90] at ({\fileTextX{601}{615}} , \fileTextY) {ttable.fs}; 
-\draw (\wordWidth * 615,\fileYMin) rectangle (\wordWidth * 644,\fileYMax); %tui.fs 29 sections
-\node [rotate=90] at ({\fileTextX{615}{644}} , \fileTextY) {tui.fs}; 
-\draw (\wordWidth * 644,\fileYMin) rectangle (\wordWidth * 659,\fileYMax); %utils.fs 15 sections
-\node [rotate=90] at ({\fileTextX{644}{659}} , \fileTextY) {utils.fs}; 
-\draw (\wordWidth * 659,\fileYMin) rectangle (\wordWidth * 663,\fileYMax); %brainless.fs 4 sections
-\node [rotate=90] at ({\fileTextX{659}{663}} , \fileTextY) {brainless.fs}; 
+%\draw (\wordWidth * 426,\fileYMin) rectangle (\wordWidth * 439,\fileYMax); %profiler.fs 13 sections
+%\node [rotate=90] at ({\fileTextX{426}{439}} , \fileTextY) {profiler.fs}; 
+%\draw (\wordWidth * 439,\fileYMin) rectangle (\wordWidth * 446,\fileYMax); %quiescence.fs 7 sections
+%\node [rotate=90] at ({\fileTextX{439}{446}} , \fileTextY) {quiescence.fs}; 
+\draw (\wordWidth * 342,\fileYMin) rectangle (\wordWidth * 346,\fileYMax); %repeat.fs 4 sections
+\node [rotate=90] at ({\fileTextX{342}{346}} , \fileTextY) {repeat.fs}; 
+%\draw (\wordWidth * 450,\fileYMin) rectangle (\wordWidth * 454,\fileYMax); %searchdefs.fs 4 sections
+%\node [rotate=90] at ({\fileTextX{450}{454}} , \fileTextY) {searchdefs.fs}; 
+%\draw (\wordWidth * 454,\fileYMin) rectangle (\wordWidth * 490,\fileYMax); %search.fs 36 sections
+%\node [rotate=90] at ({\fileTextX{454}{490}} , \fileTextY) {search.fs}; 
+%\draw (\wordWidth * 490,\fileYMin) rectangle (\wordWidth * 504,\fileYMax); %sglmoves.fs 14 sections
+%\node [rotate=90] at ({\fileTextX{490}{504}} , \fileTextY) {sglmoves.fs}; 
+%\draw (\wordWidth * 504,\fileYMin) rectangle (\wordWidth * 510,\fileYMax); %sorting.fs 6 sections
+%\node [rotate=90] at ({\fileTextX{504}{510}} , \fileTextY) {sorting.fs}; 
+\draw (\wordWidth * 346,\fileYMin) rectangle (\wordWidth * 364,\fileYMax); %string.fs 18 sections
+\node [rotate=90] at ({\fileTextX{346}{364}} , \fileTextY) {string.fs}; 
+%\draw (\wordWidth * 528,\fileYMin) rectangle (\wordWidth * 539,\fileYMax); %tests.fs 11 sections
+%\node [rotate=90] at ({\fileTextX{528}{539}} , \fileTextY) {tests.fs}; 
+\draw (\wordWidth * 364,\fileYMin) rectangle (\wordWidth * 399,\fileYMax); %threats.fs 35 sections
+\node [rotate=0] at ({\fileTextX{364}{399}} , \fileTextY) {threats.fs}; 
+%\draw (\wordWidth * 574,\fileYMin) rectangle (\wordWidth * 601,\fileYMax); %tmovegen.fs 27 sections
+%\node [rotate=90] at ({\fileTextX{574}{601}} , \fileTextY) {tmovegen.fs}; 
+%\draw (\wordWidth * 601,\fileYMin) rectangle (\wordWidth * 615,\fileYMax); %ttable.fs 14 sections
+%\node [rotate=90] at ({\fileTextX{601}{615}} , \fileTextY) {ttable.fs}; 
+\draw (\wordWidth * 399,\fileYMin) rectangle (\wordWidth * 428,\fileYMax); %tui.fs 29 sections
+\node [rotate=0] at ({\fileTextX{399}{428}} , \fileTextY) {tui.fs}; 
+\draw (\wordWidth * 428,\fileYMin) rectangle (\wordWidth * 443,\fileYMax); %utils.fs 15 sections
+\node [rotate=90] at ({\fileTextX{428}{443}} , \fileTextY) {utils.fs}; 
+%\draw (\wordWidth * 659,\fileYMin) rectangle (\wordWidth * 663,\fileYMax); %brainless.fs 4 sections
+%\node [rotate=90] at ({\fileTextX{659}{663}} , \fileTextY) {brainless.fs}; 
 
 % words ------- y -2 to -3
 \foreach \x in {1,...,\wordCount}
