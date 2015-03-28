@@ -1,91 +1,321 @@
+\usetikzlibrary{decorations.markings}
 \begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.5] %1.75
 
 	\tikzstyle{every node}=[font=\tiny] % \large
 
-	\pgfmathsetmacro {\ringWidth} { 1.8 }
-	\pgfmathsetmacro {\dirRad} { 15 }
-	\pgfmathsetmacro {\fileRad} { \dirRad -  \ringWidth }
-	\pgfmathsetmacro {\wordRad} { \fileRad - \ringWidth }
-	\pgfmathsetmacro {\interactionRad} { \wordRad - \ringWidth }
+	\pgfmathsetmacro {\dirSectionRingWidth} { 1.5 }
+	\pgfmathsetmacro {\fileSectionRingWidth} { 2.2 }
+	\pgfmathsetmacro {\wordSectionRingWidth} { 1.2 }
 
-	\def \wordCount { 663 }
+	\pgfmathsetmacro {\dirRad} { 18 }
+	\pgfmathsetmacro {\fileRad} { \dirRad -  \dirSectionRingWidth }
+	\pgfmathsetmacro {\wordRad} { \fileRad - \fileSectionRingWidth }
+	\pgfmathsetmacro {\interactionRad} { \wordRad - \wordSectionRingWidth }
+
+	\def \wordCount { 443 }
 	\pgfmathsetmacro {\wordWidth } { 360 / \wordCount } %in degree
 
 	\newcommand{ \rotateBack }[1] {
 		( 90 - #1 )
 	}
 
+
+	\edef \intRadIdx { 0 }
+	\newcommand{ \incrementRowIdx } {
+
+		\pgfmathparse { \intRadIdx + 1 } \xdef \intRadIdx { \pgfmathresult }
+	}
+
+	\tikzset{test/.style={
+	    postaction={
+	        decorate,
+	        decoration={
+	            markings,
+	            mark=at position \pgfdecoratedpathlength-0.5pt with {\arrow[\fromColor,line width=#1] {>}; },
+	            mark=between positions 0 and \pgfdecoratedpathlength-8pt step 0.5pt with {
+	                \pgfmathsetmacro\myval{multiply(divide(
+	                    \pgfkeysvalueof{/pgf/decoration/mark info/distance from start}, \pgfdecoratedpathlength),100)};
+	                \pgfsetfillcolor{\fromColor!\myval!\fromColor};
+	                \pgfpathcircle{\pgfpointorigin}{#1};
+	                \pgfusepath{fill};}
+	}}}}
+
+	\newcommand{\drawInteraction}[2]{
 	
+		\pgfmathparse{#1}
+    		\pgfmathsetmacro{\from}{\pgfmathresult}
+		\pgfmathparse{#2}
+    		\pgfmathsetmacro{\to}{\pgfmathresult}
+
+		\def \fromColor{green}
+		\def \toColor{red}	
+
+		\path []
+			({#1} : \interactionRad) .. controls (0,0) .. ({#2} : \interactionRad);
+% 		\fill [left color= \leftColor, right color= \rightColor] 
+% 			({#1}, \intStartY) rectangle ({#2}, \intEndY)-- cycle;
+
+		\incrementRowIdx
+	}
+
 	%file start angles
 	\pgfmathsetmacro{\boardFs}				{  									  0 * \wordWidth }
 	\pgfmathsetmacro{\drawingFs}		{ \boardFs				+ 51 * \wordWidth }
-	\pgfmathsetmacro{\environFs}			{ \drawingFs		+ 24 * \wordWidth }
-	\pgfmathsetmacro{\benchmarkFs}	{ \environFs			+ 14 * \wordWidth }
-	\pgfmathsetmacro{\epdFs}					{ \benchmarkFs	+ 22 * \wordWidth }
+	%\pgfmathsetmacro{\environFs}			{ \drawingFs		+ 24 * \wordWidth }
+	%\pgfmathsetmacro{\benchmarkFs}	{ \environFs			+ 14 * \wordWidth }
+	\pgfmathsetmacro{\epdFs}					{ \drawingFs				+ 	24 * \wordWidth }
 	\pgfmathsetmacro{\evalFs}				{ \epdFs					+ 25 * \wordWidth }
 	\pgfmathsetmacro{\flyevalFs}			{ \evalFs					+ 26 * \wordWidth }
 	\pgfmathsetmacro{\hashFs}				{ \flyevalFs			+ 19 * \wordWidth }
 	\pgfmathsetmacro{\historyFs}			{ \hashFs				+ 17 * \wordWidth }
-	\pgfmathsetmacro{\killerFs}				{ \historyFs			+   6 * \wordWidth }
-	\pgfmathsetmacro{\moveconvFs}		{ \killerFs				+ 43 * \wordWidth }
+	%\pgfmathsetmacro{\killerFs}				{ \historyFs			+   6 * \wordWidth }
+	\pgfmathsetmacro{\moveconvFs}		{ \historyFs				+ 6 * \wordWidth }
 	\pgfmathsetmacro{\movegenFs}		{ \moveconvFs		+ 21 * \wordWidth }
 	\pgfmathsetmacro{\movesFs}			{ \movegenFs		+ 63 * \wordWidth }
-	\pgfmathsetmacro{\nullFs}					{ \movesFs			+ 90 * \wordWidth }
-	\pgfmathsetmacro{\optionsFs}			{ \nullFs					+   5 * \wordWidth }
-	\pgfmathsetmacro{\profilerFs}			{ \optionsFs			+   0 * \wordWidth }
-	\pgfmathsetmacro{\quiescenceFs}	{ \profilerFs			+ 13 * \wordWidth }
-	\pgfmathsetmacro{\repeatFs}			{ \quiescenceFs	+   7 * \wordWidth }
-	\pgfmathsetmacro{\searchdefsFs}	{ \repeatFs			+   4 * \wordWidth }
-	\pgfmathsetmacro{\searchFs}			{ \searchdefsFs	+   4 * \wordWidth }
-	\pgfmathsetmacro{\sglmovesFs}		{ \searchFs			+ 36 * \wordWidth }
-	\pgfmathsetmacro{\sortingFs}			{ \sglmovesFs		+ 14 * \wordWidth }
-	\pgfmathsetmacro{\stringFs}				{ \sortingFs			+   6 * \wordWidth }
-	\pgfmathsetmacro{\testsFs}				{ \stringFs				+ 18 * \wordWidth }
-	\pgfmathsetmacro{\threatsFs}			{ \testsFs				+ 11 * \wordWidth }
-	\pgfmathsetmacro{\tmovegenFs}		{ \threatsFs			+ 35 * \wordWidth }
-	\pgfmathsetmacro{\ttableFs}				{ \tmovegenFs		+ 27 * \wordWidth }
-	\pgfmathsetmacro{\tuiFs}					{ \ttableFs				+ 14 * \wordWidth }
+	%\pgfmathsetmacro{\nullFs}					{ \movesFs			+ 90 * \wordWidth }
+	%\pgfmathsetmacro{\optionsFs}			{ \nullFs					+   5 * \wordWidth }
+	%\pgfmathsetmacro{\profilerFs}			{ \optionsFs			+   0 * \wordWidth }
+	%\pgfmathsetmacro{\quiescenceFs}	{ \profilerFs			+ 13 * \wordWidth }
+	\pgfmathsetmacro{\repeatFs}			{ \movesFs	+   90 * \wordWidth }
+	%\pgfmathsetmacro{\searchdefsFs}	{ \repeatFs			+   4 * \wordWidth }
+	%\pgfmathsetmacro{\searchFs}			{ \searchdefsFs	+   4 * \wordWidth }
+	%\pgfmathsetmacro{\sglmovesFs}		{ \searchFs			+ 36 * \wordWidth }
+	%\pgfmathsetmacro{\sortingFs}			{ \sglmovesFs		+ 14 * \wordWidth }
+	\pgfmathsetmacro{\stringFs}				{ \repeatFs			+   4 * \wordWidth }
+	%\pgfmathsetmacro{\testsFs}				{ \stringFs				+ 18 * \wordWidth }
+	\pgfmathsetmacro{\threatsFs}			{ \stringFs				+ 18 * \wordWidth }
+	%\pgfmathsetmacro{\tmovegenFs}		{ \threatsFs			+ 35 * \wordWidth }
+	%\pgfmathsetmacro{\ttableFs}				{ \tmovegenFs		+ 27 * \wordWidth }
+	\pgfmathsetmacro{\tuiFs}					{ \threatsFs				+ 35 * \wordWidth }
 	\pgfmathsetmacro{\utilsFs}				{ \tuiFs					+ 29 * \wordWidth }
-	\pgfmathsetmacro{\brainlessFs}		{ \utilsFs				+ 15 * \wordWidth }
+	%\pgfmathsetmacro{\brainlessFs}		{ \utilsFs				+ 15 * \wordWidth }
+
+	% word angle offset to the middle of the word section
+	\newcommand{ \wordOffset }[1] {
+		(#1 * \wordWidth - \wordWidth / 2)
+	}
+
+	% word section angles; the index starts at 0
+	\pgfmathsetmacro{\addMove } 															{ \movesFs + \wordOffset{28} }
+	\pgfmathsetmacro{\appendMoves } 												{ \movegenFs + \wordOffset{43} }
+	\pgfmathsetmacro{\appendMoveToSan } 										{ \moveconvFs + \wordOffset{17} }
+	\pgfmathsetmacro{\bishopMoves } 													{ \movegenFs + \wordOffset{19} }
+	\pgfmathsetmacro{\bishopThreatensThroughQ } 						{ \threatsFs + \wordOffset{30} }
+	\pgfmathsetmacro{\bishopThreatsDeltaEval } 								{ \flyevalFs + \wordOffset{2} }
+	\pgfmathsetmacro{\bishopXyQ } 														{ \boardFs + \wordOffset{11} }
+	\pgfmathsetmacro{\blackFieldAttr } 												{ \drawingFs + \wordOffset{12} }
+	\pgfmathsetmacro{\blackPiece } 														{ \boardFs + \wordOffset{29} }
+	\pgfmathsetmacro{\blackPieceAttr } 												{ \drawingFs + \wordOffset{15} }
+	\pgfmathsetmacro{\DBoard } 															{ \drawingFs + \wordOffset{32} }
+	\pgfmathsetmacro{\DBoardLine } 													{ \drawingFs + \wordOffset{30} }
+	\pgfmathsetmacro{\captureMoveQ } 												{ \movesFs + \wordOffset{33} }
+	\pgfmathsetmacro{\castleFar } 															{ \movegenFs + \wordOffset{16} }
+	\pgfmathsetmacro{\castleMoveQ } 													{ \movesFs + \wordOffset{34} }
+	\pgfmathsetmacro{\castleNear } 														{ \movegenFs + \wordOffset{15} }
+	\pgfmathsetmacro{\HCharacters } 													{ \stringFs + \wordOffset{6} }
+	\pgfmathsetmacro{\checkQ } 															{ \threatsFs + \wordOffset{16} }
+	\pgfmathsetmacro{\currChar } 															{ \stringFs + \wordOffset{11} }
+	\pgfmathsetmacro{\deltaEval } 															{ \flyevalFs + \wordOffset{6} }
+	\pgfmathsetmacro{\toDeltaXy } 														{ \boardFs + \wordOffset{10} }
+	\pgfmathsetmacro{\deltaXyToDirection } 										{ \boardFs + \wordOffset{15} }
+	\pgfmathsetmacro{\QDirection } 														{ \boardFs + \wordOffset{40} }
+	\pgfmathsetmacro{\displayMove } 													{ \moveconvFs + \wordOffset{21} }
+	\pgfmathsetmacro{\doMove } 															{ \movesFs + \wordOffset{87} }
+	\pgfmathsetmacro{\doMoveUndoInfo } 											{ \movesFs + \wordOffset{86} }
+	\pgfmathsetmacro{\BdoNormalMoveB } 										{ \movesFs + \wordOffset{63} }
+	\pgfmathsetmacro{\doNormalMove } 												{ \movesFs + \wordOffset{64} }
+	\pgfmathsetmacro{\emptyQ } 															{ \boardFs + \wordOffset{33} }
+	\pgfmathsetmacro{\QEpdAppendToFile } 										{ \epdFs + \wordOffset{26} }
+	\pgfmathsetmacro{\epdAppendToFile } 											{ \epdFs + \wordOffset{24} }
+	\pgfmathsetmacro{\epdCloseFile } 													{ \epdFs + \wordOffset{18} }
+	\pgfmathsetmacro{\epdWriteBoard } 												{ \epdFs + \wordOffset{2} }
+	\pgfmathsetmacro{\epdWriteBoardLine } 										{ \epdFs + \wordOffset{1} }
+	\pgfmathsetmacro{\epdWriteCastle } 												{ \epdFs + \wordOffset{4} }
+	\pgfmathsetmacro{\epdWriteEp } 													{ \epdFs + \wordOffset{5} }
+	\pgfmathsetmacro{\epdWriteParty } 												{ \epdFs + \wordOffset{3} }
+	\pgfmathsetmacro{\epdWriteToFile } 												{ \epdFs + \wordOffset{23} }
+	\pgfmathsetmacro{\evalKnightThreats } 										{ \evalFs + \wordOffset{4} }
+	\pgfmathsetmacro{\evalPawnThreats } 											{ \evalFs + \wordOffset{3} }
+	\pgfmathsetmacro{\evalPut } 															{ \flyevalFs + \wordOffset{7} }
+	\pgfmathsetmacro{\evalRemove } 													{ \flyevalFs + \wordOffset{8} }
+	\pgfmathsetmacro{\evalStraightThreats } 										{ \evalFs + \wordOffset{2} }
+	\pgfmathsetmacro{\evalThreat } 														{ \evalFs + \wordOffset{1} }
+	\pgfmathsetmacro{\fieldAttr } 															{ \drawingFs + \wordOffset{13} }
+	\pgfmathsetmacro{\DFieldSlice } 														{ \drawingFs + \wordOffset{28} }
+	\pgfmathsetmacro{\fieldSpaces } 														{ \drawingFs + \wordOffset{17} }
+	\pgfmathsetmacro{\fileExistsQ } 														{ \utilsFs + \wordOffset{8} }
+	\pgfmathsetmacro{\QFindMove } 													{ \tuiFs + \wordOffset{18} }
+	\pgfmathsetmacro{\findMove } 														{ \movesFs + \wordOffset{39} }
+	\pgfmathsetmacro{\flyEvalMoves } 													{ \flyevalFs + \wordOffset{18} }
+	\pgfmathsetmacro{\flyEvalNormalMove } 										{ \flyevalFs + \wordOffset{11} }
+	\pgfmathsetmacro{\forgetMoves } 													{ \movesFs + \wordOffset{38} }
+	\pgfmathsetmacro{\forgetPosition } 												{ \repeatFs + \wordOffset{3} }
+	\pgfmathsetmacro{\BgenerateMovesB } 										{ \movegenFs + \wordOffset{42} }
+	\pgfmathsetmacro{\generateMoves } 												{ \movegenFs + \wordOffset{46} }
+	\pgfmathsetmacro{\BgenerateMovesFromB } 								{ \movegenFs + \wordOffset{39} }
+	\pgfmathsetmacro{\BgenerateMoveToB } 										{ \movegenFs + \wordOffset{38} }
+	\pgfmathsetmacro{\BgenerateMoveToNocheckB } 					{ \movegenFs + \wordOffset{36} }
+	\pgfmathsetmacro{\getMove } 															{ \movesFs + \wordOffset{23} }
+	\pgfmathsetmacro{\getMoveClass } 												{ \movesFs + \wordOffset{30} }
+	\pgfmathsetmacro{\getMoveSquares } 											{ \movesFs + \wordOffset{31} }
+	\pgfmathsetmacro{\getOrig } 															{ \movesFs + \wordOffset{26} }
+	\pgfmathsetmacro{\getPieceMasked } 											{ \boardFs + \wordOffset{43} }
+	\pgfmathsetmacro{\getTarget } 														{ \movesFs + \wordOffset{29} }
+	\pgfmathsetmacro{\hashFarMovedPawn } 									{ \hashFs + \wordOffset{34} }
+	\pgfmathsetmacro{\hashPiece } 														{ \hashFs + \wordOffset{31} }
+	\pgfmathsetmacro{\hashSquare } 													{ \hashFs + \wordOffset{32} }
+	\pgfmathsetmacro{\Dhborder } 														{ \drawingFs + \wordOffset{31} }
+	\pgfmathsetmacro{\histRecord } 														{ \historyFs + \wordOffset{2} }
+	\pgfmathsetmacro{\QInString } 														{ \stringFs + \wordOffset{10} }
+	\pgfmathsetmacro{\inStringQ } 														{ \stringFs + \wordOffset{9} }
+	\pgfmathsetmacro{\isString } 															{ \stringFs + \wordOffset{4} }
+	\pgfmathsetmacro{\QKingEval } 														{ \evalFs + \wordOffset{15} }
+	\pgfmathsetmacro{\kingMove } 														{ \movegenFs + \wordOffset{12} }
+	\pgfmathsetmacro{\kingMoves } 														{ \movegenFs + \wordOffset{22} }
+	\pgfmathsetmacro{\kingSquare } 														{ \boardFs + \wordOffset{29} }
+	\pgfmathsetmacro{\knightEval } 														{ \evalFs + \wordOffset{21} }
+	\pgfmathsetmacro{\knightMoves } 													{ \movegenFs + \wordOffset{18} }
+	\pgfmathsetmacro{\look } 																	{ \tuiFs + \wordOffset{2} }
+	\pgfmathsetmacro{\m } 																		{ \tuiFs + \wordOffset{20} }
+	\pgfmathsetmacro{\mightCauseCheckQ } 										{ \threatsFs + \wordOffset{34} }
+	\pgfmathsetmacro{\moveC } 																{ \movesFs + \wordOffset{22} }
+	\pgfmathsetmacro{\moveS } 																{ \movesFs + \wordOffset{21} }
+	\pgfmathsetmacro{\moveF } 																{ \movesFs + \wordOffset{20} }
+	\pgfmathsetmacro{\moved } 																{ \boardFs + \wordOffset{26} }
+	\pgfmathsetmacro{\moves } 																{ \movesFs + \wordOffset{19} }
+	\pgfmathsetmacro{\moveToSan } 														{ \moveconvFs + \wordOffset{18} }
+	\pgfmathsetmacro{\movesExistQ } 													{ \movegenFs + \wordOffset{63} }
+	\pgfmathsetmacro{\moveSquares } 													{ \movesFs + \wordOffset{14} }
+	\pgfmathsetmacro{\moveToString } 												{ \moveconvFs + \wordOffset{20} }
+	\pgfmathsetmacro{\BmoveToExistsQB } 										{ \movegenFs + \wordOffset{62} }
+	\pgfmathsetmacro{\BmoveToExistsQNocheckB } 						{ \movegenFs + \wordOffset{60} }
+	\pgfmathsetmacro{\myPieceQ } 														{ \boardFs + \wordOffset{37} }
+	\pgfmathsetmacro{\newMoves } 														{ \movesFs + \wordOffset{37} }
+	\pgfmathsetmacro{\newString } 														{ \stringFs + \wordOffset{2} }
+	\pgfmathsetmacro{\nextChar } 															{ \stringFs + \wordOffset{7} }
+	\pgfmathsetmacro{\noAttr } 																{ \drawingFs + \wordOffset{10} }
+	\pgfmathsetmacro{\opponentQ } 													{ \boardFs + \wordOffset{35} }
+	\pgfmathsetmacro{\opponentBishopQ } 										{ \threatsFs + \wordOffset{4} }
+	\pgfmathsetmacro{\opponentKingSquare } 									{ \boardFs + \wordOffset{4} }
+	\pgfmathsetmacro{\opponentKnightQ } 										{ \threatsFs + \wordOffset{2} }
+	\pgfmathsetmacro{\opponentMoveOrig } 										{ \movesFs + \wordOffset{12} }
+	\pgfmathsetmacro{\opponentMoveTarget } 									{ \movesFs + \wordOffset{9} }
+	\pgfmathsetmacro{\opponentPawnQ } 											{ \threatsFs + \wordOffset{1} }
+	\pgfmathsetmacro{\opponentPieces } 											{ \boardFs + \wordOffset{47} }
+	\pgfmathsetmacro{\opponentRookQ } 											{ \threatsFs + \wordOffset{5} }
+	\pgfmathsetmacro{\otherParty } 														{ \boardFs + \wordOffset{17} }
+	\pgfmathsetmacro{\DParty } 																{ \tuiFs + \wordOffset{1} }
+	\pgfmathsetmacro{\pawnQ } 																{ \boardFs + \wordOffset{39} }
+	\pgfmathsetmacro{\pawnDeltaEval } 												{ \flyevalFs + \wordOffset{4} }
+	\pgfmathsetmacro{\QPawnEval } 														{ \evalFs + \wordOffset{14} }
+	\pgfmathsetmacro{\pawnFarMove } 												{ \movegenFs + \wordOffset{4} }
+	\pgfmathsetmacro{\pawnMoves } 													{ \movegenFs + \wordOffset{17} }
+	\pgfmathsetmacro{\pawnNormalMove } 										{ \movegenFs + \wordOffset{7} }
+	\pgfmathsetmacro{\pawnRowEval } 												{ \evalFs + \wordOffset{13} }
+	\pgfmathsetmacro{\pawnStrikeMove } 											{ \movegenFs + \wordOffset{8} }
+	\pgfmathsetmacro{\pawnTransQ } 													{ \boardFs + \wordOffset{41} }
+	\pgfmathsetmacro{\DPiece } 																{ \drawingFs + \wordOffset{18} }
+	\pgfmathsetmacro{\BDPieceB } 														{ \drawingFs + \wordOffset{9} }
+	\pgfmathsetmacro{\pieceQ } 																{ \boardFs + \wordOffset{36} }
+	\pgfmathsetmacro{\pieceToAscii } 													{ \drawingFs + \wordOffset{6} }
+	\pgfmathsetmacro{\pieceAttr } 															{ \drawingFs + \wordOffset{16} }
+	\pgfmathsetmacro{\pieceToChar } 													{ \boardFs + \wordOffset{50} }
+	\pgfmathsetmacro{\pieceDeltaEval } 												{ \flyevalFs + \wordOffset{5} }
+	\pgfmathsetmacro{\pieceToString } 												{ \drawingFs + \wordOffset{8} }
+	\pgfmathsetmacro{\pieceThreateningThrough } 							{ \threatsFs + \wordOffset{29} }
+	\pgfmathsetmacro{\positionToEpd } 												{ \epdFs + \wordOffset{6} }
+	\pgfmathsetmacro{\previousString } 												{ \stringFs + \wordOffset{3} }
+	\pgfmathsetmacro{\putPiece } 															{ \boardFs + \wordOffset{45} }
+	\pgfmathsetmacro{\queenlikeThreatensThroughQ } 					{ \threatsFs + \wordOffset{32} }
+	\pgfmathsetmacro{\queenMoves } 													{ \movegenFs + \wordOffset{21} }
+	\pgfmathsetmacro{\rememberPosition } 										{ \repeatFs + \wordOffset{2} }
+	\pgfmathsetmacro{\removePiece } 													{ \boardFs + \wordOffset{42} }
+	\pgfmathsetmacro{\rookMoves } 														{ \movegenFs + \wordOffset{20} }
+	\pgfmathsetmacro{\rookThreatensThroughQ } 							{ \threatsFs + \wordOffset{31} }
+	\pgfmathsetmacro{\rookThreatsDeltaEval } 									{ \flyevalFs + \wordOffset{1} }
+	\pgfmathsetmacro{\rookXyQ } 															{ \boardFs + \wordOffset{12} }
+	\pgfmathsetmacro{\selectMovingPiece } 										{ \movegenFs + \wordOffset{35} }
+	\pgfmathsetmacro{\setEval } 																{ \movesFs + \wordOffset{27} }
+	\pgfmathsetmacro{\setThisPawnAKing } 										{ \evalFs + \wordOffset{12} }
+	\pgfmathsetmacro{\toSquare } 															{ \boardFs + \wordOffset{6} }
+	\pgfmathsetmacro{\squareWhiteQ } 												{ \boardFs + \wordOffset{52} }
+	\pgfmathsetmacro{\straightMoves } 												{ \movegenFs + \wordOffset{11} }
+	\pgfmathsetmacro{\strikeEpMove } 												{ \movegenFs + \wordOffset{5} }
+	\pgfmathsetmacro{\strikeQMove } 													{ \movegenFs + \wordOffset{3} }
+	\pgfmathsetmacro{\takePiece } 														{ \boardFs + \wordOffset{44} }
+	\pgfmathsetmacro{\threatenedByBishopQ } 								{ \threatsFs + \wordOffset{8} }
+	\pgfmathsetmacro{\threatenedByKingQ } 									{ \threatsFs + \wordOffset{10} }
+	\pgfmathsetmacro{\threatenedByKnightQ } 								{ \threatsFs + \wordOffset{7} }
+	\pgfmathsetmacro{\threatenedByOpponentQ } 							{ \threatsFs + \wordOffset{13} }
+	\pgfmathsetmacro{\threatenedByPawnQ } 									{ \threatsFs + \wordOffset{6} }
+	\pgfmathsetmacro{\threatenedByPieceQ } 									{ \threatsFs + \wordOffset{11} }
+	\pgfmathsetmacro{\threatenedByRookQ } 									{ \threatsFs + \wordOffset{9} }
+	\pgfmathsetmacro{\threatensQ } 														{ \threatsFs + \wordOffset{28} }
+	\pgfmathsetmacro{\threatsDeltaEval } 											{ \flyevalFs + \wordOffset{3} }
+	\pgfmathsetmacro{\toMoveSquares } 												{ \movesFs + \wordOffset{16} }
+	\pgfmathsetmacro{\undoInfo } 															{ \movesFs + \wordOffset{62} }
+	\pgfmathsetmacro{\undoMove } 														{ \movesFs + \wordOffset{88} }
+	\pgfmathsetmacro{\undoNormalMove } 										{ \movesFs + \wordOffset{53} }
+	\pgfmathsetmacro{\unmoved } 															{ \boardFs + \wordOffset{25} }
+	\pgfmathsetmacro{\unmovedQ } 														{ \boardFs + \wordOffset{38} }
+	\pgfmathsetmacro{\updateCurrCheckQ } 										{ \movesFs + \wordOffset{85} }
+	\pgfmathsetmacro{\updateHash } 													{ \hashFs + \wordOffset{30} }
+	\pgfmathsetmacro{\QValidMove } 													{ \tuiFs + \wordOffset{19} }
+	\pgfmathsetmacro{\DVborderSlice } 												{ \drawingFs + \wordOffset{29} }
+	\pgfmathsetmacro{\whiteFieldAttr } 												{ \drawingFs + \wordOffset{11} }
+	\pgfmathsetmacro{\whitePawnThreatensQ } 								{ \threatsFs + \wordOffset{18} }
+	\pgfmathsetmacro{\whitePiece } 														{ \boardFs + \wordOffset{28} }
+	\pgfmathsetmacro{\whitePieceAttr } 												{ \drawingFs + \wordOffset{14} }
+	\pgfmathsetmacro{\writeChar } 														{ \stringFs + \wordOffset{12} }
+	\pgfmathsetmacro{\writeCheckState } 											{ \moveconvFs + \wordOffset{1} }
+	\pgfmathsetmacro{\writePawnMoveSan } 										{ \moveconvFs + \wordOffset{14} }
+	\pgfmathsetmacro{\writePawnTrans } 											{ \moveconvFs + \wordOffset{2} }
+	\pgfmathsetmacro{\writeSquare } 													{ \stringFs + \wordOffset{17} }
+	\pgfmathsetmacro{\writeSquareFile } 											{ \stringFs + \wordOffset{15} }
+	\pgfmathsetmacro{\writeSquareRank } 											{ \stringFs + \wordOffset{16} }
+	\pgfmathsetmacro{\writeString } 														{ \stringFs + \wordOffset{14} }
+	\pgfmathsetmacro{\toXy } 																	{ \boardFs + \wordOffset{39} }
+	\pgfmathsetmacro{\xyBoardF }	 														{ \boardFs + \wordOffset{41} }
+
 
 	\newcommand{ \fileSectorMiddle }[2] {
 		(( 90 - #1 ) - (#2 - #1) / 2)
 	}
-	\def \fileSectorRadMiddle { \fileRad - \ringWidth / 2 }
+	\def \fileSectorRadMiddle { \fileRad - \fileSectionRingWidth / 2 }
 	\newcommand{ \fileTextRot }[1] {
 		(#1 - 90)
 	}
 
 	\pgfmathsetmacro {\secMidBoardFs}				{\fileSectorMiddle{\boardFs}{\drawingFs}}
-	\pgfmathsetmacro {\secMidDrawingFs}			{\fileSectorMiddle{\drawingFs}{\environFs}}
-	\pgfmathsetmacro {\secMidEnvironFs}			{\fileSectorMiddle{\environFs}{\benchmarkFs}}
-	\pgfmathsetmacro {\secMidBenchmarkFs}		{\fileSectorMiddle{\benchmarkFs}{\epdFs}}
+	\pgfmathsetmacro {\secMidDrawingFs}			{\fileSectorMiddle{\drawingFs}{\epdFs}}
+	%\pgfmathsetmacro {\secMidEnvironFs}			{\fileSectorMiddle{\environFs}{\benchmarkFs}}
+	%\pgfmathsetmacro {\secMidBenchmarkFs}		{\fileSectorMiddle{\benchmarkFs}{\epdFs}}
 	\pgfmathsetmacro {\secMidEpdFs}					{\fileSectorMiddle{\epdFs}{\evalFs}}
 	\pgfmathsetmacro {\secMidEvalFs}					{\fileSectorMiddle{\evalFs}{\flyevalFs}}
 	\pgfmathsetmacro {\secMidFlyevalFs}				{\fileSectorMiddle{\flyevalFs}{\hashFs}}
 	\pgfmathsetmacro {\secMidHashFs}					{\fileSectorMiddle{\hashFs}{\historyFs}}
-	\pgfmathsetmacro {\secMidHistoryFs}			{\fileSectorMiddle{\historyFs}{\killerFs}}
-	\pgfmathsetmacro {\secMidKillerFs}				{\fileSectorMiddle{\killerFs}{\moveconvFs}}
+	\pgfmathsetmacro {\secMidHistoryFs}			{\fileSectorMiddle{\historyFs}{\moveconvFs}}
+	%\pgfmathsetmacro {\secMidKillerFs}				{\fileSectorMiddle{\killerFs}{\moveconvFs}}
 	\pgfmathsetmacro {\secMidMoveconvFs}		{\fileSectorMiddle{\moveconvFs}{\movegenFs}}
 	\pgfmathsetmacro {\secMidMovegenFs}		{\fileSectorMiddle{\movegenFs}{\movesFs}}
-	\pgfmathsetmacro {\secMidMovesFs}				{\fileSectorMiddle{\movesFs}{\nullFs}}
-	\pgfmathsetmacro {\secMidNullFs}					{\fileSectorMiddle{\nullFs}{\optionsFs}}
-	\pgfmathsetmacro {\secMidOptionsFs}			{\fileSectorMiddle{\optionsFs}{\profilerFs}}
-	\pgfmathsetmacro {\secMidProfilerFs}			{\fileSectorMiddle{\profilerFs}{\quiescenceFs}}
-	\pgfmathsetmacro {\secMidQuiescenceFs}	{\fileSectorMiddle{\quiescenceFs}{\repeatFs}}
-	\pgfmathsetmacro {\secMidRepeatFs}			{\fileSectorMiddle{\repeatFs}{\searchdefsFs}}
-	\pgfmathsetmacro {\secMidSearchdefsFs}	{\fileSectorMiddle{\searchdefsFs}{\searchFs}}
-	\pgfmathsetmacro {\secMidSearchFs}			{\fileSectorMiddle{\searchFs}{\sglmovesFs}}
-	\pgfmathsetmacro {\secMidSglmovesFs}		{\fileSectorMiddle{\sglmovesFs}{\sortingFs}}
-	\pgfmathsetmacro {\secMidSortingFs}			{\fileSectorMiddle{\sortingFs}{\stringFs}}
-	\pgfmathsetmacro {\secMidStringFs}				{\fileSectorMiddle{\stringFs}{\testsFs}}
-	\pgfmathsetmacro {\secMidTestsFs}				{\fileSectorMiddle{\testsFs}{\threatsFs}}
-	\pgfmathsetmacro {\secMidThreatsFs}			{\fileSectorMiddle{\threatsFs}{\tmovegenFs}}
-	\pgfmathsetmacro {\secMidTmovegenFs}		{\fileSectorMiddle{\tmovegenFs}{\ttableFs}}
-	\pgfmathsetmacro {\secMidTtableFs}				{\fileSectorMiddle{\ttableFs}{\tuiFs}}
+	\pgfmathsetmacro {\secMidMovesFs}				{\fileSectorMiddle{\movesFs}{\repeatFs}}
+	%\pgfmathsetmacro {\secMidNullFs}					{\fileSectorMiddle{\nullFs}{\optionsFs}}
+	%\pgfmathsetmacro {\secMidOptionsFs}			{\fileSectorMiddle{\optionsFs}{\profilerFs}}
+	%\pgfmathsetmacro {\secMidProfilerFs}			{\fileSectorMiddle{\profilerFs}{\quiescenceFs}}
+	%\pgfmathsetmacro {\secMidQuiescenceFs}	{\fileSectorMiddle{\quiescenceFs}{\repeatFs}}
+	\pgfmathsetmacro {\secMidRepeatFs}			{\fileSectorMiddle{\repeatFs}{\stringFs}}
+	%\pgfmathsetmacro {\secMidSearchdefsFs}	{\fileSectorMiddle{\searchdefsFs}{\searchFs}}
+	%\pgfmathsetmacro {\secMidSearchFs}			{\fileSectorMiddle{\searchFs}{\sglmovesFs}}
+	%\pgfmathsetmacro {\secMidSglmovesFs}		{\fileSectorMiddle{\sglmovesFs}{\sortingFs}}
+	%\pgfmathsetmacro {\secMidSortingFs}			{\fileSectorMiddle{\sortingFs}{\stringFs}}
+	\pgfmathsetmacro {\secMidStringFs}				{\fileSectorMiddle{\stringFs}{\threatsFs}}
+	%\pgfmathsetmacro {\secMidTestsFs}				{\fileSectorMiddle{\testsFs}{\threatsFs}}
+	\pgfmathsetmacro {\secMidThreatsFs}			{\fileSectorMiddle{\threatsFs}{\tuiFs}}
+	%\pgfmathsetmacro {\secMidTmovegenFs}		{\fileSectorMiddle{\tmovegenFs}{\ttableFs}}
+	%\pgfmathsetmacro {\secMidTtableFs}				{\fileSectorMiddle{\ttableFs}{\tuiFs}}
 	\pgfmathsetmacro {\secMidTuiFs}					{\fileSectorMiddle{\tuiFs}{\utilsFs}}
-	\pgfmathsetmacro {\secMidUtilsFs}				{\fileSectorMiddle{\utilsFs}{\brainlessFs}}
-	\pgfmathsetmacro {\secMidBrainlessFs}		{\fileSectorMiddle{\brainlessFs}{360}}
+	\pgfmathsetmacro {\secMidUtilsFs}				{\fileSectorMiddle{\utilsFs}{360}}
+	%\pgfmathsetmacro {\secMidBrainlessFs}		{\fileSectorMiddle{\brainlessFs}{360}}
 
 	% outer ring
 	\draw [thick] (0,0) circle (\dirRad);
@@ -93,10 +323,9 @@
 
 	% 2. file ring 30 sectors
 	\def \fileSectors {
-		\boardFs,			\drawingFs,	\environFs,			\benchmarkFs,\epdFs,				\evalFs,			\flyevalFs,		\hashFs,
-		\historyFs,			\killerFs,		\moveconvFs,		\movegenFs,	\movesFs,			\nullFs,			\optionsFs,	\profilerFs,
-		\quiescenceFs,\repeatFs,		\searchdefsFs,		\searchFs,			\sglmovesFs,	\sortingFs,	\stringFs,
-		\testsFs,			\threatsFs,	\tmovegenFs,		\ttableFs,			\tuiFs,					\utilsFs,			\brainlessFs
+		\boardFs,			\drawingFs,			\epdFs,				\evalFs,			\flyevalFs,		\hashFs,
+		\historyFs,			\moveconvFs,		\movegenFs,	\movesFs,		\repeatFs,		\stringFs,
+		\threatsFs,		\tuiFs,						\utilsFs
 	}
 
 	\foreach \angle in \fileSectors
@@ -110,37 +339,53 @@
 	\draw [thick] (0,0) circle (\interactionRad);
 
 	%dir text
-	\node [] at (90:\dirRad - \ringWidth / 2) {brainless-0.1.2};
+	\node [] at (90:\dirRad - \dirSectionRingWidth / 2) {brainless-0.1.2};
 	% file texts
 	\node [rotate=\fileTextRot{\secMidBoardFs}] at (\secMidBoardFs : \fileSectorRadMiddle) {board.fs};
 	\node [rotate=\fileTextRot{\secMidDrawingFs}] at (\secMidDrawingFs : \fileSectorRadMiddle) {drawing.fs};
-	\node [rotate=\fileTextRot{\secMidEnvironFs}] at (\secMidEnvironFs : \fileSectorRadMiddle) {environ.fs};
-	\node [rotate=\fileTextRot{\secMidBenchmarkFs}] at (\secMidBenchmarkFs : \fileSectorRadMiddle) {benchmark.fs};
+	%\node [rotate=\fileTextRot{\secMidEnvironFs}] at (\secMidEnvironFs : \fileSectorRadMiddle) {environ.fs};
+	%\node [rotate=\fileTextRot{\secMidBenchmarkFs}] at (\secMidBenchmarkFs : \fileSectorRadMiddle) {benchmark.fs};
 	\node [rotate=\fileTextRot{\secMidEpdFs}] at (\secMidEpdFs : \fileSectorRadMiddle) {epd.fs};
 	\node [rotate=\fileTextRot{\secMidEvalFs}] at (\secMidEvalFs : \fileSectorRadMiddle) {eval.fs};
 	\node [rotate=\fileTextRot{\secMidFlyevalFs}] at (\secMidFlyevalFs : \fileSectorRadMiddle) {flyeval.fs};
 	\node [rotate=\fileTextRot{\secMidHashFs}] at (\secMidHashFs : \fileSectorRadMiddle) {hash.fs};
 	\node [rotate=\fileTextRot{\secMidHistoryFs+90}] at (\secMidHistoryFs : \fileSectorRadMiddle) {history.fs};
-	\node [rotate=\fileTextRot{\secMidKillerFs}] at (\secMidKillerFs : \fileSectorRadMiddle) {killer.fs};
+	%\node [rotate=\fileTextRot{\secMidKillerFs}] at (\secMidKillerFs : \fileSectorRadMiddle) {killer.fs};
 	\node [rotate=\fileTextRot{\secMidMoveconvFs}] at (\secMidMoveconvFs : \fileSectorRadMiddle) {moveconv.fs};
 	\node [rotate=\fileTextRot{\secMidMovegenFs}] at (\secMidMovegenFs : \fileSectorRadMiddle) {movegen.fs};
 	\node [rotate=\fileTextRot{\secMidMovesFs}] at (\secMidMovesFs : \fileSectorRadMiddle) {moves.fs};
-	\node [rotate=\fileTextRot{\secMidNullFs-90}] at (\secMidNullFs : \fileSectorRadMiddle) {null.fs};
+	%\node [rotate=\fileTextRot{\secMidNullFs-90}] at (\secMidNullFs : \fileSectorRadMiddle) {null.fs};
 	%\node [rotate=\fileTextRot{\secMidOptionsFs}] at (\secMidOptionsFs : \fileSectorRadMiddle) {options.fs};
-	\node [rotate=\fileTextRot{\secMidProfilerFs}] at (\secMidProfilerFs : \fileSectorRadMiddle) {profiler.fs};
-	\node [rotate=\fileTextRot{\secMidQuiescenceFs-90}] at (\secMidQuiescenceFs : \fileSectorRadMiddle) {quiescence.fs};
+	%\node [rotate=\fileTextRot{\secMidProfilerFs}] at (\secMidProfilerFs : \fileSectorRadMiddle) {profiler.fs};
+	%\node [rotate=\fileTextRot{\secMidQuiescenceFs-90}] at (\secMidQuiescenceFs : \fileSectorRadMiddle) {quiescence.fs};
 	\node [rotate=\fileTextRot{\secMidRepeatFs-90}] at (\secMidRepeatFs : \fileSectorRadMiddle) {repeat.fs};
-	\node [rotate=\fileTextRot{\secMidSearchdefsFs-90}] at (\secMidSearchdefsFs : \fileSectorRadMiddle) {searchdefs.fs};
-	\node [rotate=\fileTextRot{\secMidSearchFs}] at (\secMidSearchFs : \fileSectorRadMiddle) {search.fs};
-	\node [rotate=\fileTextRot{\secMidSglmovesFs}] at (\secMidSglmovesFs : \fileSectorRadMiddle) {sglmoves.fs};
-	\node [rotate=\fileTextRot{\secMidSortingFs-90}] at (\secMidSortingFs : \fileSectorRadMiddle) {sorting.fs};
+	%\node [rotate=\fileTextRot{\secMidSearchdefsFs-90}] at (\secMidSearchdefsFs : \fileSectorRadMiddle) {searchdefs.fs};
+	%\node [rotate=\fileTextRot{\secMidSearchFs}] at (\secMidSearchFs : \fileSectorRadMiddle) {search.fs};
+	%\node [rotate=\fileTextRot{\secMidSglmovesFs}] at (\secMidSglmovesFs : \fileSectorRadMiddle) {sglmoves.fs};
+	%\node [rotate=\fileTextRot{\secMidSortingFs-90}] at (\secMidSortingFs : \fileSectorRadMiddle) {sorting.fs};
 	\node [rotate=\fileTextRot{\secMidStringFs}] at (\secMidStringFs : \fileSectorRadMiddle) {string.fs};
-	\node [rotate=\fileTextRot{\secMidTestsFs}] at (\secMidTestsFs : \fileSectorRadMiddle) {tests.fs};
+	%\node [rotate=\fileTextRot{\secMidTestsFs}] at (\secMidTestsFs : \fileSectorRadMiddle) {tests.fs};
 	\node [rotate=\fileTextRot{\secMidThreatsFs}] at (\secMidThreatsFs : \fileSectorRadMiddle) {threats.fs};
-	\node [rotate=\fileTextRot{\secMidTmovegenFs}] at (\secMidTmovegenFs : \fileSectorRadMiddle) {tmovegen.fs};
-	\node [rotate=\fileTextRot{\secMidTtableFs}] at (\secMidTtableFs : \fileSectorRadMiddle) {ttable.fs};
+	%\node [rotate=\fileTextRot{\secMidTmovegenFs}] at (\secMidTmovegenFs : \fileSectorRadMiddle) {tmovegen.fs};
+	%\node [rotate=\fileTextRot{\secMidTtableFs}] at (\secMidTtableFs : \fileSectorRadMiddle) {ttable.fs};
 	\node [rotate=\fileTextRot{\secMidTuiFs}] at (\secMidTuiFs : \fileSectorRadMiddle) {tui.fs};
 	\node [rotate=\fileTextRot{\secMidUtilsFs}] at (\secMidUtilsFs : \fileSectorRadMiddle) {utils.fs};
-	\node [rotate=\fileTextRot{\secMidBrainlessFs-90}] at (\secMidBrainlessFs : \fileSectorRadMiddle) {brainless.fs};
+	%\node [rotate=\fileTextRot{\secMidBrainlessFs-90}] at (\secMidBrainlessFs : \fileSectorRadMiddle) {brainless.fs};
+
+	% interactions ------- y -3
+	\drawInteraction{\m}{\QValidMove}
+	\drawInteraction{\QValidMove}{\generateMoves}
+	\drawInteraction{\generateMoves}{\newMoves}
+	\drawInteraction{\generateMoves}{\appendMoves}
+	\drawInteraction{\appendMoves}{\BgenerateMovesB}
+	\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+	\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+	\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+	\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+	\drawInteraction{\BgenerateMovesFromB}{\rookMoves}
+	\drawInteraction{\rookMoves}{\straightMoves}
+	\drawInteraction{\rookMoves}{\straightMoves}
+	\drawInteraction{\rookMoves}{\straightMoves}
+	\drawInteraction{\rookMoves}{\straightMoves}
 
 \end{tikzpicture}
