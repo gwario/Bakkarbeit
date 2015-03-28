@@ -1,6 +1,6 @@
 \begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.8,] % 1 nice; 0.8 fits into latex doc(width only)
 
-\tikzstyle{every node}=[font=\tiny] %\ÃÂ§iny for 1 and 20
+\tikzstyle{every node}=[font=\tiny] %\ÃÂÃÂ§iny for 1 and 20
 
 \def \width { 20 } %20 nice; 20 fits into latex doc(width only)
 \pgfmathsetmacro {\dirHeight} { -1 }
@@ -46,7 +46,7 @@
 	\fi
 
 	\fill [left color= \leftColor, right color= \rightColor] 
-		({#1}, \intStartY) rectangle ({#2}, \intEndY)-- cycle;
+		(\from, \intStartY) rectangle (\to, \intEndY)-- cycle;
 
 	\incrementRowIdx
 }
