@@ -1,93 +1,109 @@
 \usetikzlibrary{decorations.markings}
+\usetikzlibrary{math}
+
 \begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.5] %1.75
 
 	\tikzstyle{every node}=[font=\tiny] % \large
 
-	\pgfmathsetmacro {\dirSectionRingWidth} { 1.5 }
-	\pgfmathsetmacro {\fileSectionRingWidth} { 2.2 }
-	\pgfmathsetmacro {\wordSectionRingWidth} { 1.2 }
+	\def \fromColor {green}
+	\def \toColor {red}	
+	
+	\pgfmathsetmacro {\dirSectionRingWidth} { 1.5 pt }
+	\pgfmathsetmacro {\fileSectionRingWidth} { 2.2 pt }
+	\pgfmathsetmacro {\wordSectionRingWidth} { 1.2 pt }
 
-	\pgfmathsetmacro {\dirRad} { 18 }
+	\pgfmathsetmacro {\dirRad} { 15 }
 	\pgfmathsetmacro {\fileRad} { \dirRad -  \dirSectionRingWidth }
 	\pgfmathsetmacro {\wordRad} { \fileRad - \fileSectionRingWidth }
 	\pgfmathsetmacro {\interactionRad} { \wordRad - \wordSectionRingWidth }
 
 	\def \wordCount { 443 }
-	\pgfmathsetmacro {\wordWidth } { 360 / \wordCount } %in degree
 
-	\newcommand{ \rotateBack }[1] {
-		( 90 - #1 )
-	}
-
-
-	\edef \intRadIdx { 0 }
-	\newcommand{ \incrementRowIdx } {
-
-		\pgfmathparse { \intRadIdx + 1 } \xdef \intRadIdx { \pgfmathresult }
-	}
+	\pgfmathsetmacro {\wordWidth} { 360 / \wordCount }
 
 	\tikzset{test/.style={
-	    postaction={
-	        decorate,
-	        decoration={
-	            markings,
-	            mark=at position \pgfdecoratedpathlength-0.5pt with {\arrow[\fromColor,line width=#1] {>}; },
-	            mark=between positions 0 and \pgfdecoratedpathlength-8pt step 0.5pt with {
-	                \pgfmathsetmacro\myval{multiply(divide(
-	                    \pgfkeysvalueof{/pgf/decoration/mark info/distance from start}, \pgfdecoratedpathlength),100)};
-	                \pgfsetfillcolor{\fromColor!\myval!\fromColor};
-	                \pgfpathcircle{\pgfpointorigin}{#1};
-	                \pgfusepath{fill};}
+		postaction={
+			decorate,
+			decoration={
+				markings,
+				mark=between positions 0 and \pgfdecoratedpathlength step 0.5pt with {
+					\pgfmathsetmacro {\myval} {multiply(divide(
+						\pgfkeysvalueof{/pgf/decoration/mark info/distance from start}, \pgfdecoratedpathlength),100)};
+					\pgfsetfillcolor{\fromColor!\myval!\toColor};
+					\pgfpathcircle{\pgfpointorigin}{#1};
+					\pgfusepath{fill};}
 	}}}}
+
+	\tikzmath{
+		function drawInteractionLine(\from, \to) {
+			if (\from > \to) then {
+				\difference = \from - \to;
+	  			\between = \to + \difference / 2;
+	 		} else {
+				\difference = \to - \from;
+	 			\between = \from + \difference / 2;
+	 		};
+			if (\difference > 180) then {
+				\difference = 360 - \difference + 180; % [0,180] %XXX: this causes the wrong between...
+			};
+			\interactionRadMax = \interactionRad * 0.9;
+			\diffReciprocalPercentOfSemiCircle = 1 - \difference / 180; % [1,0] %XXX: this fixes the wrong between by making the radius negative! but the radius is not only negative, also the tendecy was inverted... this is a bug
+			\interactionControlsRad = \interactionRadMax * \diffReciprocalPercentOfSemiCircle; % [\interactionRad * 0.9, 0]
+			{
+				%\pgfmathparse{\between}
+				%debug
+				%\node [] at ({\between} : \interactionControlsRad) { ctrlrad: \interactionControlsRad; between:  \pgfmathresult};
+				%\draw [] (0,0) ({\between} : 0.1) -- ({\between} : \interactionRad);
+				\path [test=0.25 pt]
+					({\from} : \interactionRad) .. 
+					controls ({\between} : \interactionControlsRad) ..
+					({\to} : \interactionRad);
+			};    
+		};
+	}
 
 	\newcommand{\drawInteraction}[2]{
 	
 		\pgfmathparse{#1}
-    		\pgfmathsetmacro{\from}{\pgfmathresult}
+		\pgfmathsetmacro{\from}{\pgfmathresult}
 		\pgfmathparse{#2}
-    		\pgfmathsetmacro{\to}{\pgfmathresult}
-
-		\def \fromColor{green}
-		\def \toColor{red}	
-
-		\path []
-			({#1} : \interactionRad) .. controls (0,0) .. ({#2} : \interactionRad);
-% 		\fill [left color= \leftColor, right color= \rightColor] 
-% 			({#1}, \intStartY) rectangle ({#2}, \intEndY)-- cycle;
-
-		\incrementRowIdx
+		\pgfmathsetmacro{\to}{\pgfmathresult}
+		
+		\tikzmath{drawInteractionLine(\from,\to);}
 	}
+	%debug
+	%\draw [] (0,0) circle (0.2);
 
 	%file start angles
-	\pgfmathsetmacro{\boardFs}				{  									  0 * \wordWidth }
-	\pgfmathsetmacro{\drawingFs}		{ \boardFs				+ 51 * \wordWidth }
+	\pgfmathsetmacro{\boardFs}				{  										  0 * \wordWidth }
+	\pgfmathsetmacro{\drawingFs}		{ \boardFs					+ 51 * \wordWidth }
 	%\pgfmathsetmacro{\environFs}			{ \drawingFs		+ 24 * \wordWidth }
 	%\pgfmathsetmacro{\benchmarkFs}	{ \environFs			+ 14 * \wordWidth }
-	\pgfmathsetmacro{\epdFs}					{ \drawingFs				+ 	24 * \wordWidth }
-	\pgfmathsetmacro{\evalFs}				{ \epdFs					+ 25 * \wordWidth }
-	\pgfmathsetmacro{\flyevalFs}			{ \evalFs					+ 26 * \wordWidth }
-	\pgfmathsetmacro{\hashFs}				{ \flyevalFs			+ 19 * \wordWidth }
-	\pgfmathsetmacro{\historyFs}			{ \hashFs				+ 17 * \wordWidth }
+	\pgfmathsetmacro{\epdFs}					{ \drawingFs			+ 	24 * \wordWidth }
+	\pgfmathsetmacro{\evalFs}				{ \epdFs						+ 25 * \wordWidth }
+	\pgfmathsetmacro{\flyevalFs}			{ \evalFs						+ 26 * \wordWidth }
+	\pgfmathsetmacro{\hashFs}				{ \flyevalFs				+ 19 * \wordWidth }
+	\pgfmathsetmacro{\historyFs}			{ \hashFs					+ 17 * \wordWidth }
 	%\pgfmathsetmacro{\killerFs}				{ \historyFs			+   6 * \wordWidth }
 	\pgfmathsetmacro{\moveconvFs}		{ \historyFs				+ 6 * \wordWidth }
-	\pgfmathsetmacro{\movegenFs}		{ \moveconvFs		+ 21 * \wordWidth }
-	\pgfmathsetmacro{\movesFs}			{ \movegenFs		+ 63 * \wordWidth }
+	\pgfmathsetmacro{\movegenFs}		{ \moveconvFs			+ 21 * \wordWidth }
+	\pgfmathsetmacro{\movesFs}			{ \movegenFs			+ 63 * \wordWidth }
 	%\pgfmathsetmacro{\nullFs}					{ \movesFs			+ 90 * \wordWidth }
 	%\pgfmathsetmacro{\optionsFs}			{ \nullFs					+   5 * \wordWidth }
 	%\pgfmathsetmacro{\profilerFs}			{ \optionsFs			+   0 * \wordWidth }
 	%\pgfmathsetmacro{\quiescenceFs}	{ \profilerFs			+ 13 * \wordWidth }
-	\pgfmathsetmacro{\repeatFs}			{ \movesFs	+   90 * \wordWidth }
+	\pgfmathsetmacro{\repeatFs}			{ \movesFs				+   90 * \wordWidth }
 	%\pgfmathsetmacro{\searchdefsFs}	{ \repeatFs			+   4 * \wordWidth }
 	%\pgfmathsetmacro{\searchFs}			{ \searchdefsFs	+   4 * \wordWidth }
 	%\pgfmathsetmacro{\sglmovesFs}		{ \searchFs			+ 36 * \wordWidth }
 	%\pgfmathsetmacro{\sortingFs}			{ \sglmovesFs		+ 14 * \wordWidth }
-	\pgfmathsetmacro{\stringFs}				{ \repeatFs			+   4 * \wordWidth }
+	\pgfmathsetmacro{\stringFs}				{ \repeatFs				+   4 * \wordWidth }
 	%\pgfmathsetmacro{\testsFs}				{ \stringFs				+ 18 * \wordWidth }
-	\pgfmathsetmacro{\threatsFs}			{ \stringFs				+ 18 * \wordWidth }
+	\pgfmathsetmacro{\threatsFs}			{ \stringFs					+ 18 * \wordWidth }
 	%\pgfmathsetmacro{\tmovegenFs}		{ \threatsFs			+ 35 * \wordWidth }
 	%\pgfmathsetmacro{\ttableFs}				{ \tmovegenFs		+ 27 * \wordWidth }
 	\pgfmathsetmacro{\tuiFs}					{ \threatsFs				+ 35 * \wordWidth }
-	\pgfmathsetmacro{\utilsFs}				{ \tuiFs					+ 29 * \wordWidth }
+	\pgfmathsetmacro{\utilsFs}				{ \tuiFs						+ 29 * \wordWidth }
 	%\pgfmathsetmacro{\brainlessFs}		{ \utilsFs				+ 15 * \wordWidth }
 
 	% word angle offset to the middle of the word section
@@ -279,7 +295,7 @@
 
 
 	\newcommand{ \fileSectorMiddle }[2] {
-		(( 90 - #1 ) - (#2 - #1) / 2)
+		(#1+ (#2 - #1) / 2)
 	}
 	\def \fileSectorRadMiddle { \fileRad - \fileSectionRingWidth / 2 }
 	\newcommand{ \fileTextRot }[1] {
@@ -329,12 +345,12 @@
 	}
 
 	\foreach \angle in \fileSectors
-		\draw ( {\rotateBack{\angle}} : \fileRad) -- ({\rotateBack{\angle}} : \wordRad);
+		\draw ( {\angle} : \fileRad) -- ({\angle} : \wordRad);
 
 
 	% 3. word sectors
 	\draw [thick] (0,0) circle (\wordRad);
-	\foreach \angle in {90, 89.457013575, ..., -270}
+	\foreach \angle in {0, {\wordWidth}, ..., 360}
 		\draw (\angle:\wordRad) -- (\angle:\interactionRad);
 	\draw [thick] (0,0) circle (\interactionRad);
 
@@ -349,7 +365,7 @@
 	\node [rotate=\fileTextRot{\secMidEvalFs}] at (\secMidEvalFs : \fileSectorRadMiddle) {eval.fs};
 	\node [rotate=\fileTextRot{\secMidFlyevalFs}] at (\secMidFlyevalFs : \fileSectorRadMiddle) {flyeval.fs};
 	\node [rotate=\fileTextRot{\secMidHashFs}] at (\secMidHashFs : \fileSectorRadMiddle) {hash.fs};
-	\node [rotate=\fileTextRot{\secMidHistoryFs+90}] at (\secMidHistoryFs : \fileSectorRadMiddle) {history.fs};
+	\node [rotate=\fileTextRot{\secMidHistoryFs-90}] at (\secMidHistoryFs : \fileSectorRadMiddle) {history.fs};
 	%\node [rotate=\fileTextRot{\secMidKillerFs}] at (\secMidKillerFs : \fileSectorRadMiddle) {killer.fs};
 	\node [rotate=\fileTextRot{\secMidMoveconvFs}] at (\secMidMoveconvFs : \fileSectorRadMiddle) {moveconv.fs};
 	\node [rotate=\fileTextRot{\secMidMovegenFs}] at (\secMidMovegenFs : \fileSectorRadMiddle) {movegen.fs};
@@ -373,19 +389,252 @@
 	%\node [rotate=\fileTextRot{\secMidBrainlessFs-90}] at (\secMidBrainlessFs : \fileSectorRadMiddle) {brainless.fs};
 
 	% interactions ------- y -3
-	\drawInteraction{\m}{\QValidMove}
-	\drawInteraction{\QValidMove}{\generateMoves}
-	\drawInteraction{\generateMoves}{\newMoves}
-	\drawInteraction{\generateMoves}{\appendMoves}
-	\drawInteraction{\appendMoves}{\BgenerateMovesB}
-	\drawInteraction{\BgenerateMovesB}{\myPieceQ}
-	\drawInteraction{\BgenerateMovesB}{\myPieceQ}
-	\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-	\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-	\drawInteraction{\BgenerateMovesFromB}{\rookMoves}
-	\drawInteraction{\rookMoves}{\straightMoves}
-	\drawInteraction{\rookMoves}{\straightMoves}
-	\drawInteraction{\rookMoves}{\straightMoves}
-	\drawInteraction{\rookMoves}{\straightMoves}
+%\drawInteraction{\m}{\QValidMove}
+\drawInteraction{\QValidMove}{\generateMoves}
+\drawInteraction{\generateMoves}{\newMoves}
+\drawInteraction{\generateMoves}{\appendMoves}
+\drawInteraction{\appendMoves}{\BgenerateMovesB}
+\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+%\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+\drawInteraction{\BgenerateMovesFromB}{\rookMoves}
+\drawInteraction{\rookMoves}{\straightMoves}
+\drawInteraction{\rookMoves}{\straightMoves}
+\drawInteraction{\rookMoves}{\straightMoves}
+\drawInteraction{\rookMoves}{\straightMoves}
+\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+%\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+\drawInteraction{\BgenerateMovesFromB}{\knightMoves}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+%\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+\drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+\drawInteraction{\mightCauseCheckQ}{\kingSquare}
+%\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+\drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+%\drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+%\drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+\drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+\drawInteraction{\addMove}{\moveC}
+\drawInteraction{\moveC}{\moveS}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+%\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+\drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+\drawInteraction{\mightCauseCheckQ}{\kingSquare}
+\drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+\drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+\drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+%\drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+%\drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+\drawInteraction{\BgenerateMoveToNocheckB}{\addMove} 
+\drawInteraction{\addMove}{\moveC}
+\drawInteraction{\moveC}{\moveS}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\knightMoves}{\strikeQMove}
+\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+%\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+\drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\BgenerateMovesB}{\myPieceQ}
+%\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+\drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+\drawInteraction{\BgenerateMovesFromB}{\queenMoves}
+%\drawInteraction{\queenMoves}{\bishopMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+%\drawInteraction{\queenMoves}{\rookMoves}
+\drawInteraction{\bishopMoves}{\straightMoves}
+\drawInteraction{\bishopMoves}{\straightMoves} <---- works
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\kingMoves}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\castleNear}
+% \drawInteraction{\castleNear}{\emptyQ}
+% \drawInteraction{\castleNear}{\emptyQ}
+% \drawInteraction{\castleNear}{\unmovedQ}
+% \drawInteraction{\kingMoves}{\castleFar}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\unmovedQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\knightMoves}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% %\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% %\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% %\drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% %\drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% %\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% %\drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% %\drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\rookMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\pawnMoves}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnFarMove}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\QDirection}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% %\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnNormalMove}
+% \drawInteraction{\pawnNormalMove}{\emptyQ}
+% \drawInteraction{\pawnNormalMove}{\pawnTransQ}
+% \drawInteraction{\pawnNormalMove}{\BgenerateMoveToB}
+% %\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% %\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% %\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\pawnMoves}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnFarMove}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\QDirection}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\BgenerateMoveToB}
+% %\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% %\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnNormalMove}
+% \drawInteraction{\pawnNormalMove}{\emptyQ}
+% \drawInteraction{\pawnNormalMove}{\pawnTransQ}
+% \drawInteraction{\pawnNormalMove}{\BgenerateMoveToB}
+% %\drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% %\drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+%\drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
 
 \end{tikzpicture}
