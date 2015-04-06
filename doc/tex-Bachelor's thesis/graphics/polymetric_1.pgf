@@ -1,0 +1,229 @@
+\begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.8,] % 1 nice; 0.8 fits into latex doc(width only)
+
+	\tikzstyle{every node}=[font=\small]
+
+	\def \maxDistRad { 20 }
+	\def \maxWordRad { 3 }
+
+	\edef \intWordIdx { 0 }
+	\newcommand{ \incrementWordIdx } {
+		\pgfmathparse { \intWordIdx + 1 } \xdef \intWordIdx { \pgfmathresult }
+	}
+
+	\def \numberOfWords { 20 }
+	\def \wordAngleDiff { 360 / \numberOfWords }
+
+	\draw [] (0,0) circle (1);
+	\node [] at (0,0) {m};
+
+	\pgfmathsetmacro{\distRad} { \maxDistRad / 20 }
+	\pgfmathsetmacro{\wordRad} { \maxWordRad / 14 }
+		
+	\draw [] (\wordAngleDiff * \intWordIdx :  \distRad) circle (\wordRad);
+	\node [] at (\wordAngleDiff * \intWordIdx :  \distRad) {x};
+	\incrementWordIdx
+
+% \drawInteraction{\m}
+% \drawInteraction{\m}{\QValidMove}
+% \drawInteraction{\QValidMove}{\generateMoves}
+% \drawInteraction{\generateMoves}{\newMoves}
+% \drawInteraction{\generateMoves}{\appendMoves}
+% \drawInteraction{\appendMoves}{\BgenerateMovesB}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\rookMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\knightMoves}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\queenMoves}
+% \drawInteraction{\queenMoves}{\bishopMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\queenMoves}{\rookMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\kingMoves}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\kingMove}
+% \drawInteraction{\kingMoves}{\castleNear}
+% \drawInteraction{\castleNear}{\emptyQ}
+% \drawInteraction{\castleNear}{\emptyQ}
+% \drawInteraction{\castleNear}{\unmovedQ}
+% \drawInteraction{\kingMoves}{\castleFar}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\emptyQ}
+% \drawInteraction{\castleFar}{\unmovedQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\bishopMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\knightMoves}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
+% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\knightMoves}{\strikeQMove}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\rookMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\rookMoves}{\straightMoves}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
+% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
+% \drawInteraction{\BgenerateMovesFromB}{\pawnMoves}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnFarMove}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\QDirection}
+% \drawInteraction{\pawnFarMove}{\emptyQ}
+% \drawInteraction{\pawnFarMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnNormalMove}
+% \drawInteraction{\pawnNormalMove}{\emptyQ}
+% \drawInteraction{\pawnNormalMove}{\pawnTransQ}
+% \drawInteraction{\pawnNormalMove}{\BgenerateMoveToB}
+% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
+% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
+% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
+% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
+% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
+% \drawInteraction{\addMove}{\moveC}
+% \drawInteraction{\moveC}{\moveS}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\pawnMoves}{\QDirection}
+% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
+% \drawInteraction{\pawnStrikeMove}{\opponentQ}
+% \drawInteraction{\pawnMoves}{\strikeEpMove}
+% \drawInteraction{\strikeEpMove}{\QDirection}
+% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+
+\end{tikzpicture}

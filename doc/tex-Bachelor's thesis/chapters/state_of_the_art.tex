@@ -135,23 +135,23 @@ In this section I will present a hand full of visualization methods and will dis
 
 The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object oriented forth and there is no standard concurrency, th word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a syntax tree. On the system level although, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram and the interaction diagram(Jacobson, 1992) which has been proposed by.
 \\
-Since system level visualization is applicable to almost any paradigm and word level visualization does not seem promising, I will not investigate the benefits of those diagrams in this thesis.
+Since system level visualization is applicable to almost any paradigm and word level visualization does not seem promising for dynamic analysis, I will not investigate the benefits of those diagrams in this thesis.
 
 \subsection*{Hierarchical edge bundles}
 Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be the hierarchic relations. Like in object oriented systems, the proper organization of directories, files and word definitions has to be considered to make such a visualization helpful.
 Another possible mapping could depend on word list as words hierarchic and word execution as non hierarchic relation.
 \\
-In the following chapter I will analyze both possibilities using a real forth software as an example.
+The hierarchic edge bundle can be used for interactive and non-interactive(real-time) dynamic analysis. In the following chapter I will analyze both possibilities using a real forth software as an example.
 
 \subsection*{Information murals and massive sequence view}
 The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, mass sequence view proposed by \cite{Cornelissen2009}, which turns the horizontal scrolling into vertical scrolling and also contains the hierarchic aspect could be more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical component depends highly on the organization of the software at hand.
 \\
-In the following chapter I will analyze the massive sequence view using a real forth software as an example.
+As well as the hierarchic edge bundle, these two methods can be used for interactive and non-interactive(post-mortem) dynamic analysis. In the following chapter I will analyze the massive sequence view using a real forth software as an example.
 
 \subsection*{High-Level polymetric views}
-Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with more information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but  only condensed data required.
+Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with more information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data required.
 \\
-In the following chapter I will analyze forms of polymetric views of real software as an example.
+This method is suitable for interactive as well as non-interactive analysis. In the following chapter I will analyze forms of polymetric views of real software as an example.
 
 \subsection*{Fisheye views}
 Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle found in nature. It's basically described as a function, expressing the degree of interest of an subject, depending on an a priori importance and the distance from the current point of view. With growing distance lowers the degree of interest.
