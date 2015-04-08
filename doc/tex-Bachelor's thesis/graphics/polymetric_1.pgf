@@ -1,229 +1,384 @@
+\usetikzlibrary{math}
+
 \begin{tikzpicture}[>=latex,font=\sffamily,semithick,scale=0.8,] % 1 nice; 0.8 fits into latex doc(width only)
 
-	\tikzstyle{every node}=[font=\small]
+	\tikzstyle{every node}=[font=\tiny]
 
-	\def \maxDistRad { 20 }
-	\def \maxWordRad { 3 }
-
+	\tikzmath{
+		\numberOfUniquWords = 43;
+		\wordAngleDiff = 360 / \numberOfUniquWords;
+		\maxDistRad = 20;
+		\maxWordRad = 20;
+		\execOverall = 202;
+		\execOnePercent = \execOverall / 100;
+		\distRadOffset = 3;
+		\wordRadOffset = 0;
+		function getDistRad(\maxSubExecutions) {
+			return \distRadOffset + \maxDistRad * (\maxSubExecutions / \execOnePercent) / 100;
+		};
+		function getWordRad(\numberOfExecutions) {
+			return \wordRadOffset + \maxWordRad * (\numberOfExecutions / \execOnePercent) / 100;
+		};
+		function getAngle(\index) {
+				return \wordAngleDiff * \index;
+		};
+	}
+	
 	\edef \intWordIdx { 0 }
 	\newcommand{ \incrementWordIdx } {
 		\pgfmathparse { \intWordIdx + 1 } \xdef \intWordIdx { \pgfmathresult }
 	}
 
-	\def \numberOfWords { 20 }
-	\def \wordAngleDiff { 360 / \numberOfWords }
 
-	\draw [] (0,0) circle (1);
-	\node [] at (0,0) {m};
+	\draw [] ( 0, 0 )
+		circle ( 1 );
+	\node [] at ( 0, 0 )
+		{ORIGIN};
 
-	\pgfmathsetmacro{\distRad} { \maxDistRad / 20 }
-	\pgfmathsetmacro{\wordRad} { \maxWordRad / 14 }
-		
-	\draw [] (\wordAngleDiff * \intWordIdx :  \distRad) circle (\wordRad);
-	\node [] at (\wordAngleDiff * \intWordIdx :  \distRad) {x};
+	% 6 add-move
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 2 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )
+		circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{add-move};
 	\incrementWordIdx
 
-% \drawInteraction{\m}
-% \drawInteraction{\m}{\QValidMove}
-% \drawInteraction{\QValidMove}{\generateMoves}
-% \drawInteraction{\generateMoves}{\newMoves}
-% \drawInteraction{\generateMoves}{\appendMoves}
-% \drawInteraction{\appendMoves}{\BgenerateMovesB}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\rookMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\knightMoves}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
-% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
-% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\queenMoves}
-% \drawInteraction{\queenMoves}{\bishopMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\queenMoves}{\rookMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\kingMoves}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\kingMove}
-% \drawInteraction{\kingMoves}{\castleNear}
-% \drawInteraction{\castleNear}{\emptyQ}
-% \drawInteraction{\castleNear}{\emptyQ}
-% \drawInteraction{\castleNear}{\unmovedQ}
-% \drawInteraction{\kingMoves}{\castleFar}
-% \drawInteraction{\castleFar}{\emptyQ}
-% \drawInteraction{\castleFar}{\emptyQ}
-% \drawInteraction{\castleFar}{\emptyQ}
-% \drawInteraction{\castleFar}{\unmovedQ}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\bishopMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\bishopMoves}{\straightMoves}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\knightMoves}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
-% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\strikeQMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\kingSquare}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\deltaXyToDirection}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookThreatensThroughQ}
-% \drawInteraction{\rookThreatensThroughQ}{\pieceThreateningThrough}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\knightMoves}{\strikeQMove}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\rookMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\rookMoves}{\straightMoves}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
-% \drawInteraction{\BgenerateMovesB}{\BgenerateMovesFromB}
-% \drawInteraction{\BgenerateMovesFromB}{\selectMovingPiece}
-% \drawInteraction{\BgenerateMovesFromB}{\pawnMoves}
-% \drawInteraction{\pawnMoves}{\QDirection}
-% \drawInteraction{\pawnMoves}{\pawnFarMove}
-% \drawInteraction{\pawnFarMove}{\emptyQ}
-% \drawInteraction{\pawnFarMove}{\QDirection}
-% \drawInteraction{\pawnFarMove}{\emptyQ}
-% \drawInteraction{\pawnFarMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\pawnMoves}{\QDirection}
-% \drawInteraction{\pawnMoves}{\pawnNormalMove}
-% \drawInteraction{\pawnNormalMove}{\emptyQ}
-% \drawInteraction{\pawnNormalMove}{\pawnTransQ}
-% \drawInteraction{\pawnNormalMove}{\BgenerateMoveToB}
-% \drawInteraction{\BgenerateMoveToB}{\BgenerateMoveToNocheckB}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\mightCauseCheckQ}
-% \drawInteraction{\mightCauseCheckQ}{\kingSquare}
-% \drawInteraction{\mightCauseCheckQ}{\queenlikeThreatensThroughQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\toDeltaXy}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\bishopXyQ}
-% \drawInteraction{\queenlikeThreatensThroughQ}{\rookXyQ}
-% \drawInteraction{\BgenerateMoveToNocheckB}{\addMove}
-% \drawInteraction{\addMove}{\moveC}
-% \drawInteraction{\moveC}{\moveS}
-% \drawInteraction{\pawnMoves}{\QDirection}
-% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
-% \drawInteraction{\pawnStrikeMove}{\opponentQ}
-% \drawInteraction{\pawnMoves}{\strikeEpMove}
-% \drawInteraction{\strikeEpMove}{\QDirection}
-% \drawInteraction{\pawnMoves}{\QDirection}
-% \drawInteraction{\pawnMoves}{\pawnStrikeMove}
-% \drawInteraction{\pawnStrikeMove}{\opponentQ}
-% \drawInteraction{\pawnMoves}{\strikeEpMove}
-% \drawInteraction{\strikeEpMove}{\QDirection}
-% \drawInteraction{\BgenerateMovesB}{\myPieceQ}
+	% 1 append-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 197 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{append-moves};
+	\incrementWordIdx
+
+	%3 bishop-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{bishop-moves};
+	\incrementWordIdx
+
+	% 6 bishop-xy?
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{bishop-xy?};
+	\incrementWordIdx
+
+	% 1 castle-far
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{castle-far};
+	\incrementWordIdx
+
+	% 1 castle-near
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 3 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{castle-near};
+	\incrementWordIdx
+
+	% 6 >delta-xy
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{>delta-xy};
+	\incrementWordIdx
+
+	% 4 delta-xy>direction
+	\def \numberOfExecutions { 4 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{delta-xy>direction};
+	\incrementWordIdx
+
+	% 7 ?direction
+	\def \numberOfExecutions { 7 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{?direction};
+	\incrementWordIdx
+
+	% 8 empty?
+	\def \numberOfExecutions { 8 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{empty?};
+	\incrementWordIdx
+
+	% 1 (generate-moves)
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 196 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{(generate-moves)};
+	\incrementWordIdx
+
+	% 1 generate-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 199 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{generate-moves};
+	\incrementWordIdx
+
+	% 9 (generate-moves-from)
+	\def \numberOfExecutions { 9 }
+	\def \maxSubExecutions { 43 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{(generate-moves-from)};
+	\incrementWordIdx
+
+	% 6 (generate-move-to)
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 13 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{(generate-move-to)};
+	\incrementWordIdx
+
+	% 6 (generate-move-to-nocheck)
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 12 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{(generate-move-to-no-nocheck)};
+	\incrementWordIdx
+
+	% 8 king-move
+	\def \numberOfExecutions { 8 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{king-move};
+	\incrementWordIdx
+
+	% 1 king-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 17 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{king-moves};
+	\incrementWordIdx
+
+	% 6 king-square
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{king-square};
+	\incrementWordIdx
+
+	% 2 knight-moves
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 36 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{knight-moves};
+	\incrementWordIdx
+
+	% 1 m
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 201 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{m};
+	\incrementWordIdx
+
+	% 6 might-cause-check?
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 8 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{might-cause-check?};
+	\incrementWordIdx
+
+	% 6 move,
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{move,};
+	\incrementWordIdx
+
+	% 6 move!
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{move!};
+	\incrementWordIdx
+
+	% 13 my-piece?
+	\def \numberOfExecutions { 13 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{my-piece?};
+	\incrementWordIdx
+
+	% 1 new-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{new-moves};
+	\incrementWordIdx
+
+	% 2 opponent?
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{opponent?};
+	\incrementWordIdx
+
+	% 1 pawn-far-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 14 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{pawn-far-move};
+	\incrementWordIdx
+
+	% 1 pawn-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 41 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{pawn-moves};
+	\incrementWordIdx
+
+	% 1 pawn-normal-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 13 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{pawn-normal-move};
+	\incrementWordIdx
+
+	% 2 pawn-strike-move
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{pawn-strike-move};
+	\incrementWordIdx
+
+	% 1 pawn-trans?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{pawn-trans?};
+	\incrementWordIdx
+
+	% 4 piece-threatening-through
+	\def \numberOfExecutions { 4 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{piece-threatening-through};
+	\incrementWordIdx
+
+	% 6 queenlike-threatens-through?
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 6 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{queenlike-threatens-through?};
+	\incrementWordIdx
+
+	% 1 queen-moves
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 10 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{queen-moves};
+	\incrementWordIdx
+
+	% 3 rook-moves
+	\def \numberOfExecutions { 3 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-moves};
+	\incrementWordIdx
+
+	% 4 rook-threatens-through?
+	\def \numberOfExecutions { 4 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-threatens-through?};
+	\incrementWordIdx
+
+	% 6 rook-xy?
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-xy?};
+	\incrementWordIdx
+
+	% 9 select-moving-piece
+	\def \numberOfExecutions { 9 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{select-moving-piece};
+	\incrementWordIdx
+
+	% 24 straight-moves
+	\def \numberOfExecutions { 24 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{straight-moves};
+	\incrementWordIdx
+
+	% 2 strike-ep-move
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{strike-ep-move};
+	\incrementWordIdx
+
+	% 16 strike?-move
+	\def \numberOfExecutions { 16 }
+	\def \maxSubExecutions { 14 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{strike?-moves};
+	\incrementWordIdx
+
+	% 2 unmoved?
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{unmoved?};
+	\incrementWordIdx
+
+	% 1 ?valid-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 200 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{?valid-move};
+	\incrementWordIdx
+
 
 \end{tikzpicture}
