@@ -7,14 +7,16 @@
 	\tikzmath{
 		\numberOfUniquWords = 43;
 		\wordAngleDiff = 360 / \numberOfUniquWords;
-		\maxDistRad = 20;
 		\maxWordRad = 20;
 		\execOverall = 202;
 		\execOnePercent = \execOverall / 100;
-		\distRadOffset = 3;
-		\wordRadOffset = 0;
+		\distRadScaleFactor = 8.15;
+		\wordRadOffset = 0.1;
+		\maxDistRad = 15;
 		function getDistRad(\maxSubExecutions) {
-			return \distRadOffset + \maxDistRad * (\maxSubExecutions / \execOnePercent) / 100;
+			%return \distRadOffset + \maxDistRad * (\maxSubExecutions / \execOnePercent) / 100;
+			%return \maxDistRad - \maxSubExecutions / \distRadScaleFactor;
+			return \maxDistRad - pow(3, pow(\maxSubExecutions / 20, 2) / 42;% steiler am ende 15-3^(((x/20)^2)/42)
 		};
 		function getWordRad(\numberOfExecutions) {
 			return \wordRadOffset + \maxWordRad * (\numberOfExecutions / \execOnePercent) / 100;
@@ -30,9 +32,9 @@
 	}
 
 
-	\draw [] ( 0, 0 )
-		circle ( 1 );
-	\node [] at ( 0, 0 )
+	\draw [color=blue,] ( 0, 0 )
+		circle ( 0.05 );
+	\node [] at ( 0, 0.2 )
 		{ORIGIN};
 
 	% 6 add-move
