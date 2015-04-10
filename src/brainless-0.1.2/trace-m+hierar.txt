@@ -2716,71 +2716,71 @@ m
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -2789,93 +2789,71 @@ m
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
-									next-char
-							epd-write-board-line
-								>square
-								empty?
-								empty?
-								empty?
-								empty?
-								empty?
-								empty?
-								empty?
-								empty?
-								empty?
-								write-char
-									curr-char
-									?in-string
-									in-string?
-									next-char
-								piece?
-								write-char
-									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -2890,14 +2868,14 @@ m
 								empty?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -2912,14 +2890,36 @@ m
 								empty?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
+									next-char
+							epd-write-board-line
+								>square
+								empty?
+								empty?
+								empty?
+								empty?
+								empty?
+								empty?
+								empty?
+								empty?
+								empty?
+								write-char
+									curr-char
+										?in-string
+											in-string?
+									next-char
+								piece?
+								write-char
+									curr-char
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -2929,15 +2929,15 @@ m
 								empty?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								empty?
@@ -2946,14 +2946,14 @@ m
 								empty?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -2962,69 +2962,69 @@ m
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								empty?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
-									next-char
-								empty?
-								piece?
-								piece>char
-								write-char
-									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
+									next-char
+								empty?
+								piece?
+								piece>char
+								write-char
+									curr-char
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 							epd-write-board-line
 								>square
@@ -3033,8 +3033,8 @@ m
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
@@ -3049,66 +3049,66 @@ m
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								piece>char
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 								empty?
 								piece?
 								write-char
 									curr-char
-									?in-string
-									in-string?
+										?in-string
+											in-string?
 									next-char
 						epd-write-party
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 						epd-write-castle
 							#characters
@@ -3118,15 +3118,15 @@ m
 							unmoved
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							white-piece
 							unmoved
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							black-piece
 							unmoved
@@ -3134,88 +3134,88 @@ m
 							unmoved
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							black-piece
 							unmoved
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							#characters
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 						epd-write-ep
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 						write-string
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 							write-char
 								curr-char
-								?in-string
-								in-string?
+									?in-string
+										in-string?
 								next-char
 						#characters
 						previous-string
@@ -3425,7 +3425,19 @@ m
 						no-attr
 				square-white?
 				xy-board@
-					>square
+					>squarempty?
+							pawn-trans?
+							(generate-move-to)
+								(generate-move-to-nocheck)
+									might-cause-check?
+										king-square
+										queenlike-threatens-through?
+											>delta-xy
+											bishop-xy?
+											rook-xy?
+									add-move
+										move,
+											move!
 				.field-slice
 					field-spaces
 						field-attr
@@ -3613,7 +3625,7 @@ m
 					.piece
 						piece-attr
 							black-piece-attr
-							field-attr
+								field-attr
 							white-field-attr
 						(.piece)
 							piece>string
@@ -3867,7 +3879,19 @@ m
 				square-white?
 				xy-board@
 					>square
-				.field-slice
+				.field-slicempty?
+							pawn-trans?
+							(generate-move-to)
+								(generate-move-to-nocheck)
+									might-cause-check?
+										king-square
+										queenlike-threatens-through?
+											>delta-xy
+											bishop-xy?
+											rook-xy?
+									add-move
+										move,
+											move!
 					field-spaces
 						field-attr
 							black-field-attr
@@ -4248,7 +4272,33 @@ m
 				.field-slice
 					field-spaces
 						field-attr
-							black-field-attr
+							black-field-attr	?direction
+								pawn-far-move
+									empty?
+									?direction
+									empty?
+									(move-to-exists?)
+										(move-to-exists?-nocheck)
+											might-cause-check?
+												king-square
+												queenlike-threatens-through?
+													>delta-xy
+													bishop-xy?
+													rook-xy?
+								?direction
+								pawn-normal-move
+									empty?
+									pawn-trans?
+									(move-to-exists?)
+								?direction
+								pawn-strike-move
+									opponent?
+								strike-ep-move
+									?direction
+								?direction
+								pawn-strike-move
+									opponent?
+								strike-e
 						no-attr
 				square-white?
 				xy-board@
