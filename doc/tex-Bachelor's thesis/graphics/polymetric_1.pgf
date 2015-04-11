@@ -8,14 +8,14 @@
 		\numberOfUniquWords = 180;
 		\wordAngleDiff = 360 / \numberOfUniquWords;
 		\maxWordRad = 15;
-		\maxPerWordExecutions = 276;
 		\wordRadOffset = 0.2;
 		\maxDistRad = 15;
 		function getDistRad(\maxSubExecutions) {
 			%return \distRadOffset + \maxDistRad * (\maxSubExecutions / 4739 / 100) / 100;
 			%return \maxDistRad - \maxSubExecutions / 8.15;
 			%return \maxDistRad - pow(3, pow(\maxSubExecutions / 20, 2) / 42;% steiler am ende 15-3^(((x/20)^2)/42)
-			return \maxDistRad - pow(2, pow(\maxSubExecutions / 180, 2) / 180;%15-2^(((x/180)^2)/180)
+			%return \maxDistRad - pow(2, pow(\maxSubExecutions / 90, 2) / 90;%15-2^(((x/180)^2)/180)
+			return pow(e, (1800 / (\maxSubExecutions + 650))) - 1.4; %e^(1800/(x+650))-1.4
 		};
 		function getWordRad(\numberOfExecutions) {
 			%return \wordRadOffset + \maxWordRad * (\numberOfExecutions / \execOnePercent) / 100;
@@ -35,13 +35,20 @@
 	\draw [color=blue,] ( 0, 0 )
 		circle ( 0.05 );
 	\node [] at ( 0, 0.2 )
-		{ORIGIN};
+		{m};
+
+	% 1 m artificial middle
+% 	\def \numberOfExecutions { 1 }
+% 	\def \maxSubExecutions { 4738 }
+% 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
+% 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+% 		{m};
+% 	\incrementWordIdx
 
 	% 40 add-move
 	\def \numberOfExecutions { 40 }
 	\def \maxSubExecutions { 2 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )
-		circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{add-move};
 	\incrementWordIdx
@@ -390,9 +397,29 @@
 		{eval-threat};
 	\incrementWordIdx
 
-%    192 field-attr
-%   128 .field-slice
-%    160 field-spaces
+	% 192 field-attr
+	\def \numberOfExecutions { 192 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{field-attr};
+	\incrementWordIdx
+
+	% 128 .field-slice
+	\def \numberOfExecutions { 128 }
+	\def \maxSubExecutions { 30 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{.field-slice};
+	\incrementWordIdx
+
+	% 160 field-spaces
+	\def \numberOfExecutions { 160 }
+	\def \maxSubExecutions { 3 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{field-spaces};
+	\incrementWordIdx
 
 	% 1 file-exists?
 	\def \numberOfExecutions { 1 }
@@ -522,7 +549,13 @@
 		{get-orig};
 	\incrementWordIdx
 
-%    276 get-piece-masked
+	% 276 get-piece-masked
+	\def \numberOfExecutions { 276 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{get-piece-masked};
+	\incrementWordIdx
 
 	% 2 get-target
 	\def \numberOfExecutions { 2 }
@@ -572,8 +605,21 @@
 		{hist-record};
 	\incrementWordIdx
 
-%     68 ?in-string
-%     68 in-string?
+	% 68 ?in-string
+	\def \numberOfExecutions { 68 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{?in-string};
+	\incrementWordIdx
+
+	% 68 in-string?
+	\def \numberOfExecutions { 68 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{in-string?};
+	\incrementWordIdx
 
 	% 2 is-string
 	\def \numberOfExecutions { 2 }
@@ -583,7 +629,13 @@
 		{is-string};
 	\incrementWordIdx
 
-%     72 ?king-eval
+	% 72 ?king-eval
+	\def \numberOfExecutions { 72 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{?king-eval};
+	\incrementWordIdx
 
 	% 16 king-move
 	\def \numberOfExecutions { 16 }
@@ -631,14 +683,6 @@
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{knight-moves};
-	\incrementWordIdx
-
-	% 1 m
-	\def \numberOfExecutions { 1 }
-	\def \maxSubExecutions { 4738 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
-	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{m};
 	\incrementWordIdx
 
 	% 43 might-cause-check?
@@ -1042,53 +1086,395 @@
 	\incrementWordIdx
 
 	% 2 queen-moves
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 10 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{queen-moves};
+	\incrementWordIdx
+
 	% 2 remember-position
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{remember-position};
+	\incrementWordIdx
+
 	% 11 remove-piece
+	\def \numberOfExecutions { 11 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{remove-piece};
+	\incrementWordIdx
+
 	% 6 rook-moves
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-moves};
+	\incrementWordIdx
+
 	% 12 rook-threatens-through?
+	\def \numberOfExecutions { 12 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-threatens-through?};
+	\incrementWordIdx
+
 	% 120 rook-threats-delta-eval
+	\def \numberOfExecutions { 120 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-threats-delta-eval};
+	\incrementWordIdx
+
 	% 35 rook-xy?
+	\def \numberOfExecutions { 35 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{rook-xy?};
+	\incrementWordIdx
+
 	% 32 select-moving-piece
+	\def \numberOfExecutions { 32 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{select-moving-piece};
+	\incrementWordIdx
+
 	% 20 set-eval
+	\def \numberOfExecutions { 20 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{set-eval};
+	\incrementWordIdx
+
 	% 24 set-this-pawn&king
+	\def \numberOfExecutions { 24 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{set-this-pawn\&king};
+	\incrementWordIdx
+
 	% 136 >square
+	\def \numberOfExecutions { 136 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{>square};
+	\incrementWordIdx
+
 	% 128 square-white?
+	\def \numberOfExecutions { 128 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{square-white?};
+	\incrementWordIdx
+
 	% 48 straight-moves
+	\def \numberOfExecutions { 48 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{straight-moves};
+	\incrementWordIdx
+
 	% 34 strike-ep-move
+	\def \numberOfExecutions { 34 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{strike-ep-move};
+	\incrementWordIdx
+
 	% 32 strike?-move
+	\def \numberOfExecutions { 32 }
+	\def \maxSubExecutions { 14 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{strike?-move};
+	\incrementWordIdx
+
 	% 2 take-piece
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{take-piece};
+	\incrementWordIdx
+
 	% 1 threatened-by-bishop?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-bishop?};
+	\incrementWordIdx
+
 	% 1 threatened-by-king?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-king?};
+	\incrementWordIdx
+
 	% 1 threatened-by-knight?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 16 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-knight?};
+	\incrementWordIdx
+
 	% 1 threatened-by-opponent?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 38 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-opponent?};
+	\incrementWordIdx
+
 	% 1 threatened-by-pawn?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 6 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-pawn?};
+	\incrementWordIdx
+
 	% 1 threatened-by-piece?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 36 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-piece?};
+	\incrementWordIdx
+
 	% 1 threatened-by-rook?
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatened-by-rook?};
+	\incrementWordIdx
+
 	% 2 threatens?
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 2 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threatens?};
+	\incrementWordIdx
+
 	% 30 threats-delta-eval
+	\def \numberOfExecutions { 30 }
+	\def \maxSubExecutions { 10 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{threats-delta-eval};
+	\incrementWordIdx
+
 	% 3 to-move-squares
+	\def \numberOfExecutions { 3 }
+	\def \maxSubExecutions { 3 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{to-move-squares};
+	\incrementWordIdx
+
 	% 2 undo-info
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{undo-info};
+	\incrementWordIdx
+
 	% 1 undo-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 6 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{undo-move};
+	\incrementWordIdx
+
 	% 1 undo-normal-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 2 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{undo-normal-move};
+	\incrementWordIdx
+
 	% 6 unmoved
+	\def \numberOfExecutions { 6 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{unmoved};
+	\incrementWordIdx
+
 	% 4 unmoved?
+	\def \numberOfExecutions { 4 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{unmoved?};
+	\incrementWordIdx
+
 	% 2 update-curr-check?
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 12 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{update-curr-check?};
+	\incrementWordIdx
+
 	% 8 update-hash
+	\def \numberOfExecutions { 8 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{update-hash};
+	\incrementWordIdx
+
 	% 1 ?valid-move
+	\def \numberOfExecutions { 1 }
+	\def \maxSubExecutions { 615 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{?valid-move};
+	\incrementWordIdx
+
 	% 32 .vborder-slice
+	\def \numberOfExecutions { 32 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{.vborder-slice};
+	\incrementWordIdx
+
 	% 98 white-field-attr
+	\def \numberOfExecutions { 98 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{white-field-attr};
+	\incrementWordIdx
+
 	% 2 white-pawn-threatens?
+	\def \numberOfExecutions { 2 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{white-pawn-threatens?};
+	\incrementWordIdx
+
 	% 3 white-piece
+	\def \numberOfExecutions { 3 }
+	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{white-piece};
+	\incrementWordIdx
+
 	% 16 white-piece-attr
+	\def \numberOfExecutions { 16 }
+	\def \maxSubExecutions { 2 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{white-piece-attr};
+	\incrementWordIdx
+
 	% 68 write-char
+	\def \numberOfExecutions { 68 }
+ 	\def \maxSubExecutions { 4 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-char};
+	\incrementWordIdx
+
 	% 1 write-check-state
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 177 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-check-state};
+	\incrementWordIdx
+
 	% 1 write-pawn-move-san
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 26 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-pawn-move-san};
+	\incrementWordIdx
+
 	% 1 write-pawn-trans
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 2 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-pawn-trans};
+	\incrementWordIdx
+
 	% 1 write-square
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 14 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-square};
+	\incrementWordIdx
+
 	% 1 write-square-file
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 6 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-square-file};
+	\incrementWordIdx
+
 	% 1 write-square-rank
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 6 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-square-rank};
+	\incrementWordIdx
+
 	% 1 write-string
+	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 55 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{write-string};
+	\incrementWordIdx
+
 	% 2 >xy
+	\def \numberOfExecutions { 2 }
+ 	\def \maxSubExecutions { 0 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{>xy};
+	\incrementWordIdx
+
 	% 128 xy-board@
+	\def \numberOfExecutions { 128 }
+ 	\def \maxSubExecutions { 1 }
+	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+		{xy-board@};
+	\incrementWordIdx
 
 \end{tikzpicture}

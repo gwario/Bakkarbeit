@@ -3620,7 +3620,7 @@ m
 				.field-slice
 					field-spaces
 						field-attr
-						white-field-attr
+							white-field-attr
 						no-attr
 					.piece
 						piece-attr
