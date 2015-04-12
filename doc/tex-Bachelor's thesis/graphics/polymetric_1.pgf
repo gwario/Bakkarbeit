@@ -32,18 +32,17 @@
 	}
 
 
-	\draw [color=blue,] ( 0, 0 )
-		circle ( 0.05 );
-	\node [] at ( 0, 0.2 )
-		{m};
+%	\draw [color=blue,] ( 0, 0 ) circle ( 0.05 );
+%	\node [] at ( 0, 0.2 )
+%		{m};
 
 	% 1 m artificial middle
-% 	\def \numberOfExecutions { 1 }
-% 	\def \maxSubExecutions { 4738 }
-% 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
-% 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-% 		{m};
-% 	\incrementWordIdx
+ 	\def \numberOfExecutions { 1 }
+ 	\def \maxSubExecutions { 4738 }
+ 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
+ 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
+ 		{m};
+ 	\incrementWordIdx
 
 	% 40 add-move
 	\def \numberOfExecutions { 40 }
@@ -66,7 +65,7 @@
 	\def \maxSubExecutions { 211 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{append-move>san};
+		{append-move\textgreater san};
 	\incrementWordIdx
 
 	%6 bishop-moves
@@ -210,7 +209,7 @@
 	\def \maxSubExecutions { 0 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{>delta-xy};
+		{\textgreater delta-xy};
 	\incrementWordIdx
 
 	% 20 delta-xy>direction
@@ -218,7 +217,7 @@
 	\def \maxSubExecutions { 0 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{delta-xy>direction};
+		{delta-xy\textgreater direction};
 	\incrementWordIdx
 
 	% 121 ?direction
@@ -738,7 +737,7 @@
 	\def \maxSubExecutions { 216 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{move>san};
+		{move\textgreater san};
 	\incrementWordIdx
 
 	% 1 moves-exist?
@@ -762,7 +761,7 @@
 	\def \maxSubExecutions { 217 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{move>string};
+		{move\textgreater string};
 	\incrementWordIdx
 
 	% 2 (move-to-exists?)
@@ -1026,7 +1025,7 @@
 	\def \maxSubExecutions { 0 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{piece>char};
+		{piece\textgreater char};
 	\incrementWordIdx
 
 	% 30 piece-delta-eval
@@ -1042,7 +1041,7 @@
 	\def \maxSubExecutions { 2 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{piece>string};
+		{piece\textgreater string};
 	\incrementWordIdx
 
 	% 20 piece-threatening-through
@@ -1058,7 +1057,7 @@
 	\def \maxSubExecutions { 513 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{position>epd};
+		{position\textgreater epd};
 	\incrementWordIdx
 
 	% 2 previous-string
@@ -1466,7 +1465,7 @@
  	\def \maxSubExecutions { 0 }
 	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
-		{>xy};
+		{\textgreater xy};
 	\incrementWordIdx
 
 	% 128 xy-board@
