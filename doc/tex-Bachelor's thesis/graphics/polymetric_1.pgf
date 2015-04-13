@@ -32,17 +32,20 @@
 	}
 
 
-%	\draw [color=blue,] ( 0, 0 ) circle ( 0.05 );
+
 %	\node [] at ( 0, 0.2 )
 %		{m};
 
-	% 1 m artificial middle
+	% 1 m
  	\def \numberOfExecutions { 1 }
  	\def \maxSubExecutions { 4738 }
  	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} )	circle ( {getWordRad(\numberOfExecutions)} );
  	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
  		{m};
  	\incrementWordIdx
+
+	%origin
+	\draw [color=blue,] ( 0, 0 ) circle ( 0.05 );
 
 	% 40 add-move
 	\def \numberOfExecutions { 40 }
@@ -231,7 +234,7 @@
 	% 1 display-move
 	\def \numberOfExecutions { 1 }
 	\def \maxSubExecutions { 218 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{display-move};
 	\incrementWordIdx
@@ -287,7 +290,7 @@
 	% 1 epd-append-to-file
 	\def \numberOfExecutions { 1 }
 	\def \maxSubExecutions { 516 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=yellow] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{epd-append-to-file};
 	\incrementWordIdx
@@ -343,7 +346,7 @@
 	% 1 epd-write-to-file
 	\def \numberOfExecutions { 1 }
 	\def \maxSubExecutions { 514 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=yellow] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{epd-write-to-file};
 	\incrementWordIdx
@@ -415,7 +418,7 @@
 	% 160 field-spaces
 	\def \numberOfExecutions { 160 }
 	\def \maxSubExecutions { 3 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{field-spaces};
 	\incrementWordIdx
@@ -591,7 +594,7 @@
 	% 2 .hborder
 	\def \numberOfExecutions { 2 }
 	\def \maxSubExecutions { 1 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{.hborder};
 	\incrementWordIdx
@@ -903,7 +906,7 @@
 	% 1 .party
 	\def \numberOfExecutions { 1 }
 	\def \maxSubExecutions { 0 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{.party};
 	\incrementWordIdx
@@ -991,7 +994,7 @@
 	% 32 (.piece)
 	\def \numberOfExecutions { 32 }
 	\def \maxSubExecutions { 3 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{(.piece)};
 	\incrementWordIdx
@@ -1359,7 +1362,7 @@
 	% 32 .vborder-slice
 	\def \numberOfExecutions { 32 }
 	\def \maxSubExecutions { 0 }
-	\draw [] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
+	\draw [fill=red] ( {getAngle(\intWordIdx)} : {getDistRad(\maxSubExecutions)} ) 	circle ( {getWordRad(\numberOfExecutions)} );
 	\node [] at ( {getAngle(\intWordIdx)} :  {getDistRad(\maxSubExecutions)} )
 		{.vborder-slice};
 	\incrementWordIdx

@@ -151,7 +151,7 @@ As well as the hierarchic edge bundle, these two methods can be used for interac
 \subsection*{High-Level polymetric views}
 Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with more information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data required.
 \\
-This method is suitable for interactive as well as non-interactive analysis. In the following chapter I will analyze forms of polymetric views of real software as an example.
+This method is suitable for interactive as well as non-interactive analysis. In the following chapter I will analyze a polymetric view of real software as an example.
 
 \subsection*{Fisheye views}
 Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle found in nature. It's basically described as a function, expressing the degree of interest of an subject, depending on an a priori importance and the distance from the current point of view. With growing distance lowers the degree of interest.
@@ -164,7 +164,7 @@ The execution pattern view proposed by \cite{Pauw98executionpatterns} to visuali
 Since it is somehow related to the massive sequence view, I will not pursue this approach in detail.
 
 \subsection*{Method invocation view and taxonomy view}
-The tool \gls{GraphTrace}\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze object oriented programs. I provides a method invocation view and a taxonomy view. Although the method invocation approach of GraphTrace seems not practical for forth programs, the authors mentioned two very interesting ideas.
+The tool \gls{GraphTrace}\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze object oriented programs. It provides a method invocation view and a taxonomy view. Although the method invocation approach of GraphTrace seems not practical for forth programs, the authors mentioned two very interesting ideas.
 \begin{itemize}
 \item Displaying variable access:\\
 	The idea of showing words which access variables and the other way round, showing which words access a specific variable is very interesting. Thus it would be easier to track the global state of a program.

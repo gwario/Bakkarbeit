@@ -49,7 +49,7 @@ Figure \ref{fig:hierarchic_edge_bundle} shows the first 100\footnote{The calcula
 
 \subsection*{Information murals and massive sequence view}
 
-Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} show the trace snapshot in a \emph{massive sequence view}. It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files. But it also clearly shows the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the phases of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
+Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} show the trace snapshot in a \emph{massive sequence view}. It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files. But it also clearly shows the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
 
 \begin{figure}[p]
     \centering
@@ -74,10 +74,20 @@ Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and
 
 \subsection*{High-Level polymetric views}
 
-The following graphs are not calculated following exact formulas, although the proportions are realistic. In [fig1] I used circles to to represent single words. The radii and text size reflect the number of executions within the time frame, small radii mean fewer executions. The position reflects the number of words executed within a word, the root-word of the trace snapshot is in the center of the graph, fewer sub-word-executions result in a greater distance from the root word.
-In [fig1], the execution of \emph{m} is chosen as the root word, the trace contains m and the following 201 executed words.
+In \ref{fig:polymetric_view} I used circles to represent single words. The radius reflects the number of executions, frequently executed words appear as larger circles. The position(distance from the origin) reflects the number of words executed within the word, fewer sub-word-executions result in a greater distance. If the number of sub executions vary, the maximum was used. The color of a circle reflects the io-behavior of the word. Red means, the word prints to stdout and yellow means it is reading from or writing to a file and the other words are without a fill color.
+
+\hl{TODO große wörter = performance relevant, wörter die in der mitte sind, sind eher intern komplex, farben: wörter die tatsächlich was sichtbares tun}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.55]{graphics/polymetric_view.png}
+    \caption{High-Level polymetric view of the trace of Brainless after \emph{d2 d3 m}}
+    \label{fig:polymetric_view}
+\end{figure}
 
 \subsection*{Method invocation view and taxonomy view}
+
+Variable access view
 
 \subsection*{Frequency spectrum analysis}
 
