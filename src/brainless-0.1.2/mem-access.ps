@@ -1,0 +1,4224 @@
+%!PS-Adobe-3.0
+%%Creator: graphviz version 2.36.0 (20140111.2315)
+%%Title: TaxonomyView
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+/tapered { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 58109 372
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 58073 336 boxprim clip newpath
+1 1 set_scale 0 rotate 40 40 translate
+% a
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27 200 27 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23.5 196.3 moveto 7 (a) alignedtext
+grestore
+% b
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27 18 27 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23.5 14.3 moveto 7 (b) alignedtext
+grestore
+% a->b
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 22.85 182.07 moveto
+19.7 150.84 19.41 83.95 22 46.26 curveto
+stroke
+0 0 0 edgecolor
+newpath 25.51 46.28 moveto
+22.85 36.02 lineto
+18.53 45.7 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 25.51 46.28 moveto
+22.85 36.02 lineto
+18.53 45.7 lineto
+closepath stroke
+grestore
+% b->a
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 31.15 36.02 moveto
+34.31 67.31 34.59 134.21 32 171.84 curveto
+stroke
+0 0 0 edgecolor
+newpath 28.49 171.81 moveto
+31.15 182.07 lineto
+35.46 172.39 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 28.49 171.81 moveto
+31.15 182.07 lineto
+35.46 172.39 lineto
+closepath stroke
+grestore
+% DboardMhooks
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 163.25 218 moveto
+72.75 218 lineto
+72.75 182 lineto
+163.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+80.5 196.3 moveto 75 (#board-hooks) alignedtext
+grestore
+% blackMkingMsquare
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 296 218 moveto
+182 218 lineto
+182 182 lineto
+296 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+190 196.3 moveto 98 (black-king-square) alignedtext
+grestore
+% whiteMkingMsquare
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 429.25 218 moveto
+314.75 218 lineto
+314.75 182 lineto
+429.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+322.5 196.3 moveto 99 (white-king-square) alignedtext
+grestore
+% farMmovedMpawn
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 554.25 218 moveto
+447.75 218 lineto
+447.75 182 lineto
+554.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+455.5 196.3 moveto 91 (far-moved-pawn) alignedtext
+grestore
+% whiteQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 627 218 moveto
+573 218 lineto
+573 182 lineto
+627 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+581.5 196.3 moveto 37 (white?) alignedtext
+grestore
+% myMpawn
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 713 218 moveto
+645 218 lineto
+645 182 lineto
+713 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+653 196.3 moveto 52 (my-pawn) alignedtext
+grestore
+% myMknight
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 805 218 moveto
+731 218 lineto
+731 182 lineto
+805 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+739 196.3 moveto 58 (my-knight) alignedtext
+grestore
+% myMbishop
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 898.25 218 moveto
+823.75 218 lineto
+823.75 182 lineto
+898.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+831.5 196.3 moveto 59 (my-bishop) alignedtext
+grestore
+% myMrook
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 981 218 moveto
+917 218 lineto
+917 182 lineto
+981 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+925 196.3 moveto 48 (my-rook) alignedtext
+grestore
+% myMqueen
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1070.25 218 moveto
+999.75 218 lineto
+999.75 182 lineto
+1070.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1007.5 196.3 moveto 55 (my-queen) alignedtext
+grestore
+% myMking
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1151.25 218 moveto
+1088.75 218 lineto
+1088.75 182 lineto
+1151.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1096.5 196.3 moveto 47 (my-king) alignedtext
+grestore
+% opponentMpawn
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1270.25 218 moveto
+1169.75 218 lineto
+1169.75 182 lineto
+1270.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1177.5 196.3 moveto 85 (opponent-pawn) alignedtext
+grestore
+% opponentMknight
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1394.5 218 moveto
+1289.5 218 lineto
+1289.5 182 lineto
+1394.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1297 196.3 moveto 90 (opponent-knight) alignedtext
+grestore
+% opponentMbishop
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1519.25 218 moveto
+1412.75 218 lineto
+1412.75 182 lineto
+1519.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1420.5 196.3 moveto 91 (opponent-bishop) alignedtext
+grestore
+% opponentMrook
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1634 218 moveto
+1538 218 lineto
+1538 182 lineto
+1634 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1546 196.3 moveto 80 (opponent-rook) alignedtext
+grestore
+% opponentMqueen
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1756 218 moveto
+1652 218 lineto
+1652 182 lineto
+1756 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1660 196.3 moveto 88 (opponent-queen) alignedtext
+grestore
+% opponentMking
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1869.25 218 moveto
+1774.75 218 lineto
+1774.75 182 lineto
+1869.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1782.5 196.3 moveto 79 (opponent-king) alignedtext
+grestore
+% opponent
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 1954.25 218 moveto
+1887.75 218 lineto
+1887.75 182 lineto
+1954.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1895.5 196.3 moveto 51 (opponent) alignedtext
+grestore
+% myMpiece
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2041 218 moveto
+1973 218 lineto
+1973 182 lineto
+2041 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+1981 196.3 moveto 52 (my-piece) alignedtext
+grestore
+% pawnMdirection
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2156.5 218 moveto
+2059.5 218 lineto
+2059.5 182 lineto
+2156.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2067 196.3 moveto 82 (pawn-direction) alignedtext
+grestore
+% flyMeval
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2234.25 218 moveto
+2175.75 218 lineto
+2175.75 182 lineto
+2234.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2183.5 196.3 moveto 43 (fly-eval) alignedtext
+grestore
+% flyMevalMpiece
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2345 218 moveto
+2253 218 lineto
+2253 182 lineto
+2345 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2261 196.3 moveto 76 (fly-eval-piece) alignedtext
+grestore
+% flyMevalMsquare
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2460.5 218 moveto
+2363.5 218 lineto
+2363.5 182 lineto
+2460.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2371 196.3 moveto 82 (fly-eval-square) alignedtext
+grestore
+% cutoffQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2534.25 218 moveto
+2479.75 218 lineto
+2479.75 182 lineto
+2534.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2487.5 196.3 moveto 39 (cutoff?) alignedtext
+grestore
+% Dnull
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2607 218 moveto
+2553 218 lineto
+2553 182 lineto
+2607 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2566 196.3 moveto 28 (#null) alignedtext
+grestore
+% startMtime
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2694.25 218 moveto
+2625.75 218 lineto
+2625.75 182 lineto
+2694.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2633.5 196.3 moveto 53 (start-time) alignedtext
+grestore
+% rootMalpha
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2785 218 moveto
+2713 218 lineto
+2713 182 lineto
+2785 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2721 196.3 moveto 56 (root-alpha) alignedtext
+grestore
+% rootMbeta
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2868.25 218 moveto
+2803.75 218 lineto
+2803.75 182 lineto
+2868.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2811.5 196.3 moveto 49 (root-beta) alignedtext
+grestore
+% moveMweights
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 2981 218 moveto
+2887 218 lineto
+2887 182 lineto
+2981 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+2895 196.3 moveto 78 (move-weights) alignedtext
+grestore
+% compilationMfinishedQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3135 218 moveto
+2999 218 lineto
+2999 182 lineto
+3135 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3007 196.3 moveto 120 (compilation-finished?) alignedtext
+grestore
+% Dkillers
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3210.25 218 moveto
+3153.75 218 lineto
+3153.75 182 lineto
+3210.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3161.5 196.3 moveto 41 (#killers) alignedtext
+grestore
+% hadMstrengthQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3319 218 moveto
+3229 218 lineto
+3229 182 lineto
+3319 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3237 196.3 moveto 74 (had-strength?) alignedtext
+grestore
+% evalMsquare
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3416.25 218 moveto
+3337.75 218 lineto
+3337.75 182 lineto
+3416.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3345.5 196.3 moveto 63 (eval-square) alignedtext
+grestore
+% evalMpiece
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3507 218 moveto
+3435 218 lineto
+3435 182 lineto
+3507 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3443 196.3 moveto 56 (eval-piece) alignedtext
+grestore
+% Devals
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3579 218 moveto
+3525 218 lineto
+3525 182 lineto
+3579 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3534.5 196.3 moveto 35 (#evals) alignedtext
+grestore
+% thisMpawn
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3667 218 moveto
+3597 218 lineto
+3597 182 lineto
+3667 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3605 196.3 moveto 54 (this-pawn) alignedtext
+grestore
+% thisMking
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3750.25 218 moveto
+3685.75 218 lineto
+3685.75 182 lineto
+3750.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3693.5 196.3 moveto 49 (this-king) alignedtext
+grestore
+% thisMpawnMdir
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3857.25 218 moveto
+3768.75 218 lineto
+3768.75 182 lineto
+3857.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3776.5 196.3 moveto 73 (this-pawn-dir) alignedtext
+grestore
+% kingMguardMpawn
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 3986 218 moveto
+3876 218 lineto
+3876 182 lineto
+3986 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+3884 196.3 moveto 94 (king-guard-pawn) alignedtext
+grestore
+% kingMguardMdir
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4099.25 218 moveto
+4004.75 218 lineto
+4004.75 182 lineto
+4099.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4012.5 196.3 moveto 79 (king-guard-dir) alignedtext
+grestore
+% useMarithMnotationQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4236.25 218 moveto
+4117.75 218 lineto
+4117.75 182 lineto
+4236.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4125.5 196.3 moveto 103 (use-arith-notation?) alignedtext
+grestore
+% bigforthQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4321 218 moveto
+4255 218 lineto
+4255 182 lineto
+4321 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4263 196.3 moveto 50 (bigforth?) alignedtext
+grestore
+% gforthQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4394.5 218 moveto
+4339.5 218 lineto
+4339.5 182 lineto
+4394.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4347 196.3 moveto 40 (gforth?) alignedtext
+grestore
+% iforthQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4467 218 moveto
+4413 218 lineto
+4413 182 lineto
+4467 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4421.5 196.3 moveto 37 (iforth?) alignedtext
+grestore
+% currMdef
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4544.5 218 moveto
+4485.5 218 lineto
+4485.5 182 lineto
+4544.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4493 196.3 moveto 44 (curr-def) alignedtext
+grestore
+% nonameMdefQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4650.5 218 moveto
+4563.5 218 lineto
+4563.5 182 lineto
+4650.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4571 196.3 moveto 72 (noname-def?) alignedtext
+grestore
+% thinkMlimit
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4743.25 218 moveto
+4668.75 218 lineto
+4668.75 182 lineto
+4743.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4676.5 196.3 moveto 59 (think-limit) alignedtext
+grestore
+% currMthinkMlimit
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4862.25 218 moveto
+4761.75 218 lineto
+4761.75 182 lineto
+4862.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4769.5 196.3 moveto 85 (curr-think-limit) alignedtext
+grestore
+% thinkMextend
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 4965.25 218 moveto
+4880.75 218 lineto
+4880.75 182 lineto
+4965.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4888.5 196.3 moveto 69 (think-extend) alignedtext
+grestore
+% maxMthinkMlimit
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5088 218 moveto
+4984 218 lineto
+4984 182 lineto
+5088 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+4992 196.3 moveto 88 (max-think-limit) alignedtext
+grestore
+% abortMtime
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5180 218 moveto
+5106 218 lineto
+5106 182 lineto
+5180 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5114 196.3 moveto 58 (abort-time) alignedtext
+grestore
+% thinkMdepth
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5277.25 218 moveto
+5198.75 218 lineto
+5198.75 182 lineto
+5277.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5206.5 196.3 moveto 63 (think-depth) alignedtext
+grestore
+% abortingQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5364 218 moveto
+5296 218 lineto
+5296 182 lineto
+5364 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5304 196.3 moveto 52 (aborting?) alignedtext
+grestore
+% alpha
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5436 218 moveto
+5382 218 lineto
+5382 182 lineto
+5436 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5394 196.3 moveto 30 (alpha) alignedtext
+grestore
+% beta
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5508 218 moveto
+5454 218 lineto
+5454 182 lineto
+5508 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5469.5 196.3 moveto 23 (beta) alignedtext
+grestore
+% onMprincipalMvariationQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5667.25 218 moveto
+5526.75 218 lineto
+5526.75 182 lineto
+5667.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5534.5 196.3 moveto 125 (on-principal-variation?) alignedtext
+grestore
+% Dnodes
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5740.25 218 moveto
+5685.75 218 lineto
+5685.75 182 lineto
+5740.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5693.5 196.3 moveto 39 (#nodes) alignedtext
+grestore
+% staleMmate
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5831.25 218 moveto
+5758.75 218 lineto
+5758.75 182 lineto
+5831.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5766.5 196.3 moveto 57 (stale-mate) alignedtext
+grestore
+% currMabsMeval
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 5937.5 218 moveto
+5850.5 218 lineto
+5850.5 182 lineto
+5937.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5858 196.3 moveto 72 (curr-abs-eval) alignedtext
+grestore
+% currMcheckQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6036 218 moveto
+5956 218 lineto
+5956 182 lineto
+6036 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+5964 196.3 moveto 64 (curr-check?) alignedtext
+grestore
+% blackMmoveMtarget
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6169.5 218 moveto
+6054.5 218 lineto
+6054.5 182 lineto
+6169.5 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6062 196.3 moveto 100 (black-move-target) alignedtext
+grestore
+% whiteMmoveMtarget
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6305.25 218 moveto
+6188.75 218 lineto
+6188.75 182 lineto
+6305.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6196.5 196.3 moveto 101 (white-move-target) alignedtext
+grestore
+% blackMmoveMorig
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6430.25 218 moveto
+6323.75 218 lineto
+6323.75 182 lineto
+6430.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6331.5 196.3 moveto 91 (black-move-orig) alignedtext
+grestore
+% whiteMmoveMorig
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6557 218 moveto
+6449 218 lineto
+6449 182 lineto
+6557 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6457 196.3 moveto 92 (white-move-orig) alignedtext
+grestore
+% moveMlist
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6643 218 moveto
+6575 218 lineto
+6575 182 lineto
+6643 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6583 196.3 moveto 52 (move-list) alignedtext
+grestore
+% Dmoves
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6720.25 218 moveto
+6661.75 218 lineto
+6661.75 182 lineto
+6720.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6669.5 196.3 moveto 43 (#moves) alignedtext
+grestore
+% movesMevaluatedQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6853.25 218 moveto
+6738.75 218 lineto
+6738.75 182 lineto
+6853.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6746.5 196.3 moveto 99 (moves-evaluated?) alignedtext
+grestore
+% findMmoveMclass
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 6976 218 moveto
+6872 218 lineto
+6872 182 lineto
+6976 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+6880 196.3 moveto 88 (find-move-class) alignedtext
+grestore
+% currMstringD
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7074 218 moveto
+6994 218 lineto
+6994 182 lineto
+7074 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7002 196.3 moveto 64 (curr-string#) alignedtext
+grestore
+% epdMfileMid
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7166 218 moveto
+7092 218 lineto
+7092 182 lineto
+7166 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7100 196.3 moveto 58 (epd-file-id) alignedtext
+grestore
+% epdMfileid
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7253.25 218 moveto
+7184.75 218 lineto
+7184.75 182 lineto
+7253.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7192.5 196.3 moveto 53 (epd-fileid) alignedtext
+grestore
+% moveMgenMpiece
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7376 218 moveto
+7272 218 lineto
+7272 182 lineto
+7376 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7280 196.3 moveto 88 (move-gen-piece) alignedtext
+grestore
+% moveMgenMfrom
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7497.25 218 moveto
+7394.75 218 lineto
+7394.75 182 lineto
+7497.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7402.5 196.3 moveto 87 (move-gen-from) alignedtext
+grestore
+% forbiddenMmoveMtarget
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7656 218 moveto
+7516 218 lineto
+7516 182 lineto
+7656 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7524 196.3 moveto 124 (forbidden-move-target) alignedtext
+grestore
+% singleMmoveMto
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7773.25 218 moveto
+7674.75 218 lineto
+7674.75 182 lineto
+7773.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7682.5 196.3 moveto 83 (single-move-to) alignedtext
+grestore
+% singleMmoveMclass
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 7906.25 218 moveto
+7791.75 218 lineto
+7791.75 182 lineto
+7906.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7799.5 196.3 moveto 99 (single-move-class) alignedtext
+grestore
+% moveMexistsQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8013.25 218 moveto
+7924.75 218 lineto
+7924.75 182 lineto
+8013.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+7932.5 196.3 moveto 73 (move-exists?) alignedtext
+grestore
+% randomMseed
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8118.25 218 moveto
+8031.75 218 lineto
+8031.75 182 lineto
+8118.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8039.5 196.3 moveto 71 (random-seed) alignedtext
+grestore
+% hashedMpositions
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8251 218 moveto
+8137 218 lineto
+8137 182 lineto
+8251 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8145 196.3 moveto 98 (#hashed-positions) alignedtext
+grestore
+% mostMrecentMmatch
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8388.25 218 moveto
+8269.75 218 lineto
+8269.75 182 lineto
+8388.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8277.5 196.3 moveto 103 (most-recent-match) alignedtext
+grestore
+% checkMlimit
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8485.25 218 moveto
+8406.75 218 lineto
+8406.75 182 lineto
+8485.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8414.5 196.3 moveto 63 (check-limit) alignedtext
+grestore
+% checkMdepth
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8586.25 218 moveto
+8503.75 218 lineto
+8503.75 182 lineto
+8586.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8511.5 196.3 moveto 67 (check-depth) alignedtext
+grestore
+% threateningMsquare
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8721.25 218 moveto
+8604.75 218 lineto
+8604.75 182 lineto
+8721.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8612.5 196.3 moveto 101 (threatening-square) alignedtext
+grestore
+% nullMmoveMthreshold
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 8868 218 moveto
+8740 218 lineto
+8740 182 lineto
+8868 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8748 196.3 moveto 112 (null-move-threshold) alignedtext
+grestore
+% whiteMnullMmovesQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9005.25 218 moveto
+8886.75 218 lineto
+8886.75 182 lineto
+9005.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+8894.5 196.3 moveto 103 (white-null-moves?) alignedtext
+grestore
+% blackMnullMmovesQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9142 218 moveto
+9024 218 lineto
+9024 182 lineto
+9142 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9032 196.3 moveto 102 (black-null-moves?) alignedtext
+grestore
+% whiteMfieldQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9242 218 moveto
+9160 218 lineto
+9160 182 lineto
+9242 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9168 196.3 moveto 66 (white-field?) alignedtext
+grestore
+% whiteMpieceQ
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9346 218 moveto
+9260 218 lineto
+9260 182 lineto
+9346 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9268 196.3 moveto 70 (white-piece?) alignedtext
+grestore
+% fieldMwidth
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9441.25 218 moveto
+9364.75 218 lineto
+9364.75 182 lineto
+9441.25 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9372.5 196.3 moveto 61 (field-width) alignedtext
+grestore
+% fieldMheight
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9540 218 moveto
+9460 218 lineto
+9460 182 lineto
+9540 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9468 196.3 moveto 64 (field-height) alignedtext
+grestore
+% moveMgenMto
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9644 218 moveto
+9558 218 lineto
+9558 182 lineto
+9644 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9566 196.3 moveto 70 (move-gen-to) alignedtext
+grestore
+% targetMpiece
+gsave
+1 setlinewidth
+0 1 1 nodecolor
+newpath 9742 218 moveto
+9662 218 lineto
+9662 182 lineto
+9742 182 lineto
+closepath stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9670 196.3 moveto 64 (target-piece) alignedtext
+grestore
+% addMboardMhook
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+9827 200 66.42 66.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9783.5 196.3 moveto 87 (add-board-hook) alignedtext
+grestore
+% updateMboard
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+9969 200 57.29 57.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+9933 196.3 moveto 72 (update-board) alignedtext
+grestore
+% kingMsquare
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10096 200 51.49 51.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10064 196.3 moveto 64 (king-square) alignedtext
+grestore
+% opponentMkingMsquare
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10254 200 87.61 87.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10194.5 196.3 moveto 119 (opponent-king-square) alignedtext
+grestore
+% positionMking
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10418 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10381.5 196.3 moveto 73 (position-king) alignedtext
+grestore
+% initMkings
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10538 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10512 196.3 moveto 52 (init-kings) alignedtext
+grestore
+% singleMstrikeMepMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10689 200 88.09 88.28 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10629 196.3 moveto 120 (single-strike-ep-move) alignedtext
+grestore
+% doMpawnMfarMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+10873 200 77.02 77.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10821.5 196.3 moveto 103 (do-pawn-far-move) alignedtext
+grestore
+% doMmoveMundoMinfo
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11048 200 79.41 79.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+10994.5 196.3 moveto 107 (do-move-undo-info) alignedtext
+grestore
+% undoMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11197 200 51.02 51.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+11165.5 196.3 moveto 63 (undo-move) alignedtext
+grestore
+% selfMcheckingMmoveQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11351 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+11293.5 196.3 moveto 115 (self-checking-move?) alignedtext
+grestore
+% checkingMmoveQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11524 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+11478.5 196.3 moveto 91 (checking-move?) alignedtext
+grestore
+% setMnormalMmoveMhash
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11703 200 90.49 90.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+11641 196.3 moveto 124 (set-normal-move-hash) alignedtext
+grestore
+% setMstrikeMmoveMhash
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+11897 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+11839.5 196.3 moveto 115 (set-strike-move-hash) alignedtext
+grestore
+% epdMwriteMep
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12056 200 55.34 55.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12021 196.3 moveto 70 (epd-write-ep) alignedtext
+grestore
+% epdMreadMep
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12183 200 52.47 52.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12150.5 196.3 moveto 65 (epd-read-ep) alignedtext
+grestore
+% strikeMepMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12318 200 64.02 64.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12276.5 196.3 moveto 83 (strike-ep-move) alignedtext
+grestore
+% hashMfarMmovedMpawn
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12489 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12428.5 196.3 moveto 121 (hash-far-moved-pawn) alignedtext
+grestore
+% otherMparty
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12646 200 50.07 50.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12615.5 196.3 moveto 61 (other-party) alignedtext
+grestore
+% setMparty
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12756 200 41.39 41.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12732 196.3 moveto 48 (set-party) alignedtext
+grestore
+% flyMevalMcastleMnear
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+12895 200 78.94 79.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+12842 196.3 moveto 106 (fly-eval-castle-near) alignedtext
+grestore
+% flyMevalMcastleMfar
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13066 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13017.5 196.3 moveto 97 (fly-eval-castle-far) alignedtext
+grestore
+% ttentry
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13191 200 33.2 33.6 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13173 196.3 moveto 36 (ttentry) alignedtext
+grestore
+% associatedMcapture
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13318 200 75.09 75.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13268 196.3 moveto 100 (associated-capture) alignedtext
+grestore
+% DTparty
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13443 200 31.3 31.4 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13427 196.3 moveto 32 (.party) alignedtext
+grestore
+% myMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13532 200 39.95 40.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13509 196.3 moveto 46 (my-eval) alignedtext
+grestore
+% absMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13631 200 39.95 40.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13608 196.3 moveto 46 (abs-eval) alignedtext
+grestore
+% opponentMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13750 200 61.14 61.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13711 196.3 moveto 78 (opponent-eval) alignedtext
+grestore
+% moveMtarget
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+13883 200 53.42 53.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13849.5 196.3 moveto 67 (move-target) alignedtext
+grestore
+% opponentMmoveMtarget
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14044 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+13983.5 196.3 moveto 121 (opponent-move-target) alignedtext
+grestore
+% toMmoveMtarget
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14215 200 63.54 63.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14174 196.3 moveto 82 (to-move-target) alignedtext
+grestore
+% moveMorig
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14345 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14316 196.3 moveto 58 (move-orig) alignedtext
+grestore
+% opponentMmoveMorig
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14494 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14438 196.3 moveto 112 (opponent-move-orig) alignedtext
+grestore
+% toMmoveMorig
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14653 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14616.5 196.3 moveto 73 (to-move-orig) alignedtext
+grestore
+% moveMsquares
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14789 200 59.19 59.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14751 196.3 moveto 76 (move-squares) alignedtext
+grestore
+% opponentMmoveMsquares
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+14962 200 95.31 95.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+14896.5 196.3 moveto 131 (opponent-move-squares) alignedtext
+grestore
+% toMmoveMsquares
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15145 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15099.5 196.3 moveto 91 (to-move-squares) alignedtext
+grestore
+% sortMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15283 200 50.07 50.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15252.5 196.3 moveto 61 (sort-moves) alignedtext
+grestore
+% doMcastleMnear
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15411 200 60.17 60.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15372.5 196.3 moveto 77 (do-castle-near) alignedtext
+grestore
+% doMcastleMfar
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15545 200 55.37 55.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15510.5 196.3 moveto 69 (do-castle-far) alignedtext
+grestore
+% doMcastleMnearMfast
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15694 200 76.06 76.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15643.5 196.3 moveto 101 (do-castle-near-fast) alignedtext
+grestore
+% doMcastleMfarMfast
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+15859 200 70.27 70.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15812.5 196.3 moveto 93 (do-castle-far-fast) alignedtext
+grestore
+% epdMwriteMparty
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16013 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+15970.5 196.3 moveto 85 (epd-write-party) alignedtext
+grestore
+% generateMpromotions
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16180 200 83.26 83.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16123.5 196.3 moveto 113 (generate-promotions) alignedtext
+grestore
+% useMnullMmovesQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16351 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16305.5 196.3 moveto 91 (use-null-moves?) alignedtext
+grestore
+% toMnullMmovesQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16503 200 64.02 64.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16461.5 196.3 moveto 83 (to-null-moves?) alignedtext
+grestore
+% DTboardMline
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16635 200 49.09 49.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16605 196.3 moveto 60 (.board-line) alignedtext
+grestore
+% myMpieces
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16750 200 47.17 47.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16721.5 196.3 moveto 57 (my-pieces) alignedtext
+grestore
+% pawnMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+16891 200 75.09 75.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+16841 196.3 moveto 100 (pawn-target-move) alignedtext
+grestore
+% pawnMsingleMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+17084 200 99.16 99.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17015.5 196.3 moveto 137 (pawn-single-target-move) alignedtext
+grestore
+% knightMsingleMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+17304 200 102.54 102.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17233 196.3 moveto 142 (knight-single-target-move) alignedtext
+grestore
+% knightMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+17504 200 78.94 79.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17451 196.3 moveto 106 (knight-target-move) alignedtext
+grestore
+% bishopMtargetMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+17684 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17628 196.3 moveto 112 (bishop-target-moves) alignedtext
+grestore
+% rookMtargetMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+17861 200 76.06 76.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17810.5 196.3 moveto 101 (rook-target-moves) alignedtext
+grestore
+% queenMtargetMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18036 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+17981.5 196.3 moveto 109 (queen-target-moves) alignedtext
+grestore
+% opponentMpieces
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18203 200 68.37 68.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18158.5 196.3 moveto 89 (opponent-pieces) alignedtext
+grestore
+% opponentMpawnQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18359 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18313.5 196.3 moveto 91 (opponent-pawn?) alignedtext
+grestore
+% opponentMknightQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18519 200 72.19 72.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18471 196.3 moveto 96 (opponent-knight?) alignedtext
+grestore
+% opponentMbishopQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18683 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18634.5 196.3 moveto 97 (opponent-bishop?) alignedtext
+grestore
+% opponentMrookQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18841 200 65.94 66.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18798 196.3 moveto 86 (opponent-rook?) alignedtext
+grestore
+% opponentMkingQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+18991 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+18948.5 196.3 moveto 85 (opponent-king?) alignedtext
+grestore
+% opponentQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19122 200 47.17 47.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19093.5 196.3 moveto 57 (opponent?) alignedtext
+grestore
+% undoMstrikeMepMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19273 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19215.5 196.3 moveto 115 (undo-strike-ep-move) alignedtext
+grestore
+% strikeQMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19433 200 57.29 57.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19397 196.3 moveto 72 (strike?-move) alignedtext
+grestore
+% straightMstrikeMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19594 200 85.19 85.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19536 196.3 moveto 116 (straight-strike-moves) alignedtext
+grestore
+% straightMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19761 200 63.54 63.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19720 196.3 moveto 82 (straight-moves) alignedtext
+grestore
+% kingMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+19892 200 49.09 49.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19862 196.3 moveto 60 (king-move) alignedtext
+grestore
+% bishopMthreatensMthroughQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20062 200 102.54 102.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+19991 196.3 moveto 142 (bishop-threatens-through?) alignedtext
+grestore
+% rookMthreatensMthroughQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20278 200 95.31 95.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+20212.5 196.3 moveto 131 (rook-threatens-through?) alignedtext
+grestore
+% legalMmoveMtargetQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20469 200 77.02 77.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+20417.5 196.3 moveto 103 (legal-move-target?) alignedtext
+grestore
+% myMpieceQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20612 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+20583 196.3 moveto 58 (my-piece?) alignedtext
+grestore
+% flyMevalMtransMknight
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20761 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+20705 196.3 moveto 112 (fly-eval-trans-knight) alignedtext
+grestore
+% flyMevalMtransMqueen
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+20944 200 81.34 81.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+20889 196.3 moveto 110 (fly-eval-trans-queen) alignedtext
+grestore
+% undoMtransMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+21115 200 71.24 71.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+21068 196.3 moveto 94 (undo-trans-move) alignedtext
+grestore
+% doMtransMknightMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+21292 200 87.61 87.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+21232.5 196.3 moveto 119 (do-trans-knight-move) alignedtext
+grestore
+% doMtransMqueenMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+21484 200 86.16 86.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+21425.5 196.3 moveto 117 (do-trans-queen-move) alignedtext
+grestore
+% doMtransMknightMmoveMfast
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+21692 200 103.01 103.18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+21620.5 196.3 moveto 143 (do-trans-knight-move-fast) alignedtext
+grestore
+% doMtransMqueenMmoveMfast
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+21915 200 102.06 102.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+21844.5 196.3 moveto 141 (do-trans-queen-move-fast) alignedtext
+grestore
+% bishopMsingleMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22139 200 103.49 103.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22067 196.3 moveto 144 (bishop-single-target-move) alignedtext
+grestore
+% rookMsingleMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22358 200 96.26 96.68 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22291.5 196.3 moveto 133 (rook-single-target-move) alignedtext
+grestore
+% queenMsingleMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22574 200 101.09 101.28 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22504 196.3 moveto 140 (queen-single-target-move) alignedtext
+grestore
+% Qdirection
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22740 200 46.22 46.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22712.5 196.3 moveto 55 (?direction) alignedtext
+grestore
+% evalMput
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22844 200 39.47 39.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22821.5 196.3 moveto 45 (eval-put) alignedtext
+grestore
+% flyMevalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+22963 200 61.14 61.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+22924 196.3 moveto 78 (fly-eval-move) alignedtext
+grestore
+% flyMevalMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23106 200 64.02 64.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23064.5 196.3 moveto 83 (fly-eval-moves) alignedtext
+grestore
+% flyMevalMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23272 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23216 196.3 moveto 112 (fly-eval-strike-move) alignedtext
+grestore
+% flyMevalMnormalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23462 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23401.5 196.3 moveto 121 (fly-eval-normal-move) alignedtext
+grestore
+% flyMevalMstrikeMepMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23664 200 94.34 94.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23599 196.3 moveto 130 (fly-eval-strike-ep-move) alignedtext
+grestore
+% isMcutoffQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23821 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23795 196.3 moveto 52 (is-cutoff?) alignedtext
+grestore
+% bestMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+23949 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+23906.5 196.3 moveto 85 (best-move-eval) alignedtext
+grestore
+% nullMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+24098 200 64.49 64.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+24056 196.3 moveto 84 (null-move-eval) alignedtext
+grestore
+% singleMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+24253 200 72.22 72.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+24205.5 196.3 moveto 95 (single-move-eval) alignedtext
+grestore
+% killerMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+24413 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+24367.5 196.3 moveto 91 (killer-move-eval) alignedtext
+grestore
+% captureMkillerMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+24599 200 98.19 98.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+24531 196.3 moveto 136 (capture-killer-move-eval) alignedtext
+grestore
+% minimumMquiescenceMmoveMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+24844 200 128.06 128.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+24753.5 196.3 moveto 181 (minimum-quiescence-move-eval) alignedtext
+grestore
+% BevalMpositionMrecursiveB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25088 200 97.24 97.48 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25021 196.3 moveto 134 (\(eval-position-recursive\)) alignedtext
+grestore
+% BquiescenceMevalMnocheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25308 200 104.46 104.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25235.5 196.3 moveto 145 (\(quiescence-eval-nocheck\)) alignedtext
+grestore
+% BquiescenceMevalMcheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25527 200 96.29 96.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25461 196.3 moveto 132 (\(quiescence-eval-check\)) alignedtext
+grestore
+% BabortMsearchQB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25705 200 63.54 63.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25664 196.3 moveto 82 (\(abort-search?\)) alignedtext
+grestore
+% calculateMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25852 200 64.49 64.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25810 196.3 moveto 84 (calculate-move) alignedtext
+grestore
+% rootMsearch
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+25985 200 50.07 50.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+25954.5 196.3 moveto 61 (root-search) alignedtext
+grestore
+% createMmoveMweights
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26138 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26080.5 196.3 moveto 115 (create-move-weights) alignedtext
+grestore
+% forgetMmoveMweights
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26326 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26268.5 196.3 moveto 115 (forget-move-weights) alignedtext
+grestore
+% moveMweight
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26487 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26450.5 196.3 moveto 73 (move-weight) alignedtext
+grestore
+% adjustMkillerMhistory
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26643 200 80.39 80.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26589 196.3 moveto 108 (adjust-killer-history) alignedtext
+grestore
+% getMrelMkillMcount
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26812 200 70.27 70.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26765.5 196.3 moveto 93 (get-rel-kill-count) alignedtext
+grestore
+% clearMkillerMhistory
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+26978 200 76.54 76.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+26927 196.3 moveto 102 (clear-killer-history) alignedtext
+grestore
+% strength
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27112 200 38.49 38.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27090 196.3 moveto 44 (strength) alignedtext
+grestore
+% QdefaultMstrength
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27239 200 70.29 70.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27193 196.3 moveto 92 (?default-strength) alignedtext
+grestore
+% rookMthreatsMdeltaMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27418 200 90.49 90.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27356 196.3 moveto 124 (rook-threats-delta-eval) alignedtext
+grestore
+% bishopMthreatsMdeltaMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27625 200 98.21 98.28 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27557.5 196.3 moveto 135 (bishop-threats-delta-eval) alignedtext
+grestore
+% deltaMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27787 200 45.24 45.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27760 196.3 moveto 54 (delta-eval) alignedtext
+grestore
+% evalMthreat
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+27899 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27870 196.3 moveto 58 (eval-threat) alignedtext
+grestore
+% evalMstraightMthreats
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28046 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+27991.5 196.3 moveto 109 (eval-straight-threats) alignedtext
+grestore
+% initMknightMthreatMtable
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28236 200 90.49 90.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28174 196.3 moveto 124 (init-knight-threat-table) alignedtext
+grestore
+% evalMknightMthreats
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28422 200 77.02 77.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28370.5 196.3 moveto 103 (eval-knight-threats) alignedtext
+grestore
+% pawnMrowMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28581 200 63.54 63.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28540 196.3 moveto 82 (pawn-row-eval) alignedtext
+grestore
+% QpawnMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28714 200 51.02 51.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28682.5 196.3 moveto 63 (?pawn-eval) alignedtext
+grestore
+% QkingMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28831 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28802 196.3 moveto 58 (?king-eval) alignedtext
+grestore
+% kingMguardQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+28950 200 52.94 53.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+28917 196.3 moveto 66 (king-guard?) alignedtext
+grestore
+% kingMatMbottomQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29089 200 67.39 67.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29045 196.3 moveto 88 (king-at-bottom?) alignedtext
+grestore
+% totalMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29219 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29193 196.3 moveto 52 (total-eval) alignedtext
+grestore
+% pieceMdeltaMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29348 200 66.42 66.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29304.5 196.3 moveto 87 (piece-delta-eval) alignedtext
+grestore
+% pieceMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29480 200 46.2 46.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29452 196.3 moveto 56 (piece-eval) alignedtext
+grestore
+% kingMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29589 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29563 196.3 moveto 52 (king-eval) alignedtext
+grestore
+% setMkingMguardMpawn
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29735 200 83.26 83.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29678.5 196.3 moveto 113 (set-king-guard-pawn) alignedtext
+grestore
+% queenMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+29886 200 49.09 49.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29856 196.3 moveto 60 (queen-eval) alignedtext
+grestore
+% setMthisMpawnAking
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30035 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+29980.5 196.3 moveto 109 (set-this-pawn&king) alignedtext
+grestore
+% setMthisMpawn
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30192 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30155.5 196.3 moveto 73 (set-this-pawn) alignedtext
+grestore
+% evalMpawnMthreats
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30341 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30292.5 196.3 moveto 97 (eval-pawn-threats) alignedtext
+grestore
+% Bstat
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30461 200 28.4 28.7 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30447 196.3 moveto 28 (<stat) alignedtext
+grestore
+% statB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30536 200 28.4 28.7 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30522 196.3 moveto 28 (stat>) alignedtext
+grestore
+% benchmarkMmovegen
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30668 200 85.19 85.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30610 196.3 moveto 116 (benchmark-movegen) alignedtext
+grestore
+% pawnMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30819 200 47.17 47.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30790.5 196.3 moveto 57 (pawn-eval) alignedtext
+grestore
+% pawnMdeltaMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+30952 200 67.39 67.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+30908 196.3 moveto 88 (pawn-delta-eval) alignedtext
+grestore
+% appendMmoveBstring
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31122 200 84.24 84.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31065 196.3 moveto 114 (append-move>string) alignedtext
+grestore
+% moveBstring
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31280 200 55.34 55.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31245 196.3 moveto 70 (move>string) alignedtext
+grestore
+% BhistoryMfilenameB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31429 200 75.09 75.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31379 196.3 moveto 100 (\(history-filename\)) alignedtext
+grestore
+% pC
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31540 200 18 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31534.5 196.3 moveto 11 (p:) alignedtext
+grestore
+% pCnoname
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31622 200 46.22 46.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31594.5 196.3 moveto 55 (p:noname) alignedtext
+grestore
+% Sp
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31704 200 18 18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31698.5 196.3 moveto 11 (;p) alignedtext
+grestore
+% rememberMbestmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+31824 200 84.24 84.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31767 196.3 moveto 114 (remember-bestmove) alignedtext
+grestore
+% onlyMaggressionMhopefulQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32027 200 100.61 100.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+31957.5 196.3 moveto 139 (only-aggression-hopeful?) alignedtext
+grestore
+% QcheckMextension
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32217 200 71.24 71.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32170 196.3 moveto 94 (?check-extension) alignedtext
+grestore
+% setupMthinkMlimit
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32377 200 70.29 70.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32331 196.3 moveto 92 (setup-think-limit) alignedtext
+grestore
+% QstaleMmate
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32517 200 51.02 51.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32485.5 196.3 moveto 63 (?stale-mate) alignedtext
+grestore
+% BevalMmoveMrecursiveB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32675 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32614.5 196.3 moveto 121 (\(eval-move-recursive\)) alignedtext
+grestore
+% recurseQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32822 200 39.95 40.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32799 196.3 moveto 46 (recurse?) alignedtext
+grestore
+% horizonMdistance
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+32950 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+32904.5 196.3 moveto 91 (horizon-distance) alignedtext
+grestore
+% benchmark1
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33092 200 54.39 54.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33058 196.3 moveto 68 (benchmark1) alignedtext
+grestore
+% showMthoughts
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33227 200 62.09 62.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33187 196.3 moveto 80 (show-thoughts) alignedtext
+grestore
+% checkMmateMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33377 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33331.5 196.3 moveto 91 (check-mate-eval) alignedtext
+grestore
+% evalBtt
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33500 200 35.62 36 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33480.5 196.3 moveto 39 (eval>tt) alignedtext
+grestore
+% ttBeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33589 200 35.62 36 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33569.5 196.3 moveto 39 (tt>eval) alignedtext
+grestore
+% QabortMsearch
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33701 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33664.5 196.3 moveto 73 (?abort-search) alignedtext
+grestore
+% rootMprincipalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+33859 200 81.34 81.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33804 196.3 moveto 110 (root-principal-move) alignedtext
+grestore
+% principalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34024 200 64.49 64.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+33982 196.3 moveto 84 (principal-move) alignedtext
+grestore
+% appendMprincipalMvariation
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34212 200 104.46 104.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34139.5 196.3 moveto 145 (append-principal-variation) alignedtext
+grestore
+% appendMpvBstring
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34408 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34359.5 196.3 moveto 97 (append-pv>string) alignedtext
+grestore
+% simpleMkiller
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34555 200 55.34 55.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34520 196.3 moveto 70 (simple-killer) alignedtext
+grestore
+% Pdepth
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34665 200 35.62 36 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34645.5 196.3 moveto 39 (+depth) alignedtext
+grestore
+% Mdepth
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34752 200 33.22 33.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34734.5 196.3 moveto 35 (-depth) alignedtext
+grestore
+% nullMmoveQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34854 200 51.02 51.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34822.5 196.3 moveto 63 (null-move?) alignedtext
+grestore
+% storeMevaluation
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+34991 200 67.39 67.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+34947 196.3 moveto 88 (store-evaluation) alignedtext
+grestore
+% switchMalphaMbeta
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35150 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35101.5 196.3 moveto 97 (switch-alpha-beta) alignedtext
+grestore
+% adjustMalpha
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35295 200 53.42 53.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35261.5 196.3 moveto 67 (adjust-alpha) alignedtext
+grestore
+% evalMpositionMwithMmemory
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35475 200 108.31 108.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35399.5 196.3 moveto 151 (eval-position-with-memory) alignedtext
+grestore
+% usefulMcaptureQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35667 200 64.49 64.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35625 196.3 moveto 84 (useful-capture?) alignedtext
+grestore
+% ttableMadjustMweight
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35831 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35776.5 196.3 moveto 109 (ttable-adjust-weight) alignedtext
+grestore
+% weightMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+35991 200 61.14 61.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+35952 196.3 moveto 78 (weight-moves) alignedtext
+grestore
+% QonMprincipalMvariation
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+36162 200 91.46 91.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36099.5 196.3 moveto 125 (?on-principal-variation) alignedtext
+grestore
+% generateMfastMkiller
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+36349 200 77.02 77.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36297.5 196.3 moveto 103 (generate-fast-killer) alignedtext
+grestore
+% generateMfastMstrikeMkiller
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+36544 200 100.14 100.18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36475 196.3 moveto 138 (generate-fast-strike-killer) alignedtext
+grestore
+% QcheckSstaleMmate
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+36736 200 74.14 74.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36687 196.3 moveto 98 (?check/stale-mate) alignedtext
+grestore
+% PflyMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+36872 200 43.32 43.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36846.5 196.3 moveto 51 (+fly-eval) alignedtext
+grestore
+% setMcurrMabsMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37003 200 69.32 69.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+36957.5 196.3 moveto 91 (set-curr-abs-eval) alignedtext
+grestore
+% currMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37133 200 42.37 42.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37108.5 196.3 moveto 49 (curr-eval) alignedtext
+grestore
+% getMnullMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37254 200 61.14 61.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37215 196.3 moveto 78 (get-null-move) alignedtext
+grestore
+% checkMflyMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37395 200 61.62 61.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37355.5 196.3 moveto 79 (check-fly-eval) alignedtext
+grestore
+% BquiescenceMevalMpositionB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37579 200 103.49 103.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37507 196.3 moveto 144 (\(quiescence-eval-position\)) alignedtext
+grestore
+% setMmoveMvars
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37762 200 61.14 61.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37723 196.3 moveto 78 (set-move-vars) alignedtext
+grestore
+% updateMcurrMcheckQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+37920 200 78.46 78.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+37867.5 196.3 moveto 105 (update-curr-check?) alignedtext
+grestore
+% BgenerateMmoveMtoB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38096 200 78.94 79.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38043 196.3 moveto 106 (\(generate-move-to\)) alignedtext
+grestore
+% BmoveMtoMexistsQB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38267 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38218.5 196.3 moveto 97 (\(move-to-exists?\)) alignedtext
+grestore
+% generateMmoveMfrom
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38442 200 83.26 83.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38385.5 196.3 moveto 113 (generate-move-from) alignedtext
+grestore
+% checkMcheck
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38598 200 54.39 54.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38564 196.3 moveto 68 (check-check) alignedtext
+grestore
+% getMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38715 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38689 196.3 moveto 52 (get-move) alignedtext
+grestore
+% setMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38821 200 43.32 43.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38795.5 196.3 moveto 51 (set-move) alignedtext
+grestore
+% getMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+38922 200 38.49 38.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38900 196.3 moveto 44 (get-eval) alignedtext
+grestore
+% getMorig
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39017 200 38.02 38.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+38995.5 196.3 moveto 43 (get-orig) alignedtext
+grestore
+% setMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39112 200 38.02 38.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39090.5 196.3 moveto 43 (set-eval) alignedtext
+grestore
+% getMtarget
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39213 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39187 196.3 moveto 52 (get-target) alignedtext
+grestore
+% getMmoveMclass
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39340 200 64.02 64.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39298.5 196.3 moveto 83 (get-move-class) alignedtext
+grestore
+% getMmoveMsquares
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39496 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39447.5 196.3 moveto 97 (get-move-squares) alignedtext
+grestore
+% getMmoveMnoeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39658 200 70.27 70.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39611.5 196.3 moveto 93 (get-move-noeval) alignedtext
+grestore
+% swapMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39802 200 55.37 55.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39767.5 196.3 moveto 69 (swap-moves) alignedtext
+grestore
+% firstMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+39923 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+39894 196.3 moveto 58 (first-move) alignedtext
+grestore
+% newMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40041 200 51.49 51.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40009 196.3 moveto 64 (new-moves) alignedtext
+grestore
+% forgetMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40169 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40132.5 196.3 moveto 73 (forget-moves) alignedtext
+grestore
+% nextMbestMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40310 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40267.5 196.3 moveto 85 (next-best-move) alignedtext
+grestore
+% sortMmovesMbyMweight
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40483 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40422.5 196.3 moveto 121 (sort-moves-by-weight) alignedtext
+grestore
+% BevalMmovesB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40648 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40611.5 196.3 moveto 73 (\(eval-moves\)) alignedtext
+grestore
+% benchmarkMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40791 200 67.39 67.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40747 196.3 moveto 88 (benchmark-eval) alignedtext
+grestore
+% uniqueMtargetQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+40938 200 61.62 61.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+40898.5 196.3 moveto 79 (unique-target?) alignedtext
+grestore
+% uniqueMrankQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41075 200 57.29 57.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41039 196.3 moveto 72 (unique-rank?) alignedtext
+grestore
+% uniqueMfileQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41203 200 52.94 53.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41170 196.3 moveto 66 (unique-file?) alignedtext
+grestore
+% QsingleMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41333 200 58.24 58.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41296 196.3 moveto 74 (?single-move) alignedtext
+grestore
+% deleteMmovesMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41477 200 67.39 67.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41433 196.3 moveto 88 (delete-moves-to) alignedtext
+grestore
+% evalMcaptureMbalance
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41646 200 83.26 83.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41589.5 196.3 moveto 113 (eval-capture-balance) alignedtext
+grestore
+% checkMhash
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41798 200 50.07 50.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41767.5 196.3 moveto 61 (check-hash) alignedtext
+grestore
+% addMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+41912 200 46.22 46.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41884.5 196.3 moveto 55 (add-move) alignedtext
+grestore
+% findMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42024 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+41995 196.3 moveto 58 (find-move) alignedtext
+grestore
+% findMmoveMx
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42145 200 55.37 55.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42110.5 196.3 moveto 69 (find-move-x) alignedtext
+grestore
+% deleteMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42273 200 54.39 54.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42239 196.3 moveto 68 (delete-move) alignedtext
+grestore
+% DTmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42382 200 36.1 36.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42362 196.3 moveto 40 (.moves) alignedtext
+grestore
+% DTSemoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42477 200 39.95 40.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42454 196.3 moveto 46 (.emoves) alignedtext
+grestore
+% QevalMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42591 200 55.34 55.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42556 196.3 moveto 70 (?eval-moves) alignedtext
+grestore
+% QgetMeval
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42708 200 42.35 42.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42683 196.3 moveto 50 (?get-eval) alignedtext
+grestore
+% stringMvariable
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42831 200 61.62 61.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42791.5 196.3 moveto 79 (string-variable) alignedtext
+grestore
+% newMstring
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+42959 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+42930 196.3 moveto 58 (new-string) alignedtext
+grestore
+% previousMstring
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43089 200 63.54 63.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43048 196.3 moveto 82 (previous-string) alignedtext
+grestore
+% epdMcloseMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43230 200 59.22 59.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43192.5 196.3 moveto 75 (epd-close-file) alignedtext
+grestore
+% epdMopenMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43365 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43328.5 196.3 moveto 73 (epd-open-file) alignedtext
+grestore
+% epdMreadMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43497 200 55.34 55.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43462 196.3 moveto 70 (epd-read-file) alignedtext
+grestore
+% epdMreadMlast
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43627 200 56.32 56.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43591.5 196.3 moveto 71 (epd-read-last) alignedtext
+grestore
+% epdMtruncate
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43756 200 54.39 54.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43722 196.3 moveto 68 (epd-truncate) alignedtext
+grestore
+% epdMwriteMtoMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+43897 200 68.34 68.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+43852 196.3 moveto 90 (epd-write-to-file) alignedtext
+grestore
+% epdMappendMtoMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44060 200 76.06 76.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44009.5 196.3 moveto 101 (epd-append-to-file) alignedtext
+grestore
+% epdMcreateMfile
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44216 200 61.62 61.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44176.5 196.3 moveto 79 (epd-create-file) alignedtext
+grestore
+% test
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44318 200 22.62 23 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44308.5 196.3 moveto 19 (test) alignedtext
+grestore
+% BgenerateMquiescenceMmoveMtoB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44479 200 120.36 120.48 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44394.5 196.3 moveto 169 (\(generate-quiescence-move-to\)) alignedtext
+grestore
+% singleMnormalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44700 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44644 196.3 moveto 112 (single-normal-move) alignedtext
+grestore
+% singleMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+44879 200 77.02 77.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+44827.5 196.3 moveto 103 (single-strike-move) alignedtext
+grestore
+% singleMpawnMfarMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45063 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45002.5 196.3 moveto 121 (single-pawn-far-move) alignedtext
+grestore
+% pawnMfarMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45236 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45193.5 196.3 moveto 85 (pawn-far-move) alignedtext
+grestore
+% castleMnear
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45368 200 48.62 48.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45338.5 196.3 moveto 59 (castle-near) alignedtext
+grestore
+% castleMfar
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45478 200 43.32 43.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45452.5 196.3 moveto 51 (castle-far) alignedtext
+grestore
+% selectMmovingMpiece
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45622 200 82.31 82.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45566.5 196.3 moveto 111 (select-moving-piece) alignedtext
+grestore
+% movesMexistQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45780 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45743.5 196.3 moveto 73 (moves-exist?) alignedtext
+grestore
+% singleMpawnMnormalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+45960 200 104.46 104.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+45887.5 196.3 moveto 145 (single-pawn-normal-move) alignedtext
+grestore
+% singleMnonpawnMnormalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+46201 200 117.93 118.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+46118 196.3 moveto 166 (single-nonpawn-normal-move) alignedtext
+grestore
+% singleMpawnMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+46436 200 98.19 98.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+46368 196.3 moveto 136 (single-pawn-strike-move) alignedtext
+grestore
+% singleMnonpawnMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+46665 200 112.16 112.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+46586.5 196.3 moveto 157 (single-nonpawn-strike-move) alignedtext
+grestore
+% singleMtransMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+46870 200 74.61 74.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+46820.5 196.3 moveto 99 (single-trans-move) alignedtext
+grestore
+% singleMkingMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47036 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+46987.5 196.3 moveto 97 (single-king-move) alignedtext
+grestore
+% singleMkingMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47223 200 95.31 95.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47157.5 196.3 moveto 131 (single-king-strike-move) alignedtext
+grestore
+% normalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47396 200 59.22 59.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47358.5 196.3 moveto 75 (normal-move) alignedtext
+grestore
+% strikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47526 200 52.94 53.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47493 196.3 moveto 66 (strike-move) alignedtext
+grestore
+% pawnMnormalMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47679 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47624.5 196.3 moveto 109 (pawn-normal-move) alignedtext
+grestore
+% pawnMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+47854 200 75.09 75.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47804 196.3 moveto 100 (pawn-strike-move) alignedtext
+grestore
+% straightMpeacefulMmoves
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+48044 200 96.29 96.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+47978 196.3 moveto 132 (straight-peaceful-moves) alignedtext
+grestore
+% kingMstrikeMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+48230 200 71.24 71.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+48183 196.3 moveto 94 (king-strike-move) alignedtext
+grestore
+% kingMpeacefulMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+48401 200 81.34 81.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+48346 196.3 moveto 110 (king-peaceful-move) alignedtext
+grestore
+% BgenerateMmoveMtoMnocheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+48612 200 111.21 111.28 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+48534.5 196.3 moveto 155 (\(generate-move-to-nocheck\)) alignedtext
+grestore
+% BgenerateMmoveMtoMcheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+48844 200 102.54 102.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+48773 196.3 moveto 142 (\(generate-move-to-check\)) alignedtext
+grestore
+% BmoveMtoMexistsQBT
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+49039 200 74.61 74.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+48989.5 196.3 moveto 99 (\(move-to-exists?\)') alignedtext
+grestore
+% BmoveMtoMexistsQMnocheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+49237 200 104.94 105.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+49164 196.3 moveto 146 (\(move-to-exists?-nocheck\)) alignedtext
+grestore
+% BmoveMtoMexistsQMcheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+49457 200 96.26 96.68 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+49390.5 196.3 moveto 133 (\(move-to-exists?-check\)) alignedtext
+grestore
+% BgenerateMmoveMnotMtoB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+49665 200 92.41 92.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+49601.5 196.3 moveto 127 (\(generate-move-not-to\)) alignedtext
+grestore
+% appendMmovesMnotMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+49862 200 86.16 86.38 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+49803.5 196.3 moveto 117 (append-moves-not-to) alignedtext
+grestore
+% appendMstrikeMmovesMnotMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+50075 200 108.31 108.58 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+49999.5 196.3 moveto 151 (append-strike-moves-not-to) alignedtext
+grestore
+% BgenerateMsingleMmoveB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+50294 200 92.41 92.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+50230.5 196.3 moveto 127 (\(generate-single-move\)) alignedtext
+grestore
+% generateMsingleMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+50492 200 87.14 87.18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+50433 196.3 moveto 118 (generate-single-move) alignedtext
+grestore
+% BgenerateMsingleMmoveMxB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+50698 200 100.61 100.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+50628.5 196.3 moveto 139 (\(generate-single-move-x\)) alignedtext
+grestore
+% generateMsingleMmoveMx
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+50912 200 94.34 94.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+50847 196.3 moveto 130 (generate-single-move-x) alignedtext
+grestore
+% BmoveMtoMexistsMBT
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51100 200 74.61 74.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51050.5 196.3 moveto 99 (\(move-to-exists?\)') alignedtext
+grestore
+% BmoveMtovexistsQMnocheckB
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51298 200 104.94 105.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51225 196.3 moveto 146 (\(move-to-exists?-nocheck\)) alignedtext
+grestore
+% random
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51460 200 38.02 38.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51438.5 196.3 moveto 43 (random) alignedtext
+grestore
+% rememberMposition
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51595 200 78.46 78.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51542.5 196.3 moveto 105 (remember-position) alignedtext
+grestore
+% forgetMposition
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51755 200 63.07 63.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51714.5 196.3 moveto 81 (forget-position) alignedtext
+grestore
+% continueMcheckQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+51904 200 68.37 68.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+51859.5 196.3 moveto 89 (continue-check?) alignedtext
+grestore
+% performMflyMevalMtest
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52075 200 85.21 85.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52017.5 196.3 moveto 115 (perform-fly-eval-test) alignedtext
+grestore
+% performMcheckMtest
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52256 200 77.49 77.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52204 196.3 moveto 104 (perform-check-test) alignedtext
+grestore
+% performMhashMtest
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52425 200 73.17 73.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52376.5 196.3 moveto 97 (perform-hash-test) alignedtext
+grestore
+% Pcheck
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52553 200 36.1 36.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52533 196.3 moveto 40 (+check) alignedtext
+grestore
+% Mcheck
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52642 200 34.17 34.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52623.5 196.3 moveto 37 (-check) alignedtext
+grestore
+% performMtests
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52752 200 57.27 57.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52715.5 196.3 moveto 73 (perform-tests) alignedtext
+grestore
+% whiteMpawnMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+52919 200 90.49 90.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+52857 196.3 moveto 124 (white-pawn-threatens?) alignedtext
+grestore
+% blackMpawnMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+53118 200 90.01 90.18 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53056.5 196.3 moveto 123 (black-pawn-threatens?) alignedtext
+grestore
+% knightMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+53298 200 71.24 71.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53251 196.3 moveto 94 (knight-threatens?) alignedtext
+grestore
+% threatenedMfromMdirectionQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+53493 200 105.41 105.88 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53419.5 196.3 moveto 147 (threatened-from-direction?) alignedtext
+grestore
+% bishopMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+53690 200 72.19 72.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53642 196.3 moveto 96 (bishop-threatens?) alignedtext
+grestore
+% rookMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+53846 200 65.47 65.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53803.5 196.3 moveto 85 (rook-threatens?) alignedtext
+grestore
+% queenMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54000 200 70.29 70.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+53954 196.3 moveto 92 (queen-threatens?) alignedtext
+grestore
+% kingMthreatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54153 200 64.49 64.99 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+54111 196.3 moveto 84 (king-threatens?) alignedtext
+grestore
+% pieceMwouldMthreatenQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54325 200 89.06 89.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+54264.5 196.3 moveto 121 (piece-would-threaten?) alignedtext
+grestore
+% threatensQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54478 200 46.22 46.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+54450.5 196.3 moveto 55 (threatens?) alignedtext
+grestore
+% pieceMthreateningMthrough
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54644 200 102.06 102.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+54573.5 196.3 moveto 141 (piece-threatening-through) alignedtext
+grestore
+% queenlikeMthreatensMthroughQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+54878 200 113.61 113.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+54798.5 196.3 moveto 159 (queenlike-threatens-through?) alignedtext
+grestore
+% mightMcauseMopponentMcheckQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55127 200 116.48 116.98 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55045 196.3 moveto 164 (might-cause-opponent-check?) alignedtext
+grestore
+% mightMcauseMcheckQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55343 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55288.5 196.3 moveto 109 (might-cause-check?) alignedtext
+grestore
+% mightMblockMcheckQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55523 200 81.36 81.49 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55468.5 196.3 moveto 109 (might-block-check?) alignedtext
+grestore
+% decideMnullMmovesQ
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55703 200 80.39 80.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55649 196.3 moveto 108 (decide-null-moves?) alignedtext
+grestore
+% fieldMattr
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55843 200 41.39 41.69 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55819 196.3 moveto 48 (field-attr) alignedtext
+grestore
+% fieldMspaces
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+55955 200 52.47 52.79 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+55922.5 196.3 moveto 65 (field-spaces) alignedtext
+grestore
+% pieceMattr
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56070 200 44.29 44.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56044 196.3 moveto 52 (piece-attr) alignedtext
+grestore
+% smallMboard
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56185 200 52.94 53.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56152 196.3 moveto 66 (small-board) alignedtext
+grestore
+% normalMboard
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56315 200 59.22 59.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56277.5 196.3 moveto 75 (normal-board) alignedtext
+grestore
+% hugeMboard
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56443 200 50.54 50.89 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56412 196.3 moveto 62 (huge-board) alignedtext
+grestore
+% DTfieldMslice
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56560 200 48.14 48.19 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56531 196.3 moveto 58 (.field-slice) alignedtext
+grestore
+% DThborder
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56666 200 39.95 40.09 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56643 196.3 moveto 46 (.hborder) alignedtext
+grestore
+% DTvborderMslice
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56784 200 59.19 59.59 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56746 196.3 moveto 76 (.vborder-slice) alignedtext
+grestore
+% straightMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+56945 200 83.29 83.39 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+56889 196.3 moveto 112 (straight-target-move) alignedtext
+grestore
+% kingMtargetMmove
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57118 200 72.22 72.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+57070.5 196.3 moveto 95 (king-target-move) alignedtext
+grestore
+% appendMmovesMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57280 200 72.22 72.29 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+57232.5 196.3 moveto 95 (append-moves-to) alignedtext
+grestore
+% generateMcheapestMmoveMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57477 200 106.39 106.68 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+57403 196.3 moveto 148 (generate-cheapest-move-to) alignedtext
+grestore
+% generateMcheapestMweakMmoveMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57730 200 128.06 128.08 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+57639.5 196.3 moveto 181 (generate-cheapest-weak-move-to) alignedtext
+grestore
+% generateMpawnMmoveMto
+gsave
+1 setlinewidth
+0 0 0 nodecolor
+57971 200 94.34 94.78 ellipse_path stroke
+0 0 0 nodecolor
+14 /Times-Roman set_font
+57906 196.3 moveto 130 (generate-pawn-move-to) alignedtext
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+%%BoundingBox: 36 36 58109 372
+end
+restore
+%%EOF

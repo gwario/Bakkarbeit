@@ -1,0 +1,97 @@
+src/brainless-0.1.2/board.fs:12:0   VALUE #board-hooks		\ number of XTs in >board-hooks<
+src/brainless-0.1.2/board.fs:14:0 VALUE black-king-square
+src/brainless-0.1.2/board.fs:15:0 VALUE white-king-square
+src/brainless-0.1.2/board.fs:16:0 VALUE far-moved-pawn		\ the only pawn that can be struck en passante
+src/brainless-0.1.2/board.fs:17:TRUE VALUE white?		\ color of current party
+src/brainless-0.1.2/board.fs:74:0 VALUE my-pawn			\ values that shouldn't be calculated twice
+src/brainless-0.1.2/board.fs:75:0 VALUE my-knight
+src/brainless-0.1.2/board.fs:76:0 VALUE my-bishop
+src/brainless-0.1.2/board.fs:77:0 VALUE my-rook
+src/brainless-0.1.2/board.fs:78:0 VALUE my-queen
+src/brainless-0.1.2/board.fs:79:0 VALUE my-king
+src/brainless-0.1.2/board.fs:80:0 VALUE opponent-pawn		
+src/brainless-0.1.2/board.fs:81:0 VALUE opponent-knight
+src/brainless-0.1.2/board.fs:82:0 VALUE opponent-bishop
+src/brainless-0.1.2/board.fs:83:0 VALUE opponent-rook
+src/brainless-0.1.2/board.fs:84:0 VALUE opponent-queen
+src/brainless-0.1.2/board.fs:85:0 VALUE opponent-king
+src/brainless-0.1.2/board.fs:100:f-piece VALUE opponent		  \ opponent pieces masked by color-piece-mask
+src/brainless-0.1.2/board.fs:101:f-piece f-white OR VALUE my-piece \ my pieces masked by color-piece-mask
+src/brainless-0.1.2/board.fs:102:1 VALUE pawn-direction		  \ direction in which pawns can move (+1|-1)
+src/brainless-0.1.2/flyeval.fs:14:   \ get evaluation delta value resulting from change of rook/queen threats
+src/brainless-0.1.2/flyeval.fs:76:0 VALUE fly-eval		\ currently generated evaluation
+src/brainless-0.1.2/flyeval.fs:97:0 VALUE fly-eval-piece
+src/brainless-0.1.2/flyeval.fs:98:0 VALUE fly-eval-square
+src/brainless-0.1.2/search.fs:18:0 VALUE cutoff?
+src/brainless-0.1.2/search.fs:44:0 VALUE #null
+src/brainless-0.1.2/search.fs:288:0 VALUE start-time
+src/brainless-0.1.2/search.fs:289:0 VALUE root-alpha
+src/brainless-0.1.2/search.fs:290:0 VALUE root-beta
+src/brainless-0.1.2/sorting.fs:9:0 VALUE move-weights
+src/brainless-0.1.2/brainless.fs:45:0 VALUE compilation-finished?
+src/brainless-0.1.2/killer.fs:24:0 VALUE #killers
+src/brainless-0.1.2/tui.fs:95:FALSE VALUE had-strength?
+src/brainless-0.1.2/eval.fs:9:0 VALUE eval-square
+src/brainless-0.1.2/eval.fs:10:0 VALUE eval-piece
+src/brainless-0.1.2/eval.fs:11:0 VALUE #evals
+src/brainless-0.1.2/eval.fs:105:0 VALUE this-pawn	    \ pawn which is currently evaluated (pawn OR color)
+src/brainless-0.1.2/eval.fs:106:0 VALUE this-king	    \ king of the currently evaluated pawn's color
+src/brainless-0.1.2/eval.fs:107:0 VALUE this-pawn-dir       \ move direction of current pawn (-1 or 1)
+src/brainless-0.1.2/eval.fs:155:0 VALUE king-guard-pawn		\ king's pawns for which is searched
+src/brainless-0.1.2/eval.fs:156:0 VALUE king-guard-dir		\ direction in which those pawns are located
+src/brainless-0.1.2/moveconv.fs:9:0 VALUE use-arith-notation?
+src/brainless-0.1.2/environ.fs:26:0 VALUE bigforth?
+src/brainless-0.1.2/environ.fs:27:0 VALUE gforth?
+src/brainless-0.1.2/environ.fs:28:0 VALUE iforth?
+src/brainless-0.1.2/profiler.fs:41:0 VALUE curr-def
+src/brainless-0.1.2/profiler.fs:42:0 VALUE noname-def?
+src/brainless-0.1.2/searchdefs.fs:8:0 VALUE think-limit		\ current think depth limit during iterating
+src/brainless-0.1.2/searchdefs.fs:9:0 VALUE curr-think-limit	\ current think limit (including extensions)
+src/brainless-0.1.2/searchdefs.fs:10:0 VALUE think-extend		\ maximum think-limit for search extension
+src/brainless-0.1.2/searchdefs.fs:11:max-think-depth VALUE max-think-limit	\ maximum think limit during iterating
+src/brainless-0.1.2/searchdefs.fs:12:10 VALUE abort-time		\ time for thinking
+src/brainless-0.1.2/searchdefs.fs:13:0 VALUE think-depth		\ current think depth (plies)
+src/brainless-0.1.2/searchdefs.fs:14:0 VALUE aborting?		\ set by time control routine to exit recursion
+src/brainless-0.1.2/searchdefs.fs:16:0 VALUE alpha
+src/brainless-0.1.2/searchdefs.fs:17:0 VALUE beta
+src/brainless-0.1.2/searchdefs.fs:18:0 VALUE on-principal-variation?
+src/brainless-0.1.2/searchdefs.fs:20:0 VALUE #nodes
+src/brainless-0.1.2/moves.fs:21: 0     VALUE    stale-mate
+src/brainless-0.1.2/moves.fs:23:0 VALUE curr-abs-eval		\ current absolute evaluation (set by do-move)
+src/brainless-0.1.2/moves.fs:24:0 VALUE curr-check?		\ is current party in check?
+src/brainless-0.1.2/moves.fs:25:0 VALUE black-move-target	\ target of most recent move of black
+src/brainless-0.1.2/moves.fs:26:0 VALUE white-move-target	\ target of most recent move of white
+src/brainless-0.1.2/moves.fs:27:0 VALUE black-move-orig
+src/brainless-0.1.2/moves.fs:28:0 VALUE white-move-orig
+src/brainless-0.1.2/moves.fs:29:0 VALUE move-list		\ (currently used) list of moves
+src/brainless-0.1.2/moves.fs:30:0 VALUE #moves			\ number of moves in move-list
+src/brainless-0.1.2/moves.fs:31:0 VALUE moves-evaluated?	\ are moves in current list evaluated?
+src/brainless-0.1.2/moves.fs:158:0 VALUE find-move-class
+src/brainless-0.1.2/string.fs:10:0 VALUE curr-string#
+src/brainless-0.1.2/epd.fs:14:0 VALUE epd-file-id
+src/brainless-0.1.2/epd.fs:157:0 VALUE epd-fileid
+src/brainless-0.1.2/movegen.fs:9:0 VALUE move-gen-piece		\ piece for which moves are generated
+src/brainless-0.1.2/movegen.fs:10:0 VALUE move-gen-from		\ square of piece for which moves are generated
+src/brainless-0.1.2/movegen.fs:312:0 VALUE forbidden-move-target
+src/brainless-0.1.2/movegen.fs:352:0 VALUE single-move-to
+src/brainless-0.1.2/movegen.fs:371:0 VALUE single-move-class	
+src/brainless-0.1.2/movegen.fs:390:0 VALUE move-exists?
+src/brainless-0.1.2/utils.fs:51:74755 VALUE random-seed
+src/brainless-0.1.2/utils.fs:55:\ Option value handling
+src/brainless-0.1.2/utils.fs:64:: option  ( x "name" -- )  \ define an option with default value
+src/brainless-0.1.2/utils.fs:67:: set-option  ( x "name" -- ) \ sets the value of an option
+src/brainless-0.1.2/utils.fs:71:   ELSE			   \ else set value of option, if possible
+src/brainless-0.1.2/repeat.fs:14:0   VALUE #hashed-positions
+src/brainless-0.1.2/repeat.fs:35:0 VALUE most-recent-match
+src/brainless-0.1.2/tests.fs:11:0 VALUE check-limit
+src/brainless-0.1.2/tests.fs:12:0 VALUE check-depth
+src/brainless-0.1.2/threats.fs:79:0 VALUE threatening-square
+src/brainless-0.1.2/null.fs:9:3 VALUE null-move-threshold	\ null move heuristic will be enabled for a
+src/brainless-0.1.2/null.fs:12:0 VALUE white-null-moves?	\ set by ?null-moves on tree root
+src/brainless-0.1.2/null.fs:13:0 VALUE black-null-moves?
+src/brainless-0.1.2/drawing.fs:13:0 VALUE white-field?
+src/brainless-0.1.2/drawing.fs:14:0 VALUE white-piece?
+src/brainless-0.1.2/drawing.fs:15:3 VALUE field-width
+src/brainless-0.1.2/drawing.fs:16:2 VALUE field-height
+src/brainless-0.1.2/tmovegen.fs:9:0 VALUE move-gen-to	\ target of moves for target move generation
+src/brainless-0.1.2/tmovegen.fs:10:0 VALUE target-piece	\ straight moving piece, masked with >full-piece-mask<

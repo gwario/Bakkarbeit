@@ -1,0 +1,52 @@
+src/brainless-0.1.2/board.fs:50:create-array x-direction-table
+src/brainless-0.1.2/board.fs:52:create-array y-direction-table
+src/brainless-0.1.2/sorting.fs:11:: create-move-weights  ( -- )
+src/brainless-0.1.2/sorting.fs:12:	s" create-move-weights" print-def
+src/brainless-0.1.2/sorting.fs:24:create-array piece-move-weights  0 ,
+src/brainless-0.1.2/sorting.fs:44:   create-move-weights
+src/brainless-0.1.2/brainless.fs:9:s" trace.txt" r/w create-file throw constant tracefile-id
+src/brainless-0.1.2/killer.fs:23:CREATE killer-history /killer-history ALLOT
+src/brainless-0.1.2/killer.fs:52:CREATE principal-variation  /principal-variation ALLOT
+src/brainless-0.1.2/killer.fs:54:CREATE saved-best-move /pv-move ALLOT	\ saved move during iterative deepening
+src/brainless-0.1.2/killer.fs:124:CREATE simple-killers      /simple-killers ALLOT
+src/brainless-0.1.2/killer.fs:125:\ CREATE associated-killers  /associated-killers ALLOT
+src/brainless-0.1.2/killer.fs:126:CREATE associated-captures /associated-killers ALLOT
+src/brainless-0.1.2/killer.fs:127:CREATE fast-killers        /fast-killers ALLOT
+src/brainless-0.1.2/tui.fs:50:     epd-create-file
+src/brainless-0.1.2/tui.fs:56:: save  ( "name" -- ) 	s" save" print-def  BL WORD COUNT epd-create-file ;
+src/brainless-0.1.2/eval.fs:16:create-array square-weights
+src/brainless-0.1.2/eval.fs:69:create-array knight-threat-table   100 CELLS ALLOT
+src/brainless-0.1.2/eval.fs:90:create-array piece-weights
+src/brainless-0.1.2/eval.fs:99:create-array pawn-row-weights
+src/brainless-0.1.2/environ.fs:53:CREATE PAD #PAD CHARS ALLOT
+src/brainless-0.1.2/environ.fs:74:   : DEFER  ( "name" -- ) 	s" DEFER" print-def CREATE ['] NOOP ,  DOES> @ EXECUTE ;
+src/brainless-0.1.2/environ.fs:112:      CREATE IMMEDIATE  CELLS ALLOT   DOES> POSTPONE LITERAL EVAL" []CELL " ;
+src/brainless-0.1.2/environ.fs:115:   \ : ARRAY  ( u "name" -- )  CREATE CELLS ALLOT   DOES>  SWAP CELLS + ;
+src/brainless-0.1.2/environ.fs:118:      CREATE IMMEDIATE CELLS ALLOT
+src/brainless-0.1.2/environ.fs:128:      CREATE IMMEDIATE  2* CELLS ALLOT
+src/brainless-0.1.2/environ.fs:132:  : 2ARRAY  ( u "name" -- ) 	s" 2ARRAY" print-def CREATE 2* CELLS ALLOT   DOES> SWAP 2* CELLS + ;
+src/brainless-0.1.2/profiler.fs:66:   nextname CREATE curr-def , does>profile ; IMMEDIATE
+src/brainless-0.1.2/string.fs:15:   CREATE max-strings CELLS ALLOT
+src/brainless-0.1.2/epd.fs:159:CREATE epd-file-buffer c/epd-file-buffer CHARS ALLOT
+src/brainless-0.1.2/epd.fs:214:: epd-create-file ( c-addr u -- ) \ create new file for current position
+src/brainless-0.1.2/epd.fs:215:	s" epd-create-file" print-def
+src/brainless-0.1.2/epd.fs:216:   R/W CREATE-FILE THROW TO epd-fileid
+src/brainless-0.1.2/epd.fs:220:   \ append to epd file, or create new file if not existing return index of
+src/brainless-0.1.2/epd.fs:224:   ELSE epd-create-file 0 THEN ;
+src/brainless-0.1.2/utils.fs:16:: create-array  ( "name" -- )
+src/brainless-0.1.2/utils.fs:17:	s" create-array" print-def
+src/brainless-0.1.2/utils.fs:18:   CREATE IMMEDIATE
+src/brainless-0.1.2/utils.fs:23:: create-2array  ( "name" -- )
+src/brainless-0.1.2/utils.fs:24:	s" create-2array" print-def
+src/brainless-0.1.2/utils.fs:25:   CREATE   DOES>  ( u a-addr1 -- a-addr2 )  SWAP 2* CELLS + ;
+src/brainless-0.1.2/utils.fs:28:   CREATE IMMEDIATE
+src/brainless-0.1.2/utils.fs:37:   CREATE IMMEDIATE OVER ,  +
+src/brainless-0.1.2/utils.fs:57:: create-option  ( x "name" -- )
+src/brainless-0.1.2/utils.fs:58:	s" create-option" print-def
+src/brainless-0.1.2/utils.fs:59:   CREATE ,  DOES> @ ;
+src/brainless-0.1.2/utils.fs:66:   option-exists? 0= IF create-option THEN ;
+src/brainless-0.1.2/utils.fs:69:   option-exists? 0= IF    \ option doesn't exist, create it
+src/brainless-0.1.2/utils.fs:70:      create-option
+src/brainless-0.1.2/hash.fs:45:   CREATE hash 4 CELLS ALLOT
+src/brainless-0.1.2/hash.fs:73:   CREATE /hash * ALLOT   DOES>  ( u -- a-addr )  SWAP /hash * + ;
+src/brainless-0.1.2/drawing.fs:72:      CREATE ,  DOES> @ 0 SWAP SYSCALL DROP ;

@@ -1,0 +1,1131 @@
+digraph TaxonomyView {#value = green, create = blue; word = circle, value/create = rectangle
+	#word <-> value access arrows # writer -> value; value -> reader
+	# DboardMhooks
+	DboardMhooks -> addMboardMhook; addMboardMhook -> DboardMhooks;
+	DboardMhooks -> updateMboard;
+
+	# blackMkingMsquare
+	blackMkingMsquare -> kingMsquare;
+	blackMkingMsquare -> opponentMkingMsquare;
+	positionMking -> blackMkingMsquare; #because of TO value
+	initMkings -> blackMkingMsquare;
+
+	# whiteMkingMsquare
+	whiteMkingMsquare -> kingMsquare;
+	whiteMkingMsquare -> opponentMkingMsquare;
+	positionMking -> whiteMkingMsquare;
+	initMkings -> whiteMkingMsquare;
+
+	# farMmovedMpawn
+	farMmovedMpawn -> singleMstrikeMepMmove;
+	doMpawnMfarMmove -> farMmovedMpawn;
+	farMmovedMpawn -> doMmoveMundoMinfo; doMmoveMundoMinfo -> farMmovedMpawn;
+	undoMmove -> farMmovedMpawn;
+	farMmovedMpawn -> selfMcheckingMmoveQ; selfMcheckingMmoveQ -> farMmovedMpawn;
+	farMmovedMpawn -> checkingMmoveQ; checkingMmoveQ -> farMmovedMpawn;
+	epd-write-ep -> epdMwriteMep;
+	epdMreadMep -> farMmovedMpawn;
+	farMmovedMpawn -> strikeMepMmove;
+	farMmovedMpawn -> hashMfarMmovedMpawn;
+
+	# white?
+	whiteQ -> otherMparty; otherMparty -> whiteQ;
+	whiteQ -> setMparty;
+	whiteQ -> flyMevalMcastleMnear;
+	whiteQ -> flyMevalMcastleMfar;
+	whiteQ -> ttentry;
+	whiteQ -> associatedMcapture;
+	whiteQ -> DTparty;
+	whiteQ -> myMeval;
+	whiteQ -> absMeval;
+	whiteQ -> opponentMeval;
+	whiteQ -> moveMtarget;
+	whiteQ -> opponentMmoveMtarget;
+	whiteQ -> toMmoveMtarget;
+	whiteQ -> moveMorig;
+	whiteQ -> opponentMmoveMorig;
+	whiteQ -> toMmoveMorig;
+	whiteQ -> moveMsquares;
+	whiteQ -> opponentMmoveMsquares;
+	whiteQ -> toMmoveMsquares;
+	whiteQ -> sortMmoves;
+	whiteQ -> doMcastleMnear;
+	whiteQ -> doMcastleMfar;
+	whiteQ -> doMcastleMnearMfast;
+	whiteQ -> doMcastleMfarMfast;
+	whiteQ -> epdMwriteMparty;
+	whiteQ -> generateMpromotions;
+	whiteQ -> useMnullMmovesQ;
+	whiteQ -> toMnullMmovesQ;
+
+	# my-pawn
+	myMpieces -> myMpawn;
+	myMpawn -> generateMpromotions; myMpawn -> generateMpromotions;
+	myMpawn -> pawnMtargetMmove;
+	pawnMsingleMtargetMmove -> myMpawn;
+
+	# my-knight
+	knightMsingleMtargetMmove -> myMknight;
+	myMknight -> knightMtargetMmove;
+	myMpieces -> myMknight;
+
+	# my-bishop
+	myMpieces -> myMbishop;
+	bishopMtargetMmoves -> myMbishop;
+
+	# my-rook
+	rookMtargetMmoves -> myMrook;
+	myMpieces -> myMrook;
+
+	# my-queen
+	myMpieces -> myMqueen;
+	queenMtargetMmoves -> myMqueen;
+
+	# my-king
+	myMpieces -> myMking;
+
+	# opponent-pawn
+	opponentMpieces -> opponentMpawn;
+	opponentMpawn -> opponentMpawnQ;
+
+	# opponent-knight
+	opponentMpieces -> opponentMknight;
+	opponentMknight -> opponentMknightQ;
+
+	# opponent-bishop
+	opponentMbishop -> opponentMbishopQ;
+	opponentMpieces -> opponentMbishop;
+
+	# opponent-rook
+	opponentMpieces -> opponentMrook;
+	opponentMrook -> opponentMrookQ;
+
+	# opponent-queen
+	opponentMqueen -> opponentMbishopQ;
+	opponentMqueen -> opponentMrookQ;
+	opponentMpieces -> opponentMqueen;
+
+	# opponent-king
+	opponentMpieces -> opponentMking;
+	opponentMking -> opponentMkingQ;
+
+	# opponent
+	opponent -> opponentMpieces;
+	opponent -> opponentQ;
+	opponent -> otherMparty; otherMparty -> opponent;
+	opponent -> undoMstrikeMepMmove;
+	opponent -> strikeQMmove;
+	opponent -> straightMstrikeMmoves;
+	opponent -> straightMmoves;
+	opponent -> kingMmove;
+	opponent -> bishopMthreatensMthroughQ;
+	opponent -> rookMthreatensMthroughQ;
+	opponent -> legalMmoveMtargetQ;
+
+	# my-piece
+	myMpiece -> otherMparty; otherMparty -> myMpiece;
+	myMpiece -> myMpieceQ;
+	myMpiece -> myMpieces;
+	myMpiece -> flyMevalMtransMknight;
+	myMpiece -> flyMevalMtransMqueen;
+	myMpiece -> undoMtransMmove;
+	myMpiece -> doMtransMknightMmove;
+	myMpiece -> doMtransMqueenMmove;
+	myMpiece -> doMtransMknightMmoveMfast;
+	myMpiece -> doMtransMqueenMmoveMfast;
+	myMpiece -> generateMpromotions;
+	myMpiece -> pawnMsingleMtargetMmove;
+	myMpiece -> knightMsingleMtargetMmove;
+	myMpiece -> bishopMsingleMtargetMmove;
+	myMpiece -> rookMsingleMtargetMmove;
+	myMpiece -> queenMsingleMtargetMmove;
+
+	# pawn-direction
+	otherMparty -> pawnMdirection; pawnMdirection -> otherMparty;
+	pawnMdirection -> Qdirection;
+
+	# fly-eval
+	flyMeval -> evalMput; evalMput -> flyMeval;
+	flyMeval -> flyMevalMmove; flyMevalMmove -> flyMeval;
+	flyMeval -> flyMevalMmoves; flyMevalMmoves -> flyMeval;
+
+	# fly-eval-piece
+	flyMevalMpiece -> flyMevalMstrikeMmove;
+	flyMevalMpiece -> flyMevalMnormalMmove;
+	flyMevalMpiece -> flyMevalMstrikeMepMmove;
+	flyMevalMpiece -> flyMevalMcastleMnear;
+	flyMevalMpiece -> flyMevalMcastleMfar;
+	flyMevalMpiece -> flyMevalMmove; flyMevalMmove -> flyMevalMpiece;
+	flyMevalMpiece -> flyMevalMmoves; flyMevalMmoves -> flyMevalMpiece;
+
+	# fly-eval-square
+	flyMevalMsquare -> flyMevalMmove; flyMevalMmove -> flyMevalMsquare;
+	flyMevalMsquare -> flyMevalMmoves; flyMevalMmoves -> flyMevalMsquare;
+
+	# cutoff?
+	isMcutoffQ -> cutoffQ;
+	bestMmoveMeval -> cutoffQ;
+	nullMmoveMeval -> cutoffQ; cutoffQ -> nullMmoveMeval;
+	cutoffQ -> singleMmoveMeval; singleMmoveMeval -> cutoffQ;
+	killerMmoveMeval -> cutoffQ;
+	captureMkillerMmoveMeval -> cutoffQ;
+	minimumMquiescenceMmoveMeval -> cutoffQ;
+	cutoffQ -> BevalMpositionMrecursiveB;
+	cutoffQ -> BquiescenceMevalMnocheckB;
+	cutoffQ -> BquiescenceMevalMcheckB;
+
+	# #null
+	nullMmoveMeval -> Hnull;
+
+	# start-time
+	startMtime -> BabortMsearchQB;
+	startMtime -> calculateMmove;
+
+	# root-alpha
+	rootMalpha -> calculateMmove; calculateMmove -> rootMalpha;
+	rootMalpha -> rootMsearch;
+
+	# root-beta
+	rootMbeta -> rootMsearch;
+	rootMbeta -> calculateMmove; calculateMmove -> rootMbeta;
+
+	# move-weights
+	moveMweights -> createMmoveMweights; createMmoveMweights -> moveMweights;
+	moveMweights -> forgetMmoveMweights; forgetMmoveMweights -> moveMweights;
+	moveMweights -> moveMweight;
+
+	# compilation-finished?
+	# not in words used...
+
+	# #killers
+	Hkillers -> adjustMkillerMhistory; adjustMkillerMhistory -> Hkillers;
+	Hkillers -> getMrelMkillMcount;
+	clearMkillerMhistory -> Hkillers;
+
+	# had-strength?
+	strength -> hadMstrengthQ;
+	hadMstrengthQ -> QdefaultMstrength;
+
+	# eval-square
+	evalMsquare -> rookMthreatsMdeltaMeval;
+	evalMsquare -> bishopMthreatsMdeltaMeval;
+	deltaMeval -> evalMsquare;
+	evalMsquare -> evalMthreat;
+	evalMsquare -> evalMstraightMthreats;
+	initMknightMthreatMtable -> evalMsquare;
+	evalMsquare -> evalMknightMthreats;
+	evalMsquare -> pawnMrowMeval;
+	evalMsquare -> QpawnMeval;
+	evalMsquare -> QkingMeval;
+	evalMsquare -> kingMguardQ;
+	evalMsquare -> kingMatMbottomQ;
+	totalMeval -> evalMsquare;
+
+	# eval-piece
+	pieceMdeltaMeval [shape=circle, label="piece-delta-eval"];
+	deltaMeval [shape=circle, label="delta-eval"];
+	pieceMeval [shape=circle, label="piece-eval"];
+	totalMeval [shape=circle, label="total-eval"];
+	kingMeval [shape=circle, label="king-eval"];
+	setMkingMguardMpawn [shape=circle, label="set-king-guard-pawn"];
+	queenMeval [shape=circle, label="queen-eval"];
+	setMthisMpawnAking [shape=circle, label="set-this-pawn&king"];
+	setMthisMpawn [shape=circle, label="set-this-pawn"];
+	evalMpawnMthreats [shape=circle, label="eval-pawn-threats"];
+
+	# #evals
+	totalMeval [shape=circle, label="total-eval"];
+	flyMevalMmove [shape=circle, label="fly-eval-move"];
+	flyMevalMmoves [shape=circle, label="fly-eval-moves"];
+	Bstat [shape=circle, label="<stat"];
+	statB [shape=circle, label="stat>"];
+	benchmarkMmovegen [shape=circle, label="benchmark-movegen"];
+
+	# this-pawn
+	QpawnMeval [shape=circle, label="?pawn-eval"];
+
+	# this-king
+	QkingMeval [shape=circle, label="?king-eval"];
+
+	# this-pawn-dir
+	setMthisMpawn [shape=circle, label="set-this-pawn"];
+	setMthisMpawnAking [shape=circle, label="set-this-pawn&king"];
+	pawnMrowMeval [shape=circle, label="pawn-row-eval"];
+	pawnMeval [shape=circle, label="pawn-eval"];
+	pawnMdeltaMeval [shape=circle, label="pawn-delta-eval"];
+
+	# king-guard-pawn
+	setMkingMguardMpawn [shape=circle, label="set-king-guard-pawn"];
+	kingMguardQ [shape=circle, label="king-guard?"];
+
+	# king-guard-dir
+	setMkingMguardMpawn [shape=circle, label="set-king-guard-pawn"];
+	kingMatMbottomQ [shape=circle, label="king-at-bottom?"];
+	kingMguardQ [shape=circle, label="king-guard?"];
+
+	# use-arith-notation?
+	appendMmoveBstring [shape=circle, label="append-move>string"];
+	moveBstring [shape=circle, label="move>string"];
+
+	# bigforth?
+	# not used in words
+
+	# gforth?
+	BhistoryMfilenameB [shape=circle, label="(history-filename)"];
+
+	# iforth?
+	# not used in words
+
+	# curr-def
+	pC [shape=circle, label="p:"];
+	pCnoname [shape=circle, label="p:noname"];
+	Sp [shape=circle, label=";p"];
+
+	# noname-def?
+	pC [shape=circle, label="p:"];
+	pCnoname [shape=circle, label="p:noname"];
+	Sp [shape=circle, label=";p"];
+
+	# think-limit
+	rememberMbestmove [shape=circle, label="remember-bestmove"];
+	nullMmoveMeval [shape=circle, label="null-move-eval"];
+	onlyMaggressionMhopefulQ [shape=circle, label="only-aggression-hopeful?"];
+	QcheckMextension [shape=circle, label="?check-extension"];
+	setupMthinkMlimit [shape=circle, label="setup-think-limit"];
+	setupMthinkMlimit [shape=circle, label="setup-think-limit"];
+	calculateMmove [shape=circle, label="calculate-move"];
+
+	# curr-think-limit
+	QstaleMmate [shape=circle, label="?stale-mate"];
+	QcheckMextension [shape=circle, label="?check-extension"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	setupMthinkMlimit [shape=circle, label="setup-think-limit"];
+	recurseQ [shape=circle, label="recurse?"];
+	horizonMdistance [shape=circle, label="horizon-distance"];
+
+	# think-extend
+	QcheckMextension [shape=circle, label="?check-extension"];
+	setupMthinkMlimit [shape=circle, label="setup-think-limit"];
+
+	# max-think-limit
+	calculateMmove [shape=circle, label="calculate-move"];
+	strength [shape=circle, label="strength"];
+	benchmark1 [shape=circle, label="benchmark1"];
+
+	# abort-time
+	showMthoughts [shape=circle, label="show-thoughts"];
+	BabortMsearchQB [shape=circle, label="(abort-search?)"];
+	strength [shape=circle, label="strength"];
+	benchmark1 [shape=circle, label="benchmark1"];
+
+	# think-depth
+	checkMmateMeval [shape=circle, label="check-mate-eval"];
+	rememberMbestmove [shape=circle, label="remember-bestmove"];
+	nullMmoveMeval [shape=circle, label="null-move-eval"];
+	QstaleMmate [shape=circle, label="?stale-mate"];
+	onlyMaggressionMhopefulQ [shape=circle, label="only-aggression-hopeful?"];
+	evalBtt [shape=circle, label="eval>tt"];
+	ttBeval [shape=circle, label="tt>eval"];
+	QabortMsearch [shape=circle, label="?abort-search"];
+	QcheckMextension [shape=circle, label="?check-extension"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	rootMsearch [shape=circle, label="root-search"];
+	rootMprincipalMmove [shape=circle, label="root-principal-move"];
+	principalMmove [shape=circle, label="principal-move"];
+	appendMprincipalMvariation [shape=circle, label="append-principal-variation"];
+	appendMpvBstring [shape=circle, label="append-pv>string"];
+	simpleMkiller [shape=circle, label="simple-killer"];
+	recurseQ [shape=circle, label="recurse?"];
+	Pdepth [shape=circle, label="+depth"];
+	Mdepth [shape=circle, label="-depth"];
+	horizonMdistance [shape=circle, label="horizon-distance"];
+	nullMmoveQ [shape=circle, label="null-move?"];
+
+	# aborting?
+	storeMevaluation [shape=circle, label="store-evaluation"];
+	QabortMsearch [shape=circle, label="?abort-search"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	rootMsearch [shape=circle, label="root-search"];
+	calculateMmove [shape=circle, label="calculate-move"];
+
+	# alpha
+	switchMalphaMbeta [shape=circle, label="switch-alpha-beta"];
+	adjustMalpha [shape=circle, label="adjust-alpha"];
+	nullMmoveMeval [shape=circle, label="null-move-eval"];
+	onlyMaggressionMhopefulQ [shape=circle, label="only-aggression-hopeful?"];
+	storeMevaluation [shape=circle, label="store-evaluation"];
+	evalMpositionMwithMmemory [shape=circle, label="eval-position-with-memory"];
+	BquiescenceMevalMnocheckB [shape=circle, label="(quiescence-eval-nocheck)"];
+	BquiescenceMevalMcheckB [shape=circle, label="(quiescence-eval-check)"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	rootMsearch [shape=circle, label="root-search"];
+	calculateMmove [shape=circle, label="calculate-move"];
+	usefulMcaptureQ [shape=circle, label="useful-capture?"];
+
+	# beta
+	ttableMadjustMweight [shape=circle, label="ttable-adjust-weight"];
+	switchMalphaMbeta [shape=circle, label="switch-alpha-beta"];
+	isMcutoffQ [shape=circle, label="is-cutoff?"];
+	nullMmoveMeval [shape=circle, label="null-move-eval"];
+	storeMevaluation [shape=circle, label="store-evaluation"];
+	evalMpositionMwithMmemory [shape=circle, label="eval-position-with-memory"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	rootMsearch [shape=circle, label="root-search"];
+
+	# on-principal-variation?
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	rootMsearch [shape=circle, label="root-search"];
+	calculateMmove [shape=circle, label="calculate-move"];
+	weightMmoves [shape=circle, label="weight-moves"];
+	QonMprincipalMvariation [shape=circle, label="?on-principal-variation"];
+	generateMfastMkiller [shape=circle, label="generate-fast-killer"];
+	generateMfastMstrikeMkiller [shape=circle, label="generate-fast-strike-killer"];
+
+	# #nodes
+	BevalMpositionMrecursiveB [shape=circle, label="(eval-position-recursive)"];
+	BquiescenceMevalMnocheckB [shape=circle, label="(quiescence-eval-nocheck)"];
+	BquiescenceMevalMcheckB [shape=circle, label="(quiescence-eval-check)"];
+	Bstat [shape=circle, label="<stat"];
+	statB [shape=circle, label="stat>"];
+
+	# stale-mate
+	QstaleMmate [shape=circle, label="?stale-mate"];
+	QcheckSstaleMmate [shape=circle, label="?check/stale-mate"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+
+	# curr-abs-eval
+	flyMevalMmove [shape=circle, label="fly-eval-move"];
+	flyMevalMmoves [shape=circle, label="fly-eval-moves"];
+	PflyMeval [shape=circle, label="+fly-eval"];
+	calculateMmove [shape=circle, label="calculate-move"];
+	setMcurrMabsMeval [shape=circle, label="set-curr-abs-eval"];
+	currMeval [shape=circle, label="curr-eval"];
+	getMnullMmove [shape=circle, label="get-null-move"];
+	doMmoveMundoMinfo [shape=circle, label="do-move-undo-info"];
+	undoMmove [shape=circle, label="undo-move"];
+	checkMflyMeval [shape=circle, label="check-fly-eval"];
+
+	# curr-check?
+	QcheckSstaleMmate [shape=circle, label="?check/stale-mate"];
+	onlyMaggressionMhopefulQ [shape=circle, label="only-aggression-hopeful?"];
+	BquiescenceMevalMpositionB [shape=circle, label="(quiescence-eval-position)"];
+	QcheckMextension [shape=circle, label="?check-extension"];
+	calculateMmove [shape=circle, label="calculate-move"];
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	updateMcurrMcheckQ [shape=circle, label="update-curr-check?"];
+	doMmoveMundoMinfo [shape=circle, label="do-move-undo-info"];
+	undoMmove [shape=circle, label="undo-move"];
+	BgenerateMmoveMtoB [shape=circle, label="(generate-move-to)"];
+	BmoveMtoMexistsQB [shape=circle, label="(move-to-exists?)"];
+	generateMmoveMfrom [shape=circle, label="generate-move-from"];
+	checkMcheck [shape=circle, label="check-check"];
+
+	# black-move-target
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	moveMtarget [shape=circle, label="move-target"];
+	opponentMmoveMtarget [shape=circle, label="opponent-move-target"];
+	toMmoveMtarget [shape=circle, label="to-move-target"];
+	moveMsquares [shape=circle, label="move-squares"];
+	opponentMmoveMsquares [shape=circle, label="opponent-move-squares"];
+	toMmoveMsquares [shape=circle, label="to-move-squares"];
+
+	# white-move-target
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	moveMtarget [shape=circle, label="move-target"];
+	opponentMmoveMtarget [shape=circle, label="opponent-move-target"];
+	toMmoveMtarget [shape=circle, label="to-move-target"];
+	opponentMmoveMsquares [shape=circle, label="opponent-move-squares"];
+	toMmoveMsquares [shape=circle, label="to-move-squares"];
+
+	# black-move-orig
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	moveMorig [shape=circle, label="move-orig"];
+	opponentMmoveMorig [shape=circle, label="opponent-move-orig"];
+	toMmoveMorig [shape=circle, label="to-move-orig"];
+	moveMsquares [shape=circle, label="move-squares"];
+	opponentMmoveMsquares [shape=circle, label="opponent-move-squares"];
+	toMmoveMsquares [shape=circle, label="to-move-squares"];
+
+	# white-move-orig
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	moveMorig [shape=circle, label="move-orig"];
+	opponentMmoveMorig [shape=circle, label="opponent-move-orig"];
+	toMmoveMorig [shape=circle, label="to-move-orig"];
+	moveMsquares [shape=circle, label="move-squares"];
+	opponentMmoveMsquares [shape=circle, label="opponent-move-squares"];
+	toMmoveMsquares [shape=circle, label="to-move-squares"];
+
+	# move-list
+	getMmove [shape=circle, label="get-move"];
+	setMmove [shape=circle, label="set-move"];
+	getMeval [shape=circle, label="get-eval"];
+	getMorig [shape=circle, label="get-orig"];
+	setMeval [shape=circle, label="set-eval"];
+	getMtarget [shape=circle, label="get-target"];
+	getMmoveMclass [shape=circle, label="get-move-class"];
+	getMmoveMsquares [shape=circle, label="get-move-squares"];
+	getMmoveMnoeval [shape=circle, label="get-move-noeval"];
+	swapMmoves [shape=circle, label="swap-moves"];
+	firstMmove [shape=circle, label="first-move"];
+	newMmoves [shape=circle, label="new-moves"];
+	forgetMmoves [shape=circle, label="forget-moves"];
+
+	# #moves
+	flyMevalMmoves [shape=circle, label="fly-eval-moves"];
+	killerMmoveMeval [shape=circle, label="killer-move-eval"];
+	captureMkillerMmoveMeval [shape=circle, label="capture-killer-move-eval"];
+	minimumMquiescenceMmoveMeval [shape=circle, label="minimum-quiescence-move-eval"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	rootMsearch [shape=circle, label="root-search"];
+	createMmoveMweights [shape=circle, label="create-move-weights"];
+	weightMmoves [shape=circle, label="weight-moves"];
+	nextMbestMmove [shape=circle, label="next-best-move"];
+	sortMmovesMbyMweight [shape=circle, label="sort-moves-by-weight"];
+	generateMfastMkiller [shape=circle, label="generate-fast-killer"];
+	generateMfastMstrikeMkiller [shape=circle, label="generate-fast-strike-killer"];
+	BevalMmovesB [shape=circle, label="(eval-moves)"];
+	benchmarkMeval [shape=circle, label="benchmark-eval"];
+	benchmarkMmovegen [shape=circle, label="benchmark-movegen"];
+	uniqueMtargetQ [shape=circle, label="unique-target?"];
+	uniqueMrankQ [shape=circle, label="unique-rank?"];
+	uniqueMfileQ [shape=circle, label="unique-file?"];
+	QsingleMmove [shape=circle, label="?single-move"];
+	deleteMmovesMto [shape=circle, label="delete-moves-to"];
+	evalMcaptureMbalance [shape=circle, label="eval-capture-balance"];
+	checkMflyMeval [shape=circle, label="check-fly-eval"];
+	checkMcheck [shape=circle, label="check-check"];
+	checkMhash [shape=circle, label="check-hash"];
+	addMmove [shape=circle, label="add-move"];
+	newMmoves [shape=circle, label="new-moves"];
+	forgetMmoves [shape=circle, label="forget-moves"];
+	findMmove [shape=circle, label="find-move"];
+	findMmoveMx [shape=circle, label="find-move-x"];
+	deleteMmove [shape=circle, label="delete-move"];
+	sortMmoves [shape=circle, label="sort-moves"];
+	DTmoves [shape=circle, label=".moves"];
+	DTSemoves [shape=circle, label=".emoves"];
+
+	# moves-evaluated?
+	newMmoves [shape=circle, label="new-moves"];
+	forgetMmoves [shape=circle, label="forget-moves"];
+	QevalMmoves [shape=circle, label="?eval-moves"];
+	QgetMeval [shape=circle, label="?get-eval"];
+	flyMevalMmoves [shape=circle, label="fly-eval-moves"];
+	BevalMmovesB [shape=circle, label="(eval-moves)"];
+
+	# find-move-class
+	findMmoveMx [shape=circle, label="find-move-x"];
+
+	# curr-string#
+	stringMvariable [shape=circle, label="string-variable"];
+	newMstring [shape=circle, label="new-string"];
+	previousMstring [shape=circle, label="previous-string"];
+
+	# epd-file-id
+	# Not used in any words
+
+	# epd-fileid
+	epdMcloseMfile [shape=circle, label="epd-close-file"];
+	epdMopenMfile [shape=circle, label="epd-open-file"];
+	epdMreadMfile [shape=circle, label="epd-read-file"];
+	epdMreadMlast [shape=circle, label="epd-read-last"];
+	epdMtruncate [shape=circle, label="epd-truncate"];
+	epdMwriteMtoMfile [shape=circle, label="epd-write-to-file"];
+	epdMappendMtoMfile [shape=circle, label="epd-append-to-file"];
+	epdMcreateMfile [shape=circle, label="epd-create-file"];
+	test [shape=circle, label="test"];
+
+	# move-gen-piece
+	BgenerateMquiescenceMmoveMtoB [shape=circle, label="(generate-quiescence-move-to)"];
+	singleMnormalMmove [shape=circle, label="single-normal-move"];
+	singleMstrikeMmove [shape=circle, label="single-strike-move"];
+	singleMpawnMfarMmove [shape=circle, label="single-pawn-far-move"];
+	pawnMfarMmove [shape=circle, label="pawn-far-move"];
+	castleMnear [shape=circle, label="castle-near"];
+	castleMfar [shape=circle, label="castle-far"];
+	selectMmovingMpiece [shape=circle, label="select-moving-piece"];
+	generateMpromotions [shape=circle, label="generate-promotions"];
+	movesMexistQ [shape=circle, label="moves-exist?"];
+
+	# move-gen-from
+	BgenerateMquiescenceMmoveMtoB [shape=circle, label="(generate-quiescence-move-to)"];
+	singleMpawnMnormalMmove [shape=circle, label="single-pawn-normal-move"];
+	singleMnonpawnMnormalMmove [shape=circle, label="single-nonpawn-normal-move"];
+	singleMpawnMstrikeMmove [shape=circle, label="single-pawn-strike-move"];
+	singleMnonpawnMstrikeMmove [shape=circle, label="single-nonpawn-strike-move"];
+	singleMpawnMfarMmove [shape=circle, label="single-pawn-far-move"];
+	singleMtransMmove [shape=circle, label="single-trans-move"];
+	singleMstrikeMepMmove [shape=circle, label="single-strike-ep-move"];
+	singleMkingMmove [shape=circle, label="single-king-move"];
+	singleMkingMstrikeMmove [shape=circle, label="single-king-strike-move"];
+	normalMmove [shape=circle, label="normal-move"];
+	strikeMmove [shape=circle, label="strike-move"];
+	strikeQMmove [shape=circle, label="strike?-move"];
+	pawnMfarMmove [shape=circle, label="pawn-far-move"];
+	strikeMepMmove [shape=circle, label="strike-ep-move"];
+	pawnMnormalMmove [shape=circle, label="pawn-normal-move"];
+	pawnMstrikeMmove [shape=circle, label="pawn-strike-move"];
+	straightMpeacefulMmoves [shape=circle, label="straight-peaceful-moves"];
+	straightMstrikeMmoves [shape=circle, label="straight-strike-moves"];
+	straightMmoves [shape=circle, label="straight-moves"];
+	kingMmove [shape=circle, label="king-move"];
+	kingMstrikeMmove [shape=circle, label="king-strike-move"];
+	kingMpeacefulMmove [shape=circle, label="king-peaceful-move"];
+	castleMnear [shape=circle, label="castle-near"];
+	castleMfar [shape=circle, label="castle-far"];
+	selectMmovingMpiece [shape=circle, label="select-moving-piece"];
+	BgenerateMmoveMtoMnocheckB [shape=circle, label="(generate-move-to-nocheck)"];
+	BgenerateMmoveMtoMcheckB [shape=circle, label="(generate-move-to-check)"];
+	generateMpromotions [shape=circle, label="generate-promotions"];
+	BmoveMtoMexistsQBT [shape=circle, label="(move-to-exists?)'"];
+	BmoveMtoMexistsQMnocheckB [shape=circle, label="(move-to-exists?-nocheck)"];
+	BmoveMtoMexistsQMcheckB [shape=circle, label="(move-to-exists?-check)"];
+	movesMexistQ [shape=circle, label="moves-exist?"];
+
+	# forbidden-move-target
+	BgenerateMmoveMnotMtoB [shape=circle, label="(generate-move-not-to)"];
+	appendMmovesMnotMto [shape=circle, label="append-moves-not-to"];
+	appendMstrikeMmovesMnotMto [shape=circle, label="append-strike-moves-not-to"];
+
+	# single-move-to
+	BgenerateMsingleMmoveB [shape=circle, label="(generate-single-move)"];
+	generateMsingleMmove [shape=circle, label="generate-single-move"];
+	BgenerateMsingleMmoveMxB [shape=circle, label="(generate-single-move-x)"];
+	generateMsingleMmoveMx [shape=circle, label="generate-single-move-x"];
+
+	# single-move-class
+	BgenerateMsingleMmoveMxB [shape=circle, label="(generate-single-move-x)"];
+	generateMsingleMmoveMx [shape=circle, label="generate-single-move-x"];
+
+	# move-exists?
+	BmoveMtoMexistsQBT [shape=circle, label="(move-to-exists?)'"];
+	BmoveMtovexistsQMnocheckB [shape=circle, label="(move-to-exists?-nocheck)"];
+	BmoveMtoMexistsQMcheckB [shape=circle, label="(move-to-exists?-check)"];
+	BmoveMtoMexistsQB [shape=circle, label="(move-to-exists?)"];
+	movesMexistQ [shape=circle, label="moves-exist?"];
+
+	# random-seed
+	random [shape=circle, label="random"];
+
+	# #hashed-positions
+	rememberMposition [shape=circle, label="remember-position"];
+	forgetMposition [shape=circle, label="forget-position"];
+
+	# most-recent-match
+	forgetMposition [shape=circle, label="forget-position"];
+
+	# check-limit
+	continueMcheckQ [shape=circle, label="continue-check?"];
+	performMflyMevalMtest [shape=circle, label="perform-fly-eval-test"];
+	performMcheckMtest [shape=circle, label="perform-check-test"];
+	performMhashMtest [shape=circle, label="perform-hash-test"];
+
+	# check-depth
+	Pcheck [shape=circle, label="+check"];
+	Mcheck [shape=circle, label="-check"];
+	performMtests [shape=circle, label="perform-tests"];
+
+	# threatening-square
+	whiteMpawnMthreatensQ [shape=circle, label="white-pawn-threatens?"];
+	blackMpawnMthreatensQ [shape=circle, label="black-pawn-threatens?"];
+	knightMthreatensQ [shape=circle, label="knight-threatens?"];
+	threatenedMfromMdirectionQ [shape=circle, label="threatened-from-direction?"];
+	bishopMthreatensQ [shape=circle, label="bishop-threatens?"];
+	rookMthreatensQ [shape=circle, label="rook-threatens?"];
+	queenMthreatensQ [shape=circle, label="queen-threatens?"];
+	kingMthreatensQ [shape=circle, label="king-threatens?"];
+	pieceMwouldMthreatenQ [shape=circle, label="piece-would-threaten?"];
+	threatensQ [shape=circle, label="threatens?"];
+	pieceMthreateningMthrough [shape=circle, label="piece-threatening-through"];
+	queenlikeMthreatensMthroughQ [shape=circle, label="queenlike-threatens-through?"];
+	mightMcauseMopponentMcheckQ [shape=circle, label="might-cause-opponent-check?"];
+	mightMcauseMcheckQ [shape=circle, label="might-cause-check?"];
+	mightMblockMcheckQ [shape=circle, label="might-block-check?"];
+
+	# null-move-threshold
+	decideMnullMmovesQ [shape=circle, label="decide-null-moves?"];
+
+	# white-null-moves?
+	useMnullMmovesQ [shape=circle, label="use-null-moves?"];
+	toMnullMmovesQ [shape=circle, label="to-null-moves?"];
+
+	# white-null-moves?
+	useMnullMmovesQ [shape=circle, label="use-null-moves?"];
+	toMnullMmovesQ [shape=circle, label="to-null-moves?"];
+	
+	# black-null-moves?
+	useMnullMmovesQ [shape=circle, label="use-null-moves?"];
+	toMnullMmovesQ [shape=circle, label="to-null-moves?"];
+
+	# white-field?
+	fieldMattr [shape=circle, label="field-attr"];
+	fieldMspaces [shape=circle, label="field-spaces"];
+	DTboardMline [shape=circle, label=".board-line"];
+
+	# white-piece?
+	pieceMattr [shape=circle, label="piece-attr"];
+	DTboardMline [shape=circle, label=".board-line"];
+
+	# field-width
+	smallMboard [shape=circle, label="small-board"];
+	normalMboard [shape=circle, label="normal-board"];
+	hugeMboard [shape=circle, label="huge-board"];
+	DTfieldMslice [shape=circle, label=".field-slice"];
+	DThborder [shape=circle, label=".hborder"];
+
+	# field-height
+	smallMboard [shape=circle, label="small-board"];
+	normalMboard [shape=circle, label="normal-board"];
+	hugeMboard [shape=circle, label="huge-board"];
+	DTfieldMslice [shape=circle, label=".field-slice"];
+	DTvborderMslice [shape=circle, label=".vborder-slice"];
+	DTboardMline [shape=circle, label=".board-line"];
+
+	# move-gen-to
+	generateMmoveMfrom [shape=circle, label="generate-move-from"];
+	pawnMtargetMmove [shape=circle, label="pawn-target-move"];
+	knightMtargetMmove [shape=circle, label="knight-target-move"];
+	straightMtargetMmove [shape=circle, label="straight-target-move"];
+	kingMtargetMmove [shape=circle, label="king-target-move"];
+	appendMmovesMto [shape=circle, label="append-moves-to"];
+	generateMcheapestMmoveMto [shape=circle, label="generate-cheapest-move-to"];
+	generateMcheapestMweakMmoveMto [shape=circle, label="generate-cheapest-weak-move-to"];
+	generateMpawnMmoveMto [shape=circle, label="generate-pawn-move-to"];
+
+	# target-piece
+	straightMtargetMmove [shape=circle, label="straight-target-move"];
+	bishopMtargetMmoves [shape=circle, label="bishop-target-moves"];
+	rookMtargetMmoves [shape=circle, label="rook-target-moves"];
+	queenMtargetMmoves [shape=circle, label="queen-target-moves"];
+	bishopMsingleMtargetMmove [shape=circle, label="bishop-single-target-move"];
+	rookMsingleMtargetMmove [shape=circle, label="rook-single-target-move"];
+	queenMsingleMtargetMmove [shape=circle, label="queen-single-target-move"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	# value node styling
+	DboardMhooks [shape=rectangle, color=red, label="\#board-hooks"];
+	blackMkingMsquare [shape=rectangle, color=red, label="black-king-square"];
+	whiteMkingMsquare [shape=rectangle, color=red, label="white-king-square"];
+	farMmovedMpawn [shape=rectangle, color=red, label="far-moved-pawn"];
+	whiteQ [shape=rectangle, color=red, label="white?"];
+	myMpawn [shape=rectangle, color=red, label="my-pawn"];
+	myMknight [shape=rectangle, color=red, label="my-knight"];
+	myMbishop [shape=rectangle, color=red, label="my-bishop"];
+	myMrook [shape=rectangle, color=red, label="my-rook"];
+	myMqueen [shape=rectangle, color=red, label="my-queen"];
+	myMking [shape=rectangle, color=red, label="my-king"];
+	opponentMpawn [shape=rectangle, color=red, label="opponent-pawn"];
+	opponentMknight [shape=rectangle, color=red, label="opponent-knight"];
+	opponentMbishop [shape=rectangle, color=red, label="opponent-bishop"];
+	opponentMrook [shape=rectangle, color=red, label="opponent-rook"];
+	opponentMqueen [shape=rectangle, color=red, label="opponent-queen"];
+	opponentMking [shape=rectangle, color=red, label="opponent-king"];
+	opponent [shape=rectangle, color=red, label="opponent"];
+	myMpiece [shape=rectangle, color=red, label="my-piece"];
+	pawnMdirection [shape=rectangle, color=red, label="pawn-direction"];
+	flyMeval [shape=rectangle, color=red, label="fly-eval"];
+	flyMevalMpiece [shape=rectangle, color=red, label="fly-eval-piece"];
+	flyMevalMsquare [shape=rectangle, color=red, label="fly-eval-square"];
+	cutoffQ [shape=rectangle, color=red, label="cutoff?"];
+	Dnull [shape=rectangle, color=red, label="\#null"];
+	startMtime [shape=rectangle, color=red, label="start-time"];
+	rootMalpha [shape=rectangle, color=red, label="root-alpha"];
+	rootMbeta [shape=rectangle, color=red, label="root-beta"];
+	moveMweights [shape=rectangle, color=red, label="move-weights"];
+	compilationMfinishedQ [shape=rectangle, color=red, label="compilation-finished?"];
+	Dkillers [shape=rectangle, color=red, label="\#killers"];
+	hadMstrengthQ [shape=rectangle, color=red, label="had-strength?"];
+	evalMsquare [shape=rectangle, color=red, label="eval-square"];
+	evalMpiece [shape=rectangle, color=red, label="eval-piece"];
+	Devals [shape=rectangle, color=red, label="\#evals"];
+	thisMpawn [shape=rectangle, color=red, label="this-pawn"];
+	thisMking [shape=rectangle, color=red, label="this-king"];
+	thisMpawnMdir [shape=rectangle, color=red, label="this-pawn-dir"];
+	kingMguardMpawn [shape=rectangle, color=red, label="king-guard-pawn"];
+	kingMguardMdir [shape=rectangle, color=red, label="king-guard-dir"];
+	useMarithMnotationQ [shape=rectangle, color=red, label="use-arith-notation?"];
+	bigforthQ [shape=rectangle, color=red, label="bigforth?"];
+	gforthQ [shape=rectangle, color=red, label="gforth?"];
+	iforthQ [shape=rectangle, color=red, label="iforth?"];
+	currMdef [shape=rectangle, color=red, label="curr-def"];
+	nonameMdefQ [shape=rectangle, color=red, label="noname-def?"];
+	thinkMlimit [shape=rectangle, color=red, label="think-limit"];
+	currMthinkMlimit [shape=rectangle, color=red, label="curr-think-limit"];
+	thinkMextend [shape=rectangle, color=red, label="think-extend"];
+	maxMthinkMlimit [shape=rectangle, color=red, label="max-think-limit"];
+	abortMtime [shape=rectangle, color=red, label="abort-time"];
+	thinkMdepth [shape=rectangle, color=red, label="think-depth"];
+	abortingQ [shape=rectangle, color=red, label="aborting?"];
+	alpha [shape=rectangle, color=red, label="alpha"];
+	beta [shape=rectangle, color=red, label="beta"];
+	onMprincipalMvariationQ [shape=rectangle, color=red, label="on-principal-variation?"];
+	Dnodes [shape=rectangle, color=red, label="\#nodes"];
+	staleMmate [shape=rectangle, color=red, label="stale-mate"];
+	currMabsMeval [shape=rectangle, color=red, label="curr-abs-eval"];
+	currMcheckQ [shape=rectangle, color=red, label="curr-check?"];
+	blackMmoveMtarget [shape=rectangle, color=red, label="black-move-target"];
+	whiteMmoveMtarget [shape=rectangle, color=red, label="white-move-target"];
+	blackMmoveMorig [shape=rectangle, color=red, label="black-move-orig"];
+	whiteMmoveMorig [shape=rectangle, color=red, label="white-move-orig"];
+	moveMlist [shape=rectangle, color=red, label="move-list"];
+	Dmoves [shape=rectangle, color=red, label="\#moves"];
+	movesMevaluatedQ [shape=rectangle, color=red, label="moves-evaluated?"];
+	findMmoveMclass [shape=rectangle, color=red, label="find-move-class"];
+	currMstringD [shape=rectangle, color=red, label="curr-string\#"];
+	epdMfileMid [shape=rectangle, color=red, label="epd-file-id"];
+	epdMfileid [shape=rectangle, color=red, label="epd-fileid"];
+	moveMgenMpiece [shape=rectangle, color=red, label="move-gen-piece"];
+	moveMgenMfrom [shape=rectangle, color=red, label="move-gen-from"];
+	forbiddenMmoveMtarget [shape=rectangle, color=red, label="forbidden-move-target"];
+	singleMmoveMto [shape=rectangle, color=red, label="single-move-to"];
+	singleMmoveMclass [shape=rectangle, color=red, label="single-move-class"];
+	moveMexistsQ [shape=rectangle, color=red, label="move-exists?"];
+	randomMseed [shape=rectangle, color=red, label="random-seed"];
+	hashedMpositions [shape=rectangle, color=red, label="\#hashed-positions"];
+	mostMrecentMmatch [shape=rectangle, color=red, label="most-recent-match"];
+	checkMlimit [shape=rectangle, color=red, label="check-limit"];
+	checkMdepth [shape=rectangle, color=red, label="check-depth"];
+	threateningMsquare [shape=rectangle, color=red, label="threatening-square"];
+	nullMmoveMthreshold [shape=rectangle, color=red, label="null-move-threshold"];
+	whiteMnullMmovesQ [shape=rectangle, color=red, label="white-null-moves?"];
+	blackMnullMmovesQ [shape=rectangle, color=red, label="black-null-moves?"];
+	whiteMfieldQ [shape=rectangle, color=red, label="white-field?"];
+	whiteMpieceQ [shape=rectangle, color=red, label="white-piece?"];
+	fieldMwidth [shape=rectangle, color=red, label="field-width"];
+	fieldMheight [shape=rectangle, color=red, label="field-height"];
+	moveMgenMto [shape=rectangle, color=red, label="move-gen-to"];
+	targetMpiece [shape=rectangle, color=red, label="target-piece"];
+	
+	# word node styling
+	absMeval [shape=circle, label="abs-eval"];
+	addMboardMhook [shape=circle, label="add-board-hook"];
+	addMmove [shape=circle, label="add-move"];
+	adjustMalpha [shape=circle, label="adjust-alpha"];
+	adjustMkillerMhistory [shape=circle, label="adjust-killer-history"];
+	appendMmoveBstring [shape=circle, label="append-move>string"];
+	appendMmovesMnotMto [shape=circle, label="append-moves-not-to"];
+	appendMmovesMto [shape=circle, label="append-moves-to"];
+	appendMprincipalMvariation [shape=circle, label="append-principal-variation"];
+	appendMpvBstring [shape=circle, label="append-pv>string"];
+	appendMstrikeMmovesMnotMto [shape=circle, label="append-strike-moves-not-to"];
+	associatedMcapture [shape=circle, label="associated-capture"];
+	BabortMsearchQB [shape=circle, label="(abort-search?)"];
+	benchmark1 [shape=circle, label="benchmark1"];
+	benchmarkMeval [shape=circle, label="benchmark-eval"];
+	benchmarkMmovegen [shape=circle, label="benchmark-movegen"];
+	bestMmoveMeval [shape=circle, label="best-move-eval"];
+	BevalMmoveMrecursiveB [shape=circle, label="(eval-move-recursive)"];
+	BevalMmovesB [shape=circle, label="(eval-moves)"];
+	BevalMpositionMrecursiveB [shape=circle, label="(eval-position-recursive)"];
+	BgenerateMmoveMnotMtoB [shape=circle, label="(generate-move-not-to)"];
+	BgenerateMmoveMtoB [shape=circle, label="(generate-move-to)"];
+	BgenerateMmoveMtoMcheckB [shape=circle, label="(generate-move-to-check)"];
+	BgenerateMmoveMtoMnocheckB [shape=circle, label="(generate-move-to-nocheck)"];
+	BgenerateMquiescenceMmoveMtoB [shape=circle, label="(generate-quiescence-move-to)"];
+	BgenerateMsingleMmoveB [shape=circle, label="(generate-single-move)"];
+	BgenerateMsingleMmoveMxB [shape=circle, label="(generate-single-move-x)"];
+	BhistoryMfilenameB [shape=circle, label="(history-filename)"];
+	bishopMsingleMtargetMmove [shape=circle, label="bishop-single-target-move"];
+	bishopMtargetMmoves [shape=circle, label="bishop-target-moves"];
+	bishopMthreatensMthroughQ [shape=circle, label="bishop-threatens-through?"];
+	bishopMthreatensQ [shape=circle, label="bishop-threatens?"];
+	bishopMthreatsMdeltaMeval [shape=circle, label="bishop-threats-delta-eval"];
+	blackMpawnMthreatensQ [shape=circle, label="black-pawn-threatens?"];
+	BmoveMtoMexistsQB [shape=circle, label="(move-to-exists?)"];
+	BmoveMtoMexistsQBT [shape=circle, label="(move-to-exists?)'"];
+	BmoveMtoMexistsQMcheckB [shape=circle, label="(move-to-exists?-check)"];
+	BmoveMtovexistsQMnocheckB [shape=circle, label="(move-to-exists?-nocheck)"];
+	BquiescenceMevalMcheckB [shape=circle, label="(quiescence-eval-check)"];
+	BquiescenceMevalMnocheckB [shape=circle, label="(quiescence-eval-nocheck)"];
+	BquiescenceMevalMpositionB [shape=circle, label="(quiescence-eval-position)"];
+	Bstat [shape=circle, label="<stat"];
+	calculateMmove [shape=circle, label="calculate-move"];
+	captureMkillerMmoveMeval [shape=circle, label="capture-killer-move-eval"];
+	castleMfar [shape=circle, label="castle-far"];
+	castleMnear [shape=circle, label="castle-near"];
+	checkingMmoveQ [shape=circle, label="checking-move?"];
+	checkMcheck [shape=circle, label="check-check"];
+	checkMflyMeval [shape=circle, label="check-fly-eval"];
+	checkMhash [shape=circle, label="check-hash"];
+	checkMmateMeval [shape=circle, label="check-mate-eval"];
+	clearMkillerMhistory [shape=circle, label="clear-killer-history"];
+	continueMcheckQ [shape=circle, label="continue-check?"];
+	createMmoveMweights [shape=circle, label="create-move-weights"];
+	currMeval [shape=circle, label="curr-eval"];
+	decideMnullMmovesQ [shape=circle, label="decide-null-moves?"];
+	deleteMmove [shape=circle, label="delete-move"];
+	deleteMmovesMto [shape=circle, label="delete-moves-to"];
+	deltaMeval [shape=circle, label="delta-eval"];
+	doMcastleMfarMfast [shape=circle, label="do-castle-far-fast"];
+	doMcastleMfar [shape=circle, label="do-castle-far"];
+	doMcastleMnearMfast [shape=circle, label="do-castle-near-fast"];
+	doMcastleMnear [shape=circle, label="do-castle-near"];
+	doMmoveMundoMinfo [shape=circle, label="do-move-undo-info"];
+	doMpawnMfarMmove [shape=circle, label="do-pawn-far-move"];
+	doMtransMknightMmoveMfast [shape=circle, label="do-trans-knight-move-fast"];
+	doMtransMknightMmove [shape=circle, label="do-trans-knight-move"];
+	doMtransMqueenMmoveMfast [shape=circle, label="do-trans-queen-move-fast"];
+	doMtransMqueenMmove [shape=circle, label="do-trans-queen-move"];
+	DTboardMline [shape=circle, label=".board-line"];
+	DTfieldMslice [shape=circle, label=".field-slice"];
+	DThborder [shape=circle, label=".hborder"];
+	DTmoves [shape=circle, label=".moves"];
+	DTparty [shape=circle, label=".party"];
+	DTSemoves [shape=circle, label=".emoves"];
+	DTvborderMslice [shape=circle, label=".vborder-slice"];
+	epdMappendMtoMfile [shape=circle, label="epd-append-to-file"];
+	epdMcloseMfile [shape=circle, label="epd-close-file"];
+	epdMcreateMfile [shape=circle, label="epd-create-file"];
+	epdMopenMfile [shape=circle, label="epd-open-file"];
+	epdMreadMep [shape=circle, label="epd-read-ep"];
+	epdMreadMfile [shape=circle, label="epd-read-file"];
+	epdMreadMlast [shape=circle, label="epd-read-last"];
+	epdMtruncate [shape=circle, label="epd-truncate"];
+	epdMwriteMep [shape=circle, label="epd-write-ep"];
+	epdMwriteMparty [shape=circle, label="epd-write-party"];
+	epdMwriteMtoMfile [shape=circle, label="epd-write-to-file"];
+	evalBtt [shape=circle, label="eval>tt"];
+	evalMcaptureMbalance [shape=circle, label="eval-capture-balance"];
+	evalMknightMthreats [shape=circle, label="eval-knight-threats"];
+	evalMpawnMthreats [shape=circle, label="eval-pawn-threats"];
+	evalMpositionMwithMmemory [shape=circle, label="eval-position-with-memory"];
+	evalMput [shape=circle, label="eval-put"];
+	evalMstraightMthreats [shape=circle, label="eval-straight-threats"];
+	evalMthreat [shape=circle, label="eval-threat"];
+	fieldMattr [shape=circle, label="field-attr"];
+	fieldMspaces [shape=circle, label="field-spaces"];
+	findMmoveMx [shape=circle, label="find-move-x"];
+	findMmove [shape=circle, label="find-move"];
+	firstMmove [shape=circle, label="first-move"];
+	flyMevalMcastleMfar [shape=circle, label="fly-eval-castle-far"];
+	flyMevalMcastleMnear [shape=circle, label="fly-eval-castle-near"];
+	flyMevalMmove [shape=circle, label="fly-eval-move"];
+	flyMevalMmoves [shape=circle, label="fly-eval-moves"];
+	flyMevalMnormalMmove [shape=circle, label="fly-eval-normal-move"];
+	flyMevalMstrikeMepMmove [shape=circle, label="fly-eval-strike-ep-move"];
+	flyMevalMstrikeMmove [shape=circle, label="fly-eval-strike-move"];
+	flyMevalMtransMknight [shape=circle, label="fly-eval-trans-knight"];
+	flyMevalMtransMqueen [shape=circle, label="fly-eval-trans-queen"];
+	forgetMmoveMweights [shape=circle, label="forget-move-weights"];
+	forgetMmoves [shape=circle, label="forget-moves"];
+	forgetMposition [shape=circle, label="forget-position"];
+	generateMcheapestMmoveMto [shape=circle, label="generate-cheapest-move-to"];
+	generateMcheapestMweakMmoveMto [shape=circle, label="generate-cheapest-weak-move-to"];
+	generateMfastMkiller [shape=circle, label="generate-fast-killer"];
+	generateMfastMstrikeMkiller [shape=circle, label="generate-fast-strike-killer"];
+	generateMmoveMfrom [shape=circle, label="generate-move-from"];
+	generateMpawnMmoveMto [shape=circle, label="generate-pawn-move-to"];
+	generateMpromotions [shape=circle, label="generate-promotions"];
+	generateMsingleMmoveMx [shape=circle, label="generate-single-move-x"];
+	generateMsingleMmove [shape=circle, label="generate-single-move"];
+	getMeval [shape=circle, label="get-eval"];
+	getMmoveMclass [shape=circle, label="get-move-class"];
+	getMmoveMnoeval [shape=circle, label="get-move-noeval"];
+	getMmoveMsquares [shape=circle, label="get-move-squares"];
+	getMmove [shape=circle, label="get-move"];
+	getMnullMmove [shape=circle, label="get-null-move"];
+	getMorig [shape=circle, label="get-orig"];
+	getMrelMkillMcount [shape=circle, label="get-rel-kill-count"];
+	getMtarget [shape=circle, label="get-target"];
+	hashMfarMmovedMpawn [shape=circle, label="hash-far-moved-pawn"];
+	horizonMdistance [shape=circle, label="horizon-distance"];
+	hugeMboard [shape=circle, label="huge-board"];
+	initMkings [shape=circle, label="init-kings"];
+	initMknightMthreatMtable [shape=circle, label="init-knight-threat-table"];
+	isMcutoffQ [shape=circle, label="is-cutoff?"];
+	killerMmoveMeval [shape=circle, label="killer-move-eval"];
+	kingMatMbottomQ [shape=circle, label="king-at-bottom?"];
+	kingMeval [shape=circle, label="king-eval"];
+	kingMguardQ [shape=circle, label="king-guard?"];
+	kingMmove [shape=circle, label="king-move"];
+	kingMpeacefulMmove [shape=circle, label="king-peaceful-move"];
+	kingMsquare [shape=circle, label="king-square"];
+	kingMstrikeMmove [shape=circle, label="king-strike-move"];
+	kingMtargetMmove [shape=circle, label="king-target-move"];
+	kingMthreatensQ [shape=circle, label="king-threatens?"];
+	knightMsingleMtargetMmove [shape=circle, label="knight-single-target-move"];
+	knightMtargetMmove [shape=circle, label="knight-target-move"];
+	knightMthreatensQ [shape=circle, label="knight-threatens?"];
+	legalMmoveMtargetQ [shape=circle, label="legal-move-target?"];
+	Mcheck [shape=circle, label="-check"];
+	Mdepth [shape=circle, label="-depth"];
+	mightMblockMcheckQ [shape=circle, label="might-block-check?"];
+	mightMcauseMcheckQ [shape=circle, label="might-cause-check?"];
+	mightMcauseMopponentMcheckQ [shape=circle, label="might-cause-opponent-check?"];
+	minimumMquiescenceMmoveMeval [shape=circle, label="minimum-quiescence-move-eval"];
+	moveBstring [shape=circle, label="move>string"];
+	moveMorig [shape=circle, label="move-orig"];
+	moveMsquares [shape=circle, label="move-squares"];
+	moveMtarget [shape=circle, label="move-target"];
+	moveMweight [shape=circle, label="move-weight"];
+	movesMexistQ [shape=circle, label="moves-exist?"];
+	myMeval [shape=circle, label="my-eval"];
+	myMpieces [shape=circle, label="my-pieces"];
+	newMmoves [shape=circle, label="new-moves"];
+	newMstring [shape=circle, label="new-string"];
+	nextMbestMmove [shape=circle, label="next-best-move"];
+	normalMboard [shape=circle, label="normal-board"];
+	normalMmove [shape=circle, label="normal-move"];
+	nullMmoveMeval [shape=circle, label="null-move-eval"];
+	nullMmoveQ [shape=circle, label="null-move?"];
+	onlyMaggressionMhopefulQ [shape=circle, label="only-aggression-hopeful?"];
+	opponentMbishopQ [shape=circle, label="opponent-bishop?"];
+	opponentMeval [shape=circle, label="opponent-eval"];
+	opponentMkingMsquare [shape=circle, label="opponent-king-square"];
+	opponentMkingQ [shape=circle, label="opponent-king?"];
+	opponentMknightQ [shape=circle, label="opponent-knight?"];
+	opponentMmoveMorig [shape=circle, label="opponent-move-orig"];
+	opponentMmoveMsquares [shape=circle, label="opponent-move-squares"];
+	opponentMmoveMtarget [shape=circle, label="opponent-move-target"];
+	opponentMpawnQ [shape=circle, label="opponent-pawn?"];
+	opponentMpieces [shape=circle, label="opponent-pieces"];
+	opponentMrookQ [shape=circle, label="opponent-rook?"];
+	opponentQ [shape=circle, label="opponent?"];
+	otherMparty [shape=circle, label="other-party"];
+	pawnMdeltaMeval [shape=circle, label="pawn-delta-eval"];
+	pawnMeval [shape=circle, label="pawn-eval"];
+	pawnMfarMmove [shape=circle, label="pawn-far-move"];
+	pawnMnormalMmove [shape=circle, label="pawn-normal-move"];
+	pawnMrowMeval [shape=circle, label="pawn-row-eval"];
+	pawnMsingleMtargetMmove [shape=circle, label="pawn-single-target-move"];
+	pawnMtargetMmove [shape=circle, label="pawn-target-move"];
+	Pcheck [shape=circle, label="+check"];
+	pCnoname [shape=circle, label="p:noname"];
+	pC [shape=circle, label="p:"];
+	Pdepth [shape=circle, label="+depth"];
+	performMcheckMtest [shape=circle, label="perform-check-test"];
+	performMflyMevalMtest [shape=circle, label="perform-fly-eval-test"];
+	performMhashMtest [shape=circle, label="perform-hash-test"];
+	performMtests [shape=circle, label="perform-tests"];
+	PflyMeval [shape=circle, label="+fly-eval"];
+	pieceMattr [shape=circle, label="piece-attr"];
+	pieceMdeltaMeval [shape=circle, label="piece-delta-eval"];
+	pieceMeval [shape=circle, label="piece-eval"];
+	pieceMthreateningMthrough [shape=circle, label="piece-threatening-through"];
+	pieceMwouldMthreatenQ [shape=circle, label="piece-would-threaten?"];
+	positionMking [shape=circle, label="position-king"];
+	previousMstring [shape=circle, label="previous-string"];
+	principalMmove [shape=circle, label="principal-move"];
+	QabortMsearch [shape=circle, label="?abort-search"];
+	QcheckMextension [shape=circle, label="?check-extension"];
+	QcheckSstaleMmate [shape=circle, label="?check/stale-mate"];
+	QdefaultMstrength [shape=circle, label="?default-strength"];
+	Qdirection [shape=circle, label="?direction"];
+	QevalMmoves [shape=circle, label="?eval-moves"];
+	QgetMeval [shape=circle, label="?get-eval"];
+	QkingMeval [shape=circle, label="?king-eval"];
+	QonMprincipalMvariation [shape=circle, label="?on-principal-variation"];
+	QpawnMeval [shape=circle, label="?pawn-eval"];
+	QsingleMmove [shape=circle, label="?single-move"];
+	QstaleMmate [shape=circle, label="?stale-mate"];
+	queenlikeMthreatensMthroughQ [shape=circle, label="queenlike-threatens-through?"];
+	queenMeval [shape=circle, label="queen-eval"];
+	queenMsingleMtargetMmove [shape=circle, label="queen-single-target-move"];
+	queenMtargetMmoves [shape=circle, label="queen-target-moves"];
+	queenMthreatensQ [shape=circle, label="queen-threatens?"];
+	random [shape=circle, label="random"];
+	recurseQ [shape=circle, label="recurse?"];
+	rememberMbestmove [shape=circle, label="remember-bestmove"];
+	rememberMposition [shape=circle, label="remember-position"];
+	rookMsingleMtargetMmove [shape=circle, label="rook-single-target-move"];
+	rookMtargetMmoves [shape=circle, label="rook-target-moves"];
+	rookMthreatensMthroughQ [shape=circle, label="rook-threatens-through?"];
+	rookMthreatensQ [shape=circle, label="rook-threatens?"];
+	rookMthreatsMdeltaMeval [shape=circle, label="rook-threats-delta-eval"];
+	rootMprincipalMmove [shape=circle, label="root-principal-move"];
+	rootMsearch [shape=circle, label="root-search"];
+	selectMmovingMpiece [shape=circle, label="select-moving-piece"];
+	selfMcheckingMmoveQ [shape=circle, label="self-checking-move?"];
+	setMcurrMabsMeval [shape=circle, label="set-curr-abs-eval"];
+	setMeval [shape=circle, label="set-eval"];
+	setMkingMguardMpawn [shape=circle, label="set-king-guard-pawn"];
+	setMmoveMvars [shape=circle, label="set-move-vars"];
+	setMmove [shape=circle, label="set-move"];
+	setMnormalMmoveMhash [shape=circle, label="set-normal-move-hash"];
+	setMparty [shape=circle, label="set-party"];
+	setMstrikeMmoveMhash [shape=circle, label="set-strike-move-hash"];
+	setMthisMpawnAking [shape=circle, label="set-this-pawn&king"];
+	setMthisMpawn [shape=circle, label="set-this-pawn"];
+	setupMthinkMlimit [shape=circle, label="setup-think-limit"];
+	showMthoughts [shape=circle, label="show-thoughts"];
+	simpleMkiller [shape=circle, label="simple-killer"];
+	singleMkingMmove [shape=circle, label="single-king-move"];
+	singleMkingMstrikeMmove [shape=circle, label="single-king-strike-move"];
+	singleMmoveMeval [shape=circle, label="single-move-eval"];
+	singleMnonpawnMnormalMmove [shape=circle, label="single-nonpawn-normal-move"];
+	singleMnonpawnMstrikeMmove [shape=circle, label="single-nonpawn-strike-move"];
+	singleMnormalMmove [shape=circle, label="single-normal-move"];
+	singleMpawnMfarMmove [shape=circle, label="single-pawn-far-move"];
+	singleMpawnMnormalMmove [shape=circle, label="single-pawn-normal-move"];
+	singleMpawnMstrikeMmove [shape=circle, label="single-pawn-strike-move"];
+	singleMstrikeMepMmove [shape=circle, label="single-strike-ep-move"];
+	singleMstrikeMmove [shape=circle, label="single-strike-move"];
+	singleMtransMmove [shape=circle, label="single-trans-move"];
+	smallMboard [shape=circle, label="small-board"];
+	sortMmovesMbyMweight [shape=circle, label="sort-moves-by-weight"];
+	sortMmoves [shape=circle, label="sort-moves"];
+	Sp [shape=circle, label=";p"];
+	statB [shape=circle, label="stat>"];
+	storeMevaluation [shape=circle, label="store-evaluation"];
+	straightMmoves [shape=circle, label="straight-moves"];
+	straightMpeacefulMmoves [shape=circle, label="straight-peaceful-moves"];
+	straightMstrikeMmoves [shape=circle, label="straight-strike-moves"];
+	straightMtargetMmove [shape=circle, label="straight-target-move"];
+	strength [shape=circle, label="strength"];
+	strikeMepMmove [shape=circle, label="strike-ep-move"];
+	strikeMmove [shape=circle, label="strike-move"];
+	strikeQMmove [shape=circle, label="strike?-move"];
+	stringMvariable [shape=circle, label="string-variable"];
+	swapMmoves [shape=circle, label="swap-moves"];
+	switchMalphaMbeta [shape=circle, label="switch-alpha-beta"];
+	test [shape=circle, label="test"];
+	threatenedMfromMdirectionQ [shape=circle, label="threatened-from-direction?"];
+	threatensQ [shape=circle, label="threatens?"];
+	toMmoveMorig [shape=circle, label="to-move-orig"];
+	toMmoveMsquares [shape=circle, label="to-move-squares"];
+	toMmoveMtarget [shape=circle, label="to-move-target"];
+	toMnullMmovesQ [shape=circle, label="to-null-moves?"];
+	totalMeval [shape=circle, label="total-eval"];
+	ttableMadjustMweight [shape=circle, label="ttable-adjust-weight"];
+	ttBeval [shape=circle, label="tt>eval"];
+	ttentry [shape=circle, label="ttentry"];
+	undoMmove [shape=circle, label="undo-move"];
+	undoMstrikeMepMmove [shape=circle, label="undo-strike-ep-move"];
+	undoMtransMmove [shape=circle, label="undo-trans-move"];
+	uniqueMfileQ [shape=circle, label="unique-file?"];
+	uniqueMrankQ [shape=circle, label="unique-rank?"];
+	uniqueMtargetQ [shape=circle, label="unique-target?"];
+	updateMboard [shape=circle, label="update-board"];
+	updateMcurrMcheckQ [shape=circle, label="update-curr-check?"];
+	usefulMcaptureQ [shape=circle, label="useful-capture?"];
+	useMnullMmovesQ [shape=circle, label="use-null-moves?"];
+	weightMmoves [shape=circle, label="weight-moves"];
+	whiteMpawnMthreatensQ [shape=circle, label="white-pawn-threatens?"];
+}
