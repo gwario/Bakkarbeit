@@ -97,34 +97,34 @@ Status.fs is included in Gforth(since 0.7.0). It opens a separate xterm window, 
 \emph{dbg}\footnote{For further information see: \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Debugging.html\#Debugging}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. \emph{dbg} is only usable for interactive analysis.
 
 \subsubsection*{Assertions}
-Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify that the program at a certain point is in a certain state. For example pre-conditions and post-conditions of words could be implemented. With the use of assertions, the code can be prevented from breaking during maintenance. The word \emph{assert(} starts the assertion, the following words until the \emph{)} is executed and has to leave a flag on the stack. If the flag is true, the asserted condition is meet, if false, the execution of the program ends and the location of the failed assertion is printed(source file and line number).\\
-There are several assertion levels and by setting the \emph{assert-level}, assertions can be deactivated.
+Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify, that the program, at a certain point, is in a certain state. For example pre-conditions and post-conditions of words could be implemented using assertions. It is also possible to prevent code from breaking during maintenance activities. The word \emph{assert(} starts the assertion, the following words until the \emph{)} are executed and have to leave a flag on the stack. If that flag is true, the asserted condition is meet, otherwise, the execution of the program ends and the location of the failed assertion is displayed(source file and line number).\\
+There are several assertion levels and by setting the \emph{assert-level}, assertions can also be deactivated.
 
 \subsubsection*{Documentation}
-Thorough and up to date documentation is undoubtedly important, this also applies to concatenative languages. Besides word documentation, since forth is by default a untyped language, there is special kind of documentation encouraged to ease the understanding of words namely the stack effect comment\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Notation.html\#Notation}}. It is written next to the name of the defined word and contains the number and kind of elements on the stack which are manipulated by the word. These comments describe the state of the stack before and after the execution of a word.\hl{There is also a distinction to be made between interpretation, compile and run-time behavior ...dont mention it!?.}
+Thorough and up-to-date documentation is undoubtedly important, this also applies to concatenative languages. Besides behavior description of words, since forth is by default an untyped language, there is also a special kind of documentation encouraged to ease the understanding of words, namely the stack effect comment\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Notation.html\#Notation}}. It is written next to the name of the defined word and contains the number and kind of elements on the stack which are manipulated by the word. These comments describe the state of the stack before and after the execution of a word. In these comments, there is also a distinction to be made between interpretation, compile and run-time behavior.
 
 \subsection*{Words and word lists}
-Like in any other language, words should be named expressive. However sometimes, it may not be avoidable or desirable to reuse names. Forth provides an elegant mechanism, called word lists\footnote{For more information on word lists, see \url{http://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Word-Lists.html\#Word-Lists}}, to account these issues and to organize words. With word lists, words can be defined in a certain context. Like in natural languages words can have a different meaning in separate contexts. Using word lists, developers can prevent name clashes and separate interface words from internal words. In large project it may be necessary to define a naming strategy.
+Like in any other language, words should be named expressively. However sometimes, it may not be avoidable to reuse names. Forth provides an elegant mechanism, called word lists\footnote{For more information on word lists, see \url{http://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Word-Lists.html\#Word-Lists}}, to address these issues and to organize words. With word lists, words can be defined in a certain context. Like in natural languages words can have a different meaning in separate contexts. Using word lists, developers can prevent name clashes and separate interface words from internal words. In large projects it might be necessary to define a naming strategy.
 
 \subsection*{Factoring}
-As in any other programming language, to solve complex problems, it is necessary to split the overall problem down into less complex sub problems. In concatenative languages this is also referred to as factoring. Factoring helps keeping definitions short(and thus easier to understand), reusable and easier to test(\url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html}).
+As in any other programming language, it is necessary to split the overall problem down into manageable, less complex sub problems. In concatenative languages this is also referred to as factoring. Factoring helps keeping definitions short(and thus easier to understand), reusable and easier to test(\url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html}).
 
 \subsection*{Aliasing}
-In gforth, there can be multiple aliases\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html} for a word. Aliases can be used to use the same underlying implementation in different contexts, to make code more readable.
+In Gforth, there can be multiple aliases\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html} for one word. Aliases can be used to use the same underlying implementation in different contexts, to make code more readable.
 
 \subsection*{Emacs forth-mode}
 
-The emacs forth-mode(gforth.el, which is based on forth.el) provides many help features\footnote{For a more information see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Emacs-and-Gforth.html\#Emacs-and-Gforth}} to ease the writing of forth. Most notable, related to program understanding, are:
+The emacs forth-mode(gforth.el, which is based on forth.el) provides many helpful features\footnote{For a more information see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Emacs-and-Gforth.html\#Emacs-and-Gforth}} to ease the writing of Forth. Most notable, related to program understanding:
 \begin{itemize}
 \item Word documentation lookup
-\item Jump to line from, error messages, debug output and failed assertions. \emph{\textasciitilde\textasciitilde} output
+\item Jump to line from, error messages, debug output, failed assertions and \emph{\textasciitilde\textasciitilde} output
 \item Highlighting
 \item Indention handling
 \end{itemize}
 
 \subsection*{Kgforth}
 
-There has also been an afford to integrate some of those tools into an graphical development environment. The project is called Kgforth\footnote{\url{http://sourceforge.net/projects/kgforth/}: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
+There has also been an afford to integrate some of those tools into a graphical development environment. The project is called Kgforth\footnote{\url{http://sourceforge.net/projects/kgforth/}: Kgforth is a simple IDE for the gforth interpreter/compiler for KDE 2.** 
 It provides an editor, gforth window,debug and dump window, forth toolbar and menu.}, but its development seems to be discontinued.
 
 \section{Applicability of methods for other paradigms to concatenative languages}
