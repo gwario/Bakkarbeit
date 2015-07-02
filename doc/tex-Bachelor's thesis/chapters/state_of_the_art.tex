@@ -129,11 +129,11 @@ It provides an editor, gforth window,debug and dump window, forth toolbar and me
 
 \section{Applicability of methods for other paradigms to concatenative languages}
 
-In this section I will present a hand full of visualization methods and will discuss the applicability to gforth/forth. In the following chapter I will present an example on the most promising methods and analyze the actual outcome regarding program understanding. 
+In this section I will present a hand full of visualization methods and discuss their applicability to Gforth/Forth. 
 
 \subsection*{Sequence diagram, interaction diagram and scenario diagram}
 
-The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object oriented forth and there is no standard concurrency, th word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a syntax tree. On the system level although, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram and the interaction diagram(Jacobson, 1992) which has been proposed by.
+The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object oriented Forth and there is no standard for concurrency, the word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a list. On the system level although, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence \hl{diagram and the interaction diagram which has been proposed by Jacobson, 1992 --- Citation unclear...}.
 \\
 Since system level visualization is applicable to almost any paradigm and word level visualization does not seem promising for dynamic analysis, I will not investigate the benefits of those diagrams in this thesis.
 
@@ -144,22 +144,22 @@ Another possible mapping could depend on word list as words hierarchic and word 
 The hierarchic edge bundle can be used for interactive and non-interactive(real-time) dynamic analysis. In the following chapter I will analyze both possibilities using a real forth software as an example.
 
 \subsection*{Information murals and massive sequence view}
-The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, mass sequence view proposed by \cite{Cornelissen2009}, which turns the horizontal scrolling into vertical scrolling and also contains the hierarchic aspect could be more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical component depends highly on the organization of the software at hand.
+The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, the mass sequence view, was later proposed by \cite{Cornelissen2009}. It turns the horizontal scrolling into vertical scrolling and also included the hierarchic aspect be more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical element depends highly on the organization of the software system at hand.
 \\
 As well as the hierarchic edge bundle, these two methods can be used for interactive and non-interactive(post-mortem) dynamic analysis. In the following chapter I will analyze the massive sequence view using a real forth software as an example.
 
 \subsection*{High-Level polymetric views}
-Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with more information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data required.
+Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with additional information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed\hl{evt footnote erklärung was das bedeutet} data required.
 \\
 This method is suitable for interactive as well as non-interactive analysis. In the following chapter I will analyze a polymetric view of real software as an example.
 
 \subsection*{Fisheye views}
-Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle found in nature. It's basically described as a function, expressing the degree of interest of an subject, depending on an a priori importance and the distance from the current point of view. With growing distance lowers the degree of interest.
+Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle also found in nature. It's basically described as a function, expressing the degree of interest of an subject, depending on an a priori importance and the distance from the current point of view. Growing distance lowers the degree of interest.
 \\
-This method is related to polymetric views, as mentioned above.
+This method is related to polymetric views, as mentioned above.\hl{is it a special case of a polymetric view?!}
 
 \subsection*{Execution pattern view}
-The execution pattern view proposed by \cite{Pauw98executionpatterns} to visualize large traces in a scalable manner and helps to identify execution patterns, represent an inas a dramatic effect on how imperteresting evolution of simple sequence diagrams and interaction diagrams.
+The execution pattern view, proposed by \cite{Pauw98executionpatterns}, visualize large traces in a scalable manner and helps to identify execution patterns. I represent an interesting evolution of simple sequence diagrams and interaction diagrams.
 \\
 Since it is somehow related to the massive sequence view, I will not pursue this approach in detail.
 
