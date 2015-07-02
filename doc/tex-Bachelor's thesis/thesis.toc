@@ -29,7 +29,7 @@
 \contentsline {chapter}{\chapternumberline {4}Results}{13}{chapter.4}
 \contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{13}{section.4.1}
 \contentsline {section}{\numberline {4.2}The application of the previously presented methods}{15}{section.4.2}
-\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{15}{section.4.3}
+\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{21}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}software maintenance}{22}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}program comprehension}{22}{subsection.4.3.2}
 \contentsline {chapter}{\chapternumberline {5}Summary and future work}{23}{chapter.5}
