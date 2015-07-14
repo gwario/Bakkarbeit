@@ -37,7 +37,14 @@ Since the calculations of the computer-moves produce a huge amount of word execu
 
 \subsection*{Hierarchical edge bundles}
 
-Figure \ref{fig:hierarchic_edge_bundle} shows the first 100\footnote{The calculation of the interaction lines consume considerable amount of system resources, which prevents longer traces due to memory limitation.} word executions of the trace snapshot mentioned before in a \emph{hierarchic edge bundle}.
+Figure \ref{fig:hierarchic_edge_bundle} shows the first 100\footnote{The calculation of the interaction lines consume a considerable amount of system resources, which prevents longer traces due to memory limitation.} word executions of the trace snapshot mentioned before in a \emph{hierarchic edge bundle}.
+
+The outer ring labeled with \emph{brainless-0.1.2} represents the directory of the source code, the middle ring represents the files and the inner ring represents the words. Words which haven't been executed in this snapshot, have been omitted.
+The word sectors are of equal angle, the number of different words divided by 360\degree. The file sectors' angle have been adjusted according to the number of files they contains.
+The lines in the circle represent word executions. Same as in \cite{Holten:2006:HEB:1187627.1187772}, the word on the green end is the caller and the word on the red end is the callee. The distance of the turning point to the center of the circle depends on the distance(in degree) of the two word sectors, words with great distance are connected near to center. Multiple occurrences of caller/callee pair appear as one line in this graph. The exact algorithms used to calculate \ref{fig:hierarchic_edge_bundle} can be found in \hl{<appendix>}.
+A further improvement would be to draw multiple occurrences of the same caller/callee pairs with a slight gap to visualize all the executions.
+
+<The interpretation>
 
 \begin{figure}[p]
     \centering
@@ -49,7 +56,13 @@ Figure \ref{fig:hierarchic_edge_bundle} shows the first 100\footnote{The calcula
 
 \subsection*{Information murals and massive sequence view}
 
-Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} show the trace snapshot in a \emph{massive sequence view}. It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files. But it also clearly shows the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
+Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} show the trace snapshot in a \emph{massive sequence view}.
+
+The \emph{massive sequence view} consists of a hierarchical part at the top of \ref{fig:massive_sequence_view_1} and the interaction part which follows immediately(\ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3}). The upper level of the hierarchical part labeled with \emph{brainless-0.1.2}, again, represents the directory of the source code. The middle level, the files and the lower level, the words. Again, words which haven't been executed in this snapshot, have been omitted.
+The interaction part shows the word executions as lines. As in \cite{Holten:2006:HEB:1187627.1187772}, the word above the green end is the caller and the word above the red end is the callee. The order of the interaction lines represents also the order of execution. The first executed word is represented by the upper most interaction line.
+
+<The interpretation>
+It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files. But it also clearly shows the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
 
 \begin{figure}[p]
     \centering

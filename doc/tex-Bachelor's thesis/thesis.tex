@@ -14,6 +14,8 @@
 \usepackage{booktabs}  % Improves the typesettings of tables.
 \usepackage[ruled,linesnumbered,algochapter]{algorithm2e} % Enables the writing of pseudo code.
 \usepackage{color,soul}
+\usepackage{verbatim}
+\usepackage{gensymb}
 \usepackage{tikz}		% Diagram extension for hierarchical edge bundle
 \usepackage{menukeys}	% Keyboard symbols
 \usepackage{nag}       % Issues warnings when best practices in writing LaTeX documents are violated.
@@ -135,6 +137,25 @@ Enter your text here.
 
 % Remove following line for the final thesis.
 % \input{chapters/intro.tex} % A short introduction to LaTeX.
+
+\begin{appendices}
+\chapter{Hierarchic edge bundle source}
+
+graphics/hierarchic\_edge\_bundle-dir\_file\_word.pgf:
+
+% \verbatiminput{ graphics/hierarchic_edge_bundle-dir_file_word.pgf }
+
+\chapter{Massive sequence view source}
+
+massive\_sequence\_view-dir\_file\_word.pgf:
+
+% \verbatiminput{ massive_sequence_view-dir_file_word.pgf }
+
+\chapter{Gfviz postscript}
+
+The contents...
+
+\end{appendices}
 
 \backmatter
 
