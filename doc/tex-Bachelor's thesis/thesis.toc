@@ -29,15 +29,15 @@
 \contentsline {chapter}{\chapternumberline {4}Results}{13}{chapter.4}
 \contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{13}{section.4.1}
 \contentsline {section}{\numberline {4.2}The application of the previously presented methods}{15}{section.4.2}
-\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{21}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}software maintenance}{22}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}program comprehension}{22}{subsection.4.3.2}
-\contentsline {chapter}{\chapternumberline {5}Summary and future work}{23}{chapter.5}
-\contentsline {section}{\numberline {5.1}comparison with related work}{23}{section.5.1}
-\contentsline {section}{\numberline {5.2}discussion of open issues}{23}{section.5.2}
-\contentsline {section}{\numberline {5.3}further work to be done}{24}{section.5.3}
-\contentsline {section}{\numberline {5.4}further reading}{25}{section.5.4}
-\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{27}{chapter.A}
-\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{29}{chapter.B}
-\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{31}{chapter.C}
-\contentsline {chapter}{Bibliography}{33}{section*.42}
+\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{20}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}software maintenance}{23}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}program comprehension}{23}{subsection.4.3.2}
+\contentsline {chapter}{\chapternumberline {5}Summary and future work}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}comparison with related work}{25}{section.5.1}
+\contentsline {section}{\numberline {5.2}discussion of open issues}{25}{section.5.2}
+\contentsline {section}{\numberline {5.3}further work to be done}{26}{section.5.3}
+\contentsline {section}{\numberline {5.4}further reading}{27}{section.5.4}
+\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{29}{chapter.A}
+\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{31}{chapter.B}
+\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{33}{chapter.C}
+\contentsline {chapter}{Bibliography}{35}{section*.41}
