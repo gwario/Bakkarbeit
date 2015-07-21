@@ -118,53 +118,9 @@ It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable
 
 \section{gfvis - A trace visualization enhancement for Gforth}
 
-\hl{TODO put this under the matching viz methods!!}
-A very important question in this concern is, how can developers be assisted to write readable code. Experienced developers may do that intuitively, but how can novice developers be encouraged and supported to write readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this attribute be supported?\\
-One answer is to provide hints based on static analysis.\\
-It is not possible to make every word completely readable and the perceived readability also depends on the experience of the developer. At some point  it always comes down to longer combinations of "nip tuck over rot", this is hardly avoidable at the lowest level. Thus, proper documentation of words is essential. It is pretty obvious, that stack effect comment\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Stack\_002dEffect-Comments-Tutorial.html\#Stack\_002dEffect-Comments-Tutorial}} in Forth, are a must have, but also the behavior of the word should be documented for complex or not very natural to read words\footnote{Most notable \\G in Gforth. See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Comments.html\#Comments}}. Another advantage of word definition comments is the possibility of automated documentation generation.\\
-Very long word definitions tend to increase the amount of brain capacity required to understand its behavior. A way to address this problem is to break down the overall task into small, manageable pieces. In context of concatenative languages, this is called factoring\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html\#Factoring-Tutorial}} in context of concatenative languages. One approach could be to place a hint on word definitions which exceed a certain amount of lines or words or different words and suggest further factoring.\\
-Another tool to make code reading more natural, is aliasing\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html}}. By defining aliases for a certain word, its functionality can be used in different contexts and still read very natural.
-Although obvious, it should be mentioned that assigning expressive and fitting names for words is essential.\\
-To understand code, the systematic approach turned out to be most efficient\cite{Robillard:2004:EDI:1042203.1042417}. To ease afford of finding the definition of words used at a certain point, a hyperlink like referencing mechanism can be used[cite the visualization paper with the hyperlink feature].\\
-As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding
-which words are useful, and 2) remembering them all.", when programs get larger, the amount of words can grow big. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reverence to where they are used. Auto completion can also help a lot in finding words previously defined.
+Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg}.
+<describe what dbg does and what gfviz prvides>
 
-\begin{itemize}
+<describe the image>
 
-\item other data structures and variables should be displayed
-	\begin{itemize}
-	\item memory maybe like \cite{ReissProgrammingEnvironments1995} or \cite{Aftandilian:2010:HIH:1879211.1879222} but since there is no underlying object orientation and no standardized oo system this would be hard do accomplish
-	\item fisheye or word cloud like display(tree or sugiyama as of \cite{Storey:1997:IVT:857188.857642})
-	\end{itemize}
-
-
-\item interactive program manipulation: state of the system before a word, after a word and by clicking on the word jumping to its definition or inserting it and there also providing those features
-
-\item stepping debugger mode: simply stepping through the whole code word by word
-
-\item goal-oriented strategy: the definition of an execution scenario such that only the parts of interest of the software system are analyzed (Koenemann and Robertson, 1991; Zaidman,
-2006).
-
-\item code analysis and visualization facilities see chapter 2 TODO
-\end{itemize}
-
-\subsection{software maintenance}
-
-\begin{itemize}
-\item types of maintenance
-\item find bugs and fix them
-\item find the right place to implement a new feature.
-\item find the right place to modify a feature.
-\end{itemize}
-
-\subsection{program comprehension}
-
-\begin{itemize}
-\item structured approach
-\item thorough reading is the most efficient[cite]
-\item about the mental model building
-\item keeping the mental model up to date
-\item keeping artifacts up to date
-\end{itemize}
-
-
+<Image>

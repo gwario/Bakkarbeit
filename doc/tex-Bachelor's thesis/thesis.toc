@@ -26,18 +26,21 @@
 \contentsline {section}{\numberline {3.3}Existing approaches}{7}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Gforth/Forth}{7}{subsection.3.3.1}
 \contentsline {section}{\numberline {3.4}Applicability of methods for other paradigms to concatenative languages}{10}{section.3.4}
-\contentsline {chapter}{\chapternumberline {4}Results}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{13}{section.4.1}
-\contentsline {section}{\numberline {4.2}The application of the previously presented methods}{15}{section.4.2}
-\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{20}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}software maintenance}{23}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}program comprehension}{23}{subsection.4.3.2}
-\contentsline {chapter}{\chapternumberline {5}Summary and future work}{25}{chapter.5}
-\contentsline {section}{\numberline {5.1}comparison with related work}{25}{section.5.1}
-\contentsline {section}{\numberline {5.2}discussion of open issues}{25}{section.5.2}
-\contentsline {section}{\numberline {5.3}further work to be done}{26}{section.5.3}
-\contentsline {section}{\numberline {5.4}further reading}{27}{section.5.4}
-\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{29}{chapter.A}
-\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{31}{chapter.B}
-\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{33}{chapter.C}
-\contentsline {chapter}{Bibliography}{35}{section*.41}
+\contentsline {section}{\numberline {3.5}Methods to support code readability and improve program understanding}{12}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Common issues and possible solutions for writing readable code}{13}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Common issues and possible solutions for understanding code}{13}{subsection.3.5.2}
+\contentsline {chapter}{\chapternumberline {4}Results}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}The application of the previously presented methods}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{22}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}software maintenance}{22}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}program comprehension}{22}{subsection.4.3.2}
+\contentsline {chapter}{\chapternumberline {5}Summary and future work}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}comparison with related work}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}discussion of open issues}{27}{section.5.2}
+\contentsline {section}{\numberline {5.3}further work to be done}{28}{section.5.3}
+\contentsline {section}{\numberline {5.4}further reading}{29}{section.5.4}
+\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{31}{chapter.A}
+\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{33}{chapter.B}
+\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{35}{chapter.C}
+\contentsline {chapter}{Bibliography}{37}{section*.41}

@@ -179,3 +179,61 @@ The variable access graph in a tree like visualization as in GraphTrace seems hi
 The frequency spectrum analysis as proposed by \cite{Ball:1999:CDA:318774.318944} represents an interesting approach. It is similar to parametric views as mentioned before, but the visualization is not graphical but textual. The word execution frequency could provide valuable information about the actual performed work and incorporated with execution time, it could help in understanding programs and support performance analysis. In \cite{Ball:1999:CDA:318774.318944}, Ball shows the application of frequency spectrum analysis at the example of an obfuscated c program, but his approach should also be applicable to concatenative languages.
 
 Since this is not the main focus of this thesis, I wont discuss this approach any further.
+
+\section{Methods to support code readability and improve program understanding}
+
+In this section I will suggest methods to write better and more natural readable code as well as methods easy understanding of existing programs.
+\\
+A very important question is, how developers can be assisted to write more readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this style be encouraged? In my opinion, the top down strategy and extensive use of factoring, is the key to produce readable Forth code in large software systems.
+\\
+To encourage high code quality and the development environment should provide hints based on static analysis.
+
+\subsection{Common issues and possible solutions for writing readable code}
+
+It is not possible to make every word completely readable and the perceived readability also depends on the experience of the developer. At some point  it always comes down to longer combinations of "nip tuck over rot", this is hardly avoidable at the lowest level. Thus, proper documentation of words is essential. It is pretty obvious, that stack effect comment\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Stack\_002dEffect-Comments-Tutorial.html\#Stack\_002dEffect-Comments-Tutorial}} in Forth, are a must have, but also the behavior of the word should be documented for complex or not very natural to read words\footnote{Most notable \\G in Gforth. See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Comments.html\#Comments}}. Another advantage of word definition comments is the possibility of automated documentation generation.\\
+But using this approach, the developers can stick to natural language like words until there is no more factoring possible and the words have to be implemented in Gforth words.
+\\
+Another common problem are very long word definitions, they tend to increase the amount of brain capacity required to understand their behavior. To address this problem, the word hierarchy created by factoring, should be kept slim and deep. One approach herer could be to place a hint on word definitions which exceed a certain amount of lines or words or different words and suggest further factoring.
+\\
+A tool to make code reading more natural, is aliasing. By defining aliases for a certain word, its functionality can be used in different contexts and still read very natural.
+
+\subsection{Common issues and possible solutions to u ease program understanding}
+
+To understand code, the systematic approach turned out to be most efficient\cite{Robillard:2004:EDI:1042203.1042417}. To ease afford of finding the definition of words used at a certain point, a hyperlink like referencing mechanism can be used[cite the visualization paper with the hyperlink feature].\\
+As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding which words are useful, and 2) remembering them all.", when programs get larger, the amount of words can grow big. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reverence to where they are used. Auto completion can also help a lot in finding words previously defined.
+
+
+\begin{itemize}
+
+\item other data structures and variables should be displayed
+	\begin{itemize}
+	\item memory maybe like \cite{ReissProgrammingEnvironments1995} or \cite{Aftandilian:2010:HIH:1879211.1879222} but since there is no underlying object orientation and no standardized oo system this would be hard do accomplish
+	\item fisheye or word cloud like display(tree or sugiyama as of \cite{Storey:1997:IVT:857188.857642})
+	\end{itemize}
+
+\item interactive program manipulation: state of the system before a word, after a word and by clicking on the word jumping to its definition or inserting it and there also providing those features
+
+\item goal-oriented strategy: the definition of an execution scenario such that only the parts of interest of the software system are analyzed (Koenemann and Robertson, 1991; Zaidman,
+2006).
+
+\item code analysis and visualization facilities see chapter 2 TODO
+\end{itemize}
+
+\subsection{software maintenance}
+
+\begin{itemize}
+\item types of maintenance
+\item find bugs and fix them
+\item find the right place to implement a new feature.
+\item find the right place to modify a feature.
+\end{itemize}
+
+\subsection{program comprehension}
+
+\begin{itemize}
+\item structured approach
+\item thorough reading is the most efficient[cite]
+\item about the mental model building
+\item keeping the mental model up to date
+\item keeping artifacts up to date
+\end{itemize}
