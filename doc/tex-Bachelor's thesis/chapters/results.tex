@@ -44,7 +44,9 @@ The word sectors are of equal angle, the number of different words divided by 36
 The lines in the circle represent word executions. Same as in \cite{Holten:2006:HEB:1187627.1187772}, the word on the green end is the caller and the word on the red end is the callee. The distance of the turning point to the center of the circle depends on the distance(in degree) of the two word sectors, words with great distance are connected near to center. Multiple occurrences of caller/callee pair appear as one line in this graph. The exact algorithms used to calculate \ref{fig:hierarchic_edge_bundle} can be found in \hl{<appendix>}.
 A further improvement would be to draw multiple occurrences of the same caller/callee pairs with a slight gap to visualize all the executions.
 
-<The interpretation>
+\subsubsection*{Interpretation}
+
+\subsubsection*{Possible improvements}
 
 \begin{figure}[p]
     \centering
@@ -61,8 +63,13 @@ Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and
 The \emph{massive sequence view} consists of a hierarchical part at the top of \ref{fig:massive_sequence_view_1} and the interaction part which follows immediately(\ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3}). The upper level of the hierarchical part labeled with \emph{brainless-0.1.2}, again, represents the directory of the source code. The middle level, the files and the lower level, the words. Again, words which haven't been executed in this snapshot, have been omitted.
 The interaction part shows the word executions as lines. As in \cite{Holten:2006:HEB:1187627.1187772}, the word above the green end is the caller and the word above the red end is the callee. The order of the interaction lines represents also the order of execution. The first executed word is represented by the upper most interaction line.
 
-<The interpretation>
-It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files. But it also clearly shows the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
+\subsubsection*{Interpretation}
+
+It is easy to identify certain steps of the program execution like the drawing part at the end of the trace(interaction with drawing.fs shown if figure \ref{fig:massive_sequence_view_2}) and the file writing part(interaction from epd.fs at the and of figure \ref{fig:massive_sequence_view_2}), if one know the words contained in those files.
+
+\subsubsection*{Possible improvements}
+
+\ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} clearly show the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
 
 \begin{figure}[p]
     \centering
@@ -90,7 +97,12 @@ It is easy to identify certain steps of the program execution like the drawing p
 Figure \ref{fig:polymetric_view} shows a polymetric view of the snapshot. 
 I used a circle to represent a single word. The radius reflects the number of executions, frequently executed words appear as larger circles. The position(distance from the origin) reflects the number of words executed within the word, fewer sub-word-executions result in a greater distance. If the number of sub executions vary, the maximum was used. The color of a circle reflects the io-behavior of a word. Red means, the word prints to stdout and yellow means it is reading from or writing to a file.
 
-<The interpretation>
+\subsubsection*{Interpretation}
+
+<TODO Red big circle> \ref{fig:polymetric_view_detail}
+
+\subsubsection*{Possible improvements}
+
 \hl{TODO große wörter = performance relevant, wörter die in der mitte sind, sind eher intern komplex, farben: wörter die tatsächlich was sichtbares tun}
 
 \begin{figure}[p]
@@ -100,13 +112,23 @@ I used a circle to represent a single word. The radius reflects the number of ex
     \label{fig:polymetric_view}
 \end{figure}
 
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.5]{graphics/polymetric_view_detail.png}
+    \caption{Sanpshot of the polymetric view of the trace of Brainless after \emph{d2 d3 m}}
+    \label{fig:polymetric_view_detail}
+\end{figure}
+
 \subsection*{Memory access view}
 
 Figure \ref{fig:taxonomy} shows a small snapshot of the memory access of brainless.
 It shows the words and the memory locations they access. The words are represented by circles and the memory locations(values) by rectangles. The arrows represent the direction of the access. An outgoing arrow(from a word to a memory location) represents write operation and an incoming arrow(from a memory location to a word), a read operation.
 Since Brainless makes extensive use of \emph{value}s, does not use *\emph{variable}s at all and uses custom defining words only occasionally, \ref{fig:taxonomy} shows only the \emph{value}s.
 
-<The interpretation>
+\subsubsection*{Interpretation}
+
+\subsubsection*{Possible improvements}
+
 It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable} and also memory fields, allocated by custom defining words.
 
 \begin{figure}[p]
@@ -118,9 +140,27 @@ It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable
 
 \section{gfvis - A trace visualization enhancement for Gforth}
 
-Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg}.
-<describe what dbg does and what gfviz prvides>
+Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg}\ref{chap:StateOfTheArt}.
+Gfvis runs with a slightly modified version of Gforth(gforth-itc) and requires \emph{gv}\footnote{GV is a postscript viewer for X displays. For further information see: \url{http://www.gnu.org/software/gv/}}. It consist of \emph{gfvis.fs} and \emph{gfvis.ps}. Both have to be in the same directory. \emph{gfvis.ps} is a template file, written in postscript, it contains code to display the executed words and the state of the data stack, the floating stack and the return stack. \emph{gfvis.fs} contains code which collects the information to be displayed and to create and update \emph{trace.fs}.
+\\
+Gfvis is started by executing \verb|<path to modified gforth>/gforth-itc ./gfvis.fs|. When the dbg is started(i.e.\ \verb|dbg test|), trace.ps, a copy of gfvis.ps, is created and gv is started to display its content \ref{fig:traceps1}\ref{fig:traceps2}. From then on, every executed word, updates trace.ps with the name of the word and the state of the stacks. When \verb|bye| is executed, gfvis terminates gv and gforth-itc.
 
-<describe the image>
+\subsubsection*{Interpretation}
 
-<Image>
+\subsubsection*{Possible improvements}
+
+Inefficient use of space, on demand display of stack content.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.30]{graphics/traceps1.png}
+    \caption{Output of trace.ps after typing \emph{dbg test}(part 1/2)}
+    \label{fig:traceps1}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.30]{graphics/traceps2.png}
+    \caption{Output of trace.ps after typing \emph{dbg test}(part 2/2)}
+    \label{fig:traceps2}
+\end{figure}

@@ -94,7 +94,7 @@ There are also words to investigate the inner workings of other words.
 Status.fs is included in Gforth(since 0.7.0). It opens a separate xterm window, displaying the current number base, the float stack, the data stack and the current search order. The view is updated after each execution in the interpreter. Thus it is only useful for interactive analysis.
 
 \subsubsection*{Stepping debugger}
-\emph{dbg}\footnote{For further information see: \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Debugging.html\#Debugging}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. \emph{dbg} is only usable for interactive analysis.
+\emph{dbg}\footnote{For further information see: \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Singlestep-Debugger.html\#Singlestep-Debugger}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. \emph{dbg} is only usable for interactive analysis.
 
 \subsubsection*{Assertions}
 Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify, that the program, at a certain point, is in a certain state. For example pre-conditions and post-conditions of words could be implemented using assertions. It is also possible to prevent code from breaking during maintenance activities. The word \emph{assert(} starts the assertion, the following words until the \emph{)} are executed and have to leave a flag on the stack. If that flag is true, the asserted condition is meet, otherwise, the execution of the program ends and the location of the failed assertion is displayed(source file and line number).\\
@@ -197,10 +197,21 @@ Another common problem are very long word definitions, they tend to increase the
 \\
 A tool to make code reading more natural, is aliasing. By defining aliases for a certain word, its functionality can be used in different contexts and still read very natural.
 
-\subsection{Common issues and possible solutions to u ease program understanding}
+\subsection{Common issues and possible solutions to ease program understanding}
 
-To understand code, the systematic approach turned out to be most efficient\cite{Robillard:2004:EDI:1042203.1042417}. To ease afford of finding the definition of words used at a certain point, a hyperlink like referencing mechanism can be used[cite the visualization paper with the hyperlink feature].\\
+To understand code, the systematic approach turned out to be most efficient\cite{Robillard:2004:EDI:1042203.1042417}. To ease afford of finding the definition of words used at a certain point, a hyperlink like referencing mechanism can be used\hl{[cite the visualization paper with the hyperlink feature]}.\\
 As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding which words are useful, and 2) remembering them all.", when programs get larger, the amount of words can grow big. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reverence to where they are used. Auto completion can also help a lot in finding words previously defined.
+
+\begin{itemize}
+\item keeping the mental model up to date
+\item keeping artifacts up to date
+\end{itemize}
+
+\begin{itemize}
+\item find bugs and fix them
+\item find the right place to implement a new feature.
+\item find the right place to modify a feature.
+\end{itemize}
 
 
 \begin{itemize}
@@ -217,23 +228,4 @@ As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... T
 2006).
 
 \item code analysis and visualization facilities see chapter 2 TODO
-\end{itemize}
-
-\subsection{software maintenance}
-
-\begin{itemize}
-\item types of maintenance
-\item find bugs and fix them
-\item find the right place to implement a new feature.
-\item find the right place to modify a feature.
-\end{itemize}
-
-\subsection{program comprehension}
-
-\begin{itemize}
-\item structured approach
-\item thorough reading is the most efficient[cite]
-\item about the mental model building
-\item keeping the mental model up to date
-\item keeping artifacts up to date
 \end{itemize}
