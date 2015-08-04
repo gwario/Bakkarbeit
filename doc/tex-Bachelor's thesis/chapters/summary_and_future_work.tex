@@ -1,12 +1,17 @@
 \chapter{Summary and future work}
 \label{chap:Summary}
 
+Gfvis, the intended improvement to \emph{dbg}, is only usable for fairly short execution scenarios and thus not as helpful as assumed.
 
-\hl{summary of what has been done and the subjective conclusion only on the implementation or also the suggestions? conclusion like what i contributed to the community!!\\}
+\hl{About the created graphics}
 
 \section{comparison with related work}
 
-Quiet some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general. The research on trace visualization has proven to be very similar for concatenative languages since a program is also a concatenation of words. The closest thing to an development environment which provides interactive information from static or analysis, is kgforth. It is an integrated development environment for Gforth/Forth, which provides separate windows for debugging and dump output. But its development has been discontinued.
+Quiet some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general.
+
+The research on trace visualization has proven to be very similar for concatenative languages since a program is also a concatenation of words.
+
+The closest thing to an development environment which provides interactive information from static analysis, is kgforth. It is an integrated development environment for Gforth/Forth, which provides separate windows for debugging and dump output. But its development has been discontinued.
 
 \section{discussion of open issues}
 
@@ -30,8 +35,11 @@ Due to the implementation of the trace recording within the debugger, it is not 
 \section{further work to be done}
 
 The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested methods. The gathering of quantitative data and the formulation of hypotheses remains to be done in future works.
+
 Another important question yet to be answered, is whether software maintenance in concatenative languages is conducted similar as in other paradigms. Only with accurate knowledge about how tasks are done, better methods to improve those can be developed.
-Further more, it is yet to be determined how to orchestrate various methods, to fit in the development process. Whether or not some kind of integrated development environment or an independent set of tools is actually more helpful.
+
+Furthermore, it is yet to be determined how to orchestrate various methods, to fit in the development process. Whether or not some kind of integrated development environment or an independent set of tools is actually more helpful.
+
 Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE, for further information see http://lighttable.com/} like approach and an application of the idea of continuous programm understanding\cite{Muller:2000:RER:336512.336526} would be interesting to see. By defining test input for words, the IDE would display the data flow/stack changes and respond immediately to changes.
 
 % \hl{TODO: PASST NICHT MEHR\\ To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.}
