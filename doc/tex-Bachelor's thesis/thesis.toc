@@ -37,8 +37,8 @@
 \contentsline {section}{\numberline {5.1}comparison with related work}{29}{section.5.1}
 \contentsline {section}{\numberline {5.2}discussion of open issues}{29}{section.5.2}
 \contentsline {section}{\numberline {5.3}further work to be done}{30}{section.5.3}
-\contentsline {section}{\numberline {5.4}further reading}{31}{section.5.4}
-\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{33}{chapter.A}
-\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{35}{chapter.B}
-\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{37}{chapter.C}
-\contentsline {chapter}{Bibliography}{39}{section*.51}
+\contentsline {section}{\numberline {5.4}further reading}{30}{section.5.4}
+\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{31}{chapter.A}
+\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{33}{chapter.B}
+\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{35}{chapter.C}
+\contentsline {chapter}{Bibliography}{37}{section*.51}

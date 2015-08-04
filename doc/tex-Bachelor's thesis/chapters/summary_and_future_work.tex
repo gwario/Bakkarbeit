@@ -1,9 +1,8 @@
 \chapter{Summary and future work}
 \label{chap:Summary}
 
-The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested solutions. The gathering of quantitative data and the formulation of hypotheses remains to be done in future works.
 
-\hl{summary of what has been done and the subjective conclusion only on the implementation or also the suggestions?}
+\hl{summary of what has been done and the subjective conclusion only on the implementation or also the suggestions? conclusion like what i contributed to the community!!\\}
 
 \section{comparison with related work}
 
@@ -30,36 +29,14 @@ Due to the implementation of the trace recording within the debugger, it is not 
 
 \section{further work to be done}
 
-\begin{itemize}
-\item how does software maintenance work in those languages?
-\item ide
-\item display of variable content
-\item display of allocated memory areas
-\item display of color diff with tooltip of previous values for stacks and memory areas
-\item (better visualization of loops and control structures) is this even possible?
-\item (display of the full program as a graph) is this even possible?
-\item (customizable inspection depth) ?
-\item type system for forth...see strongforth and the work of greg
-
-\item static code analysis
-
-v---- see previous chapter ----v
-\item using a standard data type to store traces
-\item stack depth per word
-\end{itemize}
-
+The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested methods. The gathering of quantitative data and the formulation of hypotheses remains to be done in future works.
+Another important question yet to be answered, is whether software maintenance in concatenative languages is conducted similar as in other paradigms. Only with accurate knowledge about how tasks are done, better methods to improve those can be developed.
+Further more, it is yet to be determined how to orchestrate various methods, to fit in the development process. Whether or not some kind of integrated development environment or an independent set of tools is actually more helpful.
+Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE, for further information see http://lighttable.com/} like approach and an application of the idea of continuous programm understanding\cite{Muller:2000:RER:336512.336526} would be interesting to see. By defining test input for words, the IDE would display the data flow/stack changes and respond immediately to changes.
 
 % \hl{TODO: PASST NICHT MEHR\\ To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.}
-
-kind of an \sout{ide} development environment\\
-light table ide(js) continuous reverse engineering idea of \cite{Muller:2000:RER:336512.336526} to provide immediate response of the systems output... although probably not applicable or very time consuming in setup(or not more than integration testing...) for most industrial scale software\\
-eclipse ide(java)
-
-
-conclusion like what i contributed to the community!!\\
 
 
 \section{further reading}
 
-work on program comprehension of concatenative languages
-good overview of the field \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009}
+There on work on program comprehension of concatenative languages, but \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009} provide good overview of the field field of program comprehension in general.
