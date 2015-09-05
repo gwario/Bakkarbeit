@@ -204,27 +204,27 @@ Another tool to make code reading more natural, is aliasing. By defining aliases
 
 \subsection{Common issues and possible solutions to ease program understanding}
 
-Due to \cite{Robillard:2004:EDI:1042203.1042417}, the systematic approach turned out to be most efficient to understand code. To ease the afford of finding the definition of words, used at a certain point, a hyperlink like referencing mechanism can be used.\\
+Due to \cite{Robillard:2004:EDI:1042203.1042417}, the systematic approach turned out to be most efficient to understand code. To ease the afford of finding the definition of words, used at a certain point, a hyperlink like referencing mechanism can be used.
+
 As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding which words are useful, and 2) remembering them all.", when programs get larger, the amount of words can grow big. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reverence to where they are used. Auto completion can also help a lot in finding words previously defined.
 
+In software maintenance, a common issue is, when fixing a bug, first to identify the source coded areas which are responsible for the malfunction. And second, to understand the meaning of those code areas to be able to fix the bug. The before mentioned massive sequence view can help in identifying those code areas in a large program trace.
+
+Another issue in software maintenance is the identification of changes necessary to implement a new feature or modify an existing feature. In \cite{Storey:1997:IVT:857188.857642}, Storey et. al. presented an integrated approach, which combines some of the before mentioned visualization techniques. But instead of stopping at the file level, for Forth, it would be event more helpful to go down to the word level.
+
+\begin{comment}
 \begin{itemize}
 \item keeping the mental model up to date
 \item keeping artifacts up to date
 \end{itemize}
+\end{comment}
 
-\begin{itemize}
-\item find bugs and fix them
-\item find the right place to implement a new feature.
-\item find the right place to modify a feature.
-\end{itemize}
-
-
+\begin{comment}
 \begin{itemize}
 
 \item other data structures and variables should be displayed
 	\begin{itemize}
 	\item memory maybe like \cite{ReissProgrammingEnvironments1995} or \cite{Aftandilian:2010:HIH:1879211.1879222} but since there is no underlying object orientation and no standardized oo system this would be hard do accomplish
-	\item fisheye or word cloud like display(tree or sugiyama as of \cite{Storey:1997:IVT:857188.857642})
 	\end{itemize}
 
 \item interactive program manipulation: state of the system before a word, after a word and by clicking on the word jumping to its definition or inserting it and there also providing those features
@@ -232,5 +232,5 @@ As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... T
 \item goal-oriented strategy: the definition of an execution scenario such that only the parts of interest of the software system are analyzed (Koenemann and Robertson, 1991; Zaidman,
 2006).
 
-\item code analysis and visualization facilities see chapter 2 TODO
 \end{itemize}
+\end{comment}

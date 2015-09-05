@@ -46,12 +46,16 @@ The lines in the circle represent word executions. Same as in \cite{Holten:2006:
 \subsubsection*{Interpretation}
 The main problem in this manually generated picture is the limitation to  100 executions. Due to rendering time and memory requirement, it was not possible to visualize more executions with KTikZ\footnote{Version 0.10}.
 Apart from that, the hierarchic edge bundle provides information on the complexity or importance of a word in this part of the execution trace(the number of words which are executed by one word, the number of distinct words which are executed by one word or the number of words which call on word).
-Provided, that words are named expressively, the hierarchic edge bundle can also help to extract information on what happened during execution and how something happened.
+
+Looking at the interaction lines, what stands out first, is the role of board.fs as caller and the role of threats.fs as callee. This leads to the assumption, that board.fs must contain controlling functions in this part of the trace. In contrast, threats.fs provides mainly utility words for board.fs.
 
 \subsubsection*{Possible improvements}
 A further improvement would be to draw multiple occurrences of the same caller/callee pairs(the interaction lines) with a slight gap to visualize all the executions. Or, if there are too many interaction lines, to show the exact number of interactions(e.g. on hover).
+
 Another improvement would be to show the name of the words in the hierarchic part, or if there are too much, to show it on hover.
-Due to the limitation to 100 executions, the not involved words could be omitted in the hierarchic part.
+Provided, that words are named expressively, the hierarchic edge bundle can also help to extract information on what happened during execution and how something happened. 
+
+Due to the limitation to 100 executions, the not involved words could have been omitted in the hierarchic part.
 
 \begin{figure}[p]
     \centering
@@ -65,7 +69,7 @@ Due to the limitation to 100 executions, the not involved words could be omitted
 
 Figures \ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} show the trace snapshot in a \emph{massive sequence view}.
 
-The \emph{massive sequence view} consists of a hierarchical part at the top of \ref{fig:massive_sequence_view_1} and the interaction part which follows immediately(\ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3}). The upper level of the hierarchical part labeled with \emph{brainless-0.1.2}, again, represents the directory of the source code. The middle level, the files and the lower level, the words. Again, words which haven't been executed in this snapshot, have been omitted.
+The \emph{massive sequence view} consists of the hierarchical part at the top of \ref{fig:massive_sequence_view_1} and the interaction part which follows immediately(\ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3}). The upper level of the hierarchical part, labeled with \emph{brainless-0.1.2}, again, represents the directory of the source code. The middle level, the files and the lower level, the words. Again, words which haven't been executed in this snapshot, have been omitted.
 The interaction part shows the word executions as lines. As in \cite{Holten:2006:HEB:1187627.1187772}, the word above the green end is the caller and the word above the red end is the callee. The order of the interaction lines represents also the order of execution. The first executed word is represented by the upper most interaction line.
 
 \subsubsection*{Interpretation}
@@ -74,7 +78,7 @@ It is easy to identify certain steps of the program execution like the drawing p
 
 \subsubsection*{Possible improvements}
 
-\ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} clearly show the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map the sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
+\ref{fig:massive_sequence_view_1}, \ref{fig:massive_sequence_view_2} and \ref{fig:massive_sequence_view_3} clearly show the lack of interactivity. Without filtering, zooming, on-demand information on words(references to source code) and of course expressive naming, it still remains hard to map sections of the trace to behavior. Besides these concerns, the massive sequence view seems to be well applicable to forth program traces.
 
 \begin{figure}[p]
     \centering
@@ -97,7 +101,7 @@ It is easy to identify certain steps of the program execution like the drawing p
     \label{fig:massive_sequence_view_3}
 \end{figure}
 
-\subsection*{High-Level polymetric views}
+\subsection*{High-level polymetric views}
 
 Figure \ref{fig:polymetric_view} shows a polymetric view of the snapshot. 
 I used a circle to represent a single word. The radius reflects the number of executions, frequently executed words appear as larger circles. The position(distance from the origin) reflects the number of words executed within the word, fewer sub-word-executions result in a greater distance. If the number of sub executions vary, the maximum was used. The color of a circle reflects the io-behavior of a word. Red means, the word prints to stdout and yellow means it is reading from or writing to a file.
