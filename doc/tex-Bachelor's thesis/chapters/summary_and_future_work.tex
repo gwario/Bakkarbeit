@@ -9,16 +9,15 @@ The massive sequence view can aid much in program understanding, especially with
 
 \section*{High-level polymetric views}
 
-
 But the key is still expressive naming.
 
+\section*{Gfvis}
 
 Gfvis, the intended improvement to \emph{dbg}, is only usable for fairly short execution scenarios and thus not as helpful as assumed.
 
-
 \section{comparison with related work}
 
-Quiet some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general.
+Quite some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general.
 
 The research on trace visualization has proven to be very similar for concatenative languages since a program is also a concatenation of words.
 
@@ -31,7 +30,7 @@ Another not yet addressed problem is the scalability of the view, the inefficien
 
 Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by \cite{Cornelissen:2008:ETA:1454787.1454981}, where in addition nested words as well as the stack state between arbitrary words can be hidden and displayed on demand. The introduction of "watch points" to reduce the visual noise and the size of the trace file could also address the scalability issue. But in general, postscript is probably not the best technology for displaying this data.
 
-It is also not practical to compare two traces to each other. A visualization of several traces in a massive sequence view like manner where several traces are synchronized by word and differences are visualized by colors could solve this problem.
+It is also not practical to compare two traces to each other. A visualization of several traces in a massive sequence view like manner, where the are synchronized by words and differences between them are visualized by colors, could solve this problem.
 
 Due to the implementation of the trace recording within the debugger, it is not possible to collect traces of live systems. Neither is performance analysis possible while recording traces/debugging.
  
@@ -55,7 +54,6 @@ Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE,
 
 % \hl{TODO: PASST NICHT MEHR\\ To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.}
 
-
 \section{further reading}
 
-There on work on program comprehension of concatenative languages, but \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009} provide good overview of the field field of program comprehension in general.
+There hasn't been done any work on program comprehension of concatenative languages, but \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009} provide good overview of the field field of program comprehension in general.

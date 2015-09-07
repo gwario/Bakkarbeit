@@ -32,7 +32,7 @@
 \contentsline {chapter}{\chapternumberline {4}Results}{15}{chapter.4}
 \contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{15}{section.4.1}
 \contentsline {section}{\numberline {4.2}The application of the previously presented methods}{16}{section.4.2}
-\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{23}{section.4.3}
+\contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{26}{section.4.3}
 \contentsline {chapter}{\chapternumberline {5}Summary and future work}{31}{chapter.5}
 \contentsline {section}{\numberline {5.1}comparison with related work}{31}{section.5.1}
 \contentsline {section}{\numberline {5.2}discussion of open issues}{32}{section.5.2}
@@ -41,4 +41,4 @@
 \contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{35}{chapter.A}
 \contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{37}{chapter.B}
 \contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{39}{chapter.C}
-\contentsline {chapter}{Bibliography}{41}{section*.54}
+\contentsline {chapter}{Bibliography}{41}{section*.55}

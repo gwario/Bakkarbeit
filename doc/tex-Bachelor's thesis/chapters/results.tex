@@ -108,11 +108,15 @@ I used a circle to represent a single word. The radius reflects the number of ex
 
 \subsubsection*{Interpretation}
 
-<TODO Red big circle> \ref{fig:polymetric_view_detail}
+Figure \ref{fig:polymetric_view_detail} shows the snapshot of the whole graph with the most often executed word, \emph{get-piece-masked}. This information can be valuable to identify words suitable for performance improvements. Since optimizing words which are executed very frequently can significantly improve performance.
+
+Through its short distance to the origin, the words \emph{m}, \emph{knight-moves} and \emph{.board} can be identified as high level words. At this point, it seems misleading, that the word \emph{knight-moves} is closer to the origin than \emph{pawn-moves}, since the move d2 d3 was the move of a pawn.
+
+Through the colors, it is easy to identify the words \emph{epd-write-to-file} and \emph{epd-append-to-file} as words with file interaction. The words \emph{.hborder}, \emph{field-spaces} and \emph{display-move} can be identified as words responsible for drawing the chess board.
 
 \subsubsection*{Possible improvements}
 
-\hl{TODO große wörter = performance relevant, wörter die in der mitte sind, sind eher intern komplex, farben: wörter die tatsächlich was sichtbares tun}
+This graph was generated of an execution trace but it could also be used to show information gathered from static analysis. For example, it would be interesting to map the number of words within one word to the radius of the word's circle. And use the color of the word circles to highlight very complex words(with too many words their definition).
 
 \begin{figure}[p]
     \centering
@@ -124,7 +128,7 @@ I used a circle to represent a single word. The radius reflects the number of ex
 \begin{figure}[p]
     \centering
     \includegraphics[scale=0.5]{graphics/polymetric_view_detail.png}
-    \caption{Sanpshot of the polymetric view of the trace of Brainless after \emph{d2 d3 m}}
+    \caption{Sanpshot of the High-Level polymetric view of the trace of Brainless after \emph{d2 d3 m}}
     \label{fig:polymetric_view_detail}
 \end{figure}
 
@@ -132,13 +136,15 @@ I used a circle to represent a single word. The radius reflects the number of ex
 
 Figure \ref{fig:taxonomy} shows a small snapshot of the memory access of brainless.
 It shows the words and the memory locations they access. The words are represented by circles and the memory locations(values) by rectangles. The arrows represent the direction of the access. An outgoing arrow(from a word to a memory location) represents write operation and an incoming arrow(from a memory location to a word), a read operation.
-Since Brainless makes extensive use of \emph{value}s, does not use *\emph{variable}s at all and uses custom defining words only occasionally, \ref{fig:taxonomy} shows only the \emph{value}s.
+Since Brainless makes extensive use of \emph{value}s, does not use \emph{*variable}s at all and uses custom defining words only occasionally, \ref{fig:taxonomy} shows only the \emph{value}s.
 
 \subsubsection*{Interpretation}
 
+Since the graph is very huge, it is not easy to keep track of the entire picture, but for debugging, it could be very helpful to see which other words manipulate certain memory locations to find the actual cause of a problem.
+
 \subsubsection*{Possible improvements}
 
-It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable} and also memory fields, allocated by custom defining words.
+It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable} and also memory fields, allocated by custom defining words. \ref{fig:taxonomy} shows only a small snapshot of the whole graph, because the whole graph would have been too large(the graph grows with the number of words, which access memory locations).
 
 \begin{figure}[p]
     \centering
@@ -149,25 +155,35 @@ It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable
 
 \section{gfvis - A trace visualization enhancement for Gforth}
 
-Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg}\ref{chap:StateOfTheArt}.
+Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg}(See chapter \ref{chap:StateOfTheArt}).
 Gfvis runs with a slightly modified version of Gforth(gforth-itc) and requires \emph{gv}\footnote{GV is a postscript viewer for X displays. For further information see: \url{http://www.gnu.org/software/gv/}}. It consist of \emph{gfvis.fs} and \emph{gfvis.ps}. Both have to be in the same directory. \emph{gfvis.ps} is a template file, written in postscript, it contains code to display the executed words and the state of the data stack, the floating stack and the return stack. \emph{gfvis.fs} contains code which collects the information to be displayed and to create and update \emph{trace.fs}.
 \\
-Gfvis is started by executing \verb|<path to modified gforth>/gforth-itc ./gfvis.fs|. When the dbg is started(i.e.\ \verb|dbg test|), trace.ps, a copy of gfvis.ps, is created and gv is started to display its content \ref{fig:traceps1}\ref{fig:traceps2}. From then on, every executed word, updates trace.ps with the name of the word and the state of the stacks. When \verb|bye| is executed, gfvis terminates gv and gforth-itc.
+Gfvis is started by executing \verb|<path to modified gforth>/gforth-itc ./gfvis.fs|. When the dbg is started(i.e.\ \verb|dbg test|), trace.ps, a copy of gfvis.ps, is created and gv is started to display its content(See \ref{fig:traceps1} and \ref{fig:traceps2}). From then on, every executed word, updates trace.ps with the name of the word and the state of the stacks. When \verb|bye| is executed, gfvis terminates gv and gforth-itc.
 
 \subsubsection*{Interpretation}
 
+In \ref{fig:traceps1} and \ref{fig:traceps2}, I used the word \emph{test} to demonstrate the use of gfvis. Test contains conditionals, numbers, mathematical operations, sub word executions and it prints text to stdout. The source code of \emph{test} can be found in \ref{fig:gfvis-test-src}. With gfvis it is easy to follow the inner working of \emph{test}.
+
 \subsubsection*{Possible improvements}
 
-Inefficient use of space, on demand display of stack content.
-\begin{itemize}
-\item display content of value, variable and custom defined memory
-\item display of allocated memory areas and tracking changes in those
-\item better visualization of the stacks and of changes of stack elements
-\item better visualization of loops and control structures
-\item using a standard data type to store traces
-\item limited stack depth per word
-\end{itemize}
+The first problem of gfvis is the very inefficient use of display space. It would be better to show only the current and the previous stack state. The complete history should be shown only on demand. Also the displayed stack depth could be limited to a few words(e. g. the top 5 elements).
 
+The second problem is the growing rendering time of \emph{gv}. With every new step, the whole files has to be re rendered, which takes a considerable amount of time for longer debugging sessions.
+
+Another improvement would be to show not only the stack state, but also the content of value, variable and custom defined memory.
+
+Displaying all allocated memory areas and keep track of changes within those areas in a \emph{diff} like manner,  would be helpful.
+
+Better visualization of beginning and end of control structures and especially loops would also be an improvement.
+
+Currently the stack states and executed words are stored within postscript code. A further improvement would be to store those traces in a standardized data format like json or xml.
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[scale=0.50]{graphics/gfvis-test+test2_src.png}
+    \caption{The source code of test}
+    \label{fig:gfvis-test-src}
+\end{figure}
 
 \begin{figure}[p]
     \centering
