@@ -13,7 +13,7 @@
 \BOOKMARK [1][-]{section.3.5}{Methods to support code readability and to improve program understanding}{chapter.3}% 13
 \BOOKMARK [0][-]{chapter.4}{Results}{}% 14
 \BOOKMARK [1][-]{section.4.1}{The software under investigation: Brainless}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{The application of the previously presented methods}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{The application of the previously presented visualization methods}{chapter.4}% 16
 \BOOKMARK [1][-]{section.4.3}{gfvis - A trace visualization enhancement for Gforth}{chapter.4}% 17
 \BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 18
 \BOOKMARK [1][-]{section.5.1}{comparison with related work}{chapter.5}% 19

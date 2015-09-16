@@ -2,10 +2,10 @@
 \label{chap:Summary}
 
 \section*{Hierarchic edge bundle}
-The hierarchic edge bundle could aid in program understanding, if the suggested improvements are implemented.
+The hierarchic edge bundle could aid in program understanding, if the suggested improvements are implemented, but the usefulness depends highly on proper naming and structure(wordlists or files).
 
 \section*{Information murals and massive sequence view}
-The massive sequence view can aid much in program understanding, especially with the suggested improvements. It is well applicable to Forth.
+The massive sequence view can aid much in program understanding, especially with the suggested improvements. It is well applicable to Forth. Again, the usefulness of the hierarchical part depends on proper naming and structure.
 
 \section*{High-level polymetric views}
 
@@ -19,18 +19,18 @@ Gfvis, the intended improvement to \emph{dbg}, is only usable for fairly short e
 
 Quite some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general.
 
-The research on trace visualization has proven to be very similar for concatenative languages since a program is also a concatenation of words.
+The existing methods for trace visualization have proven to be well applicable for concatenative languages since a imperative program traces are also a concatenation of method calls.
 
-The closest thing to an development environment which provides interactive information from static analysis, is kgforth. It is an integrated development environment for Gforth/Forth, which provides separate windows for debugging and dump output. But its development has been discontinued.
+The closest thing to an development environment is kgforth. It is an integrated development environment for Gforth/Forth, which provides separate windows for debugging and dump output. But its development has been discontinued.
 
 \section{discussion of open issues}
 
-Concerning the implemented demo, most obvious is the lack of usability. First of all the second window turned out to be rather annoying, it would have been better to include the visualization within the Gforth window and record the trace in a standardized data structure in a separate file.
-Another not yet addressed problem is the scalability of the view, the inefficient use of the screen real estate as well as the long rendering delay of postscript makes it unusable for very long traces. A possible solution would be to limit the displayed stack depth to a certain number since it is not encouraged to manipulate more than some of the uppermost stack elements. Or to limit the depth per word to the number of elements, which have been defined in the stack effect comment.
+Concerning gfvis, most obvious is the lack of usability. First of all the second window turned out to be rather annoying, it would have been better to include the visualization within the Gforth window and record the trace in a standardized data structure in a separate file.
+Further not yet addressed problems are the scalability of the view, the inefficient use of the screen real estate as well as the long rendering delay of postscript, which make it unusable for very long debugging sessions. A possible solution would be to limit the displayed stack depth to a certain number of elements, since it is not encouraged to manipulate more than some of the uppermost stack elements anyway. Or to limit the depth per word to the number of elements, which have been defined in the stack effect comment.
 
-Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by \cite{Cornelissen:2008:ETA:1454787.1454981}, where in addition nested words as well as the stack state between arbitrary words can be hidden and displayed on demand. The introduction of "watch points" to reduce the visual noise and the size of the trace file could also address the scalability issue. But in general, postscript is probably not the best technology for displaying this data.
+Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by \cite{Cornelissen:2008:ETA:1454787.1454981}. In addition, nested words as well as the stack state between arbitrary words should be hidden and displayed on demand. But in general, postscript is probably not the best technology for displaying this data.
 
-It is also not practical to compare two traces to each other. A visualization of several traces in a massive sequence view like manner, where the are synchronized by words and differences between them are visualized by colors, could solve this problem.
+It is also not practical to compare two traces to each other. A visualization of several traces in a massive sequence view like manner, where they are synchronized by words and differences between them are visualized by colors, could solve this problem.
 
 Due to the implementation of the trace recording within the debugger, it is not possible to collect traces of live systems. Neither is performance analysis possible while recording traces/debugging.
  
@@ -46,14 +46,14 @@ Due to the implementation of the trace recording within the debugger, it is not 
 
 The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested methods. The gathering of quantitative data and the formulation of hypotheses remains to be done in future works.
 
-Another important question yet to be answered, is whether software maintenance in concatenative languages is conducted similar as in other paradigms. Only with accurate knowledge about how tasks are done, better methods to improve those can be developed.
+Another important question yet to be answered, is whether software maintenance in concatenative languages is conducted similar as in other paradigms. Only with accurate knowledge about how tasks are done in Forth, better methods to improve those tasks can be developed.
 
-Furthermore, it is yet to be determined how to orchestrate various methods, to fit in the development process. Whether or not some kind of integrated development environment or an independent set of tools is actually more helpful.
+Furthermore, it remains to be determined how to orchestrate various methods, to fit in the development process and whether some kind of integrated development environment or an independent set of tools is actually more helpful.
 
-Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE, for further information see http://lighttable.com/} like approach and an application of the idea of continuous programm understanding\cite{Muller:2000:RER:336512.336526} would be interesting to see. By defining test input for words, the IDE would display the data flow/stack changes and respond immediately to changes.
+Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE, for further information see http://lighttable.com/} like approach and an application of the idea of continuous programm understanding\cite{Muller:2000:RER:336512.336526} would be interesting to see.
 
 % \hl{TODO: PASST NICHT MEHR\\ To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.}
 
 \section{further reading}
 
-There hasn't been done any work on program comprehension of concatenative languages, but \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009} provide good overview of the field field of program comprehension in general.
+There hasn't been done any work on program comprehension of concatenative languages, but \cite{Canfora:2011:ACS:1924421.1924451} and \cite{Cornelissen2009} provide good overview of the field of program comprehension in general.
