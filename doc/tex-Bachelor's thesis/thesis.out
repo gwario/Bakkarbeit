@@ -1,26 +1,24 @@
-\BOOKMARK [0][-]{chapter*.4}{Kurzfassung}{}% 1
-\BOOKMARK [0][-]{chapter*.5}{Abstract}{}% 2
-\BOOKMARK [0][-]{section*.6}{Contents}{}% 3
-\BOOKMARK [0][-]{section*.7}{List of Figures}{}% 4
-\BOOKMARK [0][-]{section*.8}{List of Tables}{}% 5
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
-\BOOKMARK [0][-]{chapter.2}{Methodology}{}% 7
-\BOOKMARK [0][-]{chapter.3}{Analysis of existing approaches}{}% 8
-\BOOKMARK [1][-]{section.3.1}{Program comprehension}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.2}{Analysis to support program understanding}{chapter.3}% 10
-\BOOKMARK [1][-]{section.3.3}{Existing approaches}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.4}{Applicability of methods for other paradigms to concatenative languages}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.5}{Methods to support code readability and to improve program understanding}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Results}{}% 14
-\BOOKMARK [1][-]{section.4.1}{The software under investigation: Brainless}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{The application of the previously presented visualization methods}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.3}{gfvis - A trace visualization enhancement for Gforth}{chapter.4}% 17
-\BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 18
-\BOOKMARK [1][-]{section.5.1}{comparison with related work}{chapter.5}% 19
-\BOOKMARK [1][-]{section.5.2}{discussion of open issues}{chapter.5}% 20
-\BOOKMARK [1][-]{section.5.3}{further work to be done}{chapter.5}% 21
-\BOOKMARK [1][-]{section.5.4}{further reading}{chapter.5}% 22
-\BOOKMARK [0][-]{chapter.A}{Hierarchic edge bundle source}{}% 23
-\BOOKMARK [0][-]{chapter.B}{Massive sequence view source}{}% 24
-\BOOKMARK [0][-]{chapter.C}{Gfviz postscript}{}% 25
-\BOOKMARK [0][-]{section*.55}{Bibliography}{}% 26
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 1
+\BOOKMARK [0][-]{section*.4}{Contents}{}% 2
+\BOOKMARK [0][-]{section*.5}{List of Figures}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
+\BOOKMARK [0][-]{chapter.2}{Methodology}{}% 5
+\BOOKMARK [0][-]{chapter.3}{Analysis of existing approaches}{}% 6
+\BOOKMARK [1][-]{section.3.1}{Program comprehension}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.2}{Analysis to support program understanding}{chapter.3}% 8
+\BOOKMARK [1][-]{section.3.3}{Existing approaches}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.4}{Applicability of methods for other paradigms to concatenative languages}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.5}{Methods to support code readability and to improve program understanding}{chapter.3}% 11
+\BOOKMARK [0][-]{chapter.4}{Results}{}% 12
+\BOOKMARK [1][-]{section.4.1}{The software under investigation: Brainless}{chapter.4}% 13
+\BOOKMARK [1][-]{section.4.2}{The application of the previously presented visualization methods}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.3}{gfvis - A trace visualization enhancement for Gforth}{chapter.4}% 15
+\BOOKMARK [0][-]{chapter.5}{Summary and future work}{}% 16
+\BOOKMARK [1][-]{section.5.1}{comparison with related work}{chapter.5}% 17
+\BOOKMARK [1][-]{section.5.2}{discussion of open issues}{chapter.5}% 18
+\BOOKMARK [1][-]{section.5.3}{further work to be done}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.4}{further reading}{chapter.5}% 20
+\BOOKMARK [0][-]{chapter.A}{Hierarchic edge bundle source}{}% 21
+\BOOKMARK [0][-]{chapter.B}{Massive sequence view source}{}% 22
+\BOOKMARK [0][-]{chapter.C}{Gfviz postscript}{}% 23
+\BOOKMARK [0][-]{section*.53}{Bibliography}{}% 24
