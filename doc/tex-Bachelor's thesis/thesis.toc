@@ -3,16 +3,14 @@
 \select@language {english}
 \select@language {naustrian}
 \select@language {english}
+\contentsline {chapter}{Abstract}{vii}{chapter*.2}
 \select@language {naustrian}
 \select@language {english}
-\contentsline {chapter}{Abstract}{ix}{chapter*.3}
-\select@language {naustrian}
-\select@language {english}
-\contentsline {chapter}{Contents}{xi}{section*.4}
-\contentsline {chapter}{List of Figures}{xii}{section*.5}
+\contentsline {chapter}{Contents}{ix}{section*.3}
+\contentsline {chapter}{List of Figures}{x}{section*.4}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}{chapter.1}
 \contentsline {chapter}{\chapternumberline {2}Methodology}{3}{chapter.2}
-\contentsline {chapter}{\chapternumberline {3}Analysis of existing approaches}{5}{chapter.3}
+\contentsline {chapter}{\chapternumberline {3}Analysis of Existing Approaches}{5}{chapter.3}
 \contentsline {section}{\numberline {3.1}Program comprehension}{5}{section.3.1}
 \contentsline {section}{\numberline {3.2}Analysis to support program understanding}{6}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Dynamic analysis}{6}{subsection.3.2.1}
@@ -27,12 +25,12 @@
 \contentsline {section}{\numberline {4.1}The software under investigation: Brainless}{15}{section.4.1}
 \contentsline {section}{\numberline {4.2}The application of the previously presented visualization methods}{16}{section.4.2}
 \contentsline {section}{\numberline {4.3}gfvis - A trace visualization enhancement for Gforth}{26}{section.4.3}
-\contentsline {chapter}{\chapternumberline {5}Summary and future work}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}comparison with related work}{32}{section.5.1}
-\contentsline {section}{\numberline {5.2}discussion of open issues}{32}{section.5.2}
-\contentsline {section}{\numberline {5.3}further work to be done}{32}{section.5.3}
-\contentsline {section}{\numberline {5.4}further reading}{33}{section.5.4}
+\contentsline {chapter}{\chapternumberline {5}Summary and Future Work}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Comparison with related work}{32}{section.5.1}
+\contentsline {section}{\numberline {5.2}Discussion of open issues}{32}{section.5.2}
+\contentsline {section}{\numberline {5.3}Further work to be done}{32}{section.5.3}
+\contentsline {section}{\numberline {5.4}Further reading}{33}{section.5.4}
 \contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{35}{chapter.A}
 \contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{37}{chapter.B}
 \contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{39}{chapter.C}
-\contentsline {chapter}{Bibliography}{41}{section*.53}
+\contentsline {chapter}{Bibliography}{41}{section*.52}

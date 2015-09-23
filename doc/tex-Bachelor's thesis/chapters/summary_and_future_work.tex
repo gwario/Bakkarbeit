@@ -1,11 +1,11 @@
-\chapter{Summary and future work}
+\chapter{Summary and Future Work}
 \label{chap:Summary}
 
 \section*{Hierarchical edge bundle}
-The hierarchical edge bundle could aid in program understanding, if the suggested improvements are implemented, but the usefulness depends highly on proper naming and structure(wordlists or files).
+The hierarchical edge bundle could facilitate program understanding, if the suggested improvements are implemented, but the usefulness depends highly on proper naming and structure(wordlists or files).
 
 \section*{Information murals and massive sequence view}
-The massive sequence view can aid much in program understanding, especially with the suggested improvements. It is well applicable to Forth. Again, the usefulness of the hierarchical part depends on proper naming and structure.
+The massive sequence view can help much in program understanding, especially with the suggested improvements. It is well applicable to Forth. Again, the usefulness of the hierarchical part depends on proper naming and structure.
 
 \section*{High-level polymetric views}
 
@@ -19,7 +19,7 @@ The memory access view, with the suggested improvements, aids program understand
 
 Gfvis, the intended improvement to \emph{dbg}, is only usable for fairly short execution scenarios and thus not as helpful as assumed.
 
-\section{comparison with related work}
+\section{Comparison with related work}
 
 Quite some research has been done on the topic of program comprehension in the last decades, but most of it addressed object oriented or procedural languages. Since there is no standard way to model object orientation in Gforth/Forth, it is not possible to implement a general tool for visualization, similar to the existing methods. But these methods should be applicable in general.
 
@@ -27,7 +27,7 @@ The existing methods for trace visualization have proven to be well applicable f
 
 The closest thing to an development environment is kgforth. It is an integrated development environment for Gforth/Forth, which provides separate windows for debugging and dump output. But its development has been discontinued.
 
-\section{discussion of open issues}
+\section{Discussion of open issues}
 
 Concerning gfvis, most obvious is the lack of usability. First of all the second window turned out to be rather annoying, it would have been better to include the visualization within the Gforth window and record the trace in a standardized data structure in a separate file.
 Further not yet addressed problems are the scalability of the view, the inefficient use of the screen real estate as well as the long rendering delay of postscript, which make it unusable for very long debugging sessions. A possible solution would be to limit the displayed stack depth to a certain number of elements, since it is not encouraged to manipulate more than some of the uppermost stack elements anyway. Or to limit the depth per word to the number of elements, which have been defined in the stack effect comment.
@@ -46,18 +46,18 @@ Due to the implementation of the trace recording within the debugger, it is not 
 % 	\end{itemize}
 % \end{itemize}
 
-\section{further work to be done}
+\section{Further work to be done}
 
-The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested methods. The gathering of quantitative data and the formulation of hypotheses remains to be done in future works.
+The pure exploratory approach did not provide any information on the actual impact of the implemented and suggested methods. The gathering of quantitative data and the formulation of hypotheses remain to be done in future works.
 
 Another important question yet to be answered, is whether software maintenance in concatenative languages is conducted similar as in other paradigms. Only with accurate knowledge about how tasks are done in Forth, better methods to improve those tasks can be developed.
 
-Furthermore, it remains to be determined how to orchestrate various methods, to fit in the development process and whether some kind of integrated development environment or an independent set of tools is actually more helpful.
+Furthermore, it remains to be determined how to orchestrate various methods, so that they fit into the development process and whether some kind of integrated development environment or an independent set of tools is actually more helpful.
 
 Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE, for further information see http://lighttable.com/} like approach and an application of the idea of continuous programm understanding\cite{Muller:2000:RER:336512.336526} would be interesting to see.
 
 % \hl{TODO: PASST NICHT MEHR\\ To properly approach the stated problem, the first thing is to understand if and when program understanding is required. Although intuitively obvious, this section will discuss both, since the approach which developers use to understand programs, can be very different during the life cycle of software. Next, the means of understanding programs itself is investigated. Third, the nature of concatenative languages and in particular gforth/forth will be investigated.}
 
-\section{further reading}
+\section{Further reading}
 
 There hasn't been done any work on program comprehension of concatenative languages, but Canfora et al. presented  very good introduction to program understanding in \cite{Canfora:2011:ACS:1924421.1924451} and Bas Cornelissen gives in \cite{Cornelissen2009} a good overview of the field of program comprehension and trace visualization.
