@@ -13,12 +13,12 @@
 \chapter{Analysis of Existing Approaches}
 \label{chap:StateOfTheArt}
 
-The focus here lies on so called E type software systems(E stands for evolving \cite{Cook:2006:ESS:1115566.1115567}). Most of the real world software systems are type E. These systems are of particular interest since they underlie continuous changes throughout their whole life cycle. Thus understanding existing code, which might not be well documented, is crucial for the maintenance of those systems.
+The focus here lies on so called E type software systems (E stands for evolving \cite{Cook:2006:ESS:1115566.1115567}). Most of the real world software systems are type E. These systems are of particular interest since they underlie continuous changes throughout their whole life cycle. Thus understanding existing code, which might not be well documented, is crucial for the maintenance of those systems.
 
 \section{Program comprehension}
 
 Program comprehension can be gained following various approaches. First of all, by reading the code.
-In \cite{Basili:1997:EPR:257260.257262}, Basili et al. approach the concept of reading on a very fundamental level. The natural way to learn writing is to learn reading first. The reading then forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests that readability of code does impact the efficiency of failure discovery. According to Basili et al., the most severe problem is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code is not properly addressed in education. The syntactical flexibility, Forth provides, as opposed to other languages(and paradigms), allows it to achieve a very natural seeming reading experience. Thus our skills in natural languages could come in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
+In \cite{Basili:1997:EPR:257260.257262}, Basili et al. approach the concept of reading on a very fundamental level. The natural way to learn writing is to learn reading first. The reading then forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests that readability of code does impact the efficiency of failure discovery. According to Basili et al., the most severe problem is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code is not properly addressed in education. The syntactical flexibility, Forth provides, as opposed to other languages (and paradigms), allows it to achieve a very natural seeming reading experience. Thus our skills in natural languages could come in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
 
 There have emerged several strategies on how to read and understand a program\cite{Storey:1999:CDE:308936.308940}\cite{Storey:1997:PUT:832304.836998}:
 \subsubsection*{Top-down program comprehension}
@@ -30,7 +30,7 @@ Using the top down strategy, the reader begins on the highest level of abstracti
 \\\\
 As Storey et al. point out in \cite{Storey:1999:CDE:308936.308940}, there are certain factors which influence the choice programmers take. Thus programming environments should provide methods to support all of these strategies.
 \\
-Since type E software evolves throughout its whole life cycle, also the before mentioned mental model of the reader has to evolve. It has to be kept in sync with the software system. This suggests, that it is essential to keep all types of artifacts(documentation, source level documentation, graphics,...) up to date.
+Since type E software evolves throughout its whole life cycle, also the before mentioned mental model of the reader has to evolve. It has to be kept in sync with the software system. This suggests, that it is essential to keep all types of artifacts (documentation, source level documentation, graphics,...) up to date.
 
 \section{Analysis to support program understanding}
 
@@ -38,7 +38,7 @@ Besides reading of the source code and other textual documentation, there are al
 
 \subsection{Dynamic analysis}
 
-Dynamic analysis is performed on the image of a program, executed on a real or virtual processor. The advantage is, that due to the availability of the data to be manipulated, the actual behavior of a program can be investigated. The major drawback however is that there exists only an incomplete view of the software system at hand\cite{Ball:1999:CDA:318774.318944}. Dynamic analysis is a very efficient way to evolve or correct the mental model of developers, but not to create it. \hl{E.g. in} large software systems, some scenarios simply might not occur during analysis.
+Dynamic analysis is performed on the image of a program, executed on a real or virtual processor. The advantage is, that due to the availability of the data to be manipulated, the actual behavior of a program can be investigated. The major drawback however is that there exists only an incomplete view of the software system at hand\cite{Ball:1999:CDA:318774.318944}. Dynamic analysis is a very efficient way to evolve or correct the mental model of developers, but not to create it. E.g.\ in large software systems, some scenarios simply might not occur during analysis.
 
 \begin{comment}
 \hl{TODO einfach weglassen? I will distinct here between two categories of dynamic analysis:}
@@ -86,8 +86,8 @@ In this section I'm going to present the tools, Gforth/Forth provides to support
 Gforth provides several tools to display data and code, which supports program understanding and software maintenance.\\
 For displaying data, the most important words are \emph{.}, \emph{.s}, \emph{."}, \emph{type} and \emph{dump}.\\
 \emph{.} and \emph{.s} simply display elements of the data stack, there are also words to visualize the other stacks.
-The words \emph{."} and \emph{type} display text and \emph{dump} displays memory areas(address, hex and ascii).
-\textasciitilde\textasciitilde\:  displays the location of itself in the source-file(file and line number) as well as the data stack.\\
+The words \emph{."} and \emph{type} display text and \emph{dump} displays memory areas (address, hex and ascii).
+\textasciitilde\textasciitilde\:  displays the location of itself in the source-file (file and line number) as well as the data stack.\\
 All these words can be utilized to display logging information.\\
 They are usable in interactive as well as in non-interactive analysis.\\
 There are also words to investigate the inner workings of other words. 
@@ -100,7 +100,7 @@ Status.fs is included in Gforth\footnote{Since version 0.7.0}. It opens a separa
 \emph{dbg}\footnote{For further information see: \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Singlestep-Debugger.html\#Singlestep-Debugger}}, the stepping debugger, supports among others, single step, step into, step over as well as break points. It displays the address of the word to be executed and the content of the data stack after its execution. \emph{dbg} is only usable for interactive analysis.
 
 \subsubsection*{Assertions}
-Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify, that the program, at a certain point, is in a certain state. For example pre-conditions and post-conditions of words could be implemented using assertions. It is also possible to prevent code from breaking during maintenance activities. The word \emph{assert(} starts the assertion, the following words until the \emph{)} are executed and have to leave a flag on the stack. If that flag is true, the asserted condition is meet, otherwise, the execution of the program ends and the location of the failed assertion is displayed(source file and line number).\\
+Assertions\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Assertions.html\#Assertions}} can be used to verify, that the program, at a certain point, is in a certain state. For example pre-conditions and post-conditions of words could be implemented using assertions. It is also possible to prevent code from breaking during maintenance activities. The word \emph{assert(} starts the assertion, the following words until the \emph{)} are executed and have to leave a flag on the stack. If that flag is true, the asserted condition is meet, otherwise, the execution of the program ends and the location of the failed assertion is displayed (source file and line number).\\
 There are several assertion levels and by setting the \emph{assert-level}, assertions can also be deactivated.
 
 \subsubsection*{Documentation}
@@ -110,14 +110,14 @@ Thorough and up-to-date documentation is undoubtedly important, this also applie
 Like in any other language, words should be named expressively. However sometimes, it may not be avoidable to reuse names. Forth provides an elegant mechanism, called word lists\footnote{For more information on word lists, see \url{http://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Word-Lists.html\#Word-Lists}}, to address these issues and to organize words. With word lists, words can be defined in a certain context. Like in natural languages words can have a different meaning in separate contexts. Using word lists, developers can prevent name clashes and separate interface words from internal words. In large projects it might be necessary to define a naming strategy.
 
 \subsection*{Factoring}
-As in any other programming language, it is necessary to split the overall problem down into manageable, less complex sub problems. In concatenative languages this is also referred to as factoring. Factoring helps keeping definitions short(and thus easier to understand), reusable and easier to test\footnote{\url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html}}.
+As in any other programming language, it is necessary to split the overall problem down into manageable, less complex sub problems. In concatenative languages this is also referred to as factoring. Factoring helps keeping definitions short (and thus easier to understand), reusable and easier to test\footnote{\url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Factoring-Tutorial.html}}.
 
 \subsection*{Aliasing}
 In Gforth, there can be multiple aliases\footnote{See https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Aliases.html} for one word. Aliases can be used to use the same underlying implementation in different contexts, to make code more readable.
 
 \subsection*{Emacs forth-mode}
 
-The emacs forth-mode(gforth.el, which is based on forth.el) provides many helpful features\footnote{For a more information see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Emacs-and-Gforth.html\#Emacs-and-Gforth}} to ease the writing of Forth. Most notable, related to program understanding:
+The emacs forth-mode (gforth.el, which is based on forth.el) provides many helpful features\footnote{For a more information see \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Emacs-and-Gforth.html\#Emacs-and-Gforth}} to ease the writing of Forth. Most notable, related to program understanding:
 \begin{itemize}
 \item Word documentation lookup
 \item Jump to line from, error messages, debug output, failed assertions and \emph{\textasciitilde\textasciitilde} output
@@ -136,23 +136,23 @@ In this section I will present a several visualization methods and discuss their
 
 \subsection*{Sequence diagram and scenario diagram}
 
-The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object oriented Forth and there is no standard for concurrency, the word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a list. On the system level, though, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram.
+The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object-oriented Forth and there is no standard for concurrency, the word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a list. On the system level, though, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram.
 \\
 Since system level visualization is applicable to almost any paradigm and word level visualization does not seem promising for dynamic analysis, I will not investigate the benefits of those diagrams in this thesis.
 
 \subsection*{Hierarchical edge bundles}
-Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of Forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be mapped to the hierarchic relations. Like in object oriented systems, the proper organization of directories, files and word definitions are a requirement to make such a visualization really helpful.
+Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of Forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be mapped to the hierarchic relations. Like in object-oriented systems, the proper organization of directories, files and word definitions are a requirement to make such a visualization really helpful.
 Another possible mapping could depend on word lists as hierarchic and word executions as non-hierarchic relations.
 \\
-The hierarchic edge bundle can be used for interactive and non-interactive(real-time) dynamic analysis. In the following chapter I will analyze both possibilities using a real Forth software system as an example.
+The hierarchic edge bundle can be used for interactive and non-interactive (real-time) dynamic analysis. In the following chapter I will analyze both possibilities using a real Forth software system as an example.
 
 \subsection*{Information murals and massive sequence view}
 The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, the mass sequence view, was later proposed by \cite{Cornelissen2009}. It turned the horizontal scrolling into vertical scrolling and also included the hierarchic aspect more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical relations depend highly on the organization of the software system at hand.
 \\
-As well as the hierarchic edge bundle, these two methods can be used for interactive and non-interactive(post-mortem) dynamic analysis. In the following chapter, I will analyze the massive sequence view using a real Forth software system as an example.
+As well as the hierarchic edge bundle, these two methods can be used for interactive and non-interactive (post-mortem) dynamic analysis. In the following chapter, I will analyze the massive sequence view using a real Forth software system as an example.
 
 \subsection*{High-Level polymetric views}
-Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by \cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations(and the thickness) between rectangles, representing aspects of the software to analyze. In terms of Forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with additional information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data\footnote{There is no need to have a complete execution trace.} required.
+Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by \cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations (and the thickness) between rectangles, representing aspects of the software to analyze. In terms of Forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with additional information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data\footnote{There is no need to have a complete execution trace.} required.
 \\
 This method is suitable for interactive as well as non-interactive analysis. In the following chapter, I will analyze a polymetric view of real software system as an example.
 
@@ -167,7 +167,7 @@ The execution pattern view, proposed by \cite{Pauw98executionpatterns}, visualiz
 Since it is somehow related to the massive sequence view, I will not pursue this approach in detail.
 
 \subsection*{Method invocation view and taxonomy view}
-The tool \gls{GraphTrace}\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze object oriented programs. It provides a method invocation view and a taxonomy view. Although the method invocation approach of GraphTrace seems not practical for Forth programs, the authors mentioned two very interesting ideas.
+The tool \gls{GraphTrace}\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze object-oriented programs. It provides a method invocation view and a taxonomy view. Although the method invocation approach of GraphTrace seems not practical for Forth programs, the authors mentioned two very interesting ideas.
 \begin{itemize}
 \item Displaying variable access:\\
 	The idea of showing words which access variables and the other way round, showing which words access a specific variable is very interesting. Thus it would be easier to track the global state of a program.
@@ -189,7 +189,7 @@ In this section I will suggest methods to write better code, that reads more idi
 \\
 A very important question is, how developers can be assisted to write more readable code. Concatenative languages are flexible enough to produce code very similar to natural languages, but how can this style be encouraged? In my opinion, the top down strategy and extensive use of factoring, is the key to produce readable Forth code in large software systems.
 \\
-Going down from the top, the programmer writes description of the work to be done right out of the requirements documents(e.g. user stories). He defines single words or groups of words and describes them in more detail. This process is repeated until the technical level is reached and actual Forth words are written.
+Going down from the top, the programmer writes description of the work to be done right out of the requirements documents (e.g.\ user stories). He defines single words or groups of words and describes them in more detail. This process is repeated until the technical level is reached and actual Forth words are written.
 \\
 To encourage high code quality and the development environment should provide hints based on static analysis.
 
