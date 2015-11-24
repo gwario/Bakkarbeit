@@ -1,31 +1,37 @@
 %!PS
-%%BoundingBox: 0 0 130 800              % trailing spaces to make room for more width 
+%%BoundingBox: 0 0 150 600              % trailing spaces to make room for more width 
 %BoundingBox: 0 0 70 610
-/cellwidth {70} def %C increase to modify stack width
-/wordcellwidth { 50 } def %C increase to modify word width
+
+/cellwidth {85} def %C increase to modify stack width
+/wordcellwidth { 105 } def %C increase to modify word width
 
 %70 is stack width and 50 is word width
 %the BoundingBox width must be increased by 120 each update
 
-/boundingboxheight 800 def % increase to modify the height of the stacks
+/boundingboxheight 600 def % increase to modify the height of the stacks
 
 /wordname ( ) def
 /datastack [ ] def
 /floatstack [ ] def
 /returnstack [ ] def
 
-/stackline (----------------) def
+/stackline (------------) def
 /arrow (---->) def
 
 /setwordcolor { 1 0 0 setrgbcolor } def
 
 /setstackfont {
-	/Courier 8 selectfont
+	%	/Courier 8 selectfont
+	/Courier findfont 16 scalefont setfont
+
 } def
+
 /paddingbottom 5 def
+/paddingleft 30 def
+
 
 /movetoorigin {
-	0 paddingbottom moveto
+	paddingleft paddingbottom moveto
 } def
 
 
