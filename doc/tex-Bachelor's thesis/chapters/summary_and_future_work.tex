@@ -9,7 +9,7 @@ The massive sequence view can help much in program understanding, especially wit
 
 \section*{High-level polymetric views}
 
-The high-level polymetric view is well applicable for Forth. I is especially useful for static analysis and for trace visualization.
+The high-level polymetric view is well applicable for Forth. It is especially useful for static analysis and for trace visualization.
 
 \section*{Memory access view}
 
@@ -32,7 +32,7 @@ The closest thing to an development environment is kgforth. It is an integrated 
 Concerning gfvis, most obvious is the lack of usability. First of all the second window turned out to be rather annoying, it would have been better to include the visualization within the Gforth window and record the trace in a standardized data structure in a separate file.
 Further not yet addressed problems are the scalability of the view, the inefficient use of the screen real estate as well as the long rendering delay of postscript, which make it unusable for very long debugging sessions. A possible solution would be to limit the displayed stack depth to a certain number of elements, since it is not encouraged to manipulate more than some of the uppermost stack elements anyway. Or to limit the depth per word to the number of elements, which have been defined in the stack effect comment.
 
-Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by \cite{Cornelissen:2008:ETA:1454787.1454981}. In addition, nested words as well as the stack state between arbitrary words should be hidden and displayed on demand. But in general, postscript is probably not the best technology for displaying this data.
+Another improvement would be the implementation of an interactive trace sequence view, like the "massive sequence" view implemented by Cornelissen et al.\cite{Cornelissen:2008:ETA:1454787.1454981}. In addition, nested words as well as the stack state between arbitrary words should be hidden and displayed on demand. But in general, postscript is probably not the best technology for displaying this data.
 
 It is also not practical to compare two traces to each other. A visualization of several traces in a massive sequence view like manner, where they are synchronized by words and differences between them are visualized by colors, could solve this problem.
 
@@ -60,4 +60,4 @@ Concerning a Gforth IDE, a Light Table\footnote{Light Table is a javascript IDE,
 
 \section{Further reading}
 
-There hasn't been done any work on program comprehension of concatenative languages, but Canfora et al. presented  very good introduction to program understanding in \cite{Canfora:2011:ACS:1924421.1924451} and Bas Cornelissen gives in \cite{Cornelissen2009} a good overview of the field of program comprehension and trace visualization.
+There hasn't been done any work on program comprehension of concatenative languages, but Canfora et al.\cite{Canfora:2011:ACS:1924421.1924451} presented very good introduction to program understanding and Bas Cornelissen\cite{Cornelissen2009} gives a good overview of the field of program comprehension and trace visualization.

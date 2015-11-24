@@ -30,7 +30,4 @@
 \contentsline {section}{\numberline {5.2}Discussion of open issues}{32}{section.5.2}
 \contentsline {section}{\numberline {5.3}Further work to be done}{32}{section.5.3}
 \contentsline {section}{\numberline {5.4}Further reading}{33}{section.5.4}
-\contentsline {appendix}{\chapternumberline {A}Hierarchic edge bundle source}{35}{chapter.A}
-\contentsline {appendix}{\chapternumberline {B}Massive sequence view source}{37}{chapter.B}
-\contentsline {appendix}{\chapternumberline {C}Gfviz postscript}{39}{chapter.C}
-\contentsline {chapter}{Bibliography}{41}{section*.52}
+\contentsline {chapter}{Bibliography}{35}{section*.52}

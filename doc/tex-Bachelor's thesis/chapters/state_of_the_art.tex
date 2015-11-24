@@ -18,7 +18,7 @@ The focus here lies on so called E type software systems (E stands for evolving 
 \section{Program comprehension}
 
 Program comprehension can be gained following various approaches. First of all, by reading the code.
-In \cite{Basili:1997:EPR:257260.257262}, Basili et al. approach the concept of reading on a very fundamental level. The natural way to learn writing is to learn reading first. The reading then forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests that readability of code does impact the efficiency of failure discovery. According to Basili et al., the most severe problem is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code is not properly addressed in education. The syntactical flexibility, Forth provides, as opposed to other languages (and paradigms), allows it to achieve a very natural seeming reading experience. Thus our skills in natural languages could come in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
+Basili et al.\cite{Basili:1997:EPR:257260.257262} approach the concept of reading on a very fundamental level. The natural way to learn writing is to learn reading first. The reading then forms a model for our writing.  His research shows that reading is most effective compared to testing. This suggests that readability of code does impact the efficiency of failure discovery. According to Basili et al., the most severe problem is the fact that programming languages are learned the other way round. We first learn to write code and then learn to read it. Furthermore, the ability to read code is not properly addressed in education. The syntactical flexibility, Forth provides, as opposed to other languages (and paradigms), allows it to achieve a very natural seeming reading experience. Thus our skills in natural languages could come in handy and make program reading and thus understanding even more efficient. This would in the end result in higher code quality in terms of failures and unexpected or unintended behavior.
 
 There have emerged several strategies on how to read and understand a program\cite{Storey:1999:CDE:308936.308940}\cite{Storey:1997:PUT:832304.836998}:
 \subsubsection*{Top-down program comprehension}
@@ -28,7 +28,7 @@ Using the top down strategy, the reader begins on the highest level of abstracti
 \subsubsection*{Systematic and as-needed program comprehension} This strategy embodies detailed reading as well as only focusing on the code necessary to fulfill the task at hand.
 \subsubsection*{Integrated approaches of program comprehension} This strategy allows freely switching between the top down, the bottom up and the knowledge based approach.
 \\\\
-As Storey et al. point out in \cite{Storey:1999:CDE:308936.308940}, there are certain factors which influence the choice programmers take. Thus programming environments should provide methods to support all of these strategies.
+As Storey et al.\cite{Storey:1999:CDE:308936.308940} point out, there are certain factors which influence the choice programmers take. Thus programming environments should provide methods to support all of these strategies.
 \\
 Since type E software evolves throughout its whole life cycle, also the before mentioned mental model of the reader has to evolve. It has to be kept in sync with the software system. This suggests, that it is essential to keep all types of artifacts (documentation, source level documentation, graphics,...) up to date.
 
@@ -136,33 +136,33 @@ In this section I will present a several visualization methods and discuss their
 
 \subsection*{Sequence diagram and scenario diagram}
 
-The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object-oriented Forth and there is no standard for concurrency, the word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degrade to a list. On the system level, though, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by \cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram.
+The \gls{UML} sequence diagram can be used to model event sequences on any level of abstraction. Since I left out object-oriented Forth and there is no standard for concurrency, the word-only level provides little help. On this level, the actors would be represented by words and the messages\footnote{The edges in UML's sequence diagram are called messages.} would represent word executions. Therefore the sequence diagram would degenerate to a list. On the system level, though, the sequence diagram can provide useful information on the interaction between system components. The scenario diagram as implemented by Koskimies et al.\cite{Koskimies:1996:SUS:871313}, is essentially the same as the sequence diagram.
 \\
 Since system level visualization is applicable to almost any paradigm and word level visualization does not seem promising for dynamic analysis, I will not investigate the benefits of those diagrams in this thesis.
 
 \subsection*{Hierarchical edge bundles}
-Hierarchical edge bundles as proposed by \cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of Forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be mapped to the hierarchic relations. Like in object-oriented systems, the proper organization of directories, files and word definitions are a requirement to make such a visualization really helpful.
+Hierarchical edge bundles as proposed by Danny Holten\cite{Holten:2006:HEB:1187627.1187772} display hierarchic and non hierarchic relations between nodes. In context of Forth, word execution can be mapped to non hierarchic relations and directory/file tree and the definition could be mapped to the hierarchic relations. Like in object-oriented systems, the proper organization of directories, files and word definitions are a requirement to make such a visualization really helpful.
 Another possible mapping could depend on word lists as hierarchic and word executions as non-hierarchic relations.
 \\
 The hierarchic edge bundle can be used for interactive and non-interactive (real-time) dynamic analysis. In the following chapter I will analyze both possibilities using a real Forth software system as an example.
 
 \subsection*{Information murals and massive sequence view}
-The information mural was initially proposed by \cite{Jerding:1998:IMT:614271.614408}. A modified version, the mass sequence view, was later proposed by \cite{Cornelissen2009}. It turned the horizontal scrolling into vertical scrolling and also included the hierarchic aspect more suitable. As with the hierarchical edge bundles, the usefulness of the hierarchical relations depend highly on the organization of the software system at hand.
+The information mural was initially proposed by Jerding and Stasko\cite{Jerding:1998:IMT:614271.614408}. A modified version, the mass sequence view, was later proposed by Bas Cornelissen\cite{Cornelissen2009}. It turned the horizontal scrolling into vertical scrolling and also included the hierarchic aspect more suitably. As with the hierarchical edge bundles, the usefulness of the hierarchical relations depend highly on the organization of the software system at hand.
 \\
 As well as the hierarchic edge bundle, these two methods can be used for interactive and non-interactive (post-mortem) dynamic analysis. In the following chapter, I will analyze the massive sequence view using a real Forth software system as an example.
 
 \subsection*{High-Level polymetric views}
-Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by \cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations (and the thickness) between rectangles, representing aspects of the software to analyze. In terms of Forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with additional information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data\footnote{There is no need to have a complete execution trace.} required.
+Polymetric views\cite{Ducasse:2004:HPV:977397.977739} are a very interesting and promising approach to grasp the behavior of very large systems. In polymetric views, system attributes or measures are mapped to attributes of a graph. The attributes proposed by Ducasse et al.\cite{Ducasse:2004:HPV:977397.977739}, are position, height, width, color and the relations (and the thickness) between rectangles, representing aspects of the software to analyze. In terms of Forth, the mapping to words seems most obvious. This would result in some kind of a word cloud with additional information attached. This could be most valuable, when used with the appropriate metrics, to analyze and optimize performance. Another advantage is, that there is no complete, but only condensed data\footnote{There is no need to have a complete execution trace.} required.
 \\
 This method is suitable for interactive as well as non-interactive analysis. In the following chapter, I will analyze a polymetric view of real software system as an example.
 
 \subsection*{Fisheye views}
-Fisheye views were first proposed by \cite{Furnas:1986:GFV:22627.22342} and formulated by \cite{Storey:1995:GLA:647547.728600} and \cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle also found in nature. It's basically described as a function, expressing the degree of interest of a subject, depending on an a priori importance and the distance from the current point of view. Growing distance lowers the degree of interest.
+Fisheye views were first proposed by George W. Furnas\cite{Furnas:1986:GFV:22627.22342} and formulated by Storey et al.\cite{Storey:1995:GLA:647547.728600} and Sarkar et al.\cite{Sarkar:1994:GFV:198366.198384}. The essence of fisheye views is a principle also found in nature. It's basically described as a function, expressing the degree of interest of a subject, depending on an a priori importance and the distance from the current point of view. Growing distance lowers the degree of interest.
 \\
 This method is related to the above mentioned polymetric views.
 
 \subsection*{Execution pattern view}
-The execution pattern view, proposed by \cite{Pauw98executionpatterns}, visualizes large traces in a scalable manner and helps to identify execution patterns. It represents an interesting evolution of simple sequence diagrams and interaction diagrams.
+The execution pattern view, proposed by Wim De Pauw et al.\cite{Pauw98executionpatterns}, visualizes large traces in a scalable manner and helps to identify execution patterns. It represents an interesting evolution of simple sequence diagrams and interaction diagrams.
 \\
 Since it is somehow related to the massive sequence view, I will not pursue this approach in detail.
 
@@ -172,14 +172,14 @@ The tool \gls{GraphTrace}\cite{Kleyn:1988:GOS:62084.62101} is meant to analyze o
 \item Displaying variable access:\\
 	The idea of showing words which access variables and the other way round, showing which words access a specific variable is very interesting. Thus it would be easier to track the global state of a program.
 \item Concurrent views:\\
-	The authors of \cite{Kleyn:1988:GOS:62084.62101} present a quiet interesting analogy. They compare the execution of a program with tennis and football, and refer to the multiple perspectives necessary to understand all aspects of a match and the whole outcome.
+	Kleyn and Gingrich\cite{Kleyn:1988:GOS:62084.62101} present a quite interesting analogy. They compare the execution of a program with tennis and football, and refer to the multiple perspectives necessary to understand all aspects of a match and the whole outcome.
 \end{itemize}
 
 The variable access graph in a tree like visualization as in GraphTrace seems highly useful since variables represent a global program state, which can increase complexity. Although this approach seems to make only sense for in static analysis, I will analyze the variable access graph of real software system in the next chapter.
 
 \subsection*{Frequency spectrum analysis}
 
-The frequency spectrum analysis as proposed by \cite{Ball:1999:CDA:318774.318944} represents also an interesting approach. It is similar to polymetric views as mentioned before, but the visualization is not graphical but textual. The word execution frequency could provide valuable information about the actual performed work and incorporated with execution time, it could help in understanding programs and support performance analysis. In \cite{Ball:1999:CDA:318774.318944}, Ball shows the application of frequency spectrum analysis at the example of an obfuscated c program, but his approach should also be applicable to concatenative languages.
+The frequency spectrum analysis as proposed by Thoms Ball\cite{Ball:1999:CDA:318774.318944} represents also an interesting approach. It is similar to polymetric views as mentioned before, but the visualization is not graphical but textual. The word execution frequency could provide valuable information about the actual performed work and incorporated with execution time, it could help in understanding programs and support performance analysis. Ball shows the application of frequency spectrum analysis at the example of an obfuscated c program\cite{Ball:1999:CDA:318774.318944}, but his approach should also be applicable to concatenative languages.
 
 Since this is not the main focus of this thesis, I wont discuss this approach any further.
 
@@ -195,7 +195,7 @@ To encourage high code quality and the development environment should provide hi
 
 \subsection{Common issues and possible solutions for writing readable code}
 
-It is not possible to make every word completely readable and the perceived readability also depends on the experience of the developer. At some point  it always comes down to longer combinations of \emph{nip}, \emph{tuck}, \emph{over}, \emph{rot} and so on. This is hardly avoidable at the lowest level. Thus, proper documentation of words is essential. It is pretty obvious, that stack effect comments\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Stack\_002dEffect-Comments-Tutorial.html\#Stack\_002dEffect-Comments-Tutorial}} in Forth, are a must have, but also the behavior of the words should be documented. Especially for complex or \hl{not very natural to read words}\footnote{Most notable \\G in Gforth. See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Comments.html\#Comments}}. Another advantage of word definition comments is the possibility of automated documentation generation.\\
+It is not possible to make every word completely readable and the perceived readability also depends on the experience of the developer. At some point  it always comes down to longer combinations of \emph{nip}, \emph{tuck}, \emph{over}, \emph{rot} and so on. This is hardly avoidable at the lowest level. Thus, proper documentation of words is essential. It is pretty obvious, that stack effect comments\footnote{See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Stack\_002dEffect-Comments-Tutorial.html\#Stack\_002dEffect-Comments-Tutorial}} in Forth, are a must have, but also the behavior of the words should be documented. Especially for complex or not very natural to read words\footnote{Most notable \textbackslash G in Gforth. See \url{https://www.complang.tuwien.ac.at/forth/gforth/Docs-html/Comments.html\#Comments}}. Another advantage of word definition comments is the possibility of automated documentation generation.\\
 Using this approach, the developers can stick to natural language like words until there is no more factoring possible and the words have to be implemented in low level Gforth words.
 \\
 Another common problem are very long word definitions, they tend to increase the amount of brain capacity required to understand their behavior. To address this problem, the word hierarchy created by factoring, should be kept slim and deep. One approach here could be to display hints for word definitions, which exceed a certain amount of lines or words or different words, and suggest further factoring.
@@ -204,13 +204,13 @@ Another tool to make code reading more natural, is aliasing. By defining aliases
 
 \subsection{Common issues and possible solutions to ease program understanding}
 
-Due to \cite{Robillard:2004:EDI:1042203.1042417}, the systematic approach turned out to be most efficient to understand code. To ease the effort of finding the definition of words, used at a certain point, a hyperlink like referencing mechanism can be used.
+Due to Robillard et al.\cite{Robillard:2004:EDI:1042203.1042417}, the systematic approach turned out to be most efficient to understand code. To ease the effort of finding the definition of words, used at a certain point, a hyperlink like referencing mechanism can be used.
 
-As stated by \gls{Charles D. Moore} in \cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding which words are useful, and 2) remembering them all.". When programs grow, the amount of words can get huge. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reference to where they are used. Auto completion can also help a lot in finding words previously defined.
+As stated by \gls{Charles D. Moore}\cite{Biancuzzi:2009:MPC:1592983}: "... The challenge there is 1) deciding which words are useful, and 2) remembering them all.". When programs grow, the amount of words can get huge. Thus it is suggested to have some sort of a dictionary to search the whole vocabulary by name, stack effect comment, word definition documentation and provide a reference to where they are used. Auto completion can also help a lot in finding words previously defined.
 
 In software maintenance, a common issue is, when fixing a bug, first to identify the source code areas which are responsible for the malfunction. And second, to understand the meaning of those code areas to be able to fix the bug. The before mentioned massive sequence view can help in identifying those code areas in a large program trace.
 
-Another issue in software maintenance is the identification of changes which are necessary to implement a new feature or modify an existing feature. In \cite{Storey:1997:IVT:857188.857642}, Storey et al. presented an integrated approach, which combines some of the before mentioned visualization techniques. But instead of stopping at the file level, for Forth, it would be event more helpful to go down to the word level.
+Another issue in software maintenance is the identification of changes which are necessary to implement a new feature or modify an existing feature. Storey et al.\cite{Storey:1997:IVT:857188.857642} presented an integrated approach, which combines some of the before mentioned visualization techniques. But instead of stopping at the file level, for Forth, it would be even more helpful to go down to the word level.
 
 \begin{comment}
 \begin{itemize}
