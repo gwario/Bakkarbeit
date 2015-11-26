@@ -155,7 +155,7 @@ It should cover \emph{value}, \emph{variable}, \emph{2variable}, \emph{fvariable
 
 \section{gfvis - A trace visualization enhancement for Gforth}
 
-Gfvis was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg} (see Chapter \ref{chap:StateOfTheArt}).
+Gfvis\footnote{The full source code of gfvis is available on Github: \url{https://github.com/gwario/Bakkarbeit}} was developed within this thesis, it is an enhancement for Gforths debugger \emph{dbg} (see Chapter \ref{chap:StateOfTheArt}).
 Gfvis runs with a slightly modified version of Gforth (modified gforth-itc) and requires \emph{gv}\footnote{GV is a postscript viewer for X displays. For further information see: \url{http://www.gnu.org/software/gv/}}. It consist of \emph{gfvis.fs} and \emph{gfvis.ps}. Both have to be in the same directory. \emph{gfvis.ps} is a template file, written in postscript, it contains code to display the executed words and the state of the data stack, the floating stack and the return stack. \emph{gfvis.fs} contains code which collects the information to be displayed and to create and update \emph{trace.fs}.
 \\
 Gfvis is started by executing \verb|<path to modified gforth>/gforth-itc ./gfvis.fs|. When the dbg is started (i.e.\ \verb|dbg test|), trace.ps, a copy of gfvis.ps, is created and gv is started to display its content (see Figures \ref{fig:traceps1} and \ref{fig:traceps2}). From then on, every executed word, updates trace.ps with the name of the word and the state of the stacks. When \verb|bye| is executed, gfvis terminates gv and gforth-itc.
